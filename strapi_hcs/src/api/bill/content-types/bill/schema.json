@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bills",
+  "info": {
+    "singularName": "bill",
+    "pluralName": "bills",
+    "displayName": "Bill"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userName": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "biginteger"
+    },
+    "paid": {
+      "type": "boolean"
+    },
+    "payTime": {
+      "type": "date"
+    }
+  }
+}

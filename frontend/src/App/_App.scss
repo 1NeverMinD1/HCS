@@ -1,0 +1,26 @@
+.main {
+  margin-top: 20px;
+  text-align: center;
+  .main__input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    input {
+      width: 20%;
+      padding: 5px;
+      border: gray solid 2px;
+      outline: none;
+      transition: 0.3s ease all;
+      &:hover {
+        cursor: pointer;
+        border-color: red;
+        transition: 0.3s ease all;
+      }
+      &:focus {
+        transition: 0.3s ease all;
+        border-color: black;
+      }
+    }
+  }
+}
