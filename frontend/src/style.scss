@@ -1,9 +1,15 @@
-@import "./App/App";
+@import "./App";
 @import "./components/News";
 @import "./HeaderNav/HeaderNav";
+@import "./Search/Search";
+@import "./Articles/Articles";
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.wrapper {
+  padding-inline: 120px;
 }

@@ -1,6 +1,6 @@
 export default function Search({ query, setQuery }) {
   return (
-    <div className="main__input">
+    <div className="search">
       <label htmlFor="search_task">Найти ответ на вопрос</label>
       <input
         type="text"

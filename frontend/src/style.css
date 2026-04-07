@@ -1,28 +1,7 @@
 .main {
   margin-top: 20px;
-  text-align: center;
-}
-.main .main__input {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-.main .main__input input {
-  width: 20%;
-  padding: 5px;
-  border: gray solid 2px;
-  outline: none;
-  transition: 0.3s ease all;
-}
-.main .main__input input:hover {
-  cursor: pointer;
-  border-color: red;
-  transition: 0.3s ease all;
-}
-.main .main__input input:focus {
-  transition: 0.3s ease all;
-  border-color: black;
+  text-align: center;
 }
 
 .news {
@@ -50,12 +29,9 @@
 }
 
 .nav {
-  padding-inline: 120px;
   display: block;
-  background: wheat;
 }
 .nav .nav__header {
-  padding-inline: 120px;
   display: flex;
   padding: 10px;
   justify-content: space-between;
@@ -77,8 +53,35 @@
   cursor: pointer;
 }
 
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.search input {
+  width: 20%;
+  padding: 5px;
+  border: gray solid 2px;
+  outline: none;
+  transition: 0.3s ease all;
+}
+.search input:hover {
+  cursor: pointer;
+  border-color: red;
+  transition: 0.3s ease all;
+}
+.search input:focus {
+  transition: 0.3s ease all;
+  border-color: black;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.wrapper {
+  padding-inline: 120px;
 }/*# sourceMappingURL=style.css.map */

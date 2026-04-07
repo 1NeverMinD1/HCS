@@ -1,6 +1,6 @@
 export default function HeaderNav() {
   return (
-    <div className="nav">
+    <div className="nav wrapper">
       <nav className="nav__header">
         <span>ЖКХ</span>
         <ul className="nav__list">
