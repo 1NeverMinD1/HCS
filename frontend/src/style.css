@@ -1,87 +1,55 @@
-.main {
-  margin-top: 20px;
-  display: flex;
-  text-align: center;
+@import url(https://db.onlinewebfonts.com/c/fdebcd0c20c9955d76511b720d9932bb?family=MaryTodd+W00+Black);
+.filter {
+  padding-inline: 120px;
 }
-
-.news {
-  margin-top: 20px;
-}
-.news .news_list {
-  margin-top: 20px;
+.filter .filter__list {
+  background: #1a1a1a;
+  padding: 17px 50px;
   display: flex;
-  gap: 20px;
-  align-items: center;
+  gap: 40px;
   justify-content: center;
 }
-.news .news_list .news_block {
-  height: 400px;
-  border: black solid 2px;
-  border-radius: 5px;
-  padding: 10px;
-  width: 33%;
-  transition: 0.3s ease all;
-}
-.news .news_list .news_block:hover {
-  cursor: pointer;
-  transition: 0.3s ease all;
-  transform: scale(1.05);
-}
-
-.nav {
-  display: block;
-}
-.nav .nav__header {
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-}
-.nav .nav__header span {
-  font-weight: bold;
-}
-.nav .nav__header span:hover {
-  cursor: pointer;
-}
-.nav .nav__header .nav__list {
-  display: flex;
-  gap: 30px;
-}
-.nav .nav__header .nav__list .nav__item {
+.filter .filter__list .filter__item {
   list-style: none;
-}
-.nav .nav__header .nav__list .nav__item:hover {
-  cursor: pointer;
+  color: white;
 }
 
-.search {
+header {
+  padding: 48px 120px;
+  background: black;
+  color: white;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-around;
 }
-.search input {
-  width: 20%;
-  padding: 5px;
-  border: gray solid 2px;
+header .search input {
+  width: 640px;
+  padding: 10px;
+  background: #04594d;
+  border: none;
   outline: none;
-  transition: 0.3s ease all;
 }
-.search input:hover {
-  cursor: pointer;
-  border-color: red;
-  transition: 0.3s ease all;
+header .search input:focus::-moz-placeholder {
+  margin-left: 200px;
 }
-.search input:focus {
-  transition: 0.3s ease all;
-  border-color: black;
+header .search input:focus::placeholder {
+  margin-left: 200px;
+}
+header .search button {
+  padding: 9px 32px;
+  border: #8e4042 solid 1px;
+  background: #8e4042;
+  color: white;
 }
 
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("./fonts/MyFont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
+  font-family: "MyCustomFont", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-.wrapper {
-  padding-inline: 120px;
 }/*# sourceMappingURL=style.css.map */

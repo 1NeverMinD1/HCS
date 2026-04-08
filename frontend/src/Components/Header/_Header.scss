@@ -1,0 +1,25 @@
+header {
+  padding: 48px 120px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  .search {
+    input {
+      width: 640px;
+      padding: 10px;
+      background: #04594d;
+      border: none;
+      outline: none;
+      &:focus::placeholder {
+        margin-left: 200px;
+      }
+    }
+    button {
+      padding: 9px 32px;
+      border: #8e4042 solid 1px;
+      background: #8e4042;
+      color: white;
+    }
+  }
+}
