@@ -1,10 +1,12 @@
 export default function Header() {
   return (
     <header>
-      <h1>NEWS</h1>
+      <span className="logo">
+        <a href="#">НАЗВАНИЕ</a>
+      </span>
       <div className="search">
         <input type="text" placeholder="Найти новость" />
-        <button>SEARCH</button>
+        <button className="search__button">SEARCH</button>
       </div>
     </header>
   );

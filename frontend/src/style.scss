@@ -1,6 +1,9 @@
-@import "./Components/App/App";
-@import "./Components/Filter/Filter";
-@import "./Components/Header/Header";
+@import "./components/App/App";
+@import "./components/Filter/Filter";
+@import "./components/LatestNews/LatestNews";
+@import "./components/Header/Header";
+@import "./components/Trendings/Trendings";
+@import "./components/Footer/Footer";
 @import url(https://db.onlinewebfonts.com/c/fdebcd0c20c9955d76511b720d9932bb?family=MaryTodd+W00+Black);
 
 @font-face {
@@ -8,6 +11,10 @@
   src: url("./fonts/MyFont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+}
+
+body {
+  background: #f3f2ea;
 }
 
 * {

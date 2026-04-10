@@ -1,0 +1,22 @@
+.bg_color {
+  background: black;
+}
+
+.main_info {
+  padding-inline: 120px;
+  margin-top: 20px;
+  display: flex;
+}
+
+@media (max-width: 1440px) {
+  .main_info {
+    padding-inline: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main_info {
+    padding-inline: 0px;
+    flex-direction: column;
+  }
+}

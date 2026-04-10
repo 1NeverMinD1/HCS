@@ -1,0 +1,132 @@
+.trending {
+  background: white;
+  width: 30%;
+  .trending__header {
+    padding: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    .trending__button {
+      cursor: pointer;
+      transition: 0.3s ease transform;
+      border-radius: 5px;
+      padding: 7px 22px;
+      border: 1px solid #1a1a1a;
+      background: #1a1a1a;
+      color: white;
+      &:hover {
+        transform: scale(1.05);
+        transition: 0.3s ease transform;
+      }
+    }
+  }
+  .trending__news {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .trending__block {
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s ease border-color;
+      padding: 10px;
+      display: flex;
+      gap: 25px;
+      height: 250px;
+      align-items: stretch;
+      img {
+        width: 50%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .trending__info {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: space-between;
+        p {
+          color: #04594d;
+        }
+      }
+      &:hover {
+        transition: 0.3s ease border-color;
+        border: 2px solid rgb(44, 44, 44);
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .trending {
+    width: 40%;
+    .trending__header {
+      padding: 25px;
+      display: flex;
+      justify-content: space-between;
+      h2 {
+        font-size: 20px;
+      }
+      .trending__button {
+        padding: 7px 10px;
+      }
+    }
+    .trending__block {
+      padding: 10px;
+      display: flex;
+      gap: 25px;
+      height: 350px;
+      align-items: stretch;
+      img {
+        width: 50%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .trending__info {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      h4 {
+        font-size: 16px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .trending {
+    margin-top: 20px;
+    width: 100%;
+    .trending__header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      h2 {
+        font-size: 20px;
+      }
+      .trending__button {
+        width: 150px;
+        padding: 7px 10px;
+      }
+    }
+    .trending__news {
+      padding: 10px;
+      .trending__block {
+        padding: 10px;
+        height: 175px;
+        .trending__info {
+          h4 {
+            font-size: 14px;
+          }
+          p {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

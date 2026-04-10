@@ -11,15 +11,48 @@ header {
       background: #04594d;
       border: none;
       outline: none;
-      &:focus::placeholder {
-        margin-left: 200px;
+      &::placeholder {
+        color: rgb(177, 177, 177);
       }
     }
-    button {
+    .search__button {
       padding: 9px 32px;
       border: #8e4042 solid 1px;
       background: #8e4042;
       color: white;
+      cursor: pointer;
+    }
+  }
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 35px;
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 48px 0px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    .search {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      input {
+        margin-bottom: 20px;
+        width: 300px;
+      }
+      button {
+        margin-inline: auto;
+        width: 200px;
+      }
     }
   }
 }
