@@ -1,12 +1,14 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Filter from "../Filter/Filter";
 import LatestNews from "../LatestNews/LatestNews";
 import Trendings from "../Trendings/Trendings";
 import Footer from "../Footer/Footer";
+import NewsPage from "../../pages/NewsPage";
 
-export default function App() {
+function Home() {
   return (
-    <main>
+    <main className="home">
       <Header />
       <div className="bg_color">
         <Filter />
@@ -19,5 +21,16 @@ export default function App() {
         <Footer />
       </div>
     </main>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/news/:id" element={<NewsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

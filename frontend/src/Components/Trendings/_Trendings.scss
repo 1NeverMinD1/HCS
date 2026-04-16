@@ -55,6 +55,30 @@
   }
 }
 
+@media (max-width: 1900px) {
+  .trending {
+    .trending__header {
+      padding: 20px;
+    }
+    .trending__news {
+      padding: 20px;
+      .trending__block {
+        padding: 10px;
+        gap: 25px;
+        height: 250px;
+        align-items: stretch;
+        .trending__info {
+          gap: 5px;
+          p {
+            height: 52%;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 1440px) {
   .trending {
     width: 40%;

@@ -18,6 +18,11 @@
     justify-content: space-evenly;
     gap: 20px;
     flex-wrap: wrap;
+    .latest__link {
+      text-decoration: none;
+      color: inherit;
+      display: contents;
+    }
     .latest__block {
       transition: 0.3s ease transform;
       display: flex;

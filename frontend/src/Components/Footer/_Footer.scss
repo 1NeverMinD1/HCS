@@ -1,5 +1,5 @@
 footer {
-  padding: 60px 120px;
+  padding: 20px 120px;
   display: flex;
   justify-content: space-evenly;
   color: white;
@@ -56,6 +56,16 @@ footer {
     .footer__nav {
       gap: 20px;
       justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 1900px) {
+  footer {
+    padding-block: 20px;
+    .footer__list {
+      flex-direction: column;
+      gap: 10px;
     }
   }
 }

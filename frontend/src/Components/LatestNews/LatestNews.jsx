@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LatestNews() {
   const [news, setNews] = useState([]);
@@ -24,30 +25,41 @@ export default function LatestNews() {
 
           if (item.back) {
             return (
-              <div
-                className="latest__block__highlated"
+              <Link
+                to={`/news/${item.documentId}`}
                 key={item.id}
-                style={{
-                  backgroundImage: `url(http://localhost:1337${imageUrl})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
+                className="latest__link"
               >
-                <h3>{item.title}</h3>
-                <small className="latest__time">
-                  {new Date(item.publishDate).toLocaleDateString()}
-                </small>
-              </div>
+                <div
+                  className="latest__block__highlated"
+                  style={{
+                    backgroundImage: `url(http://localhost:1337${imageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <h3>{item.title}</h3>
+                  <small className="latest__time">
+                    {new Date(item.publishDate).toLocaleDateString()}
+                  </small>
+                </div>
+              </Link>
             );
           } else {
             return (
-              <div className="latest__block" key={item.id}>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-                <small className="latest__time">
-                  {new Date(item.publishDate).toLocaleDateString()}
-                </small>
-              </div>
+              <Link
+                to={`/news/${item.documentId}`}
+                key={item.id}
+                className="latest__link"
+              >
+                <div className="latest__block">
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                  <small className="latest__time">
+                    {new Date(item.publishDate).toLocaleDateString()}
+                  </small>
+                </div>
+              </Link>
             );
           }
         })}
