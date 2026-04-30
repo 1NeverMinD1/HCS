@@ -4,7 +4,20 @@
 @import "./components/Header/Header";
 @import "./components/Trendings/Trendings";
 @import "./components/Footer/Footer";
-@import "./pages/NewsPage";
+// PAGES
+// News
+@import "./pages/News/NewsListPage";
+@import "./pages/News/NewsPage/NewsPage";
+@import "./pages//News/NPArticle/NPArticle";
+@import "./pages/News/NPIntro/NPIntro";
+@import "./pages/News/NPContent/NPContent";
+// Category
+@import "./pages/CategoryPage/CategoryPage";
+// Articles
+@import "./pages/Articles/ArticlesListPage/ArticlesListPage";
+// Blogs
+@import "./pages/Blogs/BlogsListPage/BlogsListPage.scss";
+@import "./pages/Blogs/BPIntro/BPIntro";
 @import url(https://db.onlinewebfonts.com/c/fdebcd0c20c9955d76511b720d9932bb?family=MaryTodd+W00+Black);
 
 @font-face {

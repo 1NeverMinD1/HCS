@@ -1,0 +1,37 @@
+.page__art {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-block: 36px;
+}
+
+.page__divider span {
+  display: block;
+  border-radius: 100px;
+}
+
+.page__divider span:nth-child(1),
+.page__divider span:nth-child(3) {
+  width: 48px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(127, 119, 221, 0.4));
+}
+
+.page__divider span:nth-child(3) {
+  background: linear-gradient(90deg, rgba(93, 202, 165, 0.4), transparent);
+}
+
+.page__divider span:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  background: rgba(127, 119, 221, 0.6);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}

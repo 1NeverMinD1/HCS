@@ -1,89 +1,115 @@
-footer {
-  padding: 20px 120px;
+.footer {
+  margin-top: 24px;
+  padding-inline: 32px;
+}
+
+.footer__inner {
+  position: relative;
+  background: #0d0d14;
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 32px 40px;
   display: flex;
-  justify-content: space-evenly;
-  color: white;
-  height: 100%;
-  margin-top: 20px;
-  span {
-    display: block;
-    margin-block: auto;
-  }
-  p {
-    margin-top: 15px;
-    text-align: center;
-    margin-block: auto;
-  }
-  .footer__list {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    .footer__item {
-      list-style: none;
-      cursor: pointer;
-    }
-  }
-  .footer__nav {
-    display: flex;
-    gap: 40px;
-    .footer__nav__list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      .footer__nav__item {
-        list-style: none;
-        cursor: pointer;
-      }
-    }
-  }
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  overflow: hidden;
 }
 
-@media (max-width: 480px) {
-  footer {
-    text-align: center;
-    padding: 20px 20px;
-    gap: 20px;
-    flex-direction: column;
-    .logo {
-      font-size: 20px;
-    }
-    .footer__list {
-      gap: 20px;
-      align-items: stretch;
-      text-align: center;
-      flex-direction: column;
-    }
-    .footer__nav {
-      gap: 20px;
-      justify-content: center;
-    }
-  }
+/* Градиентная линия сверху — зеркало хедера */
+.footer__inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #7f77dd 30%,
+    #5dcaa5 70%,
+    transparent 100%
+  );
 }
 
-@media (max-width: 1900px) {
-  footer {
-    padding-block: 20px;
-    .footer__list {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
+.footer__line {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin-inline: 32px;
 }
 
-@media (max-width: 1440px) {
-  footer {
-    padding: 20px 60px;
-    .footer__list {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .footer__nav {
-      gap: 20px;
-      .footer__nav__list {
-        gap: 15px;
-      }
-    }
-  }
+/* Brand */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__logo {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.footer__logo em {
+  font-style: normal;
+  color: #7f77dd;
+}
+
+.footer__copy {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+}
+
+/* Nav */
+.footer__nav-list {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__nav-item {
+  padding: 7px 14px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  border-radius: 100px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+
+.footer__nav-item:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Legal */
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.footer__legal-item {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer__legal-item:hover {
+  color: rgba(255, 255, 255, 0.5);
 }
