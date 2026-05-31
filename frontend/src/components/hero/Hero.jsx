@@ -5,7 +5,7 @@ export default function Hero() {
 
   useEffect(() => {
     fetch(
-      "http://localhost:1337/api/news?filters[isFeatured][$eq]=true&populate=desc_img&populate=tags&sort=publishDate:desc",
+      "hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=desc_img&populate=tags&sort=publishDate:desc",
     )
       .then((res) => res.json())
       .then((data) => {
@@ -27,7 +27,7 @@ export default function Hero() {
       className="hero"
       style={{
         backgroundImage: imageUrl
-          ? `url(http://localhost:1337${imageUrl})`
+          ? `url(hcs-production-423d.up.railway.app${imageUrl})`
           : "none",
       }}
     >

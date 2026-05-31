@@ -11,7 +11,10 @@ export default function EventsBlock({ event }) {
   return (
     <div className="events__block">
       {imageUrl && (
-        <img src={`http://localhost:1337${imageUrl}`} alt={event.name} />
+        <img
+          src={`hcs-production-423d.up.railway.app${imageUrl}`}
+          alt={event.name}
+        />
       )}
       <div className="events__block-content">
         <h2 className="events__block-title">{event.name}</h2>

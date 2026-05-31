@@ -7,7 +7,7 @@ export default function Events() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        "http://localhost:1337/api/events?populate=desc_img&sort=start:asc&pagination[pageSize]=3",
+        "hcs-production-423d.up.railway.app/api/events?populate=desc_img&sort=start:asc&pagination[pageSize]=3",
       );
       const data = await res.json();
       setEvents(data.data);

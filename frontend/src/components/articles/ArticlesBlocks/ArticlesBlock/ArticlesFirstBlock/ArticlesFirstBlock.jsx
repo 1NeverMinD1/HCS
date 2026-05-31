@@ -1,6 +1,6 @@
 export default function ArticlesFirstBlock({ article }) {
   const imageUrl = article?.desc_img?.url
-    ? "http://localhost:1337" + article.desc_img.url
+    ? "hcs-production-423d.up.railway.app" + article.desc_img.url
     : "";
 
   const category = article?.tags?.[0]?.name || "";

@@ -1,5 +1,5 @@
 export default function LatestNewsBlock({ item }) {
-  const imgUrl = `http://localhost:1337${item.desc_img.url}`;
+  const imgUrl = `hcs-production-423d.up.railway.app${item.desc_img.url}`;
 
   const category = item.categories?.[0]?.name;
 

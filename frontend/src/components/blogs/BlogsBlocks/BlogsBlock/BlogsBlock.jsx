@@ -1,5 +1,5 @@
 export default function BlogsBlock({ blog }) {
-  const imageUrl = "http://localhost:1337" + blog.desc_img.url;
+  const imageUrl = "hcs-production-423d.up.railway.app" + blog.desc_img.url;
 
   return (
     <div className="blogs__block">

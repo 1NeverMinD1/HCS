@@ -7,7 +7,7 @@ export default function Blogs() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        "http://localhost:1337/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
+        "hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
       );
       const data = await res.json();
       setBlogs(data.data);
