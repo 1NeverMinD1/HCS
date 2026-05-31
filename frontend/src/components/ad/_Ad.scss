@@ -1,0 +1,46 @@
+.ad {
+  .ad__content {
+    background: rgb(241, 222, 222);
+    padding: 60px 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    .email {
+      width: 60px;
+      height: 60px;
+      background: rgb(230, 128, 128);
+      fill: red;
+      padding: 10px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    .ad__input {
+      justify-content: center;
+      display: flex;
+      width: 100%;
+      gap: 20px;
+      .email_input {
+        padding-inline: 10px;
+        font-size: 16px;
+        width: 20%;
+        border-radius: 0px;
+        border: none;
+        outline: none;
+        background: white;
+        border-radius: 10px;
+      }
+      .subscribe {
+        width: 10%;
+      }
+    }
+  }
+}
