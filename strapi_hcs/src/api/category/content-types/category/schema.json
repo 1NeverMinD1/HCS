@@ -19,6 +19,12 @@
       "relation": "manyToMany",
       "target": "api::new.new",
       "inversedBy": "categories"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "categories"
     }
   }
 }

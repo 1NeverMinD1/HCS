@@ -24,7 +24,7 @@
       }
     },
     "desc": {
-      "type": "string",
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -74,6 +74,14 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "mappedBy": "news"
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

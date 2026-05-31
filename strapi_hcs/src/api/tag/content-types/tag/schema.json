@@ -19,6 +19,18 @@
       "relation": "manyToMany",
       "target": "api::new.new",
       "inversedBy": "tags"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "tags"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "tags"
     }
   }
 }

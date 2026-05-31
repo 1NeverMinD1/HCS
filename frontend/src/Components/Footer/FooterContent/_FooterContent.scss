@@ -1,0 +1,31 @@
+.footer__content {
+  display: flex;
+  .footer__intro {
+    width: 30%;
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      width: 75%;
+    }
+  }
+  .footer__contacts {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    .footer__contacts-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .footer__contacts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .footer__contacts-item {
+          cursor: pointer;
+          color: rgb(58, 58, 58);
+        }
+      }
+    }
+  }
+}

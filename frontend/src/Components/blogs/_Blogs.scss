@@ -1,0 +1,11 @@
+.blogs {
+  margin-block: 50px;
+  .blogs__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .blogs__header-title {
+      font-size: 40px;
+    }
+  }
+}
