@@ -3,13 +3,11 @@
   background: white;
   color: black;
   width: 30%;
+  height: 600px;
   overflow: hidden;
   transition: box-shadow 0.2s ease;
 
   &:hover {
-    box-shadow:
-      2px 4px 5px rgb(179, 179, 179),
-      -2px 4px 5px rgb(179, 179, 179);
     cursor: pointer;
   }
 
@@ -19,6 +17,7 @@
     width: 100%;
     height: 55%;
     transition: transform 0.3s ease;
+    object-fit: cover;
   }
 
   &:hover img {

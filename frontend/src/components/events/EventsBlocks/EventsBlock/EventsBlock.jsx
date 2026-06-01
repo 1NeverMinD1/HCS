@@ -17,6 +17,7 @@ export default function EventsBlock({ event }) {
         />
       )}
       <div className="events__block-content">
+        <p className="event__block-category">{event.event_cats?.[0]?.name}</p>
         <h2 className="events__block-title">{event.name}</h2>
         <p className="events__block-text">{event.desc}</p>
         <div className="events__block-footer">
