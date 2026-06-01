@@ -26,9 +26,7 @@ export default function Hero() {
     <div
       className="hero"
       style={{
-        backgroundImage: imageUrl
-          ? `url(https://hcs-production-423d.up.railway.app${imageUrl})`
-          : "none",
+        backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
       }}
     >
       {category && <p className="cat">{category}</p>}

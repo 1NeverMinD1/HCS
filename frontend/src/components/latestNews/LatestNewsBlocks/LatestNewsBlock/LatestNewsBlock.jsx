@@ -1,5 +1,7 @@
 export default function LatestNewsBlock({ item }) {
-  const imgUrl = `https://hcs-production-423d.up.railway.app${item.desc_img.url}`;
+  const imgUrl = item.desc_img?.url?.startsWith("http")
+    ? item.desc_img.url
+    : `https://hcs-production-423d.up.railway.app${item.desc_img.url}`;
 
   const category = item.categories?.[0]?.name;
 

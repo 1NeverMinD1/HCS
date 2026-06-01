@@ -1,5 +1,6 @@
 export default function EventsBlock({ event }) {
-  const imageUrl = event.desc_img?.formats?.medium?.url || event.desc_img?.url;
+  const imageUrl =
+    event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "";
 
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("ru-RU", {
@@ -10,12 +11,7 @@ export default function EventsBlock({ event }) {
 
   return (
     <div className="events__block">
-      {imageUrl && (
-        <img
-          src={`https://hcs-production-423d.up.railway.app${imageUrl}`}
-          alt={event.name}
-        />
-      )}
+      {imageUrl && <img src={imageUrl} alt={event.name} />}
       <div className="events__block-content">
         <p className="event__block-category">{event.event_cats?.[0]?.name}</p>
         <h2 className="events__block-title">{event.name}</h2>

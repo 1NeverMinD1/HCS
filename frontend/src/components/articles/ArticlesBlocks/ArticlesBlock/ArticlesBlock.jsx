@@ -1,7 +1,5 @@
 export default function ArticlesBlock({ article }) {
-  const imageUrl = article?.desc_img?.url
-    ? "https://hcs-production-423d.up.railway.app" + article.desc_img.url
-    : "";
+  const imageUrl = article?.desc_img?.url || "";
 
   const category = article?.tags?.[0]?.name || "";
 
