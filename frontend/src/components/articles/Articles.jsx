@@ -7,7 +7,7 @@ export default function Articles() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        "hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
+        "https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
       );
       const data = await res.json();
       setArticles(data.data);

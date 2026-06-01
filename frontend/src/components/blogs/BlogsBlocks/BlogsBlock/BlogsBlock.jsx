@@ -1,5 +1,6 @@
 export default function BlogsBlock({ blog }) {
-  const imageUrl = "hcs-production-423d.up.railway.app" + blog.desc_img.url;
+  const imageUrl =
+    "https://hcs-production-423d.up.railway.app" + blog.desc_img.url;
 
   return (
     <div className="blogs__block">

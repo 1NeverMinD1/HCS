@@ -12,7 +12,7 @@ export default function EventsBlock({ event }) {
     <div className="events__block">
       {imageUrl && (
         <img
-          src={`hcs-production-423d.up.railway.app${imageUrl}`}
+          src={`https://hcs-production-423d.up.railway.app${imageUrl}`}
           alt={event.name}
         />
       )}

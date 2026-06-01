@@ -7,7 +7,7 @@ export default function LatestNews() {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        "hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
+        "https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=4",
       );
 
       const json = await res.json();
