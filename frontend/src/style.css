@@ -5,16 +5,24 @@
   padding-block: 10px;
   align-items: center;
   box-shadow: 0 1px rgb(179, 179, 179);
+  position: relative;
+  overflow: visible;
 }
 .header .logo {
   font-weight: bold;
   font-size: 26px;
+}
+.header .menu {
+  position: relative;
+  overflow: visible;
 }
 .header .menu .menu__list {
   display: flex;
   gap: 20px;
   list-style: none;
   align-items: center;
+  position: relative;
+  overflow: visible;
 }
 .header .menu .menu__list .menu__list-item {
   color: rgb(58, 58, 58);
@@ -24,6 +32,51 @@
 .header .menu .menu__list .menu__list-item:hover {
   transition: 0.2s ease all;
   cursor: pointer;
+  color: black;
+}
+.header .menu .menu__list .menu__list-item--dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  overflow: visible;
+}
+.header .menu .menu__list .menu__list-item .dropdown__arrow {
+  margin-left: 5px;
+  width: 12px;
+  height: 7px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.header .menu .menu__list .menu__list-item .dropdown__arrow--open {
+  transform: rotate(180deg);
+}
+.header .menu .menu__list .menu__list-item .dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: white;
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 8px;
+  list-style: none;
+  padding: 8px 0;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  animation: fadeIn 0.15s ease;
+}
+.header .menu .menu__list .menu__list-item .dropdown .dropdown__item {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: rgb(58, 58, 58);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.header .menu .menu__list .menu__list-item .dropdown .dropdown__item:hover {
+  background: rgb(245, 245, 245);
   color: black;
 }
 .header .interaction .interaction__block {
@@ -53,12 +106,23 @@
   border-radius: 8px;
   padding: 10px 20px;
   transition: 0.2s ease all;
+  cursor: pointer;
 }
 .subscribe:hover {
   transition: 0.2s ease all;
   background: rgb(252, 72, 72);
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .main {
   background-color: white;
 }
