@@ -41,12 +41,14 @@ export default function Header() {
             Новости
             <svg
               className={`dropdown__arrow ${isOpen ? "dropdown__arrow--open" : ""}`}
-              viewBox="0 0 10 6"
+              width="12"
+              height="7"
+              viewBox="0 0 12 7"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M1 1L5 5L9 1"
+                d="M1 1L6 6L11 1"
                 stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
