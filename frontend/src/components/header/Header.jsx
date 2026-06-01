@@ -1,10 +1,68 @@
+import { useEffect, useState, useRef } from "react";
+
 export default function Header() {
+  const [categories, setCategories] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    fetch("https://hcs-production-423d.up.railway.app/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data.data || []));
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    const handleKey = (e) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, []);
+
   return (
     <header className="header wrapper">
       <span className="logo">ВЕСТНИК</span>
       <div className="menu">
         <ul className="menu__list">
-          <li className="menu__list-item">Новости</li>
+          <li
+            className="menu__list-item menu__list-item--dropdown"
+            ref={dropdownRef}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Новости
+            <svg
+              className={`dropdown__arrow ${isOpen ? "dropdown__arrow--open" : ""}`}
+              viewBox="0 0 10 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1L5 5L9 1"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {isOpen && (
+              <ul className="dropdown">
+                {categories.map((cat) => (
+                  <li key={cat.id} className="dropdown__item">
+                    {cat.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
           <li className="menu__list-item">Статьи</li>
           <li className="menu__list-item">Блоги</li>
           <li className="menu__list-item">События</li>

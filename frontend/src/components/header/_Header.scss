@@ -4,32 +4,83 @@
   padding-block: 10px;
   align-items: center;
   box-shadow: 0 1px rgb(179, 179, 179);
+
   .logo {
     font-weight: bold;
     font-size: 26px;
   }
+
   .menu {
     .menu__list {
       display: flex;
       gap: 20px;
       list-style: none;
       align-items: center;
+
       .menu__list-item {
         color: rgb(58, 58, 58);
         font-size: 20px;
         transition: 0.2s ease all;
+
         &:hover {
           transition: 0.2s ease all;
           cursor: pointer;
           color: black;
         }
+
+        &--dropdown {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          user-select: none;
+        }
+
+        .dropdown__arrow {
+          width: 10px;
+          height: 6px;
+          transition: transform 0.2s ease;
+
+          &--open {
+            transform: rotate(180deg);
+          }
+        }
+
+        .dropdown {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 0;
+          background: white;
+          border: 1px solid rgb(201, 201, 201);
+          border-radius: 8px;
+          list-style: none;
+          padding: 8px 0;
+          min-width: 180px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          z-index: 100;
+
+          .dropdown__item {
+            padding: 8px 16px;
+            font-size: 16px;
+            color: rgb(58, 58, 58);
+            cursor: pointer;
+            transition: background 0.15s ease;
+
+            &:hover {
+              background: rgb(245, 245, 245);
+              color: black;
+            }
+          }
+        }
       }
     }
   }
+
   .interaction {
     .interaction__block {
       display: flex;
       gap: 30px;
+
       .search_icon {
         display: block;
         width: 50px;
@@ -38,6 +89,7 @@
         margin-block: auto;
         transition: 0.2s ease all;
         border-radius: 5px;
+
         &:hover {
           transition: 0.2s ease all;
           background: red;
@@ -56,6 +108,8 @@
   border-radius: 8px;
   padding: 10px 20px;
   transition: 0.2s ease all;
+  cursor: pointer;
+
   &:hover {
     transition: 0.2s ease all;
     background: rgb(252, 72, 72);
