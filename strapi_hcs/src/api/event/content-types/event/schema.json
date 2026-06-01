@@ -29,12 +29,6 @@
     "amount": {
       "type": "integer"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "mappedBy": "events"
-    },
     "desc_img": {
       "type": "media",
       "multiple": false,
@@ -44,6 +38,12 @@
         "videos",
         "audios"
       ]
+    },
+    "event_cats": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-cat.event-cat",
+      "inversedBy": "events"
     }
   }
 }

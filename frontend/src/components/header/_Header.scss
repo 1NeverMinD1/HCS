@@ -3,9 +3,20 @@
   justify-content: space-between;
   padding-block: 10px;
   align-items: center;
-  box-shadow: 0 1px rgb(179, 179, 179);
-  position: relative;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   overflow: visible;
+
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease;
 
   .logo {
     font-weight: bold;
@@ -30,7 +41,6 @@
         transition: 0.2s ease all;
 
         &:hover {
-          transition: 0.2s ease all;
           cursor: pointer;
           color: black;
         }
@@ -60,25 +70,38 @@
           position: absolute;
           top: calc(100% + 10px);
           left: 0;
-          background: white;
-          border: 1px solid rgb(201, 201, 201);
-          border-radius: 8px;
+
+          background: rgba(255, 255, 255, 0.85);
+
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+
+          border: 1px solid rgba(201, 201, 201, 0.4);
+
+          border-radius: 12px;
+
           list-style: none;
           padding: 8px 0;
           min-width: 180px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
           z-index: 100;
+
           animation: fadeIn 0.15s ease;
 
           .dropdown__item {
-            padding: 8px 16px;
+            padding: 10px 16px;
             font-size: 16px;
             color: rgb(58, 58, 58);
             cursor: pointer;
-            transition: background 0.15s ease;
+
+            transition:
+              background 0.15s ease,
+              color 0.15s ease;
 
             &:hover {
-              background: rgb(245, 245, 245);
+              background: rgba(245, 245, 245, 0.7);
               color: black;
             }
           }
@@ -97,12 +120,14 @@
         width: 50px;
         padding: 10px;
         height: 50px;
+
         margin-block: auto;
+
         transition: 0.2s ease all;
+
         border-radius: 5px;
 
         &:hover {
-          transition: 0.2s ease all;
           background: red;
           fill: white;
         }
@@ -111,18 +136,33 @@
   }
 }
 
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.55);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .subscribe {
   border: none;
   background: red;
   color: white;
+
   font-size: 18px;
+
   border-radius: 8px;
+
   padding: 10px 20px;
+
   transition: 0.2s ease all;
+
   cursor: pointer;
 
   &:hover {
-    transition: 0.2s ease all;
     background: rgb(252, 72, 72);
   }
 }
@@ -132,6 +172,7 @@
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

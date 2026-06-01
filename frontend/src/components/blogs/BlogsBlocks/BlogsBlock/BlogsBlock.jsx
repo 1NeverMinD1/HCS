@@ -11,8 +11,7 @@ export default function BlogsBlock({ blog }) {
           <p className="author">{blog.author}</p>
           <p className="spec">{blog.position}</p>
         </div>
-
-        <div className="blogs__block-content">
+        <div className="blogs__block-info">
           <h2 className="blogs__block-title">{blog.title}</h2>
 
           <p className="blogs__block-text">{blog.desc}</p>
