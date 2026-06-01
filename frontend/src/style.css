@@ -331,10 +331,16 @@
 .articles__block .articles__block-content .articles__block-cat {
   margin-left: 10px;
 }
+.articles__block .articles__block-content .articles__block-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .articles__block .articles__block-content .articles__block-text {
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: rgb(58, 58, 58);
 }
