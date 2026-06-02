@@ -17,18 +17,24 @@ export default function NewsPage() {
 
   if (!news.length) return null;
 
+  const heroNews = news[0];
+  const topNews = news.slice(1, 4);
+  const restNews = news.slice(4);
+
   return (
     <div className="newspage wrapper">
       <h2 className="newspage__title">Новости</h2>
       <hr />
-      <NewsPageBlocks news={news} />
+
+      <NewsPageBlocks hero={heroNews} list={topNews} />
 
       <div className="more_news">
         <hr />
         <p>ЕЩЁ НОВОСТИ</p>
         <hr />
       </div>
-      <NewsPageList news={news} />
+
+      <NewsPageList news={restNews} />
     </div>
   );
 }

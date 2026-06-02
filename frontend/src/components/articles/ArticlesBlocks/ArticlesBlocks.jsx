@@ -8,7 +8,7 @@ export default function ArticlesBlocks({ articles }) {
 
   return (
     <div className="articles__blocks">
-      <ArticlesFirstBlock article={first} />
+      {first && <ArticlesFirstBlock article={first} />}
 
       {rest.map((item) => (
         <ArticlesBlock key={item.id} article={item} />

@@ -857,15 +857,14 @@
 }
 
 .newspage__main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 .newspage__main-item {
   border: 1px solid rgb(201, 201, 201);
-  width: 32%;
+  width: 100%;
   border-radius: 12px;
   transition: all 0.3s ease;
   overflow: hidden;
