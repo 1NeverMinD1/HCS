@@ -31,6 +31,10 @@
 @use "./components/pages/news/NewsPageBlocks/NewsPageBlock/NewsPageBlock";
 @use "./components/pages/news/NewsPageList/NewsPageList";
 @use "./components/pages/news/NewsPageList/NewsPageListBlock/NewsPageListBlock";
+// Arts
+@use "./components/pages/articles/ArtsPage";
+@use "./components/pages/articles/ArtsPageBlocks/ArtsPageBlocks";
+@use "./components/pages/articles/ArtsPageBlocks/ArtsPageBlock/ArtsPageBlock";
 
 p {
   color: rgb(58, 58, 58);
