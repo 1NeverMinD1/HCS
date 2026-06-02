@@ -1,0 +1,14 @@
+.newspage__hero {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+
+  .newspage__hero-list {
+    height: 500px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}

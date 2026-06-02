@@ -26,6 +26,11 @@
 // Pages
 // News
 @use "./components/pages/news/NewsPage";
+@use "./components/pages/news/NewsPageBlocks/NewsPageBlocks";
+@use "./components/pages/news/NewsPageBlocks/NewsPageHero/NewsPageHero";
+@use "./components/pages/news/NewsPageBlocks/NewsPageBlock/NewsPageBlock";
+@use "./components/pages/news/NewsPageList/NewsPageList";
+@use "./components/pages/news/NewsPageList/NewsPageListBlock/NewsPageListBlock";
 
 p {
   color: rgb(58, 58, 58);

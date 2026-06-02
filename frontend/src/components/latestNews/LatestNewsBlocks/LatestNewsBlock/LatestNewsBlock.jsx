@@ -3,7 +3,7 @@ export default function LatestNewsBlock({ item }) {
     ? item.desc_img.url
     : `https://hcs-production-423d.up.railway.app${item.desc_img.url}`;
 
-  const category = item.categories?.[0]?.name;
+  const category = item.category?.name;
 
   return (
     <div className="latest__block">
