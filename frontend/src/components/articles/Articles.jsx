@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ArticlesBlocks from "./ArticlesBlocks/ArticlesBlocks";
 
 export default function Articles({ featuredTag }) {
@@ -25,7 +26,9 @@ export default function Articles({ featuredTag }) {
     <div className="articles">
       <div className="articles__header">
         <h2 className="articles__header-title">Статьи</h2>
-        <a className="view_all">Все статьи</a>
+        <Link to="/articles" className="view_all">
+          Все статьи
+        </Link>
       </div>
 
       <ArticlesBlocks articles={filteredArticles} />

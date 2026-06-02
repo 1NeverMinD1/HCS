@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer.jsx";
 
 import Home from "./components/pages/Home.jsx";
 import NewsPage from "./components/pages/news/NewsPage.jsx";
+import ArtsPage from "./components/pages/articles/ArtsPage.jsx";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/articles" element={<ArtsPage />} />
       </Routes>
       <hr />
       <div className="wrapper">
