@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
@@ -14,28 +15,20 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
     };
 
     const handleKey = (e) => {
       if (e.key === "Escape") setIsOpen(false);
     };
 
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("keydown", handleKey);
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKey);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("keydown", handleKey);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKey);
     };
   }, []);
 
@@ -43,16 +36,27 @@ export default function Header() {
     <header
       className={`header wrapper ${isScrolled ? "header--scrolled" : ""}`}
     >
-      <span className="logo">ВЕСТНИК</span>
+      <Link to="/" className="logo">
+        ВЕСТНИК
+      </Link>
 
       <div className="menu">
         <ul className="menu__list">
           <li
             className="menu__list-item menu__list-item--dropdown"
             ref={dropdownRef}
-            onClick={() => setIsOpen(!isOpen)}
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
           >
-            Новости
+            <NavLink
+              to="/news"
+              className={({ isActive }) =>
+                isActive ? "menu__link active" : "menu__link"
+              }
+            >
+              Новости
+            </NavLink>
+
             <svg
               className={`dropdown__arrow ${
                 isOpen ? "dropdown__arrow--open" : ""
@@ -71,20 +75,57 @@ export default function Header() {
                 strokeLinejoin="round"
               />
             </svg>
+
             {isOpen && (
-              <ul className="dropdown">
-                {categories.map((cat) => (
-                  <li key={cat.id} className="dropdown__item">
-                    {cat.name}
-                  </li>
-                ))}
-              </ul>
+              <div className="dropdown">
+                <ul className="dropdown__content">
+                  {categories.map((cat) => (
+                    <li key={cat.id} className="dropdown__item">
+                      <NavLink
+                        to={`/news/${cat.id}`}
+                        className="dropdown__link"
+                      >
+                        {cat.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </li>
 
-          <li className="menu__list-item">Статьи</li>
-          <li className="menu__list-item">Блоги</li>
-          <li className="menu__list-item">События</li>
+          <li className="menu__list-item">
+            <NavLink
+              to="/articles"
+              className={({ isActive }) =>
+                isActive ? "menu__link active" : "menu__link"
+              }
+            >
+              Статьи
+            </NavLink>
+          </li>
+
+          <li className="menu__list-item">
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) =>
+                isActive ? "menu__link active" : "menu__link"
+              }
+            >
+              Блоги
+            </NavLink>
+          </li>
+
+          <li className="menu__list-item">
+            <NavLink
+              to="/events"
+              className={({ isActive }) =>
+                isActive ? "menu__link active" : "menu__link"
+              }
+            >
+              События
+            </NavLink>
+          </li>
         </ul>
       </div>
 

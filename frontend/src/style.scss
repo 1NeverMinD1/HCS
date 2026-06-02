@@ -23,6 +23,9 @@
 // Footer
 @use "./components/footer/Footer";
 @use "./components/footer/FooterContent/FooterContent";
+// Pages
+// News
+@use "./components/pages/news/NewsPage";
 
 p {
   color: rgb(58, 58, 58);
