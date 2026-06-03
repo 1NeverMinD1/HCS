@@ -44,6 +44,16 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "blogs"
+    },
+    "back_img": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

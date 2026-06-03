@@ -8,6 +8,7 @@ import Footer from "./components/footer/Footer.jsx";
 import Home from "./components/pages/Home.jsx";
 import NewsPage from "./components/pages/news/NewsPage.jsx";
 import ArtsPage from "./components/pages/articles/ArtsPage.jsx";
+import BlogsPage from "./components/pages/blogs/BlogsPage.jsx";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/articles" element={<ArtsPage />} />
+        <Route path="/blogs" element={<BlogsPage />} />
       </Routes>
       <hr />
       <div className="wrapper">

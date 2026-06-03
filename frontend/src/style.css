@@ -1015,6 +1015,11 @@
   border-radius: 10px 0 0 10px;
 }
 
+.blogspage .blogspage__title {
+  margin-block: 20px;
+  font-size: 40px;
+}
+
 p {
   color: rgb(58, 58, 58);
 }

@@ -35,7 +35,12 @@
 @use "./components/pages/articles/ArtsPage";
 @use "./components/pages/articles/ArtsPageBlocks/ArtsPageBlocks";
 @use "./components/pages/articles/ArtsPageBlocks/ArtsPageBlock/ArtsPageBlock";
-
+// Blogs
+@use "./components/pages/blogs/BlogsPage";
+@use "./components/pages/blogs/BlogsPageBlocks/BlogsPageBlocks";
+@use "./components/pages/blogs/BlogsPageBlocks/BlogsPageBlock/BlogsPageBlock";
+@use "./components/pages/blogs/BlogsPageBlocks/BlogsPageFirstBlock/BlogsPageFirstBlock";
+// Events
 p {
   color: rgb(58, 58, 58);
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BlogsBlocks from "./BlogsBlocks/BlogsBlocks";
 
 export default function Blogs() {
@@ -20,7 +21,9 @@ export default function Blogs() {
     <div className="blogs">
       <div className="blogs__header">
         <h2 className="blogs__header-title">Блоги</h2>
-        <a className="view_all">Все блоги</a>
+        <Link to="/blogs" className="view_all">
+          Все блоги
+        </Link>
       </div>
 
       <BlogsBlocks blogs={blogs} />
