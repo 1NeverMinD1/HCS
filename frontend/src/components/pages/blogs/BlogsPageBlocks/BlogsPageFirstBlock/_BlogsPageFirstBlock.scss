@@ -1,0 +1,137 @@
+.blogspage__hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  padding: 30px;
+  height: 450px;
+
+  border-radius: 10px;
+
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transition: background-size 0.4s ease;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.9),
+    0 1px 1px rgba(0, 0, 0, 0.8);
+
+  &:hover {
+    background-size: 110%;
+  }
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.65) 30%,
+      rgba(0, 0, 0, 0.3) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    z-index: -1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  p {
+    color: white;
+  }
+
+  .blogspage__hero-header {
+    padding-top: 10%;
+
+    display: flex;
+    gap: 10px;
+
+    .profile {
+      width: 50px;
+      height: 50px;
+
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .blogspage__hero-about {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .author {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .spec {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .blogspage__hero-content {
+    width: 60%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h1 {
+      font-size: 42px;
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    .blogspage__hero-text {
+      display: -webkit-box;
+      overflow: hidden;
+
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+  }
+
+  .blogs__block-footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .date {
+      opacity: 0.85;
+    }
+
+    .likes,
+    .comms {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+
+        fill: white;
+      }
+    }
+  }
+}
