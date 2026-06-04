@@ -37,27 +37,28 @@ function renderBlock(block, i) {
   }
 }
 
-export default function NewsContent() {
+export default function ArticlesContent() {
   const { documentId } = useParams();
-  const [news, setNews] = useState(null);
+  const [articles, setArticles] = useState(null);
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/news/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/articles/${documentId}?populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setNews(data.data));
+      .then((data) => setArticles(data.data));
   }, [documentId]);
 
-  if (!news) return <h2>Загрузка...</h2>;
+  if (!articles) return <h2>Загрузка...</h2>;
 
-  const date = new Date(news.publishDate);
+  const date = new Date(articles.publishDate);
 
-  const imgUrl = news.desc_img?.formats?.small?.url || news.desc_img?.url;
+  const imgUrl =
+    articles.desc_img?.formats?.small?.url || articles.desc_img?.url;
 
   return (
-    <div className="newscontent">
-      <Link to="/news" className="back">
+    <div className="artscontent">
+      <Link to="/articles" className="back">
         <svg
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
@@ -69,11 +70,11 @@ export default function NewsContent() {
             d="M7.008 10.996L2.004 7.992l5.004-2.996v1.997h6.996v1.998H7.008v2.005z"
           ></path>
         </svg>
-        Все новости
+        Все статьи
       </Link>
-      <div className="newscontent__header">
-        <p className="cat">{news.categories?.[0]?.name}</p>
-        <div className="newscontent__header-date">
+      <div className="artscontent__header">
+        <p className="cat">{articles.tags?.[0]?.name}</p>
+        <div className="artscontent__header-date">
           <p>
             {date.toLocaleDateString("ru-RU", {
               day: "numeric",
@@ -83,11 +84,11 @@ export default function NewsContent() {
           </p>
         </div>
       </div>
-      <h2 className="newscontent__title">{news.title}</h2>
-      <img src={imgUrl} alt="desc_img" className="newscontent__img" />
+      <h2 className="artscontent__title">{articles.title}</h2>
+      <img src={imgUrl} alt="desc_img" className="artscontent__img" />
       <hr />
-      <div className="newscontent__main">
-        {news.content?.map((block, i) => renderBlock(block, i))}
+      <div className="artscontent__main">
+        {articles.content?.map((block, i) => renderBlock(block, i))}
       </div>
     </div>
   );

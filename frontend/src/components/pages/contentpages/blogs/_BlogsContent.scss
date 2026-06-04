@@ -1,6 +1,6 @@
-.newscontent {
+.blogscontent {
   margin-top: 20px;
-  margin-inline: 250px;
+  margin-inline: 400px;
   padding: 20px;
   box-shadow:
     1px 1px 10px rgb(179, 179, 179),
@@ -22,29 +22,49 @@
       }
     }
   }
-  .newscontent__header {
+  .blogscontent__header {
     display: flex;
     gap: 20px;
-    align-items: baseline;
-    .newscontent__header-date {
-      p {
-        font-size: 16px;
-        opacity: 0.8;
+    align-items: center;
+    .profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      margin-left: 20px;
+      object-fit: cover;
+    }
+    .blogscontent__author {
+      .author {
+        font-size: 24px;
+      }
+      .spec {
+        font-size: 18px;
       }
     }
   }
-  .newscontent__title {
-    width: 50%;
+  .blogscontent__header-date {
+    margin-top: 20px;
+    p {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+  }
+  .cat {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  .blogscontent__title {
+    width: 70%;
     font-size: 40px;
   }
-  .newscontent__img {
+  .blogscontent__img {
     width: 80%;
     margin-inline: auto;
     display: block;
     margin-block: 20px;
     border-radius: 10px;
   }
-  .newscontent__main {
+  .blogscontent__main {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -63,7 +83,7 @@
       font-size: 20px;
       text-indent: 20px;
       line-height: 130%;
-      s &::before {
+      &::before {
         content: "\201C";
         position: absolute;
         left: 10px;
@@ -148,6 +168,45 @@
     }
     h6 {
       font-size: 15px;
+    }
+  }
+  .blogscontent__footer {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    gap: 20px;
+    hr {
+      border: 1px solid black;
+      height: 20px;
+    }
+    .likes,
+    .comms {
+      display: flex;
+      gap: 10px;
+      font-size: 20px;
+      align-items: center;
+      transition: 0.3s ease all;
+      cursor: pointer;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .likes:hover {
+      transition: 0.3s ease all;
+      color: red;
+      transform: scale(1.05);
+      svg {
+        fill: red;
+      }
+    }
+    .comms:hover {
+      transition: 0.3s ease all;
+      color: rgb(41, 137, 216);
+      transform: scale(1.05);
+      svg {
+        fill: rgb(41, 137, 216);
+      }
     }
   }
 }

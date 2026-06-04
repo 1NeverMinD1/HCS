@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ArticlesBlock({ article }) {
   const imageUrl = article?.desc_img?.url
     ? article.desc_img.url.startsWith("http")
@@ -10,7 +12,7 @@ export default function ArticlesBlock({ article }) {
   const text = article?.content?.[0]?.children?.[0]?.text || "";
 
   return (
-    <div className="articles__block">
+    <Link to={`/articles/${article.documentId}`} className="articles__block">
       {imageUrl && <img src={imageUrl} alt={article.title} />}
 
       <div className="articles__block-content">
@@ -22,6 +24,6 @@ export default function ArticlesBlock({ article }) {
           {new Date(article.publishDate).toLocaleDateString()}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

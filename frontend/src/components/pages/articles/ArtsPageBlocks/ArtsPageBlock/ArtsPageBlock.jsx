@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ArtsPageBlock({ item, index }) {
   if (!item) return null;
 
@@ -13,7 +15,10 @@ export default function ArtsPageBlock({ item, index }) {
   const isReversed = index % 2 === 1;
 
   return (
-    <div className={`artspage__list-block ${isReversed ? "reverse" : ""}`}>
+    <Link
+      to={`/articles/${item.documentId}`}
+      className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
+    >
       {imgUrl && <img src={imgUrl} alt={item.title} />}
 
       <div className="artspage__list-block-content">
@@ -31,6 +36,6 @@ export default function ArtsPageBlock({ item, index }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

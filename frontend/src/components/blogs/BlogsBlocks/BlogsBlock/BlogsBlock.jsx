@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 export default function BlogsBlock({ blog }) {
   const imageUrl = blog?.desc_img?.url || "";
 
   return (
-    <div className="blogs__block">
+    <Link to={`/blogs/${blog.documentId}`} className="blogs__block">
       <img src={imageUrl} alt="profile_photo" className="profile" />
 
       <div className="blogs__block-content">
@@ -45,6 +47,6 @@ export default function BlogsBlock({ blog }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

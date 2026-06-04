@@ -12,6 +12,8 @@ import BlogsPage from "./components/pages/blogs/BlogsPage.jsx";
 import EventsPage from "./components/pages/events/EventsPage.jsx";
 
 import NewsContent from "./components/pages/contentpages/news/NewsContent.jsx";
+import ArticlesContent from "./components/pages/contentpages/articles/ArticlesContent.jsx";
+import BlogsContent from "./components/pages/contentpages/blogs/BlogsContent.jsx";
 
 export default function App() {
   return (
@@ -24,7 +26,9 @@ export default function App() {
         <Route path="/news/category/:id" element={<NewsPage />} />
         <Route path="/news/:documentId" element={<NewsContent />} />
         <Route path="/articles" element={<ArtsPage />} />
+        <Route path="/articles/:documentId" element={<ArticlesContent />} />
         <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blogs/:documentId" element={<BlogsContent />} />
         <Route path="/events" element={<EventsPage />} />
       </Routes>
       <hr />

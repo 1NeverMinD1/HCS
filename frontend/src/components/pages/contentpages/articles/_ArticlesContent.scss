@@ -1,4 +1,4 @@
-.newscontent {
+.artscontent {
   margin-top: 20px;
   margin-inline: 250px;
   padding: 20px;
@@ -22,29 +22,29 @@
       }
     }
   }
-  .newscontent__header {
+  .artscontent__header {
     display: flex;
     gap: 20px;
     align-items: baseline;
-    .newscontent__header-date {
+    .artscontent__header-date {
       p {
         font-size: 16px;
         opacity: 0.8;
       }
     }
   }
-  .newscontent__title {
-    width: 50%;
+  .artscontent__title {
+    width: 70%;
     font-size: 40px;
   }
-  .newscontent__img {
+  .artscontent__img {
     width: 80%;
     margin-inline: auto;
     display: block;
     margin-block: 20px;
     border-radius: 10px;
   }
-  .newscontent__main {
+  .artscontent__main {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -63,7 +63,7 @@
       font-size: 20px;
       text-indent: 20px;
       line-height: 130%;
-      s &::before {
+      &::before {
         content: "\201C";
         position: absolute;
         left: 10px;

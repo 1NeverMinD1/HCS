@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function BlogsPageFirstBlock({ blog }) {
   if (!blog) return null;
   const imageUrl =
@@ -10,7 +12,8 @@ export default function BlogsPageFirstBlock({ blog }) {
     blog.back_img?.url;
 
   return (
-    <div
+    <Link
+      to={`/blogs/${blog.documentId}`}
       className="blogspage__hero"
       style={{
         backgroundImage: `url(${firstBlockImg})`,
@@ -61,6 +64,6 @@ export default function BlogsPageFirstBlock({ blog }) {
           89
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

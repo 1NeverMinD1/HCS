@@ -47,8 +47,13 @@
 // Content
 // News
 @use "./components/pages/contentpages/news/NewsContent";
+// Articles
+@use "./components/pages/contentpages/articles/ArticlesContent";
+// Blogs
+@use "./components/pages/contentpages/blogs/BlogsContent";
 
-p {
+p,
+li {
   color: rgb(58, 58, 58);
 }
 

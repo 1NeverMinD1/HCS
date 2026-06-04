@@ -383,6 +383,8 @@
 }
 
 .articles__block {
+  text-decoration: none;
+  color: black;
   width: 100%;
   height: 750px;
   border-radius: 10px;
@@ -433,6 +435,8 @@
 }
 
 .articles__first-block {
+  text-decoration: none;
+  color: black;
   width: 100%;
   height: 750px;
   border-radius: 10px;
@@ -495,6 +499,8 @@
 }
 
 .blogs__block {
+  text-decoration: none;
+  color: black;
   height: 300px;
   padding: 10px;
   display: flex;
@@ -1025,6 +1031,8 @@
 }
 
 .artspage__list-block {
+  text-decoration: none;
+  color: black;
   display: flex;
   height: 400px;
   width: 80%;
@@ -1107,6 +1115,8 @@
 }
 
 .blogspage__item {
+  text-decoration: none;
+  color: black;
   width: 100%;
   margin-top: 50px;
   height: 650px;
@@ -1205,7 +1215,9 @@
 }
 
 .blogspage__hero {
+  text-decoration: none;
   position: relative;
+  color: black;
   isolation: isolate;
   overflow: hidden;
   padding: 30px;
@@ -1502,6 +1514,45 @@ s .newscontent .newscontent__main blockquote::before {
   margin-inline: auto;
   width: 80%;
 }
+.newscontent .newscontent__main ul {
+  font-weight: bold;
+}
+.newscontent .newscontent__main ul li {
+  text-indent: 30px;
+}
+.newscontent .newscontent__main ol {
+  list-style: none;
+  counter-reset: my-counter;
+  padding-left: 30px;
+}
+.newscontent .newscontent__main ol li {
+  counter-increment: my-counter;
+  position: relative;
+  padding-left: 40px;
+  line-height: 140%;
+}
+.newscontent .newscontent__main ol li::before {
+  content: counter(my-counter);
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background: rgb(233, 112, 112);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.newscontent .newscontent__main ul,
+.newscontent .newscontent__main ol {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .newscontent .newscontent__main h1,
 .newscontent .newscontent__main h2,
 .newscontent .newscontent__main h3,
@@ -1538,7 +1589,375 @@ s .newscontent .newscontent__main blockquote::before {
   font-size: 15px;
 }
 
-p {
+.artscontent {
+  margin-top: 20px;
+  margin-inline: 250px;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgb(179, 179, 179), -1px 1px 10px rgb(179, 179, 179);
+  border-radius: 20px;
+}
+.artscontent .back {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  margin-block: 20px;
+  transition: all 0.3s ease;
+}
+.artscontent .back:hover {
+  color: red;
+}
+.artscontent .back:hover svg {
+  transition: all 0.3s ease;
+  fill: red;
+}
+.artscontent .artscontent__header {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+}
+.artscontent .artscontent__header .artscontent__header-date p {
+  font-size: 16px;
+  opacity: 0.8;
+}
+.artscontent .artscontent__title {
+  width: 70%;
+  font-size: 40px;
+}
+.artscontent .artscontent__img {
+  width: 80%;
+  margin-inline: auto;
+  display: block;
+  margin-block: 20px;
+  border-radius: 10px;
+}
+.artscontent .artscontent__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.artscontent .artscontent__main p {
+  font-size: 20px;
+  text-indent: 30px;
+}
+.artscontent .artscontent__main blockquote {
+  margin-block: 20px;
+  background: rgb(236, 158, 158);
+  padding: 30px;
+  padding-left: 50px;
+  width: 60%;
+  position: relative;
+  margin-left: 70px;
+  font-size: 20px;
+  text-indent: 20px;
+  line-height: 130%;
+}
+.artscontent .artscontent__main blockquote::before {
+  content: "“";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 70px;
+  color: red;
+  font-family: Georgia, serif;
+}
+.artscontent .artscontent__main img {
+  margin-block: 40px;
+  margin-inline: auto;
+  width: 80%;
+}
+.artscontent .artscontent__main ul {
+  font-weight: bold;
+}
+.artscontent .artscontent__main ul li {
+  text-indent: 30px;
+}
+.artscontent .artscontent__main ol {
+  list-style: none;
+  counter-reset: my-counter;
+  padding-left: 30px;
+}
+.artscontent .artscontent__main ol li {
+  counter-increment: my-counter;
+  position: relative;
+  padding-left: 40px;
+  line-height: 140%;
+}
+.artscontent .artscontent__main ol li::before {
+  content: counter(my-counter);
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background: rgb(233, 112, 112);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.artscontent .artscontent__main ul,
+.artscontent .artscontent__main ol {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.artscontent .artscontent__main h1,
+.artscontent .artscontent__main h2,
+.artscontent .artscontent__main h3,
+.artscontent .artscontent__main h4,
+.artscontent .artscontent__main h5,
+.artscontent .artscontent__main h6 {
+  margin-left: 40px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.artscontent .artscontent__main h1::after,
+.artscontent .artscontent__main h2::after,
+.artscontent .artscontent__main h3::after,
+.artscontent .artscontent__main h4::after,
+.artscontent .artscontent__main h5::after,
+.artscontent .artscontent__main h6::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgb(228, 98, 98);
+  margin-top: 5px;
+}
+.artscontent .artscontent__main h3 {
+  font-size: 30px;
+}
+.artscontent .artscontent__main h4 {
+  font-size: 25px;
+}
+.artscontent .artscontent__main h5 {
+  font-size: 20px;
+}
+.artscontent .artscontent__main h6 {
+  font-size: 15px;
+}
+
+.blogscontent {
+  margin-top: 20px;
+  margin-inline: 400px;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgb(179, 179, 179), -1px 1px 10px rgb(179, 179, 179);
+  border-radius: 20px;
+}
+.blogscontent .back {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  margin-block: 20px;
+  transition: all 0.3s ease;
+}
+.blogscontent .back:hover {
+  color: red;
+}
+.blogscontent .back:hover svg {
+  transition: all 0.3s ease;
+  fill: red;
+}
+.blogscontent .blogscontent__header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.blogscontent .blogscontent__header .profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-left: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.blogscontent .blogscontent__header .blogscontent__author .author {
+  font-size: 24px;
+}
+.blogscontent .blogscontent__header .blogscontent__author .spec {
+  font-size: 18px;
+}
+.blogscontent .blogscontent__header-date {
+  margin-top: 20px;
+}
+.blogscontent .blogscontent__header-date p {
+  font-size: 16px;
+  opacity: 0.8;
+}
+.blogscontent .cat {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.blogscontent .blogscontent__title {
+  width: 70%;
+  font-size: 40px;
+}
+.blogscontent .blogscontent__img {
+  width: 80%;
+  margin-inline: auto;
+  display: block;
+  margin-block: 20px;
+  border-radius: 10px;
+}
+.blogscontent .blogscontent__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.blogscontent .blogscontent__main p {
+  font-size: 20px;
+  text-indent: 30px;
+}
+.blogscontent .blogscontent__main blockquote {
+  margin-block: 20px;
+  background: rgb(236, 158, 158);
+  padding: 30px;
+  padding-left: 50px;
+  width: 60%;
+  position: relative;
+  margin-left: 70px;
+  font-size: 20px;
+  text-indent: 20px;
+  line-height: 130%;
+}
+.blogscontent .blogscontent__main blockquote::before {
+  content: "“";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 70px;
+  color: red;
+  font-family: Georgia, serif;
+}
+.blogscontent .blogscontent__main img {
+  margin-block: 40px;
+  margin-inline: auto;
+  width: 80%;
+}
+.blogscontent .blogscontent__main ul {
+  font-weight: bold;
+}
+.blogscontent .blogscontent__main ul li {
+  text-indent: 30px;
+}
+.blogscontent .blogscontent__main ol {
+  list-style: none;
+  counter-reset: my-counter;
+  padding-left: 30px;
+}
+.blogscontent .blogscontent__main ol li {
+  counter-increment: my-counter;
+  position: relative;
+  padding-left: 40px;
+  line-height: 140%;
+}
+.blogscontent .blogscontent__main ol li::before {
+  content: counter(my-counter);
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background: rgb(233, 112, 112);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.blogscontent .blogscontent__main ul,
+.blogscontent .blogscontent__main ol {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blogscontent .blogscontent__main h1,
+.blogscontent .blogscontent__main h2,
+.blogscontent .blogscontent__main h3,
+.blogscontent .blogscontent__main h4,
+.blogscontent .blogscontent__main h5,
+.blogscontent .blogscontent__main h6 {
+  margin-left: 40px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.blogscontent .blogscontent__main h1::after,
+.blogscontent .blogscontent__main h2::after,
+.blogscontent .blogscontent__main h3::after,
+.blogscontent .blogscontent__main h4::after,
+.blogscontent .blogscontent__main h5::after,
+.blogscontent .blogscontent__main h6::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgb(228, 98, 98);
+  margin-top: 5px;
+}
+.blogscontent .blogscontent__main h3 {
+  font-size: 30px;
+}
+.blogscontent .blogscontent__main h4 {
+  font-size: 25px;
+}
+.blogscontent .blogscontent__main h5 {
+  font-size: 20px;
+}
+.blogscontent .blogscontent__main h6 {
+  font-size: 15px;
+}
+.blogscontent .blogscontent__footer {
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  gap: 20px;
+}
+.blogscontent .blogscontent__footer hr {
+  border: 1px solid black;
+  height: 20px;
+}
+.blogscontent .blogscontent__footer .likes,
+.blogscontent .blogscontent__footer .comms {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  align-items: center;
+  transition: 0.3s ease all;
+  cursor: pointer;
+}
+.blogscontent .blogscontent__footer .likes svg,
+.blogscontent .blogscontent__footer .comms svg {
+  width: 30px;
+  height: 30px;
+}
+.blogscontent .blogscontent__footer .likes:hover {
+  transition: 0.3s ease all;
+  color: red;
+  transform: scale(1.05);
+}
+.blogscontent .blogscontent__footer .likes:hover svg {
+  fill: red;
+}
+.blogscontent .blogscontent__footer .comms:hover {
+  transition: 0.3s ease all;
+  color: rgb(41, 137, 216);
+  transform: scale(1.05);
+}
+.blogscontent .blogscontent__footer .comms:hover svg {
+  fill: rgb(41, 137, 216);
+}
+
+p,
+li {
   color: rgb(58, 58, 58);
 }
 
