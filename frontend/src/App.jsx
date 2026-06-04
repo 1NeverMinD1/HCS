@@ -9,6 +9,9 @@ import Home from "./components/pages/Home.jsx";
 import NewsPage from "./components/pages/news/NewsPage.jsx";
 import ArtsPage from "./components/pages/articles/ArtsPage.jsx";
 import BlogsPage from "./components/pages/blogs/BlogsPage.jsx";
+import EventsPage from "./components/pages/events/EventsPage.jsx";
+
+import NewsContent from "./components/pages/contentpages/news/NewsContent.jsx";
 
 export default function App() {
   return (
@@ -18,8 +21,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/category/:id" element={<NewsPage />} />
+        <Route path="/news/:documentId" element={<NewsContent />} />
         <Route path="/articles" element={<ArtsPage />} />
         <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Routes>
       <hr />
       <div className="wrapper">

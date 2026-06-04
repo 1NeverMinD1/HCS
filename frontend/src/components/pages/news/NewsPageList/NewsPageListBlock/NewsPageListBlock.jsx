@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function NewsPageListBlock({ item }) {
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
@@ -6,8 +8,10 @@ export default function NewsPageListBlock({ item }) {
   const date = new Date(item.publishDate);
 
   return (
-    <div className="newspage__main-item">
-      <img src={imgUrl} alt={item.title} />
+    <Link to={`/news/${item.documentId}`} className="newspage__main-item">
+      <div className="check">
+        <img src={imgUrl} alt={item.title} />
+      </div>
 
       <div className="newspage__main-item-content">
         <p className="newspage__main-item-cat">{category}</p>
@@ -32,6 +36,6 @@ export default function NewsPageListBlock({ item }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

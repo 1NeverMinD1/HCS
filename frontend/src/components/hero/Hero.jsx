@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
@@ -30,10 +31,11 @@ export default function Hero({ onLoadFeatured }) {
   const date = new Date(featured.publishDate);
 
   return (
-    <div
-      className="hero"
-      style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
-    >
+    <Link to={`/news/${featured.documentId}`} className="hero">
+      <div
+        className="hero__bg"
+        style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
+      />
       {category && <p className="cat">{category}</p>}
 
       <h1 className="hero__title">{featured.title}</h1>
@@ -48,6 +50,6 @@ export default function Hero({ onLoadFeatured }) {
           })}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

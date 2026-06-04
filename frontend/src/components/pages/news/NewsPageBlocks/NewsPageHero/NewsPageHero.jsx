@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function NewsPageHero({ news }) {
   const latestNewsImage =
     news.desc_img?.formats?.medium?.url ||
@@ -9,7 +11,8 @@ export default function NewsPageHero({ news }) {
   const latestNewsDate = new Date(news.publishDate);
 
   return (
-    <div
+    <Link
+      to={`/news/${news.documentId}`}
       className="newspage__hero-main"
       style={{
         "--bg": `url(${latestNewsImage})`,
@@ -39,6 +42,6 @@ export default function NewsPageHero({ news }) {
           })}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

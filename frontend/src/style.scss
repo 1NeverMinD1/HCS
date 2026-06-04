@@ -41,6 +41,13 @@
 @use "./components/pages/blogs/BlogsPageBlocks/BlogsPageBlock/BlogsPageBlock";
 @use "./components/pages/blogs/BlogsPageBlocks/BlogsPageFirstBlock/BlogsPageFirstBlock";
 // Events
+@use "./components/pages/events/EventsPage";
+@use "./components/pages/events/EventsPageBlocks/EventsPageBlocks";
+@use "./components/pages/events/EventsPageBlocks/EventsPageBlock/EventsPageBlock";
+// Content
+// News
+@use "./components/pages/contentpages/news/NewsContent";
+
 p {
   color: rgb(58, 58, 58);
 }
@@ -78,4 +85,9 @@ ul {
   font-family: "Main";
   src: url("./static/bold.woff2") format("woff2");
   font-weight: 700;
+}
+
+.arrow-left {
+  width: 30px;
+  height: 30px;
 }

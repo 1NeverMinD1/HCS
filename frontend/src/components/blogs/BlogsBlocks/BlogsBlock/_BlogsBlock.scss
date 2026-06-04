@@ -7,6 +7,7 @@
   border: 1px solid rgb(199, 199, 199);
   transition: 0.3s ease all;
   &:hover {
+    cursor: pointer;
     transition: 0.3s ease all;
     box-shadow: 0px 6px 10px rgb(179, 179, 179);
     .blogs__block-content {

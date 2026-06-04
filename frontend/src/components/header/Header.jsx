@@ -82,7 +82,7 @@ export default function Header() {
                   {categories.map((cat) => (
                     <li key={cat.id} className="dropdown__item">
                       <NavLink
-                        to={`/news/${cat.id}`}
+                        to={`/news/category/${cat.id}`}
                         className="dropdown__link"
                       >
                         {cat.name}

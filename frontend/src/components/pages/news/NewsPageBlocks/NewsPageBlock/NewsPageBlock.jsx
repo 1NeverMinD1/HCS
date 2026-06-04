@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 export default function NewsPageBlock({ item }) {
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
   const category = item.categories?.[0]?.name;
 
   return (
-    <div className="newspage__hero-item">
+    <Link to={`/news/${item.documentId}`} className="newspage__hero-item">
       <img src={imgUrl} alt={item.title} />
 
       <div className="newspage__hero-item-info">
@@ -18,6 +20,6 @@ export default function NewsPageBlock({ item }) {
           {new Date(item.publishDate).toLocaleDateString("ru-RU")}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

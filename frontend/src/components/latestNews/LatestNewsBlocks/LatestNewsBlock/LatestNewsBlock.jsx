@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function LatestNewsBlock({ item }) {
   const imgUrl = item.desc_img?.url?.startsWith("http")
     ? item.desc_img.url
@@ -6,7 +8,7 @@ export default function LatestNewsBlock({ item }) {
   const category = item.categories?.[0]?.name;
 
   return (
-    <div className="latest__block">
+    <Link to={`/news/${item.documentId}`} className="latest__block">
       <img src={imgUrl} alt={item.title} />
 
       <div className="latest__block-content">
@@ -20,6 +22,6 @@ export default function LatestNewsBlock({ item }) {
           {new Date(item.publishDate).toLocaleDateString()}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

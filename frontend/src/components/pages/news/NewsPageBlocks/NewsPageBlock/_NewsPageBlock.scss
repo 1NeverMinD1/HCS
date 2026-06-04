@@ -1,12 +1,20 @@
 .newspage__hero-item {
+  text-decoration: none;
+  color: black;
   display: flex;
   gap: 10px;
   height: 30%;
   overflow: hidden;
   transition: all 0.3s ease;
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+    box-shadow:
+      1px 1px 10px rgb(179, 179, 179),
+      -1px 1px 10px rgb(179, 179, 179);
+  }
   &:hover img {
     transform: scale(1.05);
-    border-radius: 0px;
     transition: all 0.3s ease;
   }
   img {
