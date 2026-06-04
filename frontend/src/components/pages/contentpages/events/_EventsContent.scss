@@ -1,4 +1,4 @@
-.newscontent {
+.eventscontent {
   margin-top: 20px;
   margin-inline: 250px;
   padding: 20px;
@@ -22,29 +22,29 @@
       }
     }
   }
-  .newscontent__header {
+  .eventscontent__header {
     display: flex;
     gap: 20px;
     align-items: baseline;
-    .newscontent__header-date {
+    .eventscontent__header-date {
       p {
         font-size: 16px;
         opacity: 0.8;
       }
     }
   }
-  .newscontent__title {
+  .eventscontent__title {
     width: 50%;
     font-size: 40px;
   }
-  .newscontent__img {
+  .eventscontent__img {
     width: 80%;
     margin-inline: auto;
     display: block;
     margin-block: 20px;
     border-radius: 10px;
   }
-  .newscontent__main {
+  .eventscontent__main {
     display: flex;
     flex-direction: column;
     gap: 20px;

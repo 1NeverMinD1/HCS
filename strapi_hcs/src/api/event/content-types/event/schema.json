@@ -29,6 +29,9 @@
     "amount": {
       "type": "integer"
     },
+    "price": {
+      "type": "integer"
+    },
     "desc_img": {
       "type": "media",
       "multiple": false,
@@ -38,6 +41,9 @@
         "videos",
         "audios"
       ]
+    },
+    "content": {
+      "type": "blocks"
     },
     "event_cats": {
       "type": "relation",

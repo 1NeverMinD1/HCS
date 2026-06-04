@@ -602,6 +602,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
   attributes: {
     amount: Schema.Attribute.Integer;
+    content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -617,6 +618,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     place: Schema.Attribute.String;
+    price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     start: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;

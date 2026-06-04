@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function EventsBlock({ event }) {
   const imageUrl =
     event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "";
@@ -10,7 +12,7 @@ export default function EventsBlock({ event }) {
     });
 
   return (
-    <div className="events__block">
+    <Link to={`/events/${event.documentId}`} className="events__block">
       {imageUrl && <img src={imageUrl} alt={event.name} />}
       <div className="events__block-content">
         <p className="cat">{event.event_cats?.[0]?.name}</p>
@@ -53,6 +55,6 @@ export default function EventsBlock({ event }) {
         </div>
       </div>
       <button className="subscribe">Зарегистрироваться</button>
-    </div>
+    </Link>
   );
 }

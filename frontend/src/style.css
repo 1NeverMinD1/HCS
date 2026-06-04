@@ -603,6 +603,7 @@
 }
 
 .events__block {
+  text-decoration: none;
   border-radius: 10px;
   background: white;
   color: black;
@@ -1500,11 +1501,11 @@
   text-indent: 20px;
   line-height: 130%;
 }
-s .newscontent .newscontent__main blockquote::before {
+.newscontent .newscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 0px;
+  top: 35px;
   font-size: 70px;
   color: red;
   font-family: Georgia, serif;

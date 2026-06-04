@@ -14,6 +14,7 @@ import EventsPage from "./components/pages/events/EventsPage.jsx";
 import NewsContent from "./components/pages/contentpages/news/NewsContent.jsx";
 import ArticlesContent from "./components/pages/contentpages/articles/ArticlesContent.jsx";
 import BlogsContent from "./components/pages/contentpages/blogs/BlogsContent.jsx";
+import EventsContent from "./components/pages/contentpages/events/EventsContent.jsx";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/blogs" element={<BlogsPage />} />
         <Route path="/blogs/:documentId" element={<BlogsContent />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/events/:documentId" element={<EventsContent />} />
       </Routes>
       <hr />
       <div className="wrapper">
