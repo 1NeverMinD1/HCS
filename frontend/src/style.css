@@ -722,7 +722,7 @@
   .events__block .events__block-footer .date p,
   .events__block .events__block-footer .place p,
   .events__block .events__block-footer .amount p {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .ad .ad__content {
@@ -767,7 +767,7 @@
   border-radius: 10px;
 }
 .ad .ad__content .ad__input .subscribe {
-  width: 12%;
+  width: object-fit;
 }
 
 .footer {
@@ -1534,8 +1534,14 @@
   opacity: 0.8;
 }
 .newscontent .newscontent__title {
-  width: 50%;
+  width: 70%;
   font-size: 40px;
+}
+.newscontent .newscontent__intro {
+  width: 90%;
+  margin-block: 20px;
+  text-indent: 20px;
+  font-size: 24px;
 }
 .newscontent .newscontent__img {
   width: 80%;

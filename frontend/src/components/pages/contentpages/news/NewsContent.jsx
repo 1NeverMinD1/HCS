@@ -76,6 +76,7 @@ export default function NewsContent() {
         </div>
       </div>
       <h2 className="newscontent__title">{news.title}</h2>
+      <p className="newscontent__intro">{news.desc}</p>
       <img src={imgUrl} alt="desc_img" className="newscontent__img" />
       <hr />
       <div className="newscontent__main">
