@@ -167,6 +167,11 @@
   margin-block: 40px;
 }
 
+@media (max-width: 1630px) {
+  .main .wrapper {
+    padding-inline: 200px;
+  }
+}
 @media (max-width: 1440px) {
   .main .wrapper {
     padding-inline: 150px;
@@ -245,12 +250,14 @@
 
 @media (max-width: 1630px) {
   .hero .cat {
-    margin-top: 150px;
+    margin-top: 125px;
   }
   .hero .hero__title {
+    width: 80%;
     font-size: 40px;
   }
   .hero .hero__text {
+    width: 80%;
     font-size: 20px;
   }
 }
@@ -641,11 +648,9 @@
   color: black;
   width: 30%;
   height: 700px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease;
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .events__block:hover {
   cursor: pointer;
@@ -653,15 +658,18 @@
 .events__block .img_wrapper {
   height: 55%;
   overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .events__block .img_wrapper img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  width: 100%;
   height: 100%;
   transition: transform 0.3s ease;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: 80% 30%;
+     object-position: 80% 30%;
 }
 .events__block:hover img {
   transform: scale(1.05);
@@ -710,6 +718,13 @@
   margin-bottom: 20px;
 }
 
+@media (max-width: 1630px) {
+  .events__block .events__block-footer .date p,
+  .events__block .events__block-footer .place p,
+  .events__block .events__block-footer .amount p {
+    font-size: 14px;
+  }
+}
 .ad .ad__content {
   background: rgb(241, 222, 222);
   padding: 60px 20px;
@@ -2039,9 +2054,11 @@
   width: 50%;
 }
 .eventscontent .eventscontent__intro .eventscontent__title {
+  width: 80%;
   font-size: 40px;
 }
 .eventscontent .eventscontent__intro .eventscontent__desc {
+  width: 80%;
   margin-block: 20px;
   font-size: 24px;
 }
