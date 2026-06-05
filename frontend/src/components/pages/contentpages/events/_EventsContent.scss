@@ -1,6 +1,5 @@
 .eventscontent {
   margin-top: 20px;
-  margin-inline: 250px;
   padding: 20px;
   box-shadow:
     1px 1px 10px rgb(179, 179, 179),
@@ -23,9 +22,6 @@
     }
   }
   .eventscontent__header {
-    display: flex;
-    gap: 20px;
-    align-items: baseline;
     .eventscontent__header-date {
       p {
         font-size: 16px;
@@ -36,6 +32,10 @@
   .eventscontent__title {
     width: 50%;
     font-size: 40px;
+  }
+  .eventcontent__desc {
+    margin-block: 20px;
+    font-size: 24px;
   }
   .eventscontent__img {
     width: 80%;

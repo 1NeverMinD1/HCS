@@ -18,10 +18,10 @@
       "type": "string"
     },
     "start": {
-      "type": "date"
+      "type": "datetime"
     },
     "end": {
-      "type": "date"
+      "type": "datetime"
     },
     "place": {
       "type": "string"

@@ -608,7 +608,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     desc: Schema.Attribute.String;
     desc_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    end: Schema.Attribute.Date;
+    end: Schema.Attribute.DateTime;
     event_cats: Schema.Attribute.Relation<
       'manyToMany',
       'api::event-cat.event-cat'
@@ -620,7 +620,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place: Schema.Attribute.String;
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    start: Schema.Attribute.Date;
+    start: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

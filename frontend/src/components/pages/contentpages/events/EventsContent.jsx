@@ -51,12 +51,17 @@ export default function EventsContent() {
 
   if (!events) return <h2>Загрузка...</h2>;
 
-  const date = new Date(events.publishDate);
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("ru-RU", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
   const imgUrl = events.desc_img?.formats?.small?.url || events.desc_img?.url;
 
   return (
-    <div className="eventscontent">
+    <div className="eventscontent wrapper">
       <Link to="/events" className="back">
         <svg
           viewBox="0 0 16 16"
@@ -73,18 +78,31 @@ export default function EventsContent() {
       </Link>
       <div className="eventscontent__header">
         <p className="cat">{events.event_cats?.[0]?.name}</p>
-        <div className="eventscontent__header-date">
-          <p>
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-        </div>
       </div>
       <h2 className="eventscontent__title">{events.name}</h2>
+      <p className="eventcontent__desc">{events.desc}</p>
       <img src={imgUrl} alt="desc_img" className="eventscontent__img" />
+      <div className="eventcontent__blocks">
+        <div className="eventcontent__block">
+          <p>Дата проведения</p>
+          <p>
+            {formatDate(events.start)}
+            {events.end ? ` — ${formatDate(events.end)}` : ""}
+          </p>
+        </div>
+        <div className="eventscontent__block">
+          <p>Время</p>
+          <p>{events.time}</p>
+        </div>
+        <div className="eventscontent__block">
+          <p>Место</p>
+          <p>{events.place}</p>
+        </div>
+        <div className="eventscontent__block">
+          <p> Ожидаемое количество участников</p>
+          <p>{events.amount}</p>
+        </div>
+      </div>
       <hr />
       <div className="eventscontent__main">
         {events.content?.map((block, i) => renderBlock(block, i))}
