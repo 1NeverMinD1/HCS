@@ -81,12 +81,14 @@
 @media (max-width: 1630px) {
   .hero {
     .cat {
-      margin-top: 150px;
+      margin-top: 125px;
     }
     .hero__title {
+      width: 80%;
       font-size: 40px;
     }
     .hero__text {
+      width: 80%;
       font-size: 20px;
     }
   }

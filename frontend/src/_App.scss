@@ -7,6 +7,13 @@
     margin-block: 40px;
   }
 }
+@media (max-width: 1630px) {
+  .main {
+    .wrapper {
+      padding-inline: 200px;
+    }
+  }
+}
 
 @media (max-width: 1440px) {
   .main {
