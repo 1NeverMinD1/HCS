@@ -13,7 +13,9 @@ export default function EventsBlock({ event }) {
 
   return (
     <Link to={`/events/${event.documentId}`} className="events__block">
-      {imageUrl && <img src={imageUrl} alt={event.name} />}
+      <div className="img_wrapper">
+        <img src={imageUrl} alt={event.name} />
+      </div>
       <div className="events__block-content">
         <p className="cat">{event.event_cats?.[0]?.name}</p>
         <h2 className="events__block-title">{event.name}</h2>

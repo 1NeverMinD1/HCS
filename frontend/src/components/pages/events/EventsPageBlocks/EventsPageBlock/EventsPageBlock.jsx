@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 export default function EventsPageBlock({ event }) {
   const imgUrl =
     event.desc_img?.formats?.small?.url ||
@@ -16,7 +19,7 @@ export default function EventsPageBlock({ event }) {
     });
 
   return (
-    <div className="eventspage__item">
+    <Link to={`/events/${event.documentId}`} className="eventspage__item">
       <div className="img__wrapper">
         <img src={imgUrl} alt="back_img" />
       </div>
@@ -61,9 +64,13 @@ export default function EventsPageBlock({ event }) {
         </div>
         <div className="eventspage__item-more">
           <button className="eventspage__item-button">Подробнее</button>
-          <p className="price">от 15 000 тг</p>
+          {event.price > 0 ? (
+            <p className="price">{event.price} тг</p>
+          ) : (
+            <p className="price">Бесплатно</p>
+          )}{" "}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

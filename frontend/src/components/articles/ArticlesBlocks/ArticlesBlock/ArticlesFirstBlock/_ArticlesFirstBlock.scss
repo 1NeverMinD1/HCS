@@ -14,19 +14,24 @@
     h3 {
       color: red;
     }
+    img {
+      transform: scale(1.1);
+    }
   }
-
-  img {
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  .img_wrapper {
     height: 70%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.02);
+    width: 100%;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      object-position: 70% 30%;
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
   }
 
   .articles__first-content {

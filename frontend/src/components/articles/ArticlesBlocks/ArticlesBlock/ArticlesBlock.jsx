@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 
 export default function ArticlesBlock({ article }) {
-  const imageUrl = article?.desc_img?.url
-    ? article.desc_img.url.startsWith("http")
-      ? article.desc_img.url
-      : `https://hcs-production-423d.up.railway.app${article.desc_img.url}`
-    : "";
+  const imgUrl =
+    article.desc_img?.formats?.small?.url ||
+    article.desc_img?.formats?.medium?.url ||
+    article.desc_img?.url;
 
   const category = article?.tags?.[0]?.name || "";
 
@@ -13,7 +12,9 @@ export default function ArticlesBlock({ article }) {
 
   return (
     <Link to={`/articles/${article.documentId}`} className="articles__block">
-      {imageUrl && <img src={imageUrl} alt={article.title} />}
+      <div className="img_wrapper">
+        <img src={imgUrl} alt={article.title} />
+      </div>
 
       <div className="articles__block-content">
         <p className="articles__block-cat">{category}</p>

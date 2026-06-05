@@ -1,4 +1,6 @@
 .eventspage__item {
+  text-decoration: none;
+  color: black;
   width: 100%;
   display: flex;
   gap: 20px;
@@ -97,7 +99,7 @@
         }
       }
       .price {
-        font-size: 14px;
+        font-size: 16px;
         color: #444;
       }
     }

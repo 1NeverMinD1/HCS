@@ -7,7 +7,9 @@ export default function NewsPageBlock({ item }) {
 
   return (
     <Link to={`/news/${item.documentId}`} className="newspage__hero-item">
-      <img src={imgUrl} alt={item.title} />
+      <div className="img_wrapper">
+        <img src={imgUrl} alt={item.title} />
+      </div>
 
       <div className="newspage__hero-item-info">
         <p className="newspage__hero-item-cat">{category}</p>

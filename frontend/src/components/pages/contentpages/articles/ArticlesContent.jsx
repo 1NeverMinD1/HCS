@@ -59,16 +59,8 @@ export default function ArticlesContent() {
   return (
     <div className="artscontent">
       <Link to="/articles" className="back">
-        <svg
-          viewBox="0 0 16 16"
-          xmlns="http://www.w3.org/2000/svg"
-          className="arrow-left"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M7.008 10.996L2.004 7.992l5.004-2.996v1.997h6.996v1.998H7.008v2.005z"
-          ></path>
+        <svg className="arrow_reverse" viewBox="0 0 5 9">
+          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
         </svg>
         Все статьи
       </Link>

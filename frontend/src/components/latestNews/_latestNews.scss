@@ -11,6 +11,9 @@
 }
 
 .view_all {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: red;
   font-size: 18px;
   &:hover {

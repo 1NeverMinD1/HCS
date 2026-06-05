@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 
 export default function LatestNewsBlock({ item }) {
-  const imgUrl = item.desc_img?.url?.startsWith("http")
-    ? item.desc_img.url
-    : `https://hcs-production-423d.up.railway.app${item.desc_img.url}`;
+  const imgUrl =
+    item.desc_img?.formats?.small?.url ||
+    item.desc_img?.formats?.medium?.url ||
+    item.desc_img?.url;
 
   const category = item.categories?.[0]?.name;
 
   return (
     <Link to={`/news/${item.documentId}`} className="latest__block">
-      <img src={imgUrl} alt={item.title} />
+      <div className="img_wrapper">
+        <img src={imgUrl} alt={item.title} className="latest__block-img" />
+      </div>
 
       <div className="latest__block-content">
         <p className="latest__block-cat">{category}</p>
