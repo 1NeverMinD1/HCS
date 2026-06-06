@@ -4,33 +4,32 @@ import LatestNewsBlocks from "./LatestNewsBlocks/LatestNewsBlocks";
 
 export default function LatestNews({ featuredId }) {
   const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        "https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=10",
+        "https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=8",
       );
 
       const json = await res.json();
 
-      const filtered = json.data.filter((item) => {
-        const isNotHero = item.id !== featuredId;
-        const hasTags = item.tags && item.tags.length > 0;
-
-        return isNotHero && hasTags;
-      });
+      const filtered = json.data.filter((item) => item.id !== featuredId);
 
       setNews(filtered.slice(0, 4));
+      setIsLoading(false);
     }
 
     fetchNews();
   }, [featuredId]);
 
+  if (isLoading) return null;
+
   return (
     <div className="latest">
-      <div className="latest__header">
-        <h2 className="latest__header-title">Последние новости</h2>
+      <LatestNewsBlocks news={news} />
 
+      <div className="latest__link">
         <Link to="/news" className="view_all">
           Все новости
           <svg className="arrow" viewBox="0 0 5 9">
@@ -38,8 +37,6 @@ export default function LatestNews({ featuredId }) {
           </svg>
         </Link>
       </div>
-
-      <LatestNewsBlocks news={news} />
     </div>
   );
 }

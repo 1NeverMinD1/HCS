@@ -2,6 +2,19 @@
   background-color: white;
   .wrapper {
     padding-inline: 300px;
+    .home__news-block {
+      display: flex;
+      gap: 10px;
+      .home__news-item {
+        width: 80%;
+        .home__header {
+          margin-top: 50px;
+          height: 450px;
+          display: flex;
+          gap: 10px;
+        }
+      }
+    }
   }
   hr {
     margin-block: 40px;

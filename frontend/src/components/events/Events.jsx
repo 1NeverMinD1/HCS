@@ -3,6 +3,7 @@ import EventsBlocks from "./EventsBlocks/EventsBlocks";
 
 export default function Events() {
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -11,10 +12,13 @@ export default function Events() {
       );
       const data = await res.json();
       setEvents(data.data);
+      setIsLoading(false);
     }
 
     fetchData();
   }, []);
+
+  if (isLoading) return null;
 
   return (
     <div className="events wrapper">

@@ -1,11 +1,28 @@
 .latest {
   margin-block: 50px;
-  .latest__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    h2 {
-      font-size: 40px;
+  width: 100%;
+  .latest__link {
+    .view_all {
+      width: fit-content;
+      margin-inline: auto;
+      margin-top: 20px;
+      text-decoration: none;
+      background: red;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transition: all 0.3s ease;
+        background: rgb(219, 77, 77);
+        transform: scale(1.05);
+      }
+      svg {
+        fill: white;
+        width: 15px;
+        height: 15px;
+      }
     }
   }
 }

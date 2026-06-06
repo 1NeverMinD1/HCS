@@ -4,6 +4,7 @@ import ArticlesBlocks from "./ArticlesBlocks/ArticlesBlocks";
 
 export default function Articles({ featuredTag }) {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -13,10 +14,13 @@ export default function Articles({ featuredTag }) {
 
       const data = await res.json();
       setArticles(data.data || []);
+      setIsLoading(false);
     }
 
     fetchData();
   }, []);
+
+  if (isLoading) return null;
 
   const filteredArticles = featuredTag
     ? articles.filter((item) => item.tags?.some((t) => t.name === featuredTag))

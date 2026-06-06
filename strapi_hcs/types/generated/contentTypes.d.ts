@@ -679,6 +679,12 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::new.new'>;
+    main: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishDate: Schema.Attribute.DateTime &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

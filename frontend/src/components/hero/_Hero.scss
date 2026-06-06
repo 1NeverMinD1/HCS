@@ -1,14 +1,12 @@
 .hero {
   text-decoration: none;
-  margin-inline: auto;
-  width: 100%;
+  width: 70%;
   color: white;
-  margin-top: 50px;
+
   background: yellowgreen;
   border-radius: 10px;
   padding: 30px;
-  height: 600px;
-
+  height: 450px;
   position: relative;
   overflow: hidden;
 
@@ -47,15 +45,15 @@
   }
 
   .hero__title {
-    width: 50%;
-    font-size: 55px;
+    width: 60%;
+    font-size: 30px;
   }
 
   .hero__text {
     color: white;
     margin-top: 20px;
-    font-size: 24px;
-    width: 60%;
+    font-size: 20px;
+    width: 70%;
   }
 
   .hero__date {
@@ -85,11 +83,11 @@
     }
     .hero__title {
       width: 80%;
-      font-size: 40px;
+      font-size: 25px;
     }
     .hero__text {
       width: 80%;
-      font-size: 20px;
+      font-size: 15px;
     }
   }
 }
@@ -99,12 +97,6 @@
     .cat {
       margin-top: 175px;
     }
-    .hero__title {
-      font-size: 30px;
-    }
-    .hero__text {
-      font-size: 20px;
-    }
   }
 }
 
@@ -112,12 +104,6 @@
   .hero {
     .cat {
       margin-top: 200px;
-    }
-    .hero__title {
-      font-size: 30px;
-    }
-    .hero__text {
-      font-size: 20px;
     }
   }
 }

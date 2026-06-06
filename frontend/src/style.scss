@@ -1,6 +1,8 @@
 @use "./components/header/Header";
 @use "./App";
 @use "./components/hero/Hero";
+// Ad
+@use "./components/ad/Ad";
 // News
 @use "./components/latestNews/latestNews";
 @use "./components/latestNews/LatestNewsBlocks/LatestNewsBlocks";
@@ -18,11 +20,13 @@
 @use "./components/events/Events";
 @use "./components/events/EventsBlocks/EventsBlocks";
 @use "./components/events/EventsBlocks/EventsBlock/EventBlock";
-// Ad
-@use "./components/ad/Ad";
+// Email
+@use "./components/email/Email";
 // Footer
 @use "./components/footer/Footer";
 @use "./components/footer/FooterContent/FooterContent";
+// Trendings
+@use "./components/trendings/Trendings";
 // Pages
 // News
 @use "./components/pages/news/NewsPage";

@@ -5,7 +5,9 @@ import LatestNews from "../latestNews/LatestNews";
 import Articles from "../articles/Articles";
 import Blogs from "../blogs/Blogs";
 import Events from "../events/Events";
+import Email from "../email/Email";
 import Ad from "../ad/Ad";
+import Trendings from "../trendings/Trendings";
 
 export default function Home() {
   const [featuredId, setFeaturedId] = useState(null);
@@ -14,14 +16,22 @@ export default function Home() {
   return (
     <div className="home">
       <div className="wrapper">
-        <Hero
-          onLoadFeatured={(item) => {
-            setFeaturedId(item.id);
-            setFeaturedTag(item.categories?.[0]?.name || null);
-          }}
-        />
+        <div className="home__news-block">
+          <div className="home__news-item">
+            <div className="home__header">
+              <Hero
+                onLoadFeatured={(item) => {
+                  setFeaturedId(item.id);
+                  setFeaturedTag(item.categories?.[0]?.name || null);
+                }}
+              />
+              <Ad />
+            </div>
+            <LatestNews featuredId={featuredId} />
+          </div>
+          <Trendings />
+        </div>
 
-        <LatestNews featuredId={featuredId} />
         <Articles featuredTag={featuredTag} />
         <Blogs />
       </div>
@@ -29,7 +39,7 @@ export default function Home() {
       <Events />
 
       <div className="wrapper">
-        <Ad />
+        <Email />
       </div>
     </div>
   );

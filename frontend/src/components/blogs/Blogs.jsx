@@ -4,6 +4,7 @@ import BlogsBlocks from "./BlogsBlocks/BlogsBlocks";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -12,10 +13,13 @@ export default function Blogs() {
       );
       const data = await res.json();
       setBlogs(data.data);
+      setIsLoading(false);
     }
 
     fetchData();
   }, []);
+
+  if (isLoading) return null;
 
   return (
     <div className="blogs">

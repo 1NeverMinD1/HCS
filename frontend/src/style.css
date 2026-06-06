@@ -163,6 +163,19 @@
 .main .wrapper {
   padding-inline: 300px;
 }
+.main .wrapper .home__news-block {
+  display: flex;
+  gap: 10px;
+}
+.main .wrapper .home__news-block .home__news-item {
+  width: 80%;
+}
+.main .wrapper .home__news-block .home__news-item .home__header {
+  margin-top: 50px;
+  height: 450px;
+  display: flex;
+  gap: 10px;
+}
 .main hr {
   margin-block: 40px;
 }
@@ -179,14 +192,12 @@
 }
 .hero {
   text-decoration: none;
-  margin-inline: auto;
-  width: 100%;
+  width: 70%;
   color: white;
-  margin-top: 50px;
   background: yellowgreen;
   border-radius: 10px;
   padding: 30px;
-  height: 600px;
+  height: 450px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -221,14 +232,14 @@
   z-index: 1;
 }
 .hero .hero__title {
-  width: 50%;
-  font-size: 55px;
+  width: 60%;
+  font-size: 30px;
 }
 .hero .hero__text {
   color: white;
   margin-top: 20px;
-  font-size: 24px;
-  width: 60%;
+  font-size: 20px;
+  width: 70%;
 }
 .hero .hero__date {
   margin-top: 20px;
@@ -254,45 +265,55 @@
   }
   .hero .hero__title {
     width: 80%;
-    font-size: 40px;
+    font-size: 25px;
   }
   .hero .hero__text {
     width: 80%;
-    font-size: 20px;
+    font-size: 15px;
   }
 }
 @media (max-width: 1530px) {
   .hero .cat {
     margin-top: 175px;
   }
-  .hero .hero__title {
-    font-size: 30px;
-  }
-  .hero .hero__text {
-    font-size: 20px;
-  }
 }
 @media (max-width: 1370px) {
   .hero .cat {
     margin-top: 200px;
   }
-  .hero .hero__title {
-    font-size: 30px;
-  }
-  .hero .hero__text {
-    font-size: 20px;
-  }
 }
+.ad {
+  width: 30%;
+  height: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+
 .latest {
   margin-block: 50px;
+  width: 100%;
 }
-.latest .latest__header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.latest .latest__link .view_all {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-inline: auto;
+  margin-top: 20px;
+  text-decoration: none;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
-.latest .latest__header h2 {
-  font-size: 40px;
+.latest .latest__link .view_all:hover {
+  transition: all 0.3s ease;
+  background: rgb(219, 77, 77);
+  transform: scale(1.05);
+}
+.latest .latest__link .view_all svg {
+  fill: white;
+  width: 15px;
+  height: 15px;
 }
 
 .view_all {
@@ -309,7 +330,7 @@
 
 .latest__blocks {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -341,6 +362,7 @@
 }
 .latest__block .img_wrapper .latest__block-img {
   height: 100%;
+  width: 100%;
   transition: transform 0.3s ease;
   -o-object-fit: cover;
      object-fit: cover;
@@ -725,7 +747,7 @@
     font-size: 16px;
   }
 }
-.ad .ad__content {
+.email .email__content {
   background: rgb(241, 222, 222);
   padding: 60px 20px;
   border-radius: 15px;
@@ -734,7 +756,7 @@
   align-items: center;
   margin-bottom: 20px;
 }
-.ad .ad__content .email {
+.email .email__content .email_svg {
   width: 60px;
   height: 60px;
   background: rgb(230, 128, 128);
@@ -743,20 +765,20 @@
   border-radius: 50%;
   margin-bottom: 10px;
 }
-.ad .ad__content h2 {
+.email .email__content h2 {
   font-size: 30px;
   margin-bottom: 20px;
 }
-.ad .ad__content p {
+.email .email__content p {
   margin-bottom: 20px;
 }
-.ad .ad__content .ad__input {
+.email .email__content .email__input-block {
   justify-content: center;
   display: flex;
   width: 100%;
   gap: 20px;
 }
-.ad .ad__content .ad__input .email_input {
+.email .email__content .email__input-block .email_input {
   padding-inline: 10px;
   font-size: 16px;
   width: 20%;
@@ -766,7 +788,7 @@
   background: white;
   border-radius: 10px;
 }
-.ad .ad__content .ad__input .subscribe {
+.email .email__content .email__input-block .subscribe {
   width: object-fit;
 }
 
@@ -812,6 +834,13 @@
 .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list .footer__contacts-item {
   cursor: pointer;
   color: rgb(58, 58, 58);
+}
+
+.trendings {
+  border: 1px solid black;
+  width: 20%;
+  margin-top: 50px;
+  height: 100%;
 }
 
 .newspage .newspage__title {
