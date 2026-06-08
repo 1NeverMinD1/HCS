@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
+import { useLocale } from "../../../context/LocaleContext";
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -11,15 +12,16 @@ export default function NewsPage() {
   const { id } = useParams();
   const location = useLocation();
   const isMain = location.pathname === "/news/main";
+  const { locale } = useLocale();
 
   useEffect(() => {
     let url;
     if (isMain) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc&locale=${locale}`;
     } else if (id) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc&locale=${locale}`;
     } else {
-      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&locale=${locale}`;
     }
 
     fetch(url)
@@ -36,7 +38,7 @@ export default function NewsPage() {
           setCategoryName(null);
         }
       });
-  }, [id, isMain]);
+  }, [id, isMain, locale]);
 
   if (!news.length) {
     return <h2 className="empty wrapper">Новостей нет</h2>;
