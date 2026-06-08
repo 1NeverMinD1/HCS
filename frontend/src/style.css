@@ -168,11 +168,15 @@
   gap: 10px;
 }
 .main .wrapper .home__news-block .home__news-item {
-  width: 80%;
+  width: 70%;
 }
 .main .wrapper .home__news-block .home__news-item .home__header {
   margin-top: 50px;
   height: 450px;
+  display: flex;
+  gap: 10px;
+}
+.main .wrapper .home__arts-block {
   display: flex;
   gap: 10px;
 }
@@ -331,7 +335,7 @@
 .latest__blocks {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
 }
 
 .latest__block {
@@ -399,7 +403,9 @@
 }
 
 .articles {
+  width: 70%;
   margin-block: 50px;
+  height: 100%;
 }
 .articles .articles__header {
   display: flex;
@@ -837,10 +843,173 @@
 }
 
 .trendings {
-  border: 1px solid black;
-  width: 20%;
+  width: 30%;
+  margin-top: 50px;
+  align-self: flex-start;
+  padding: 16px;
+  border-left: 3px solid red;
+}
+.trendings .trendings__title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  color: black;
+}
+.trendings .trendings__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.trendings .trendings__block {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-decoration: none;
+  color: black;
+  padding: 8px 4px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: 0.2s ease all;
+}
+.trendings .trendings__block:last-child {
+  border-bottom: none;
+}
+.trendings .trendings__block:hover h3 {
+  color: red;
+}
+.trendings .trendings__block .trendings__block-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.trendings .trendings__block .trendings__block-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: 0.2s ease color;
+}
+.trendings .trendings__block .trendings__block-info .trendings__block-date {
+  font-size: 14px;
+  color: #999;
+}
+.trendings .see_all {
+  display: inline-block;
+  margin-top: 14px;
+  text-decoration: none;
+  color: red;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.2s ease all;
+}
+.trendings .see_all:hover {
+  text-decoration: underline;
+}
+
+.home__arts-eventlist {
+  width: 30%;
   margin-top: 50px;
   height: 100%;
+  padding: 20px;
+  background: gray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 10px;
+}
+.home__arts-eventlist h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+.home__arts-eventlist .home__arts-eventlist-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.home__arts-eventlist .home__arts-eventlist-nav .see_all {
+  text-decoration: none;
+  color: white;
+}
+.home__arts-eventlist .home__arts-eventlist-nav .see_all:hover {
+  text-decoration: underline;
+}
+.home__arts-eventlist .home__arts-eventlist-item {
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  transition: 0.3s ease all;
+}
+.home__arts-eventlist .home__arts-eventlist-item:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgb(58, 58, 58), -1px -1px 10px rgb(58, 58, 58);
+}
+.home__arts-eventlist .home__arts-eventlist-item:hover .item__intro .img-wrapper {
+  width: 70%;
+}
+.home__arts-eventlist .home__arts-eventlist-item:hover .item__about {
+  width: 30%;
+  max-height: 200px;
+  opacity: 1;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__intro {
+  display: flex;
+  gap: 10px;
+  height: 150px;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__intro .img-wrapper {
+  flex: 1;
+  transition: width 0.3s ease;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__intro .img-wrapper img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about {
+  width: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about .amount,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .price,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .item__about-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about .amount svg,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .price svg,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .item__about-date svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about .amount p,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .price p,
+.home__arts-eventlist .home__arts-eventlist-item .item__about .item__about-date p {
+  width: 70%;
+  font-size: 14px;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about .price svg {
+  width: 25px;
+  height: 25px;
+}
+.home__arts-eventlist .home__arts-eventlist-item .item__about p {
+  color: white;
+}
+.home__arts-eventlist .home__arts-eventlist-item .home__arts-eventlist-content {
+  margin-top: 10px;
+}
+.home__arts-eventlist .home__arts-eventlist-item .home__arts-eventlist-content p {
+  margin-top: 10px;
+  color: white;
 }
 
 .newspage .newspage__title {

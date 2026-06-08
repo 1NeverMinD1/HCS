@@ -24,6 +24,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/main" element={<NewsPage />} />
         <Route path="/news/category/:id" element={<NewsPage />} />
         <Route path="/news/:documentId" element={<NewsContent />} />
         <Route path="/articles" element={<ArtsPage />} />

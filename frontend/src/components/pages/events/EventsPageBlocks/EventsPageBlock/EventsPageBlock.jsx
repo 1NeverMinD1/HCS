@@ -68,7 +68,7 @@ export default function EventsPageBlock({ event }) {
             <p className="price">{event.price} тг</p>
           ) : (
             <p className="price">Бесплатно</p>
-          )}{" "}
+          )}
         </div>
       </div>
     </Link>

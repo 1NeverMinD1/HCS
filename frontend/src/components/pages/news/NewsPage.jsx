@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
@@ -9,11 +9,18 @@ export default function NewsPage() {
   const [categoryName, setCategoryName] = useState(null);
 
   const { id } = useParams();
+  const location = useLocation();
+  const isMain = location.pathname === "/news/main";
 
   useEffect(() => {
-    const url = id
-      ? `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`
-      : `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc`;
+    let url;
+    if (isMain) {
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
+    } else if (id) {
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
+    } else {
+      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc`;
+    }
 
     fetch(url)
       .then((res) => res.json())
@@ -29,7 +36,7 @@ export default function NewsPage() {
           setCategoryName(null);
         }
       });
-  }, [id]);
+  }, [id, isMain]);
 
   if (!news.length) {
     return <h2 className="empty wrapper">Новостей нет</h2>;
@@ -39,7 +46,7 @@ export default function NewsPage() {
   const topNews = news.slice(1, 4);
   const restNews = news.slice(4);
 
-  const title = categoryName ?? "Новости";
+  const title = isMain ? "Главные новости" : (categoryName ?? "Новости");
 
   return (
     <div className="newspage wrapper">

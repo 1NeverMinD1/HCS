@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -37,35 +37,22 @@ function renderBlock(block, i) {
   }
 }
 
-export default function ArticlesContent() {
-  const { documentId } = useParams();
-  const [articles, setArticles] = useState(null);
-
-  useEffect(() => {
-    fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles/${documentId}?populate=*`,
-    )
-      .then((res) => res.json())
-      .then((data) => setArticles(data.data));
-  }, [documentId]);
-
-  if (!articles) return <h2>Загрузка...</h2>;
-
-  const date = new Date(articles.publishDate);
-
-  const imgUrl =
-    articles.desc_img?.formats?.small?.url || articles.desc_img?.url;
+function ArticleItem({ item, isFirst }) {
+  const date = new Date(item.publishDate);
+  const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
   return (
     <div className="artscontent">
-      <Link to="/articles" className="back">
-        <svg className="arrow_reverse" viewBox="0 0 5 9">
-          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
-        </svg>
-        Все статьи
-      </Link>
+      {isFirst && (
+        <Link to="/articles" className="back">
+          <svg className="arrow_reverse" viewBox="0 0 5 9">
+            <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
+          </svg>
+          Все статьи
+        </Link>
+      )}
       <div className="artscontent__header">
-        <p className="cat">{articles.tags?.[0]?.name}</p>
+        <p className="cat">{item.tags?.[0]?.name}</p>
         <div className="artscontent__header-date">
           <p>
             {date.toLocaleDateString("ru-RU", {
@@ -76,12 +63,82 @@ export default function ArticlesContent() {
           </p>
         </div>
       </div>
-      <h2 className="artscontent__title">{articles.title}</h2>
+      <h2 className="artscontent__title">{item.title}</h2>
       <img src={imgUrl} alt="desc_img" className="artscontent__img" />
       <hr />
       <div className="artscontent__main">
-        {articles.content?.map((block, i) => renderBlock(block, i))}
+        {item.content?.map((block, i) => renderBlock(block, i))}
       </div>
+    </div>
+  );
+}
+
+export default function ArticlesContent() {
+  const { documentId } = useParams();
+  const [articlesList, setArticlesList] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    setArticlesList([]);
+    setHasMore(true);
+
+    fetch(
+      `https://hcs-production-423d.up.railway.app/api/articles/${documentId}?populate=*`,
+    )
+      .then((res) => res.json())
+      .then((data) => setArticlesList([data.data]));
+  }, [documentId]);
+
+  const loadNext = useCallback(async () => {
+    if (articlesList.length === 0) return;
+
+    const last = articlesList[articlesList.length - 1];
+
+    const res = await fetch(
+      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
+    );
+    const data = await res.json();
+    const next = data.data?.[0];
+
+    if (next) {
+      setArticlesList((prev) => [...prev, next]);
+    } else {
+      setHasMore(false);
+    }
+  }, [articlesList]);
+
+  useEffect(() => {
+    if (!loaderRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          loadNext();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [loadNext, hasMore]);
+
+  if (articlesList.length === 0) return <h2>Загрузка...</h2>;
+
+  return (
+    <div>
+      {articlesList.map((item, index) => (
+        <ArticleItem key={item.id} item={item} isFirst={index === 0} />
+      ))}
+
+      {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+
+      {!hasMore && (
+        <p style={{ textAlign: "center", padding: "2rem" }}>
+          Больше статей нет
+        </p>
+      )}
     </div>
   );
 }

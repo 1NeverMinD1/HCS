@@ -8,6 +8,7 @@ import Events from "../events/Events";
 import Email from "../email/Email";
 import Ad from "../ad/Ad";
 import Trendings from "../trendings/Trendings";
+import EventsList from "../eventslist/EventsList";
 
 export default function Home() {
   const [featuredId, setFeaturedId] = useState(null);
@@ -25,22 +26,26 @@ export default function Home() {
                   setFeaturedTag(item.categories?.[0]?.name || null);
                 }}
               />
-              <Ad />
+              {featuredId && <Ad />}
             </div>
             <LatestNews featuredId={featuredId} />
           </div>
           <Trendings />
         </div>
-
-        <Articles featuredTag={featuredTag} />
+        <div className="home__arts-block">
+          <Articles featuredTag={featuredTag} />
+          <EventsList />
+        </div>
         <Blogs />
       </div>
 
       <Events />
 
-      <div className="wrapper">
-        <Email />
-      </div>
+      {featuredId && (
+        <div className="wrapper">
+          <Email />
+        </div>
+      )}
     </div>
   );
 }

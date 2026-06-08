@@ -1,6 +1,74 @@
 .trendings {
-  border: 1px solid black;
-  width: 20%;
+  width: 30%;
   margin-top: 50px;
-  height: 100%;
+  align-self: flex-start;
+  padding: 16px;
+  border-left: 3px solid red;
+
+  .trendings__title {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    color: black;
+  }
+
+  .trendings__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .trendings__block {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    text-decoration: none;
+    color: black;
+    padding: 8px 4px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.2s ease all;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      h3 {
+        color: red;
+      }
+    }
+    .trendings__block-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.4;
+        transition: 0.2s ease color;
+      }
+
+      .trendings__block-date {
+        font-size: 14px;
+        color: #999;
+      }
+    }
+  }
+
+  .see_all {
+    display: inline-block;
+    margin-top: 14px;
+    text-decoration: none;
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.2s ease all;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
