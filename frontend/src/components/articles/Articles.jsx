@@ -22,10 +22,6 @@ export default function Articles({ featuredTag }) {
 
   if (isLoading) return null;
 
-  const filteredArticles = featuredTag
-    ? articles.filter((item) => item.tags?.some((t) => t.name === featuredTag))
-    : articles;
-
   return (
     <div className="articles">
       <div className="articles__header">
@@ -38,7 +34,7 @@ export default function Articles({ featuredTag }) {
         </Link>
       </div>
 
-      <ArticlesBlocks articles={filteredArticles} />
+      <ArticlesBlocks articles={articles} />
     </div>
   );
 }

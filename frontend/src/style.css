@@ -518,8 +518,8 @@
 .articles__first-block .img_wrapper img {
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: 70% 30%;
-     object-position: 70% 30%;
+  -o-object-position: 50% 30%;
+     object-position: 50% 30%;
   width: 100%;
   height: 100%;
   border-top-left-radius: 5px;
