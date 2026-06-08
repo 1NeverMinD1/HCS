@@ -83,7 +83,7 @@ export default function EventsList() {
                 {event.price > 0 ? (
                   <p className="price">{event.price} тг</p>
                 ) : (
-                  <p className="price">0 тг</p>
+                  <p className="price">Бесп. </p>
                 )}
               </div>
             </div>
