@@ -43,6 +43,7 @@ export default function Header() {
   return (
     <header
       className={`header wrapper ${isScrolled ? "header--scrolled" : ""}`}
+      id="header"
     >
       <Link to="/" className="logo">
         ВЕСТНИК
@@ -157,7 +158,16 @@ export default function Header() {
             ))}
           </div>
 
-          <button className="subscribe">Подписаться</button>
+          <button
+            className="subscribe"
+            onClick={() =>
+              document
+                .getElementById("subscribe")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Подписаться
+          </button>
         </div>
       </div>
     </header>

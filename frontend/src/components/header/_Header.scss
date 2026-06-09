@@ -161,6 +161,27 @@
         }
       }
     }
+    .locale-switcher {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .locale-btn {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        border: none;
+        transition: 0.3s ease all;
+        &:hover {
+          transition: 0.3s ease all;
+          background: rgb(243, 78, 78);
+          color: white;
+        }
+      }
+      .locale-btn--active {
+        background: red;
+        color: white;
+      }
+    }
   }
 }
 

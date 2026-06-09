@@ -2,10 +2,8 @@
   margin-top: 80px;
   margin-inline: 250px;
   padding: 20px;
-  box-shadow:
-    1px 1px 10px rgb(179, 179, 179),
-    -1px 1px 10px rgb(179, 179, 179);
   border-radius: 20px;
+  border: 1px solid rgb(220, 220, 220);
   .back {
     display: flex;
     align-items: center;
@@ -15,12 +13,18 @@
     margin-block: 20px;
     transition: all 0.3s ease;
     gap: 10px;
-
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    svg {
+      transition: all 0.3s ease;
+    }
     &:hover {
-      color: red;
+      background: red;
+      color: white;
       svg {
+        fill: white;
         transition: all 0.3s ease;
-        fill: red;
       }
     }
   }

@@ -15,12 +15,18 @@
     margin-block: 20px;
     transition: all 0.3s ease;
     gap: 10px;
-
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    svg {
+      transition: all 0.3s ease;
+    }
     &:hover {
-      color: red;
+      background: red;
+      color: white;
       svg {
+        fill: white;
         transition: all 0.3s ease;
-        fill: red;
       }
     }
   }

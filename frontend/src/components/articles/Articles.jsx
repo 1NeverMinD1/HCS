@@ -9,7 +9,7 @@ export default function Articles({ featuredTag }) {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        "https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=10",
+        "https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
       );
 
       const data = await res.json();

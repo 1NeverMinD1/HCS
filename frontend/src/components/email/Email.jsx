@@ -1,6 +1,6 @@
 export default function Email() {
   return (
-    <div className="email">
+    <div className="email" id="subscribe">
       <div className="email__content">
         <svg
           fill="#000000"

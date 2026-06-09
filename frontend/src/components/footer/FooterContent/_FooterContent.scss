@@ -2,7 +2,10 @@
   display: flex;
   .footer__intro {
     width: 30%;
-    h2 {
+    button {
+      border: none;
+      font-size: 30px;
+      font-weight: bold;
       margin-bottom: 20px;
     }
     p {
@@ -22,6 +25,7 @@
         flex-direction: column;
         gap: 20px;
         .footer__contacts-item {
+          text-decoration: none;
           cursor: pointer;
           color: rgb(58, 58, 58);
         }

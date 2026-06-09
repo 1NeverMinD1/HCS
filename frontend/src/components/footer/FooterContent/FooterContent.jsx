@@ -1,8 +1,16 @@
+import { Link } from "react-router-dom";
+
 export default function FooterContent() {
   return (
     <div className="footer__content">
       <div className="footer__intro">
-        <h2>ВЕСТНИК</h2>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="logo"
+        >
+          ВЕСТНИК
+        </button>
+
         <p>
           Современный новостной портал с актуальными новостями, глубокой
           аналитикой и авторскими материалами.
@@ -12,10 +20,18 @@ export default function FooterContent() {
         <div className="footer__contacts-block">
           <h3>РАЗДЕЛЫ</h3>
           <ul className="footer__contacts-list">
-            <li className="footer__contacts-item">Новости</li>
-            <li className="footer__contacts-item">Статьи</li>
-            <li className="footer__contacts-item">Блоги</li>
-            <li className="footer__contacts-item">События</li>
+            <Link to="/news" className="footer__contacts-item">
+              <li className="footer__contacts-item">Новости</li>
+            </Link>
+            <Link to="/articles" className="footer__contacts-item">
+              <li className="footer__contacts-item">Статьи</li>
+            </Link>
+            <Link to="/blogs" className="footer__contacts-item">
+              <li className="footer__contacts-item">Блоги</li>
+            </Link>
+            <Link to="/events" className="footer__contacts-item">
+              <li className="footer__contacts-item">События</li>
+            </Link>
           </ul>
         </div>
         <div className="footer__contacts-block">
