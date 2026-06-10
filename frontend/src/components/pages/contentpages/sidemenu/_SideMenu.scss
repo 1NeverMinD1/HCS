@@ -1,0 +1,110 @@
+.sidemenu {
+  border: 1px solid rgb(220, 220, 220);
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+
+  h2 {
+    flex-shrink: 0;
+  }
+
+  .sidemenu__items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    max-height: calc(100vh - 180px);
+  }
+
+  .sidemenu__item {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    gap: 10px;
+    height: 150px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    flex-shrink: 0;
+    &:hover {
+      border: 2px solid rgb(220, 220, 220);
+      .sidemenu__item-img {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        img {
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+      }
+      .sidemenu__item-content {
+        .sidemenu__item-title {
+          color: red;
+        }
+      }
+    }
+    .sidemenu__item-img {
+      width: 50%;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .sidemenu__item-content {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .sidemenu__item-label {
+        color: white;
+        font-size: 14px;
+        width: fit-content;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+      .sidemenu__item-title {
+        font-size: 18px;
+        font-weight: bold;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+  .sidemenu__item--news {
+    .sidemenu__item-content {
+      .sidemenu__item-label {
+        background: red;
+      }
+    }
+  }
+  .sidemenu__item--article {
+    .sidemenu__item-content {
+      .sidemenu__item-label {
+        background: orange;
+      }
+    }
+  }
+  .sidemenu__item--blog {
+    .sidemenu__item-content {
+      .sidemenu__item-label {
+        background: blue;
+      }
+    }
+  }
+  .sidemenu__item--event {
+    .sidemenu__item-content {
+      .sidemenu__item-label {
+        background: green;
+      }
+    }
+  }
+}
