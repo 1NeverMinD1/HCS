@@ -7,11 +7,10 @@
   flex-direction: column;
   gap: 10px;
   overflow: hidden;
-
+  transition: all 0.3s ease;
   h2 {
     flex-shrink: 0;
   }
-
   .sidemenu__items {
     display: flex;
     flex-direction: column;
@@ -20,7 +19,6 @@
     padding-bottom: 20px;
     max-height: calc(100vh - 180px);
   }
-
   .sidemenu__item {
     text-decoration: none;
     color: black;
@@ -33,12 +31,15 @@
     flex-shrink: 0;
     &:hover {
       border: 2px solid rgb(220, 220, 220);
+      transition: all 0.3s ease;
       .sidemenu__item-img {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
+        transition: all 0.3s ease;
         img {
           border-top-left-radius: 10px;
           border-bottom-left-radius: 10px;
+          transition: all 0.3s ease;
         }
       }
       .sidemenu__item-content {

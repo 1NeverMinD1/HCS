@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SideMenu from "../sidemenu/SideMenu";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -127,18 +128,23 @@ export default function ArticlesContent() {
   if (articlesList.length === 0) return <h2>Загрузка...</h2>;
 
   return (
-    <div>
-      {articlesList.map((item, index) => (
-        <ArticleItem key={item.id} item={item} isFirst={index === 0} />
-      ))}
+    <div className="artscontent__layout">
+      <div className="artscontent__layout-main">
+        {articlesList.map((item, index) => (
+          <ArticleItem key={item.id} item={item} isFirst={index === 0} />
+        ))}
 
-      {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+        {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
 
-      {!hasMore && (
-        <p style={{ textAlign: "center", padding: "2rem" }}>
-          Больше статей нет
-        </p>
-      )}
+        {!hasMore && (
+          <p style={{ textAlign: "center", padding: "2rem" }}>
+            Больше статей нет
+          </p>
+        )}
+      </div>
+      <div className="artscontent__layout-sidemenu">
+        <SideMenu currentId={documentId} />
+      </div>
     </div>
   );
 }
