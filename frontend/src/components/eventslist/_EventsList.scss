@@ -88,6 +88,12 @@
           font-size: 14px;
         }
       }
+      .item__about-date {
+        .item__about-date-time {
+          display: flex;
+          flex-direction: column;
+        }
+      }
       .price {
         svg {
           width: 25px;

@@ -1118,6 +1118,10 @@
   width: 70%;
   font-size: 14px;
 }
+.home__arts-eventlist .home__arts-eventlist-item .item__about .item__about-date .item__about-date-time {
+  display: flex;
+  flex-direction: column;
+}
 .home__arts-eventlist .home__arts-eventlist-item .item__about .price svg {
   width: 25px;
   height: 25px;

@@ -27,7 +27,7 @@ export default function EventsList() {
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("ru-RU", {
       day: "numeric",
-      month: "long",
+      month: "numeric",
     });
 
   return (
@@ -61,10 +61,10 @@ export default function EventsList() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                   <path d="M85.1,18.5H77v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5c-1.9,0-3.5,1.6-3.5,3.5v4.5H35.3v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5  c-1.9,0-3.5,1.6-3.5,3.5v4.5h-8.5c-3.4,0-6.2,2.8-6.2,6.2v55.9c0,3.4,2.8,6.2,6.2,6.2h70.3c3.4,0,6.2-2.8,6.2-6.2V24.7  C91.3,21.3,88.5,18.5,85.1,18.5z M68.7,14.3h4.6v6.1v4.9h-4.6v-4.9V14.3z M27,14.3h4.6v6.1v4.9H27v-4.9V14.3z M14.9,22.2h8.5v3.3  c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3H65v3.3c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3h8.2  c1.4,0,2.5,1.1,2.5,2.5v10H12.4v-10C12.4,23.3,13.5,22.2,14.9,22.2z M85.1,83.1H14.9c-1.4,0-2.5-1.1-2.5-2.5V38.4h75.2v42.2  C87.6,82,86.5,83.1,85.1,83.1z" />
                 </svg>
-                <p>
-                  {formatDate(event.start)}
-                  {event.end ? ` — ${formatDate(event.end)}` : ""}
-                </p>
+                <div className="item__about-date-time">
+                  <p>{formatDate(event.start)} - </p>
+                  <p>{formatDate(event.end)}</p>
+                </div>
               </div>
               <div className="amount">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
