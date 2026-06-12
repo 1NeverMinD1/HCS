@@ -2,16 +2,15 @@
   width: 30%;
   margin-top: 50px;
   height: 100%;
-  padding: 10px;
-  background: rgb(194, 193, 193);
-  color: white;
+  padding: 20px 10px;
+  color: black;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   gap: 10px;
   h2 {
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 18px;
   }
   .home__arts-eventlist-nav {
     display: flex;
@@ -19,9 +18,16 @@
     align-items: baseline;
     .see_all {
       text-decoration: none;
-      color: white;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 10px;
+      transition: 0.3s ease all;
+
       &:hover {
-        text-decoration: underline;
+        transition: 0.3s ease all;
+
+        background: red;
+        color: white;
       }
     }
   }
@@ -30,18 +36,21 @@
     text-decoration: none;
     color: white;
     transition: 0.3s ease all;
+    border: 1px solid transparent;
+
     &:hover {
       cursor: pointer;
       box-shadow:
-        1px 1px 10px rgb(133, 132, 132),
-        -1px -1px 10px rgb(133, 132, 132);
+        1px 1px 10px rgba(0, 0, 0, 0.2),
+        -1px -1px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
       .item__intro {
         .img-wrapper {
-          width: 70%;
+          width: 60%;
         }
       }
       .item__about {
-        width: 30%;
+        width: 40%;
         max-height: 200px;
         opacity: 1;
       }
@@ -72,43 +81,50 @@
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
+      gap: 10px;
       .amount,
       .price,
       .item__about-date {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
+        height: 30%;
         gap: 10px;
+        align-items: center;
+        border-radius: 10px;
         svg {
+          flex-shrink: 0;
           width: 30px;
           height: 30px;
-          fill: white;
+          fill: black;
         }
         p {
-          width: 70%;
           font-size: 14px;
         }
       }
       .item__about-date {
         .item__about-date-time {
           display: flex;
-          flex-direction: column;
-        }
-      }
-      .price {
-        svg {
-          width: 25px;
-          height: 25px;
+          flex-wrap: wrap;
+          gap: 2px;
+          p {
+            font-size: 14px;
+          }
         }
       }
       p {
-        color: white;
+        color: black;
       }
     }
     .home__arts-eventlist-content {
       margin-top: 10px;
+      h3 {
+        font-size: 24px;
+        color: black;
+      }
       p {
         margin-top: 10px;
-        color: white;
+        color: black;
       }
     }
   }

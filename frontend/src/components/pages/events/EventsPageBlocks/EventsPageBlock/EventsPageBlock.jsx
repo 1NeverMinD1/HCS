@@ -65,7 +65,7 @@ export default function EventsPageBlock({ event }) {
         <div className="eventspage__item-more">
           <button className="eventspage__item-button">Подробнее</button>
           {event.price > 0 ? (
-            <p className="price">{event.price} тг</p>
+            <p className="price">{event.price} тг.</p>
           ) : (
             <p className="price">Бесплатно</p>
           )}
