@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function ArtsPageBlock({ item, index }) {
+  const { locale } = useLocale();
+  const slug =
+    item.title
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
   if (!item) return null;
 
   const imgUrl =
@@ -16,7 +23,7 @@ export default function ArtsPageBlock({ item, index }) {
 
   return (
     <Link
-      to={`/articles/${item.documentId}`}
+      to={`/${locale}/articles/${item.documentId}/${slug}`}
       className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
     >
       {imgUrl && <img src={imgUrl} alt={item.title} />}

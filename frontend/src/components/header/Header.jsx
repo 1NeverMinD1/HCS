@@ -58,7 +58,7 @@ export default function Header() {
             onMouseLeave={() => setIsOpen(false)}
           >
             <NavLink
-              to="/news"
+              to={`/${locale}/news`}
               className={({ isActive }) =>
                 isActive ? "menu__link active" : "menu__link"
               }
@@ -89,7 +89,7 @@ export default function Header() {
                   {categories.map((cat) => (
                     <li key={cat.id} className="dropdown__item">
                       <NavLink
-                        to={`/news/category/${cat.id}`}
+                        to={`/${locale}/news/category/${cat.id}`}
                         className="dropdown__link"
                       >
                         {cat.name}
@@ -103,7 +103,7 @@ export default function Header() {
 
           <li className="menu__list-item">
             <NavLink
-              to="/articles"
+              to={`/${locale}/articles`}
               className={({ isActive }) =>
                 isActive ? "menu__link active" : "menu__link"
               }
@@ -114,7 +114,7 @@ export default function Header() {
 
           <li className="menu__list-item">
             <NavLink
-              to="/blogs"
+              to={`/${locale}/blogs`}
               className={({ isActive }) =>
                 isActive ? "menu__link active" : "menu__link"
               }
@@ -125,7 +125,7 @@ export default function Header() {
 
           <li className="menu__list-item">
             <NavLink
-              to="/events"
+              to={`/${locale}/events`}
               className={({ isActive }) =>
                 isActive ? "menu__link active" : "menu__link"
               }
@@ -133,6 +133,7 @@ export default function Header() {
               События
             </NavLink>
           </li>
+
           <li className="menu__list-item">
             <NavLink
               to="/qnas"

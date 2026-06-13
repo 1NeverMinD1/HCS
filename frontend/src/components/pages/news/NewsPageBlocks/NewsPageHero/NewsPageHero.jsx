@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function NewsPageHero({ news }) {
+  const { locale } = useLocale();
+  const slug =
+    event.name
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
   const latestNewsImage =
     news.desc_img?.formats?.medium?.url ||
     news.desc_img?.formats?.small?.url ||
@@ -12,7 +19,7 @@ export default function NewsPageHero({ news }) {
 
   return (
     <Link
-      to={`/news/${news.documentId}`}
+      to={`/${locale}/news/${news.documentId}/${slug}`}
       className="newspage__hero-main"
       style={{
         "--bg": `url(${latestNewsImage})`,

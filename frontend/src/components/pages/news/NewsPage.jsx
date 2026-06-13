@@ -11,7 +11,7 @@ export default function NewsPage() {
 
   const { id } = useParams();
   const location = useLocation();
-  const isMain = location.pathname === "/news/main";
+  const isMain = location.pathname.endsWith("/news/main");
   const { locale } = useLocale();
 
   useEffect(() => {

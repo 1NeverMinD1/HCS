@@ -28,17 +28,41 @@ export default function App() {
         <Header />
 
         <Routes>
+          {/* Домашняя страница */}
           <Route path="/" element={<Home />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/main" element={<NewsPage />} />
-          <Route path="/news/category/:id" element={<NewsPage />} />
-          <Route path="/news/:documentId" element={<NewsContent />} />
-          <Route path="/articles" element={<ArtsPage />} />
-          <Route path="/articles/:documentId" element={<ArticlesContent />} />
-          <Route path="/blogs" element={<BlogsPage />} />
-          <Route path="/blogs/:documentId" element={<BlogsContent />} />
-          <Route path="/events" element={<EventsPage />} />
-          <Route path="/events/:documentId" element={<EventsContent />} />
+          {/* Все новости */}
+          <Route path="/:locale/news" element={<NewsPage />} />
+          {/* Главные новости */}
+          <Route path="/:locale/news/main" element={<NewsPage />} />
+          {/* Категории новостей */}
+          <Route path="/:locale/news/category/:id" element={<NewsPage />} />
+          {/* Полная новость */}
+          <Route
+            path="/:locale/news/:documentId/:slug"
+            element={<NewsContent />}
+          />
+          {/* Все статьи */}
+          <Route path="/:locale/articles" element={<ArtsPage />} />
+          {/* Полная статья */}
+          <Route
+            path="/:locale/articles/:documentId/:slug"
+            element={<ArticlesContent />}
+          />
+          {/* Все блоги */}
+          <Route path="/:locale/blogs" element={<BlogsPage />} />
+          {/* Полный блог */}
+          <Route
+            path="/:locale/blogs/:documentId/:slug"
+            element={<BlogsContent />}
+          />
+          {/* Все мероприятия */}
+          <Route path="/:locale/events" element={<EventsPage />} />
+          {/* Полное мероприятие */}
+          <Route
+            path="/:locale/events/:documentId/:slug"
+            element={<EventsContent />}
+          />
+          {/* Вопросы и ответы */}
           <Route path="/q-and-as" element={<QNA />} />
         </Routes>
         <hr />

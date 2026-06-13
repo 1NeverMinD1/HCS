@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function EventsPageBlock({ event }) {
+  const { locale } = useLocale();
+  const slug =
+    event.name
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
   const imgUrl =
     event.desc_img?.formats?.small?.url ||
     event.desc_img?.formats?.medium?.url ||
@@ -19,7 +26,10 @@ export default function EventsPageBlock({ event }) {
     });
 
   return (
-    <Link to={`/events/${event.documentId}`} className="eventspage__item">
+    <Link
+      to={`/${locale}/events/${event.documentId}/${slug}`}
+      className="eventspage__item"
+    >
       <div className="img__wrapper">
         <img src={imgUrl} alt="back_img" />
       </div>

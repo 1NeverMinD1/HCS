@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function NewsPageListBlock({ item }) {
+  const { locale } = useLocale();
+  const slug =
+    item.name
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
   const category = item.categories?.[0]?.name;

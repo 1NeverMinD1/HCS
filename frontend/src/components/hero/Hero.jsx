@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocale } from "../../context/LocaleContext.jsx";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
+  const { locale } = useLocale();
 
   useEffect(() => {
     fetch(
-      "https://hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc",
+      `https://hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc&locale=${locale}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -17,7 +19,7 @@ export default function Hero({ onLoadFeatured }) {
           onLoadFeatured(item);
         }
       });
-  }, []);
+  }, [locale]);
 
   if (!featured) return null;
 
@@ -30,8 +32,17 @@ export default function Hero({ onLoadFeatured }) {
   const category = featured?.categories?.[0]?.name;
   const date = new Date(featured.publishDate);
 
+  const slug =
+    featured.title
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
+
   return (
-    <Link to={`/news/${featured.documentId}`} className="hero">
+    <Link
+      to={`/${locale}/news/${featured.documentId}/${slug}`}
+      className="hero"
+    >
       <div
         className="hero__bg"
         style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}

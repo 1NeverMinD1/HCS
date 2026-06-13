@@ -1,18 +1,26 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function ArticlesFirstBlock({ article }) {
+  const { locale } = useLocale();
+
   const imgUrl =
     article.desc_img?.formats?.small?.url ||
     article.desc_img?.formats?.medium?.url ||
     article.desc_img?.url;
 
   const category = article?.tags?.[0]?.name || "";
-
   const text = article?.content?.[0]?.children?.[0]?.text || "";
+
+  const slug =
+    article.title
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
 
   return (
     <Link
-      to={`/articles/${article.documentId}`}
+      to={`/${locale}/articles/${article.documentId}/${slug}`}
       className="articles__first-block"
     >
       <div className="img_wrapper">

@@ -1,12 +1,22 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function NewsPageBlock({ item }) {
+  const { locale } = useLocale();
+  const slug =
+    item.name
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
   const category = item.categories?.[0]?.name;
 
   return (
-    <Link to={`/news/${item.documentId}`} className="newspage__hero-item">
+    <Link
+      to={`/${locale}/news/${item.documentId}/${slug}`}
+      className="newspage__hero-item"
+    >
       <div className="img_wrapper">
         <img src={imgUrl} alt={item.title} />
       </div>

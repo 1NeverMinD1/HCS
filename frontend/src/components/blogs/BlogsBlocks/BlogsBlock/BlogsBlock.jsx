@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../context/LocaleContext.jsx";
 
 export default function BlogsBlock({ blog }) {
   const imageUrl = blog?.desc_img?.url || "";
 
+  const { locale } = useLocale();
+  const slug =
+    blog.title
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
+
   return (
-    <Link to={`/blogs/${blog.documentId}`} className="blogs__block">
+    <Link
+      to={`/${locale}/blogs/${blog.documentId}/${slug}`}
+      className="blogs__block"
+    >
       <img src={imageUrl} alt="profile_photo" className="profile" />
 
       <div className="blogs__block-content">

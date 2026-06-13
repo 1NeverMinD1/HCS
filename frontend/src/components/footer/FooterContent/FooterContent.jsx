@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../context/LocaleContext.jsx";
 
 export default function FooterContent() {
+  const { locale } = useLocale();
+
   return (
     <div className="footer__content">
       <div className="footer__intro">
@@ -20,16 +23,16 @@ export default function FooterContent() {
         <div className="footer__contacts-block">
           <h3>РАЗДЕЛЫ</h3>
           <ul className="footer__contacts-list">
-            <Link to="/news" className="footer__contacts-item">
+            <Link to={`/${locale}/news`} className="footer__contacts-item">
               <li className="footer__contacts-item">Новости</li>
             </Link>
-            <Link to="/articles" className="footer__contacts-item">
+            <Link to={`/${locale}/articles`} className="footer__contacts-item">
               <li className="footer__contacts-item">Статьи</li>
             </Link>
-            <Link to="/blogs" className="footer__contacts-item">
+            <Link to={`/${locale}/blogs`} className="footer__contacts-item">
               <li className="footer__contacts-item">Блоги</li>
             </Link>
-            <Link to="/events" className="footer__contacts-item">
+            <Link to={`/${locale}/events`} className="footer__contacts-item">
               <li className="footer__contacts-item">События</li>
             </Link>
           </ul>

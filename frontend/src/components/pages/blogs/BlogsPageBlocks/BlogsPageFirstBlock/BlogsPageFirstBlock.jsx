@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../../context/LocaleContext.jsx";
 
 export default function BlogsPageFirstBlock({ blog }) {
   if (!blog) return null;
+  const { locale } = useLocale();
+  const slug =
+    blog.title
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
+
   const imageUrl =
     blog.desc_img?.formats?.medium?.url ||
     blog.desc_img?.formats?.small?.url ||
@@ -13,14 +21,13 @@ export default function BlogsPageFirstBlock({ blog }) {
 
   return (
     <Link
-      to={`/blogs/${blog.documentId}`}
+      to={`/${locale}/blogs/${blog.documentId}/${slug}`}
       className="blogspage__hero"
       style={{
         backgroundImage: `url(${firstBlockImg})`,
       }}
     >
       <div className="blogspage__hero-header">
-        {" "}
         <img src={imageUrl} alt="profile_photo" className="profile" />
         <div className="blogspage__hero-about">
           <p className="author">{blog.author}</p>

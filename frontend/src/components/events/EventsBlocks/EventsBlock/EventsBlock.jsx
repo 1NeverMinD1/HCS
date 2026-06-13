@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../context/LocaleContext.jsx";
 
 export default function EventsBlock({ event }) {
+  const { locale } = useLocale();
+
   const imageUrl =
     event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "";
 
@@ -11,8 +14,17 @@ export default function EventsBlock({ event }) {
       year: "numeric",
     });
 
+  const slug =
+    event.name
+      ?.toLowerCase()
+      .replace(/[^\wа-яё\s]/gi, "")
+      .replace(/\s+/g, "-") || "";
+
   return (
-    <Link to={`/events/${event.documentId}`} className="events__block">
+    <Link
+      to={`/${locale}/events/${event.documentId}/${slug}`}
+      className="events__block"
+    >
       <div className="img_wrapper">
         <img src={imageUrl} alt={event.name} />
       </div>
