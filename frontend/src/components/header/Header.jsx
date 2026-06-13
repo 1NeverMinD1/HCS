@@ -133,6 +133,16 @@ export default function Header() {
               События
             </NavLink>
           </li>
+          <li className="menu__list-item">
+            <NavLink
+              to="/qnas"
+              className={({ isActive }) =>
+                isActive ? "menu__link active" : "menu__link"
+              }
+            >
+              Советы
+            </NavLink>
+          </li>
         </ul>
       </div>
 

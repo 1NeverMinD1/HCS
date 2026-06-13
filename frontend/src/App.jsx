@@ -1,3 +1,7 @@
+// Изменить проблему с картинками, если их нет, добавить стиль.
+// Добавить Q&A
+// Добавить перевод
+
 import { Routes, Route } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";
@@ -10,6 +14,7 @@ import NewsPage from "./components/pages/news/NewsPage.jsx";
 import ArtsPage from "./components/pages/articles/ArtsPage.jsx";
 import BlogsPage from "./components/pages/blogs/BlogsPage.jsx";
 import EventsPage from "./components/pages/events/EventsPage.jsx";
+import QNA from "./components/pages/qna/QNA.jsx";
 
 import NewsContent from "./components/pages/contentpages/news/NewsContent.jsx";
 import ArticlesContent from "./components/pages/contentpages/articles/ArticlesContent.jsx";
@@ -34,6 +39,7 @@ export default function App() {
           <Route path="/blogs/:documentId" element={<BlogsContent />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/events/:documentId" element={<EventsContent />} />
+          <Route path="/q-and-as" element={<QNA />} />
         </Routes>
         <hr />
         <div className="wrapper">

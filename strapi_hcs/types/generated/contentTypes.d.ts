@@ -708,7 +708,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
 export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
   collectionName: 'q_and_as';
   info: {
-    displayName: 'Q&A';
+    displayName: 'Qna';
     pluralName: 'q-and-as';
     singularName: 'q-and-a';
   };
