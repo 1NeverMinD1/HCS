@@ -1,3 +1,123 @@
 .qnascontent {
-  margin-top: 20px;
+  margin-top: 40px;
+  width: 80%;
+  margin-inline: auto;
+  .qnascontent__main {
+    box-shadow:
+      1px 1px 10px rgb(179, 179, 179),
+      -1px 1px 10px rgb(179, 179, 179);
+    border-radius: 10px;
+    .qnascontent__main-header {
+      padding: 10px 20px;
+      background: rgb(224, 127, 127);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      .question_ico {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background: rgb(243, 67, 67);
+        color: white;
+        border-radius: 5px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h1 {
+        color: white;
+        font-size: 26px;
+      }
+    }
+    .qnascontent__main-text {
+      padding: 10px 20px;
+      .qnascontent__main-short-block {
+        margin-block: 20px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 10px;
+        background: rgb(224, 127, 127);
+        border-left: 4px solid red;
+        gap: 10px;
+        p {
+          color: rgb(0, 0, 0);
+          font-weight: bold;
+          font-size: 20px;
+        }
+        .short_answer {
+          font-size: 18px;
+        }
+      }
+      .qnascontent__main-practice-block {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
+        .galochka {
+          width: 25px;
+          height: 25px;
+          flex-shrink: 0;
+          color: red;
+        }
+        .practice_p {
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+      .qnascontent__main-practice {
+        margin-bottom: 20px;
+        list-style: none;
+        li {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          font-size: 18px;
+          color: rgb(117, 117, 117);
+          margin-bottom: 10px;
+          &::before {
+            content: "";
+            flex-shrink: 0;
+            width: 10px;
+            height: 10px;
+            background: rgb(224, 127, 127);
+            border: 2px solid red;
+            border-radius: 2px;
+          }
+        }
+      }
+      .qnascontent__main-zakon-block {
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow:
+          2px 2px 5px rgb(179, 179, 179, 0.5),
+          -2px -2px 5px rgb(179, 179, 179, 0.5);
+        .qnascontent__main-zakon-block-intro {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+          .molotok {
+            width: 25px;
+            height: 25px;
+            flex-shrink: 0;
+          }
+          .zakon_p {
+            font-weight: bold;
+          }
+        }
+
+        .zakon {
+          width: 90%;
+          font-size: 16px;
+          line-height: 200%;
+          font-style: italic;
+        }
+      }
+    }
+  }
 }
