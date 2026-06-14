@@ -31,8 +31,25 @@
         }
       }
     },
-    "content": {
-      "type": "blocks",
+    "short_answer": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "practice": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "zakon": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
