@@ -15,7 +15,10 @@ export default function NewsPageListBlock({ item }) {
   const date = new Date(item.publishDate);
 
   return (
-    <Link to={`/news/${item.documentId}`} className="newspage__main-item">
+    <Link
+      to={`/${locale}/news/${item.documentId}/${slug}`}
+      className="newspage__main-item"
+    >
       <div className="check">
         <img src={imgUrl} alt={item.title} />
       </div>

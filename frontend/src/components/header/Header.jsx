@@ -136,7 +136,7 @@ export default function Header() {
 
           <li className="menu__list-item">
             <NavLink
-              to="/qnas"
+              to={`/${locale}/q-and-as`}
               className={({ isActive }) =>
                 isActive ? "menu__link active" : "menu__link"
               }

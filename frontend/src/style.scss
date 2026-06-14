@@ -32,6 +32,10 @@
 // EventsList
 @use "./components/eventslist/EventsList";
 // Pages
+// QNA
+@use "./components/pages/qna/QNA";
+@use "./components/pages/qna/QnasPageBlocks/QnasPageBlocks";
+@use "./components/pages/qna/QnasPageBlocks/QnasPageBlock/QnasPageBlock";
 // News
 @use "./components/pages/news/NewsPage";
 @use "./components/pages/news/NewsPageBlocks/NewsPageBlocks";
@@ -53,6 +57,8 @@
 @use "./components/pages/events/EventsPageBlocks/EventsPageBlocks";
 @use "./components/pages/events/EventsPageBlocks/EventsPageBlock/EventsPageBlock";
 // Content
+// QNA
+@use "./components/pages/contentpages/qnas/QnasContent";
 // News
 @use "./components/pages/contentpages/news/NewsContent";
 // Articles

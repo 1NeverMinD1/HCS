@@ -1,0 +1,23 @@
+.qnas__main-item {
+  position: relative;
+  padding: 10px 15px;
+  width: 50%;
+  height: 75px;
+  border: 1px solid transparent;
+  border-left: 1px solid black;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transition: all 0.3s ease;
+    border: 1px solid red;
+    border-radius: 5px;
+    transform: scale(1.05);
+  }
+}

@@ -1,6 +1,4 @@
 // Изменить проблему с картинками, если их нет, добавить стиль.
-// Добавить Q&A
-// Добавить перевод
 
 import { Routes, Route } from "react-router-dom";
 
@@ -20,6 +18,7 @@ import NewsContent from "./components/pages/contentpages/news/NewsContent.jsx";
 import ArticlesContent from "./components/pages/contentpages/articles/ArticlesContent.jsx";
 import BlogsContent from "./components/pages/contentpages/blogs/BlogsContent.jsx";
 import EventsContent from "./components/pages/contentpages/events/EventsContent.jsx";
+import QnasContent from "./components/pages/contentpages/qnas/QnasContent.jsx";
 
 export default function App() {
   return (
@@ -63,9 +62,14 @@ export default function App() {
             element={<EventsContent />}
           />
           {/* Вопросы и ответы */}
-          <Route path="/q-and-as" element={<QNA />} />
+          <Route path="/:locale/q-and-as" element={<QNA />} />
+          {/* Полный вопрос */}
+          <Route
+            path="/:locale/q-and-as/:documentId/:slug"
+            element={<QnasContent />}
+          />
         </Routes>
-        <hr />
+        <hr className="main_divide" />
         <div className="wrapper">
           <Footer />
         </div>

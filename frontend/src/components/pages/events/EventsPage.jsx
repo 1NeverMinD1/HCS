@@ -1,17 +1,21 @@
 import React from "react";
 import EventsPageBlocks from "./EventsPageBlocks/EventsPageBlocks";
 import { useState, useEffect } from "react";
+import { useLocale } from "../../../context/LocaleContext";
 
 export default function EventsPage() {
+  const { locale } = useLocale();
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("https://hcs-production-423d.up.railway.app/api/events?populate=*")
+    fetch(
+      `https://hcs-production-423d.up.railway.app/api/events?populate=*&locale=${locale}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setEvents(data.data || []);
       });
-  }, []);
+  }, [locale]);
   if (!events.length) return null;
 
   return (

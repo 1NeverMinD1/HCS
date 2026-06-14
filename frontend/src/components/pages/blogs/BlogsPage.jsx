@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
+import { useLocale } from "../../../context/LocaleContext.jsx";
 
 import BlogsPageBlocks from "./BlogsPageBlocks/BlogsPageBlocks";
 
 export default function BlogsPage() {
+  const { locale } = useLocale();
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://hcs-production-423d.up.railway.app/api/blogs?populate=*&&sort=publishDate:desc",
+      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&&sort=publishDate:desc&locale=${locale}`,
     )
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);
       });
-  }, []);
+  }, [locale]);
 
   return (
     <div className="blogspage wrapper">

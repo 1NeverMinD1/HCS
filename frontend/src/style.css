@@ -201,7 +201,7 @@
   display: flex;
   gap: 80px;
 }
-.main hr {
+.main .main_divide {
   margin-block: 40px;
 }
 
@@ -824,6 +824,7 @@
 }
 .footer .footer__end {
   display: flex;
+  margin-top: 20px;
   justify-content: space-between;
 }
 .footer .footer__end .rules {
@@ -833,6 +834,7 @@
 
 .footer__content {
   display: flex;
+  margin-bottom: 20px;
 }
 .footer__content .footer__intro {
   width: 30%;
@@ -1150,6 +1152,48 @@
 .home__arts-eventlist .home__arts-eventlist-item .home__arts-eventlist-content p {
   margin-top: 10px;
   color: black;
+}
+
+.qnaspage {
+  text-align: center;
+  margin-block: 20px;
+}
+.qnaspage .qnaspage__title {
+  font-size: 40px;
+}
+.qnaspage .artspage__intro {
+  margin-block: 20px;
+}
+
+.qnaspage__blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.qnas__main-item {
+  position: relative;
+  padding: 10px 15px;
+  width: 50%;
+  height: 75px;
+  border: 1px solid transparent;
+  border-left: 1px solid black;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+.qnas__main-item:hover {
+  transition: all 0.3s ease;
+  border: 1px solid red;
+  border-radius: 5px;
+  transform: scale(1.05);
 }
 
 .newspage .newspage__title {
@@ -1836,6 +1880,10 @@
 .eventspage__item .eventspage__content .eventspage__item-more .price {
   font-size: 16px;
   color: #444;
+}
+
+.qnascontent {
+  margin-top: 20px;
 }
 
 .newscontent__layout {
