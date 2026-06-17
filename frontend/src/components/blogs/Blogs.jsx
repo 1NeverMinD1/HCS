@@ -11,7 +11,7 @@ export default function Blogs() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=4&locale=${locale}`,
+        `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=4`,
       );
       const data = await res.json();
       setBlogs(data.data);
@@ -19,7 +19,7 @@ export default function Blogs() {
     }
 
     fetchData();
-  }, [locale]);
+  }, []);
 
   if (isLoading) return null;
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../utils/getLangField.js";
 
 export default function ArticlesBlock({ article }) {
   const { locale } = useLocale();
@@ -10,13 +11,20 @@ export default function ArticlesBlock({ article }) {
     article.desc_img?.url;
 
   const category = article?.tags?.[0]?.name || "";
-  const text = article?.content?.[0]?.children?.[0]?.text || "";
+
+  const title = getLangField(article, "title", locale);
+
+  const text =
+    article?.content?.find((block) => block.type === "paragraph")?.children?.[0]
+      ?.text || "";
 
   const slug =
-    article.title
+    title
       ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+      .trim()
+      .replace(/[^\wа-яё\s-]/gi, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-") || "";
 
   return (
     <Link
@@ -29,7 +37,7 @@ export default function ArticlesBlock({ article }) {
 
       <div className="articles__block-content">
         <p className="articles__block-cat">{category}</p>
-        <h3 className="articles__block-title">{article.title}</h3>
+        <h3 className="articles__block-title">{title}</h3>
         <p className="articles__block-text">{text}</p>
 
         <p className="articles__block-date">

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../../utils/getLangField.js";
 
 export default function ArticlesFirstBlock({ article }) {
   const { locale } = useLocale();
@@ -9,14 +10,21 @@ export default function ArticlesFirstBlock({ article }) {
     article.desc_img?.formats?.medium?.url ||
     article.desc_img?.url;
 
+  const title = getLangField(article, "title", locale);
+
   const category = article?.tags?.[0]?.name || "";
-  const text = article?.content?.[0]?.children?.[0]?.text || "";
+
+  const text =
+    article?.content?.find((block) => block.type === "paragraph")?.children?.[0]
+      ?.text || "";
 
   const slug =
-    article.title
+    title
       ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+      .trim()
+      .replace(/[^\wа-яё\s-]/gi, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-") || "";
 
   return (
     <Link
@@ -29,10 +37,10 @@ export default function ArticlesFirstBlock({ article }) {
 
       <div className="articles__first-content">
         <p className="articles__first-cat">{category}</p>
-        <h3 className="articles__first-title">{article.title}</h3>
+        <h3 className="articles__first-title">{title}</h3>
 
         <p className="articles__first-date">
-          {new Date(article.publishDate).toLocaleDateString()}
+          {new Date(article.publishDate).toLocaleDateString(locale)}
         </p>
       </div>
     </Link>

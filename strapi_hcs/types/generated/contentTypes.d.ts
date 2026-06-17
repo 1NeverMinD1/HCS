@@ -983,7 +983,19 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    title: Schema.Attribute.String &
+    title_en: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title_kk: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title_ru: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

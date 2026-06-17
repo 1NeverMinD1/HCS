@@ -15,7 +15,23 @@
     }
   },
   "attributes": {
-    "title": {
+    "title_ru": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title_kk": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title_en": {
       "type": "string",
       "pluginOptions": {
         "i18n": {

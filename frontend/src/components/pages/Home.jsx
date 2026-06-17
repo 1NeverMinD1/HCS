@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocale } from "../../context/LocaleContext.jsx";
 
 import Hero from "../hero/Hero";
 import LatestNews from "../latestNews/LatestNews";
@@ -12,6 +13,7 @@ import EventsList from "../eventslist/EventsList";
 import SEO from "../seo/SEO.jsx";
 
 export default function Home() {
+  const { locale } = useLocale();
   const [featuredId, setFeaturedId] = useState(null);
   const [featuredTag, setFeaturedTag] = useState(null);
 

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
+import { getLangField } from "../../utils/getLangField";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
@@ -11,7 +12,7 @@ export default function Header() {
   const dropdownRef = useRef(null);
 
   const locales = [
-    { code: "ru-RU", label: "RU" },
+    { code: "ru", label: "RU" },
     { code: "kk", label: "KK" },
     { code: "en", label: "EN" },
   ];
@@ -92,7 +93,7 @@ export default function Header() {
                         to={`/${locale}/news/category/${cat.id}`}
                         className="dropdown__link"
                       >
-                        {cat.name}
+                        {getLangField(cat, "name", locale)}
                       </NavLink>
                     </li>
                   ))}
