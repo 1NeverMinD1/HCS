@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../seo/SEO.jsx";
+import { useLocale } from "../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../utils/getLangField.js";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -40,8 +42,12 @@ function renderBlock(block, i) {
 }
 
 function ArticleItem({ item, isFirst }) {
+  const { locale } = useLocale();
   const date = new Date(item.publishDate);
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
+  const title = getLangField(item, "title", locale);
+  const desc = getLangField(item, "desc", locale);
+  const content = getLangField(item, "content", locale);
 
   return (
     <div className="artscontent">
@@ -65,17 +71,18 @@ function ArticleItem({ item, isFirst }) {
           </p>
         </div>
       </div>
-      <h2 className="artscontent__title">{item.title}</h2>
+      <h2 className="artscontent__title">{title}</h2>
       <img src={imgUrl} alt="desc_img" className="artscontent__img" />
       <hr />
       <div className="artscontent__main">
-        {item.content?.map((block, i) => renderBlock(block, i))}
+        {content?.map((block, i) => renderBlock(block, i))}
       </div>
     </div>
   );
 }
 
 export default function ArticlesContent() {
+  const { locale } = useLocale();
   const { documentId } = useParams();
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -127,6 +134,10 @@ export default function ArticlesContent() {
   }, [loadNext, hasMore]);
 
   if (articlesList.length === 0) return <h2>Загрузка...</h2>;
+
+  const mainItem = articlesList[0];
+  const imgUrl =
+    mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
 
   return (
     <div className="artscontent__layout">

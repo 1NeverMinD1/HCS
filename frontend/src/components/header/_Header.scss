@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -38,7 +40,7 @@
       overflow: visible;
 
       .menu__list-item {
-        color: rgb(58, 58, 58);
+        color: variables.$text-color;
         font-size: 20px;
         transition: 0.2s ease all;
 
@@ -142,24 +144,6 @@
     .interaction__block {
       display: flex;
       gap: 30px;
-
-      .search_icon {
-        display: block;
-        width: 50px;
-        padding: 10px;
-        height: 50px;
-
-        margin-block: auto;
-
-        transition: 0.2s ease all;
-
-        border-radius: 5px;
-
-        &:hover {
-          background: red;
-          fill: white;
-        }
-      }
     }
     .locale-switcher {
       display: flex;
@@ -173,12 +157,12 @@
         transition: 0.3s ease all;
         &:hover {
           transition: 0.3s ease all;
-          background: rgb(243, 78, 78);
+          background: variables.$hover-color;
           color: white;
         }
       }
       .locale-btn--active {
-        background: red;
+        background: variables.$primary-color;
         color: white;
       }
     }
@@ -198,7 +182,7 @@
 
 .subscribe {
   border: none;
-  background: red;
+  background: variables.$primary-color;
   color: white;
 
   font-size: 18px;
@@ -212,7 +196,7 @@
   cursor: pointer;
 
   &:hover {
-    background: rgb(252, 72, 72);
+    background: variables.$hover-color;
   }
 }
 

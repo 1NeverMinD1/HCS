@@ -67,10 +67,15 @@
 @use "./components/pages/contentpages/blogs/BlogsContent";
 // Events
 @use "./components/pages/contentpages/events/EventsContent";
+// Variables
+@use "./variables";
+
+// Main rgb(0, 60, 255)
+// Hover rgba(0, 60, 255, 0.658)
 
 p,
 li {
-  color: rgb(58, 58, 58);
+  color: variables.$text-color;
 }
 
 * {
@@ -111,7 +116,7 @@ ul {
 .arrow {
   width: 12px;
   height: 12px;
-  fill: red;
+  fill: rgb(0, 60, 255);
 }
 
 .arrow_reverse {

@@ -9,13 +9,13 @@ export default function BlogsPage() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc`,
     )
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);
       });
-  }, [locale]);
+  }, []);
 
   return (
     <div className="blogspage wrapper">

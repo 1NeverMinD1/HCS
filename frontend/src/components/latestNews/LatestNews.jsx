@@ -11,7 +11,7 @@ export default function LatestNews({ featuredId }) {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6&locale=${locale}`,
+        `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6`,
       );
 
       const json = await res.json();
@@ -24,7 +24,7 @@ export default function LatestNews({ featuredId }) {
     }
 
     fetchNews();
-  }, [featuredId, locale]);
+  }, [featuredId]);
 
   if (isLoading) return null;
 

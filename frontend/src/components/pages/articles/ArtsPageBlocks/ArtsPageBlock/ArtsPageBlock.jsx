@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../../utils/getLangField.js";
 
 export default function ArtsPageBlock({ item, index }) {
   const { locale } = useLocale();
+  const title = getLangField(item, "title", locale);
+  const desc = getLangField(item, "desc", locale);
   const slug =
-    item.title
+    title
       ?.toLowerCase()
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
@@ -26,12 +29,12 @@ export default function ArtsPageBlock({ item, index }) {
       to={`/${locale}/articles/${item.documentId}/${slug}`}
       className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
     >
-      {imgUrl && <img src={imgUrl} alt={item.title} />}
+      {imgUrl && <img src={imgUrl} alt={title} />}
 
       <div className="artspage__list-block-content">
         <p className="artspage__list-block-cat">{category}</p>
-        <h3 className="artspage__list-block-title">{item.title}</h3>
-        <p className="artspage__list-block-text">{item.desc}</p>
+        <h3 className="artspage__list-block-title">{title}</h3>
+        <p className="artspage__list-block-text">{desc}</p>
 
         <div className="newspage__main-item-date">
           <p>

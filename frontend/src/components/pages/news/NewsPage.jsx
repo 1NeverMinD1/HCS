@@ -18,11 +18,11 @@ export default function NewsPage() {
   useEffect(() => {
     let url;
     if (isMain) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc&locale=${locale}`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
     } else if (id) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc&locale=${locale}`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
     } else {
-      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&locale=${locale}`;
+      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc`;
     }
 
     fetch(url)
@@ -39,7 +39,7 @@ export default function NewsPage() {
           setCategoryName(null);
         }
       });
-  }, [id, isMain, locale]);
+  }, [id, isMain]);
 
   if (!news.length) {
     return <h2 className="empty wrapper">Новостей нет</h2>;

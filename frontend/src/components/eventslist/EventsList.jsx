@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
+import { getLangField } from "../../utils/getLangField.js";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -11,7 +12,7 @@ export default function EventsList() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/events?populate=*&sort=start:asc&pagination[pageSize]=3&locale=${locale}`,
+        `https://hcs-production-423d.up.railway.app/api/events?populate=*&sort=start:asc&pagination[pageSize]=3`,
       );
       const data = await res.json();
       setEvents(data.data);
@@ -19,7 +20,7 @@ export default function EventsList() {
     }
 
     fetchData();
-  }, [locale]);
+  }, []);
 
   if (isLoading) return null;
 
@@ -40,7 +41,7 @@ export default function EventsList() {
 
       {events.map((event) => {
         const slug =
-          event.name
+          getLangField(event, "name", locale)
             ?.toLowerCase()
             .replace(/[^\wа-яё\s]/gi, "")
             .replace(/\s+/g, "-") || "";
@@ -97,8 +98,8 @@ export default function EventsList() {
             </div>
 
             <div className="home__arts-eventlist-content">
-              <h3>{event.name}</h3>
-              <p>{event.desc}</p>
+              <h3>{getLangField(event, "name", locale)}</h3>
+              <p>{getLangField(event, "desc", locale)}</p>
             </div>
           </Link>
         );

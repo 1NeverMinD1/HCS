@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../utils/getLangField.js";
 
 export default function LatestNewsBlock({ item }) {
   const { locale } = useLocale();
@@ -9,10 +10,13 @@ export default function LatestNewsBlock({ item }) {
     item.desc_img?.formats?.medium?.url ||
     item.desc_img?.url;
 
+  const title = getLangField(item, "title", locale);
+  const desc = getLangField(item, "desc", locale);
+
   const category = item.categories?.[0]?.name;
 
   const slug =
-    item.title
+    title
       ?.toLowerCase()
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
@@ -29,9 +33,9 @@ export default function LatestNewsBlock({ item }) {
       <div className="latest__block-content">
         <p className="latest__block-cat">{category}</p>
 
-        <h3 className="latest__block-title">{item.title}</h3>
+        <h3 className="latest__block-title">{title}</h3>
 
-        <p className="latest__block-text">{item.desc}</p>
+        <p className="latest__block-text">{desc}</p>
 
         <p className="latest__block-date">
           {new Date(item.publishDate).toLocaleDateString()}

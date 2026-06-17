@@ -9,14 +9,12 @@ export default function EventsPage() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://hcs-production-423d.up.railway.app/api/events?populate=*&locale=${locale}`,
-    )
+    fetch(`https://hcs-production-423d.up.railway.app/api/events?populate=*`)
       .then((res) => res.json())
       .then((data) => {
         setEvents(data.data || []);
       });
-  }, [locale]);
+  }, []);
   if (!events.length) return null;
 
   return (

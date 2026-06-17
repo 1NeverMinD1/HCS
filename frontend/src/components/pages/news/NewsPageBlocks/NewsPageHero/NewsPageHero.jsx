@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../../utils/getLangField.js";
 
 export default function NewsPageHero({ news }) {
   const { locale } = useLocale();
+  const title = getLangField(news, "title", locale);
+  const desc = getLangField(news, "desc", locale);
   const slug =
-    event.name
+    title
       ?.toLowerCase()
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
@@ -29,9 +32,9 @@ export default function NewsPageHero({ news }) {
 
       {latestNewsCategory && <p className="cat">{latestNewsCategory}</p>}
 
-      <h1 className="newspage__hero-main-title">{news.title}</h1>
+      <h1 className="newspage__hero-main-title">{title}</h1>
 
-      <p className="newspage__hero-main-text">{news.desc}</p>
+      <p className="newspage__hero-main-text">{desc}</p>
 
       <div className="newspage__hero-main-date">
         <p>

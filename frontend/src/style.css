@@ -111,19 +111,6 @@
   display: flex;
   gap: 30px;
 }
-.header .interaction .interaction__block .search_icon {
-  display: block;
-  width: 50px;
-  padding: 10px;
-  height: 50px;
-  margin-block: auto;
-  transition: 0.2s ease all;
-  border-radius: 5px;
-}
-.header .interaction .interaction__block .search_icon:hover {
-  background: red;
-  fill: white;
-}
 .header .interaction .locale-switcher {
   display: flex;
   gap: 10px;
@@ -138,11 +125,11 @@
 }
 .header .interaction .locale-switcher .locale-btn:hover {
   transition: 0.3s ease all;
-  background: rgb(243, 78, 78);
+  background: rgba(0, 60, 255, 0.658);
   color: white;
 }
 .header .interaction .locale-switcher .locale-btn--active {
-  background: red;
+  background: rgb(0, 60, 255);
   color: white;
 }
 
@@ -156,7 +143,7 @@
 
 .subscribe {
   border: none;
-  background: red;
+  background: rgb(0, 60, 255);
   color: white;
   font-size: 18px;
   border-radius: 8px;
@@ -165,7 +152,7 @@
   cursor: pointer;
 }
 .subscribe:hover {
-  background: rgb(252, 72, 72);
+  background: rgba(0, 60, 255, 0.658);
 }
 
 @keyframes fadeIn {
@@ -280,7 +267,7 @@
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
-  background: red;
+  background: rgb(0, 60, 255);
   margin-bottom: 20px;
 }
 
@@ -324,7 +311,7 @@
   margin-inline: auto;
   margin-top: 20px;
   text-decoration: none;
-  background: red;
+  background: rgb(0, 60, 255);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -332,7 +319,7 @@
 }
 .latest .latest__link .view_all:hover {
   transition: all 0.3s ease;
-  background: rgb(219, 77, 77);
+  background: rgba(0, 60, 255, 0.658);
   transform: scale(1.05);
 }
 .latest .latest__link .view_all svg {
@@ -345,7 +332,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: red;
+  color: rgb(0, 60, 255);
   font-size: 18px;
 }
 .view_all:hover {
@@ -377,7 +364,7 @@
   cursor: pointer;
 }
 .latest__block:hover h3 {
-  color: red;
+  color: rgb(0, 60, 255);
 }
 .latest__block .img_wrapper {
   overflow: hidden;
@@ -438,7 +425,7 @@
 }
 
 .view_all {
-  color: red;
+  color: rgb(0, 60, 255);
   font-size: 18px;
 }
 .view_all:hover {
@@ -467,7 +454,7 @@
   cursor: pointer;
 }
 .articles__block:hover h3 {
-  color: red;
+  color: rgb(0, 60, 255);
 }
 .articles__block:hover img {
   transform: scale(1.1);
@@ -526,7 +513,7 @@
   cursor: pointer;
 }
 .articles__first-block:hover h3 {
-  color: red;
+  color: rgb(0, 60, 255);
 }
 .articles__first-block:hover img {
   transform: scale(1.1);
@@ -600,13 +587,15 @@
   box-shadow: 0px 6px 10px rgb(179, 179, 179);
 }
 .blogs__block:hover .blogs__block-content .blogs__block-title {
-  color: red;
+  color: rgb(0, 60, 255);
 }
 .blogs__block .profile {
   width: 50px;
   height: 50px;
   border-radius: 50px;
   margin-right: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .blogs__block .blogs__block-content .blogs__block-header {
   height: 20%;
@@ -775,7 +764,7 @@
   }
 }
 .email .email__content {
-  background: rgb(241, 222, 222);
+  background: rgb(169, 184, 233);
   padding: 60px 20px;
   border-radius: 15px;
   display: flex;
@@ -786,8 +775,8 @@
 .email .email__content .email_svg {
   width: 60px;
   height: 60px;
-  background: rgb(230, 128, 128);
-  fill: red;
+  background: rgb(101, 126, 211);
+  fill: rgb(0, 60, 255);
   padding: 10px;
   border-radius: 50%;
   margin-bottom: 10px;
@@ -874,7 +863,7 @@
   margin-top: 50px;
   align-self: flex-start;
   padding: 16px;
-  border-left: 3px solid red;
+  border-left: 3px solid rgb(0, 60, 255);
 }
 .trendings .trendings__title {
   font-size: 18px;
@@ -903,7 +892,7 @@
   border-bottom: none;
 }
 .trendings .trendings__block:hover h3 {
-  color: red;
+  color: rgb(0, 60, 255);
 }
 .trendings .trendings__block .trendings__block-info {
   display: flex;
@@ -924,7 +913,7 @@
   display: inline-block;
   margin-top: 14px;
   text-decoration: none;
-  color: red;
+  color: rgb(0, 60, 255);
   font-size: 20px;
   font-weight: 600;
   transition: 0.2s ease all;
@@ -2868,7 +2857,7 @@ ul {
 .arrow {
   width: 12px;
   height: 12px;
-  fill: red;
+  fill: rgb(0, 60, 255);
 }
 
 .arrow_reverse {

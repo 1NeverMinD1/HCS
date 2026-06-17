@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../seo/SEO.jsx";
+import { useLocale } from "../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../utils/getLangField.js";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -40,8 +42,13 @@ function renderBlock(block, i) {
 }
 
 export default function EventsContent() {
+  const { locale } = useLocale();
   const { documentId } = useParams();
   const [events, setEvents] = useState(null);
+  const name = getLangField(events, "name", locale);
+  const desc = getLangField(events, "desc", locale);
+  const content = getLangField(events, "content", locale);
+  const place = getLangField(events, "place", locale);
 
   useEffect(() => {
     fetch(
@@ -70,12 +77,7 @@ export default function EventsContent() {
 
   return (
     <div className="eventscontent__layout">
-      <SEO
-        title={events.name}
-        description={events.desc}
-        image={imgUrl}
-        type="article"
-      />
+      <SEO title={name} description={desc} image={imgUrl} type="article" />
       <div className="eventscontent wrapper">
         <Link to="/events" className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
@@ -86,8 +88,8 @@ export default function EventsContent() {
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
             <p className="cat">{events.event_cats?.[0]?.name}</p>
-            <h2 className="eventscontent__title">{events.name}</h2>
-            <p className="eventscontent__desc">{events.desc}</p>
+            <h2 className="eventscontent__title">{name}</h2>
+            <p className="eventscontent__desc">{desc}</p>
           </div>
           <div className="eventscontent__blocks">
             <div className="eventscontent__block">
@@ -127,7 +129,7 @@ export default function EventsContent() {
               </svg>
               <div className="info">
                 <p>Место</p>
-                <p className="text">{events.place}</p>
+                <p className="text">{place}</p>
               </div>
             </div>
             <div className="eventscontent__block">
@@ -150,7 +152,7 @@ export default function EventsContent() {
         <img src={imgUrl} alt="desc_img" className="eventscontent__img" />
         <hr />
         <div className="eventscontent__main">
-          {events.content?.map((block, i) => renderBlock(block, i))}
+          {content?.map((block, i) => renderBlock(block, i))}
         </div>
       </div>
       <div className="eventscontent__layout-sidemenu">

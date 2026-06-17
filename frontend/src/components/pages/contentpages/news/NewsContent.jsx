@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../seo/SEO.jsx";
+import { useLocale } from "../../../../context/LocaleContext";
+import { getLangField } from "../../../../utils/getLangField";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -40,8 +42,12 @@ function renderBlock(block, i) {
 }
 
 function NewsItem({ item, isFirst }) {
+  const { locale } = useLocale();
   const date = new Date(item.publishDate);
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
+  const title = getLangField(item, "title", locale);
+  const desc = getLangField(item, "desc", locale);
+  const content = getLangField(item, "content", locale);
 
   return (
     <div className="newscontent">
@@ -65,12 +71,12 @@ function NewsItem({ item, isFirst }) {
           </p>
         </div>
       </div>
-      <h2 className="newscontent__title">{item.title}</h2>
-      <p className="newscontent__intro">{item.desc}</p>
+      <h2 className="newscontent__title">{title}</h2>
+      <p className="newscontent__intro">{desc}</p>
       <img src={imgUrl} alt="desc_img" className="newscontent__img" />
       <hr />
       <div className="newscontent__main">
-        {item.content?.map((block, i) => renderBlock(block, i))}
+        {content?.map((block, i) => renderBlock(block, i))}
       </div>
     </div>
   );

@@ -10,9 +10,10 @@ export default function BlogsBlock({ blog }) {
   const title = getLangField(blog, "title", locale);
   const desc = getLangField(blog, "desc", locale);
   const position = getLangField(blog, "position", locale);
+  const author = getLangField(blog, "author", locale);
 
   const slug =
-    blog.title
+    title
       ?.toLowerCase()
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
@@ -26,7 +27,7 @@ export default function BlogsBlock({ blog }) {
 
       <div className="blogs__block-content">
         <div className="blogs__block-header">
-          <p className="author">{blog.author}</p>
+          <p className="author">{author}</p>
           <p className="spec">{position}</p>
         </div>
         <div className="blogs__block-info">

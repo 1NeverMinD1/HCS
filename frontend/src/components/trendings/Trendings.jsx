@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
+import { getLangField } from "../../utils/getLangField.js";
 
 export default function Trendings() {
   const [news, setNews] = useState([]);
@@ -10,7 +11,7 @@ export default function Trendings() {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6&locale=${locale}`,
+        `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6`,
       );
 
       const json = await res.json();
@@ -20,7 +21,7 @@ export default function Trendings() {
     }
 
     fetchNews();
-  }, [locale]);
+  }, []);
 
   if (isLoading) return null;
 
@@ -32,7 +33,7 @@ export default function Trendings() {
           const imgUrl =
             item.desc_img?.formats?.thumbnail?.url || item.desc_img?.url;
           const slug =
-            item.title
+            getLangField(item, "title", locale)
               ?.toLowerCase()
               .replace(/[^\wа-яё\s]/gi, "")
               .replace(/\s+/g, "-") || "";
@@ -43,7 +44,7 @@ export default function Trendings() {
               className="trendings__block"
             >
               <div className="trendings__block-info">
-                <h3>{item.title}</h3>
+                <h3>{getLangField(item, "title", locale)}</h3>
                 <p className="trendings__block-date">
                   {new Date(item.publishDate).toLocaleDateString("ru-RU", {
                     day: "numeric",

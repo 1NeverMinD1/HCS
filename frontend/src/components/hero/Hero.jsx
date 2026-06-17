@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
+import { getLangField } from "../../utils/getLangField.js";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
@@ -8,7 +9,7 @@ export default function Hero({ onLoadFeatured }) {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -19,7 +20,7 @@ export default function Hero({ onLoadFeatured }) {
           onLoadFeatured(item);
         }
       });
-  }, [locale]);
+  }, []);
 
   if (!featured) return null;
 
@@ -32,8 +33,11 @@ export default function Hero({ onLoadFeatured }) {
   const category = featured?.categories?.[0]?.name;
   const date = new Date(featured.publishDate);
 
+  const title = getLangField(featured, "title", locale);
+  const desc = getLangField(featured, "desc", locale);
+
   const slug =
-    featured.title
+    title
       ?.toLowerCase()
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
@@ -49,8 +53,8 @@ export default function Hero({ onLoadFeatured }) {
       />
       {category && <p className="cat">{category}</p>}
 
-      <h1 className="hero__title">{featured.title}</h1>
-      <p className="hero__text">{featured.desc}</p>
+      <h1 className="hero__title">{title}</h1>
+      <p className="hero__text">{desc}</p>
 
       <div className="hero__date">
         <p>

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocale } from "../../../../context/LocaleContext.jsx";
+import { getLangField } from "../../../../utils/getLangField.js";
 
 export default function SideMenu({ currentId }) {
   const [items, setItems] = useState([]);
+  const { locale } = useLocale();
 
   useEffect(() => {
     Promise.all([
@@ -67,13 +70,15 @@ export default function SideMenu({ currentId }) {
                   item.desc_img?.formats?.small?.url ||
                   item.desc_img?.url
                 }
-                alt={item.title}
+                alt={getLangField(item, "title", locale)}
               />
             </div>
             <div className="sidemenu__item-content">
               <p className="sidemenu__item-label">{labelMap[item.type]}</p>
               <p className="sidemenu__item-title">
-                {item.type === "event" ? item.name : item.title}
+                {item.type === "event"
+                  ? getLangField(item, "name", locale)
+                  : getLangField(item, "title", locale)}
               </p>
               <p className="sidemenu__item-date">
                 {new Date(item.publishDate).toLocaleDateString("ru-RU", {

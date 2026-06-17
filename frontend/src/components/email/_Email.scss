@@ -1,6 +1,8 @@
+@use "../../variables";
+
 .email {
   .email__content {
-    background: rgb(241, 222, 222);
+    background: rgb(169, 184, 233);
     padding: 60px 20px;
     border-radius: 15px;
     display: flex;
@@ -10,8 +12,8 @@
     .email_svg {
       width: 60px;
       height: 60px;
-      background: rgb(230, 128, 128);
-      fill: red;
+      background: rgb(101, 126, 211);
+      fill: variables.$primary-color;
       padding: 10px;
       border-radius: 50%;
       margin-bottom: 10px;

@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .latest {
   margin-block: 50px;
   width: 100%;
@@ -7,7 +9,7 @@
       margin-inline: auto;
       margin-top: 20px;
       text-decoration: none;
-      background: red;
+      background: variables.$primary-color;
       color: white;
       padding: 5px 10px;
       border-radius: 5px;
@@ -15,7 +17,7 @@
 
       &:hover {
         transition: all 0.3s ease;
-        background: rgb(219, 77, 77);
+        background: variables.$hover-color;
         transform: scale(1.05);
       }
       svg {
@@ -31,7 +33,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: red;
+  color: variables.$primary-color;
   font-size: 18px;
   &:hover {
     text-decoration: underline;

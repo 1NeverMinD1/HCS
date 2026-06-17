@@ -9,13 +9,13 @@ export default function ArtsPage() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc`,
     )
       .then((res) => res.json())
       .then((data) => {
         setArticles(data.data || []);
       });
-  }, [locale]);
+  }, []);
 
   if (!articles.length) return null;
 
