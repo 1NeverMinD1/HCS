@@ -57,39 +57,48 @@ export default function SideMenu({ currentId }) {
     <div className="sidemenu">
       <h2>Последнее</h2>
       <div className="sidemenu__items">
-        {items.map((item) => (
-          <Link
-            key={`${item.type}-${item.id}`}
-            to={`${linkMap[item.type]}/${item.documentId}`}
-            className={`sidemenu__item sidemenu__item--${item.type}`}
-          >
-            <div className="sidemenu__item-img">
-              <img
-                src={
-                  item.back_img?.url ||
-                  item.desc_img?.formats?.small?.url ||
-                  item.desc_img?.url
-                }
-                alt={getLangField(item, "title", locale)}
-              />
-            </div>
-            <div className="sidemenu__item-content">
-              <p className="sidemenu__item-label">{labelMap[item.type]}</p>
-              <p className="sidemenu__item-title">
-                {item.type === "event"
-                  ? getLangField(item, "name", locale)
-                  : getLangField(item, "title", locale)}
-              </p>
-              <p className="sidemenu__item-date">
-                {new Date(item.publishDate).toLocaleDateString("ru-RU", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
-            </div>
-          </Link>
-        ))}
+        {items.map((item) => {
+          const title =
+            item.type === "event"
+              ? getLangField(item, "name", locale)
+              : getLangField(item, "title", locale);
+
+          const slug =
+            title
+              ?.toLowerCase()
+              .replace(/[^\wа-яё\s]/gi, "")
+              .replace(/\s+/g, "-") || "";
+
+          return (
+            <Link
+              key={`${item.type}-${item.id}`}
+              to={`/${locale}/${linkMap[item.type]}/${item.documentId}/${slug}`}
+              className={`sidemenu__item sidemenu__item--${item.type}`}
+            >
+              <div className="sidemenu__item-img">
+                <img
+                  src={
+                    item.back_img?.url ||
+                    item.desc_img?.formats?.small?.url ||
+                    item.desc_img?.url
+                  }
+                  alt={getLangField(item, "title", locale)}
+                />
+              </div>
+              <div className="sidemenu__item-content">
+                <p className="sidemenu__item-label">{labelMap[item.type]}</p>
+                <p className="sidemenu__item-title">{title}</p>
+                <p className="sidemenu__item-date">
+                  {new Date(item.publishDate).toLocaleDateString("ru-RU", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
+            </Link>
+          );
+        })}{" "}
       </div>
     </div>
   );
