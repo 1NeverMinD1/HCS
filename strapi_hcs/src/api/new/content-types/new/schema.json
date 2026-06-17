@@ -9,52 +9,47 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+    "title_ru": {
+      "type": "string"
     },
-    "desc": {
+    "title_kk": {
+      "type": "string"
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "desc_ru": {
       "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
       "maxLength": 200
     },
-    "publishDate": {
-      "type": "datetime",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+    "desc_kk": {
+      "type": "text"
     },
-    "content": {
-      "type": "blocks",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+    "desc_en": {
+      "type": "text"
+    },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "main": {
+      "type": "boolean"
+    },
+    "publishDate": {
+      "type": "datetime"
+    },
+    "content_ru": {
+      "type": "blocks"
+    },
+    "content_kk": {
+      "type": "blocks"
+    },
+    "content_en": {
+      "type": "blocks"
     },
     "desc_img": {
       "type": "media",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
       "multiple": false,
       "allowedTypes": [
         "images",
@@ -74,22 +69,6 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "mappedBy": "news"
-    },
-    "isFeatured": {
-      "type": "boolean",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "main": {
-      "type": "boolean",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
     }
   }
 }

@@ -15,7 +15,7 @@
     }
   },
   "attributes": {
-    "author": {
+    "author_ru": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "position": {
+    "author_kk": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -31,7 +31,7 @@
         }
       }
     },
-    "title": {
+    "author_en": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -39,7 +39,55 @@
         }
       }
     },
-    "desc": {
+    "position_ru": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "position_kk": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "position_en": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title_ru": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title_kk": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title_en": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "desc_ru": {
       "type": "text",
       "pluginOptions": {
         "i18n": {
@@ -47,8 +95,16 @@
         }
       }
     },
-    "content": {
-      "type": "blocks",
+    "desc_kk": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "desc_en": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -57,6 +113,30 @@
     },
     "publishDate": {
       "type": "datetime",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content_ru": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content_kk": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content_en": {
+      "type": "blocks",
       "pluginOptions": {
         "i18n": {
           "localized": true
