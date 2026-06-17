@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
+import SEO from "../../../seo/SEO.jsx";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -69,6 +70,12 @@ export default function EventsContent() {
 
   return (
     <div className="eventscontent__layout">
+      <SEO
+        title={events.name}
+        description={events.desc}
+        image={imgUrl}
+        type="article"
+      />
       <div className="eventscontent wrapper">
         <Link to="/events" className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">

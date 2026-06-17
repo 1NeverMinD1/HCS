@@ -9,6 +9,7 @@ import Email from "../email/Email";
 import Ad from "../ad/Ad";
 import Trendings from "../trendings/Trendings";
 import EventsList from "../eventslist/EventsList";
+import SEO from "../seo/SEO.jsx";
 
 export default function Home() {
   const [featuredId, setFeaturedId] = useState(null);
@@ -16,6 +17,11 @@ export default function Home() {
 
   return (
     <div className="home">
+      <SEO
+        title="Главная"
+        description="Актуальные новости, статьи, блоги и события на портале Вестник"
+      />
+
       <div className="wrapper">
         <div className="home__news-block">
           <div className="home__news-item">

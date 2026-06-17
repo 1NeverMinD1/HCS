@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
+import SEO from "../../../seo/SEO.jsx";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -128,8 +129,19 @@ export default function NewsContent() {
 
   if (newsList.length === 0) return <h2>Загрузка...</h2>;
 
+  const mainItem = newsList[0];
+  const imgUrl =
+    mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
+
   return (
     <div className="newscontent__layout">
+      <SEO
+        title={mainItem.title}
+        description={mainItem.desc}
+        image={imgUrl}
+        type="article"
+      />
+
       <div className="newscontent__layout-main">
         {newsList.map((item, index) => (
           <NewsItem key={item.id} item={item} isFirst={index === 0} />

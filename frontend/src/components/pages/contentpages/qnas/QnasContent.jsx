@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
+import SEO from "../../../seo/SEO.jsx";
 
 export default function QnasContent() {
   const { documentId } = useParams();
@@ -21,6 +22,8 @@ export default function QnasContent() {
 
   return (
     <div className="qnascontent wrapper">
+      <SEO title={qnas.title} description={qnas.short_answer} type="article" />
+
       <div className="qnascontent__main">
         <div className="qnascontent__main-header">
           <span className="question_ico">?</span>
@@ -28,7 +31,7 @@ export default function QnasContent() {
         </div>
         <div className="qnascontent__main-text">
           <div className="qnascontent__main-short-block">
-            <p>Краткий ответ</p>
+            <p>Краткий ответ</p>
             <blockquote className="short_answer">
               {qnas.short_answer}
             </blockquote>

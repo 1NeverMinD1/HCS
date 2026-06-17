@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext";
 
 import QnasPageBlocks from "./QnasPageBlocks/QnasPageBlocks";
+import SEO from "../../seo/SEO.jsx";
 
 export default function QNA() {
   const { locale } = useLocale();
@@ -10,7 +11,7 @@ export default function QNA() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as?populate=*&&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/q-and-as?populate=*&sort=publishDate:desc&locale=${locale}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,6 +21,10 @@ export default function QNA() {
 
   return (
     <div className="qnaspage wrapper">
+      <SEO
+        title="Вопросы и ответы"
+        description="Быстрые ответы на интересующие вопросы"
+      />
       <h2 className="qnaspage__title">Вопросы и ответы</h2>
       <p className="qnaspage__intro">Быстрые ответы на интересующие вопросы</p>
       <QnasPageBlocks qnas={qnas} />

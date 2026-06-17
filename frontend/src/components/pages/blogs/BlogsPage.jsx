@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext.jsx";
-
 import BlogsPageBlocks from "./BlogsPageBlocks/BlogsPageBlocks";
+import SEO from "../../seo/SEO.jsx";
 
 export default function BlogsPage() {
   const { locale } = useLocale();
@@ -9,7 +9,7 @@ export default function BlogsPage() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&locale=${locale}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -19,6 +19,10 @@ export default function BlogsPage() {
 
   return (
     <div className="blogspage wrapper">
+      <SEO
+        title="Авторские блоги"
+        description="Личные мнения, истории и размышления от нашего сообщества"
+      />
       <h2 className="blogspage__title">Авторские блоги</h2>
       <p className="blogspage__intro">
         Личные мнения, истории и размышления от нашего сообщества

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext.jsx";
-
 import ArtsPageBlocks from "./ArtsPageBlocks/ArtsPageBlocks";
+import SEO from "../../seo/SEO.jsx";
 
 export default function ArtsPage() {
   const { locale } = useLocale();
@@ -9,7 +9,7 @@ export default function ArtsPage() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&locale=${locale}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -21,6 +21,10 @@ export default function ArtsPage() {
 
   return (
     <div className="artspage wrapper">
+      <SEO
+        title="Аналитические статьи"
+        description="Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших авторов"
+      />
       <h2 className="artspage__title">Аналитические статьи</h2>
       <p className="artspage__intro">
         Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших

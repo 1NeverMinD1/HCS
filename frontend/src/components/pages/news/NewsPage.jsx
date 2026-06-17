@@ -4,6 +4,7 @@ import { useParams, useLocation } from "react-router-dom";
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
+import SEO from "../../seo/SEO.jsx";
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -52,6 +53,10 @@ export default function NewsPage() {
 
   return (
     <div className="newspage wrapper">
+      <SEO
+        title={title}
+        description="Актуальные новости и события на портале Вестник"
+      />
       <h1 className="newspage__title">{title}</h1>
 
       <NewsPageBlocks hero={heroNews} list={topNews} />

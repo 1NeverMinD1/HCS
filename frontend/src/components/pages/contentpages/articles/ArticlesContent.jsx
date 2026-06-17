@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
+import SEO from "../../../seo/SEO.jsx";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -129,6 +130,12 @@ export default function ArticlesContent() {
 
   return (
     <div className="artscontent__layout">
+      <SEO
+        title={mainItem.title}
+        description={mainItem.tags?.[0]?.name}
+        image={imgUrl}
+        type="article"
+      />
       <div className="artscontent__layout-main">
         {articlesList.map((item, index) => (
           <ArticleItem key={item.id} item={item} isFirst={index === 0} />
