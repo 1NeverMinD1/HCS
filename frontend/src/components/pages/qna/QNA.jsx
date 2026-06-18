@@ -11,13 +11,13 @@ export default function QNA() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as?populate=*&sort=publishDate:desc&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/q-and-as?populate=*&sort=publishDate:desc`,
     )
       .then((res) => res.json())
       .then((data) => {
         setQnas(data.data || []);
       });
-  }, [locale]);
+  }, []);
 
   return (
     <div className="qnaspage wrapper">

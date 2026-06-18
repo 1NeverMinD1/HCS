@@ -705,6 +705,9 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    content_en: Schema.Attribute.Blocks;
+    content_kk: Schema.Attribute.Blocks;
+    content_ru: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -714,17 +717,14 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
       'api::q-and-a.q-and-a'
     > &
       Schema.Attribute.Private;
-    practice: Schema.Attribute.RichText;
     publishDate: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
-    short_answer: Schema.Attribute.Text & Schema.Attribute.Required;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
     title_ru: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    zakon: Schema.Attribute.Text;
   };
 }
 

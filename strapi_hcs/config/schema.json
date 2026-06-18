@@ -24,13 +24,13 @@
       "type": "date"
     },
     "content_ru": {
-      "type": "blocks"
+      "type": "richtext"
     },
     "content_kk": {
-      "type": "blocks"
+      "type": "richtext"
     },
     "content_en": {
-      "type": "blocks"
+      "type": "richtext"
     }
   }
 }

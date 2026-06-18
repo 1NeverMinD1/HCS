@@ -8,26 +8,29 @@ export default function QnasContent() {
   const [qnas, setQnas] = useState(null);
   const { locale } = useLocale();
 
+  const title = getLangField(blog, "title", locale);
+  const desc = getLangField(blog, "desc", locale);
+
   useEffect(() => {
     setQnas(null);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as/${documentId}?populate=*&locale=${locale}`,
+      `https://hcs-production-423d.up.railway.app/api/q-and-as/${documentId}?populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setQnas(data.data));
-  }, [documentId, locale]);
+  }, [documentId]);
 
   if (!qnas) return <h2 className="loading wrapper">Загрузка...</h2>;
 
   return (
     <div className="qnascontent wrapper">
-      <SEO title={qnas.title} description={qnas.short_answer} type="article" />
+      <SEO title={title} description={qnas.short_answer} type="article" />
 
       <div className="qnascontent__main">
         <div className="qnascontent__main-header">
           <span className="question_ico">?</span>
-          <h1>{qnas.title}</h1>
+          <h1>{title}</h1>
         </div>
         <div className="qnascontent__main-text">
           <div className="qnascontent__main-short-block">
