@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "../../../utils/useTranslation.js";
 
 import { useLocale } from "../../../context/LocaleContext";
 
@@ -8,6 +9,7 @@ import SEO from "../../seo/SEO.jsx";
 export default function QNA() {
   const { locale } = useLocale();
   const [qnas, setQnas] = useState([]);
+  const { t } = useTranslation(locale);
 
   useEffect(() => {
     fetch(
@@ -25,8 +27,8 @@ export default function QNA() {
         title="Вопросы и ответы"
         description="Быстрые ответы на интересующие вопросы"
       />
-      <h2 className="qnaspage__title">Вопросы и ответы</h2>
-      <p className="qnaspage__intro">Быстрые ответы на интересующие вопросы</p>
+      <h2 className="qnaspage__title">{t("qandasIntro")}</h2>
+      <p className="qnaspage__intro">{t("qandasIntroText")}</p>
       <QnasPageBlocks qnas={qnas} />
     </div>
   );

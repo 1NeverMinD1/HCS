@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import { useTranslation } from "../../../utils/useTranslation.js";
 
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
@@ -9,6 +10,8 @@ import SEO from "../../seo/SEO.jsx";
 export default function NewsPage() {
   const [news, setNews] = useState([]);
   const [categoryName, setCategoryName] = useState(null);
+
+  const { t } = useTranslation();
 
   const { id } = useParams();
   const location = useLocation();
@@ -49,7 +52,7 @@ export default function NewsPage() {
   const topNews = news.slice(1, 4);
   const restNews = news.slice(4);
 
-  const title = isMain ? "Главные новости" : (categoryName ?? "Новости");
+  const title = isMain ? "Главные новости" : (categoryName ?? t("news"));
 
   return (
     <div className="newspage wrapper">
@@ -63,7 +66,7 @@ export default function NewsPage() {
 
       <div className="more_news">
         <hr />
-        <p>ЕЩЁ НОВОСТИ</p>
+        <p>{t("moreNews")}</p>
         <hr />
       </div>
 

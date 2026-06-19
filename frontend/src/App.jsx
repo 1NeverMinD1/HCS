@@ -1,5 +1,3 @@
-// Изменить проблему с картинками, если их нет, добавить стиль.
-
 import { Routes, Route } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";

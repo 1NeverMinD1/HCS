@@ -1,3 +1,5 @@
+@use "../../../../variables";
+
 .artscontent__layout {
   display: flex;
   margin-top: 40px;
@@ -26,7 +28,7 @@
           transition: all 0.3s ease;
         }
         &:hover {
-          background: red;
+          background: variables.$primary-color;
           color: white;
           svg {
             fill: white;
@@ -48,8 +50,9 @@
       }
 
       .artscontent__title {
-        width: 70%;
+        width: 90%;
         font-size: 40px;
+        text-indent: 15px;
       }
 
       .artscontent__img {
@@ -64,13 +67,14 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        margin-top: 20px;
         p {
           font-size: 20px;
           text-indent: 30px;
         }
         blockquote {
           margin-block: 20px;
-          background: rgb(236, 158, 158);
+          background: variables.$hover-color;
           padding: 30px;
           padding-left: 50px;
           width: 60%;
@@ -85,7 +89,7 @@
             left: 10px;
             top: 10px;
             font-size: 70px;
-            color: red;
+            color: variables.$primary-color;
             font-family: Georgia, serif;
           }
         }
@@ -115,7 +119,7 @@
               left: 0;
               width: 25px;
               height: 25px;
-              background: rgb(233, 112, 112);
+              background: variables.$hover-color;
               color: white;
               border-radius: 50%;
               display: flex;
@@ -146,7 +150,7 @@
             display: block;
             width: 100%;
             height: 2px;
-            background: rgb(228, 98, 98);
+            background: variables.$hover-color;
             margin-top: 5px;
           }
         }

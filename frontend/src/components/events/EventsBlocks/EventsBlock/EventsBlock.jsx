@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { useTranslation } from "../../../../utils/useTranslation.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 
 export default function EventsBlock({ event }) {
   const { locale } = useLocale();
+  const { t } = useTranslation();
 
   const imageUrl =
     event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "";
@@ -11,13 +14,6 @@ export default function EventsBlock({ event }) {
   const name = getLangField(event, "name", locale);
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
-
-  const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
 
   const slug =
     name
@@ -43,8 +39,8 @@ export default function EventsBlock({ event }) {
               <path d="M85.1,18.5H77v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5c-1.9,0-3.5,1.6-3.5,3.5v4.5H35.3v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5  c-1.9,0-3.5,1.6-3.5,3.5v4.5h-8.5c-3.4,0-6.2,2.8-6.2,6.2v55.9c0,3.4,2.8,6.2,6.2,6.2h70.3c3.4,0,6.2-2.8,6.2-6.2V24.7  C91.3,21.3,88.5,18.5,85.1,18.5z M68.7,14.3h4.6v6.1v4.9h-4.6v-4.9V14.3z M27,14.3h4.6v6.1v4.9H27v-4.9V14.3z M14.9,22.2h8.5v3.3  c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3H65v3.3c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3h8.2  c1.4,0,2.5,1.1,2.5,2.5v10H12.4v-10C12.4,23.3,13.5,22.2,14.9,22.2z M85.1,83.1H14.9c-1.4,0-2.5-1.1-2.5-2.5V38.4h75.2v42.2  C87.6,82,86.5,83.1,85.1,83.1z" />
             </svg>
             <p>
-              {formatDate(event.start)}
-              {event.end ? ` — ${formatDate(event.end)}` : ""}
+              {formatLocalizedDate(event.start, locale)}
+              {event.end ? ` — ${formatLocalizedDate(event.end, locale)}` : ""}
             </p>
           </div>
           <div className="place">
@@ -69,11 +65,13 @@ export default function EventsBlock({ event }) {
               <path d="M.221 16.268a15.064 15.064 0 0 0 1.789 1.9C2.008 18.111 2 18.057 2 18a5.029 5.029 0 0 1 3.233-4.678 1 1 0 0 0 .175-1.784A2.968 2.968 0 0 1 4 9a2.988 2.988 0 0 1 5.022-2.2 5.951 5.951 0 0 1 2.022-.715 4.994 4.994 0 1 0-7.913 6.085 7.07 7.07 0 0 0-2.91 4.098z" />
               <path d="M18.954 20.284a7.051 7.051 0 0 0-3.085-5.114A4.956 4.956 0 0 0 17 12a5 5 0 1 0-8.869 3.17 7.051 7.051 0 0 0-3.085 5.114 14.923 14.923 0 0 0 1.968.849C7.012 21.088 7 21.046 7 21a5.031 5.031 0 0 1 3.233-4.678 1 1 0 0 0 .175-1.785A2.964 2.964 0 0 1 9 12a3 3 0 1 1 6 0 2.964 2.964 0 0 1-1.408 2.537 1 1 0 0 0 .175 1.785A5.031 5.031 0 0 1 17 21c0 .046-.012.088-.013.133a14.919 14.919 0 0 0 1.967-.849z" />
             </svg>
-            <p>{event.amount.toLocaleString()} участников</p>
+            <p>
+              {event.amount.toLocaleString()} {t("participants")}
+            </p>
           </div>
         </div>
       </div>
-      <button className="subscribe">Зарегистрироваться</button>
+      <button className="subscribe">{t("subscribe")}</button>
     </Link>
   );
 }

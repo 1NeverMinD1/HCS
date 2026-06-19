@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
+import { formatLocalizedDate } from "../../utils/dateLocale.js";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
@@ -31,7 +32,6 @@ export default function Hero({ onLoadFeatured }) {
     : "";
 
   const category = featured?.categories?.[0]?.name;
-  const date = new Date(featured.publishDate);
 
   const title = getLangField(featured, "title", locale);
   const desc = getLangField(featured, "desc", locale);
@@ -57,13 +57,7 @@ export default function Hero({ onLoadFeatured }) {
       <p className="hero__text">{desc}</p>
 
       <div className="hero__date">
-        <p>
-          {date.toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </p>
+        <p>{formatLocalizedDate(featured.publishDate, locale)}</p>
       </div>
     </Link>
   );

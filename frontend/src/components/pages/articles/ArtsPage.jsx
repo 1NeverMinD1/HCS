@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext.jsx";
+import { useTranslation } from "../../../utils/useTranslation.js";
 import ArtsPageBlocks from "./ArtsPageBlocks/ArtsPageBlocks";
 import SEO from "../../seo/SEO.jsx";
 
 export default function ArtsPage() {
   const { locale } = useLocale();
   const [articles, setArticles] = useState([]);
+
+  const { t } = useTranslation(locale);
 
   useEffect(() => {
     fetch(
@@ -25,11 +28,8 @@ export default function ArtsPage() {
         title="Аналитические статьи"
         description="Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших авторов"
       />
-      <h2 className="artspage__title">Аналитические статьи</h2>
-      <p className="artspage__intro">
-        Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших
-        авторов
-      </p>
+      <h2 className="artspage__title">{t("artsIntro")}</h2>
+      <p className="artspage__intro">{t("artsIntroText")}</p>
       <ArtsPageBlocks articles={articles} />
     </div>
   );

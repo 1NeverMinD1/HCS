@@ -13,10 +13,11 @@ export default function ArticlesBlock({ article }) {
   const category = article?.tags?.[0]?.name || "";
 
   const title = getLangField(article, "title", locale);
+  const content = getLangField(article, "content", locale);
 
   const text =
-    article?.content?.find((block) => block.type === "paragraph")?.children?.[0]
-      ?.text || "";
+    content?.find((block) => block.type === "paragraph")?.children?.[0]?.text ||
+    "";
 
   const slug =
     title

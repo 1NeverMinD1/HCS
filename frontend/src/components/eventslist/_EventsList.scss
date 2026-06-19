@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .home__arts-eventlist {
   width: 30%;
   margin-top: 50px;
@@ -26,7 +28,7 @@
       &:hover {
         transition: 0.3s ease all;
 
-        background: red;
+        background: variables.$primary-color;
         color: white;
       }
     }

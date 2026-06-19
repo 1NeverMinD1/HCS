@@ -1,3 +1,5 @@
+@use "../../../../variables";
+
 .sidemenu {
   border: 1px solid rgb(220, 220, 220);
   padding: 20px;
@@ -44,7 +46,7 @@
       }
       .sidemenu__item-content {
         .sidemenu__item-title {
-          color: red;
+          color: variables.$primary-color;
         }
       }
     }

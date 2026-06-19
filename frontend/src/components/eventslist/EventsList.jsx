@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
+import { useTranslation } from "../../utils/useTranslation.js";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { locale } = useLocale();
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -33,9 +35,9 @@ export default function EventsList() {
   return (
     <div className="home__arts-eventlist">
       <div className="home__arts-eventlist-nav">
-        <h2>Предстоящие события</h2>
+        <h2>{t("futureEvents")}</h2>
         <Link to={`/${locale}/events`} className="see_all">
-          Все события
+          {t("allEvents")}
         </Link>
       </div>
 

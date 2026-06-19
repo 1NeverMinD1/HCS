@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .blogspage__item {
   text-decoration: none;
   color: black;
@@ -17,7 +19,7 @@
       transform: scale(1.1);
     }
     .blogspage__item-title {
-      color: red;
+      color: variables.$primary-color;
     }
   }
   .blogspage__item-header {

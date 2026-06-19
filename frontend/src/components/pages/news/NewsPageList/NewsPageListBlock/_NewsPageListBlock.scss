@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .newspage__main-item {
   text-decoration: none;
   color: black;
@@ -14,7 +16,7 @@
     cursor: pointer;
     .newspage__main-item-title {
       transition: all 0.3s ease;
-      color: red;
+      color: variables.$primary-color;
     }
   }
   .check {
@@ -40,7 +42,7 @@
       display: inline-block;
       color: black;
       margin-left: 10px;
-      background: red;
+      background: variables.$primary-color;
       color: white;
       padding: 5px;
       width: fit-content;

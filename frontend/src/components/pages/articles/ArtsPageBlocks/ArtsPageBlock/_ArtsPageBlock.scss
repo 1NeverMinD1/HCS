@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .artspage__list-block {
   text-decoration: none;
   color: black;
@@ -12,7 +14,7 @@
 
   &:hover {
     .artspage__list-block-title {
-      color: red;
+      color: variables.$primary-color;
     }
   }
 
@@ -50,7 +52,7 @@
 
     .artspage__list-block-text {
       font-size: 16px;
-      color: #444;
+      color: variables.$text-color;
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;

@@ -40,7 +40,7 @@ export default function ArticlesFirstBlock({ article }) {
         <h3 className="articles__first-title">{title}</h3>
 
         <p className="articles__first-date">
-          {new Date(article.publishDate).toLocaleDateString(locale)}
+          {new Date(article.publishDate).toLocaleDateString()}
         </p>
       </div>
     </Link>

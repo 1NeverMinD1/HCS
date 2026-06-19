@@ -70,9 +70,6 @@
 // Variables
 @use "./variables";
 
-// Main rgb(0, 60, 255)
-// Hover rgba(0, 60, 255, 0.658)
-
 p,
 li {
   color: variables.$text-color;

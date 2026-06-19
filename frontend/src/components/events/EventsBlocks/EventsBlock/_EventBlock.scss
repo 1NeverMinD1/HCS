@@ -1,3 +1,5 @@
+@use "../../../../variables";
+
 .events__block {
   text-decoration: none;
   border-radius: 10px;
@@ -47,6 +49,7 @@
     }
   }
   .events__block-footer {
+    margin-top: 20px;
     p {
       color: rgb(31, 31, 31);
       font-size: 18px;
@@ -67,8 +70,9 @@
   svg {
     width: 20px;
     height: 20px;
-    fill: red;
+    fill: variables.$primary-color;
     margin-right: 10px;
+    margin-left: 10px;
   }
   .subscribe {
     display: block;

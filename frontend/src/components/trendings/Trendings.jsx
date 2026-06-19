@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
+import { useTranslation } from "../../utils/useTranslation.js";
 
 export default function Trendings() {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { locale } = useLocale();
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchNews() {
@@ -27,7 +29,7 @@ export default function Trendings() {
 
   return (
     <div className="trendings">
-      <h2 className="trendings__title">Последние новости</h2>
+      <h2 className="trendings__title">{t("latestNews")}</h2>
       <div className="trendings__list">
         {news.map((item) => {
           const imgUrl =
@@ -57,7 +59,7 @@ export default function Trendings() {
         })}
       </div>
       <Link to={`/${locale}/news`} className="see_all">
-        Показать все
+        {t("showAll")}
       </Link>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 
 export default function QnasPageBlock({ qna }) {
   const { locale } = useLocale();
@@ -11,8 +12,6 @@ export default function QnasPageBlock({ qna }) {
       .replace(/[^\wа-яё\s]/gi, "")
       .replace(/\s+/g, "-") || "";
 
-  const date = new Date(qna.publishDate);
-
   return (
     <Link
       to={`/${locale}/q-and-as/${qna.documentId}/${slug}`}
@@ -21,13 +20,7 @@ export default function QnasPageBlock({ qna }) {
       <h3 className="qnas__main-item-title">{title}</h3>
 
       <div className="qnas__main-item-date">
-        <p>
-          {date.toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </p>
+        <p>{formatLocalizedDate(qna.publishDate, locale)}</p>
       </div>
     </Link>
   );

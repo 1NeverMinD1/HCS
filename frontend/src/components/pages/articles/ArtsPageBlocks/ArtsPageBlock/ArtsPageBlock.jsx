@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 
 export default function ArtsPageBlock({ item, index }) {
   const { locale } = useLocale();
@@ -20,8 +21,6 @@ export default function ArtsPageBlock({ item, index }) {
 
   const category = item.categories?.[0]?.name || item.tags?.[0]?.name;
 
-  const date = new Date(item.publishDate);
-
   const isReversed = index % 2 === 1;
 
   return (
@@ -37,13 +36,7 @@ export default function ArtsPageBlock({ item, index }) {
         <p className="artspage__list-block-text">{desc}</p>
 
         <div className="newspage__main-item-date">
-          <p>
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
+          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
         </div>
       </div>
     </Link>

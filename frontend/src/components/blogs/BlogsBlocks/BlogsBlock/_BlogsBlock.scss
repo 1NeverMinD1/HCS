@@ -6,7 +6,7 @@
   height: 300px;
   padding: 10px;
   display: flex;
-  width: 45%;
+  width: 100%;
   border-radius: 10px;
   border: 1px solid rgb(199, 199, 199);
   transition: 0.3s ease all;
@@ -28,10 +28,14 @@
     object-fit: cover;
   }
   .blogs__block-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     .blogs__block-header {
       height: 20%;
+      flex-direction: column;
       display: flex;
-      gap: 20px;
+      gap: 5px;
       align-items: baseline;
       .author {
         font-size: 20px;

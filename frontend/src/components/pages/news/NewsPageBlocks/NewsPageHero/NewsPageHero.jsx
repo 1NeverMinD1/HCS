@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { useTranslation } from "../../../../../utils/useTranslation.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 
 export default function NewsPageHero({ news }) {
   const { locale } = useLocale();
   const title = getLangField(news, "title", locale);
   const desc = getLangField(news, "desc", locale);
+  const { t } = useTranslation();
   const slug =
     title
       ?.toLowerCase()
@@ -17,7 +20,6 @@ export default function NewsPageHero({ news }) {
     news.desc_img?.url;
 
   const latestNewsCategory = news.categories?.[0]?.name;
-
   const latestNewsDate = new Date(news.publishDate);
 
   return (
@@ -37,13 +39,7 @@ export default function NewsPageHero({ news }) {
       <p className="newspage__hero-main-text">{desc}</p>
 
       <div className="newspage__hero-main-date">
-        <p>
-          {latestNewsDate.toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </p>
+        <p>{formatLocalizedDate(news.publishDate, locale)}</p>
 
         <p>
           {latestNewsDate.toLocaleTimeString("ru-RU", {

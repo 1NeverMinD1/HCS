@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .newspage__hero-main {
   text-decoration: none;
   width: 50%;
@@ -31,7 +33,7 @@
     display: inline-block;
     color: black;
     margin-left: 10px;
-    background: red;
+    background: variables.$primary-color;
     color: white;
     padding: 5px;
     width: fit-content;

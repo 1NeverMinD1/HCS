@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .eventspage__item {
   text-decoration: none;
   color: black;
@@ -32,7 +34,7 @@
     justify-content: space-between;
     .eventspage__item-cat {
       display: inline-block;
-      background: red;
+      background: variables.$primary-color;
       width: fit-content;
       padding: 2px 5px;
       border-radius: 5px;
@@ -58,7 +60,7 @@
       align-items: center;
       gap: 10px;
       p {
-        color: rgb(31, 31, 31);
+        color: variables.$text-color;
         font-size: 14px;
       }
       .date {
@@ -77,7 +79,7 @@
     svg {
       width: 20px;
       height: 20px;
-      fill: red;
+      fill: variables.$primary-color;
       margin-right: 10px;
     }
     .eventspage__item-more {
@@ -85,7 +87,7 @@
       gap: 10px;
       align-items: center;
       .eventspage__item-button {
-        background: red;
+        background: variables.$primary-color;
         border: none;
         font-size: 16px;
         color: white;
@@ -94,7 +96,7 @@
         &:hover {
           cursor: pointer;
           &:hover {
-            background: rgb(252, 72, 72);
+            background: variables.$hover-color;
           }
         }
       }

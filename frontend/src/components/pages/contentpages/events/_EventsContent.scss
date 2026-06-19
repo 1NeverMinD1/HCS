@@ -1,3 +1,5 @@
+@use "../../../../variables";
+
 .eventscontent__layout {
   display: flex;
   margin-top: 40px;
@@ -25,7 +27,7 @@
         transition: all 0.3s ease;
       }
       &:hover {
-        background: red;
+        background: variables.$primary-color;
         color: white;
         svg {
           fill: white;
@@ -34,46 +36,37 @@
       }
     }
     .eventscontent__intro {
-      display: flex;
-      margin-bottom: 20px;
-      align-items: center;
-      justify-content: space-between;
-      .eventscontent__header {
-        width: 50%;
-      }
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
       .eventscontent__title {
-        width: 100%;
         font-size: 40px;
       }
       .eventscontent__desc {
-        width: 100%;
         margin-block: 20px;
         font-size: 24px;
       }
 
       .eventscontent__blocks {
-        display: flex;
-        flex-wrap: wrap;
-        width: 50%;
-        justify-content: space-between;
-        margin-top: 20px;
-        margin-inline: auto;
-        gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
         .eventscontent__block {
           border-radius: 10px;
           padding: 20px;
-          width: 40%;
+          width: 90%;
           border: 1px solid rgb(107, 107, 107);
           display: flex;
           align-items: center;
-          height: 100px;
+          height: 120px;
           transition: 0.3s ease all;
           &:hover {
             transition: 0.3s ease all;
-            border: 1px solid red;
+            border: 1px solid variables.$primary-color;
           }
           .info {
             display: flex;
+            justify-content: center;
             flex-direction: column;
             gap: 10px;
           }
@@ -83,7 +76,8 @@
           svg {
             width: 30px;
             height: 30px;
-            fill: red;
+            flex-shrink: 0;
+            fill: variables.$primary-color;
             margin-right: 10px;
           }
         }
@@ -97,6 +91,7 @@
       border-radius: 10px;
     }
     .eventscontent__main {
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -106,7 +101,7 @@
       }
       blockquote {
         margin-block: 20px;
-        background: rgb(236, 158, 158);
+        background: variables.$hover-color;
         padding: 30px;
         padding-left: 50px;
         width: 60%;
@@ -122,7 +117,7 @@
           top: 35px;
 
           font-size: 70px;
-          color: red;
+          color: variables.$primary-color;
           font-family: Georgia, serif;
         }
       }
@@ -154,7 +149,7 @@
             left: 0;
             width: 25px;
             height: 25px;
-            background: rgb(233, 112, 112);
+            background: variables.$hover-color;
             color: white;
             border-radius: 50%;
             display: flex;
@@ -185,7 +180,7 @@
           display: block;
           width: 100%;
           height: 2px;
-          background: rgb(228, 98, 98);
+          background: variables.$hover-color;
           margin-top: 5px;
         }
       }

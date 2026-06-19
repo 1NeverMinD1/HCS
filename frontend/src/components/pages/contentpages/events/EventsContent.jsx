@@ -79,7 +79,7 @@ export default function EventsContent() {
     <div className="eventscontent__layout">
       <SEO title={name} description={desc} image={imgUrl} type="article" />
       <div className="eventscontent wrapper">
-        <Link to="/events" className="back">
+        <Link to="/${locale}/events" className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
@@ -142,7 +142,7 @@ export default function EventsContent() {
                 <path d="M18.954 20.284a7.051 7.051 0 0 0-3.085-5.114A4.956 4.956 0 0 0 17 12a5 5 0 1 0-8.869 3.17 7.051 7.051 0 0 0-3.085 5.114 14.923 14.923 0 0 0 1.968.849C7.012 21.088 7 21.046 7 21a5.031 5.031 0 0 1 3.233-4.678 1 1 0 0 0 .175-1.785A2.964 2.964 0 0 1 9 12a3 3 0 1 1 6 0 2.964 2.964 0 0 1-1.408 2.537 1 1 0 0 0 .175 1.785A5.031 5.031 0 0 1 17 21c0 .046-.012.088-.013.133a14.919 14.919 0 0 0 1.967-.849z" />
               </svg>
               <div className="info">
-                <p> Ожидаемое количество участников</p>
+                <p> Количество участников</p>
                 <p className="text">{events.amount}</p>
               </div>
             </div>

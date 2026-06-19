@@ -2,11 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField";
+import { useTranslation } from "../../utils/useTranslation.js";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
 
   const { locale, setLocale } = useLocale();
   const dropdownRef = useRef(null);
@@ -64,7 +66,7 @@ export default function Header() {
                 isActive ? "menu__link active" : "menu__link"
               }
             >
-              Новости
+              {t("news")}
             </NavLink>
 
             <svg
@@ -109,7 +111,7 @@ export default function Header() {
                 isActive ? "menu__link active" : "menu__link"
               }
             >
-              Статьи
+              {t("articles")}
             </NavLink>
           </li>
 
@@ -120,7 +122,7 @@ export default function Header() {
                 isActive ? "menu__link active" : "menu__link"
               }
             >
-              Блоги
+              {t("blogs")}
             </NavLink>
           </li>
 
@@ -131,7 +133,7 @@ export default function Header() {
                 isActive ? "menu__link active" : "menu__link"
               }
             >
-              События
+              {t("events")}
             </NavLink>
           </li>
 
@@ -142,7 +144,7 @@ export default function Header() {
                 isActive ? "menu__link active" : "menu__link"
               }
             >
-              Советы
+              {t("qandas")}
             </NavLink>
           </li>
         </ul>
@@ -170,7 +172,7 @@ export default function Header() {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Подписаться
+            {t("subscribe")}
           </button>
         </div>
       </div>

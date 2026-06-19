@@ -1,7 +1,33 @@
+@use "../../../../variables";
+
 .qnascontent {
   margin-top: 40px;
   width: 80%;
   margin-inline: auto;
+  .back {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    margin-block: 20px;
+    transition: all 0.3s ease;
+    gap: 10px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    svg {
+      transition: all 0.3s ease;
+    }
+    &:hover {
+      background: variables.$primary-color;
+      color: white;
+      svg {
+        fill: white;
+        transition: all 0.3s ease;
+      }
+    }
+  }
   .qnascontent__main {
     box-shadow:
       1px 1px 10px rgb(179, 179, 179),
@@ -9,7 +35,7 @@
     border-radius: 10px;
     .qnascontent__main-header {
       padding: 10px 20px;
-      background: rgb(224, 127, 127);
+      background: variables.$hover-color;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       display: flex;
@@ -19,7 +45,7 @@
         flex-shrink: 0;
         width: 40px;
         height: 40px;
-        background: rgb(243, 67, 67);
+        background: variables.$primary-color;
         color: white;
         border-radius: 5px;
         font-size: 20px;
@@ -40,8 +66,8 @@
         flex-direction: column;
         color: white;
         padding: 10px;
-        background: rgb(224, 127, 127);
-        border-left: 4px solid red;
+        background: variables.$hover-color;
+        border-left: 4px solid variables.$primary-color;
         gap: 10px;
         p {
           color: rgb(0, 0, 0);
@@ -61,7 +87,7 @@
           width: 25px;
           height: 25px;
           flex-shrink: 0;
-          color: red;
+          color: variables.$primary-color;
         }
         .practice_p {
           font-weight: bold;
@@ -83,8 +109,8 @@
             flex-shrink: 0;
             width: 10px;
             height: 10px;
-            background: rgb(224, 127, 127);
-            border: 2px solid red;
+            background: variables.$hover-color;
+            border: 2px solid variables.$primary-color;
             border-radius: 2px;
           }
         }

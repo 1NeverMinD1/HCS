@@ -1,4 +1,7 @@
+import { useTranslation } from "../../utils/useTranslation";
+
 export default function Email() {
+  const { t } = useTranslation();
   return (
     <div className="email" id="subscribe">
       <div className="email__content">
@@ -16,18 +19,15 @@ export default function Email() {
             </g>
           </g>
         </svg>
-        <h2>Подпишитесь на рассылку</h2>
-        <p>
-          Получайте самые важные новости и аналитику прямо на вашу почту. Без
-          спама, только актуальная информация.
-        </p>
+        <h2>{t("subscribeOn")}</h2>
+        <p>{t("subscribeOnText")}</p>
         <div className="email__input-block">
           <input
             type="text"
             className="email_input"
-            placeholder="Введите ваш email"
+            placeholder={t("enterYourEmail")}
           />
-          <button className="subscribe">Подписаться</button>
+          <button className="subscribe">{t("subscribe")}</button>
         </div>
       </div>
     </div>
