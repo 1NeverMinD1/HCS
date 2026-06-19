@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext.jsx";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import ArtsPageBlocks from "./ArtsPageBlocks/ArtsPageBlocks";
-import SEO from "../../seo/SEO.jsx";
+import SEO from "../../SEO/SEO.jsx";
 
 export default function ArtsPage() {
   const { locale } = useLocale();

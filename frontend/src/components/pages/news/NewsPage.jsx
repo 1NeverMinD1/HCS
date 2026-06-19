@@ -5,7 +5,7 @@ import { useTranslation } from "../../../utils/useTranslation.js";
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
-import SEO from "../../seo/SEO.jsx";
+import SEO from "../../SEO/SEO.jsx";
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);

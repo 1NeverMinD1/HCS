@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "../../../context/LocaleContext.jsx";
 import BlogsPageBlocks from "./BlogsPageBlocks/BlogsPageBlocks";
 import { useTranslation } from "../../../utils/useTranslation.js";
-import SEO from "../../seo/SEO.jsx";
+import SEO from "../../SEO/SEO.jsx";
 
 export default function BlogsPage() {
   const { locale } = useLocale();

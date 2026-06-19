@@ -3,7 +3,7 @@ import EventsPageBlocks from "./EventsPageBlocks/EventsPageBlocks";
 import { useState, useEffect } from "react";
 import { useLocale } from "../../../context/LocaleContext";
 import { useTranslation } from "../../../utils/useTranslation.js";
-import SEO from "../../seo/SEO.jsx";
+import SEO from "../../SEO/SEO.jsx";
 
 export default function EventsPage() {
   const { locale } = useLocale();

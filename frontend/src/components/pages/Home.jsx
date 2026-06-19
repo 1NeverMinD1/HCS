@@ -10,7 +10,7 @@ import Email from "../email/Email";
 import Ad from "../ad/Ad";
 import Trendings from "../trendings/Trendings";
 import EventsList from "../eventslist/EventsList";
-import SEO from "../seo/SEO.jsx";
+import SEO from "../SEO/SEO.jsx";
 
 export default function Home() {
   const { locale } = useLocale();

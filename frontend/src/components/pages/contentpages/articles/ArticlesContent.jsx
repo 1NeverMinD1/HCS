@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
-import SEO from "../../../seo/SEO.jsx";
+import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 

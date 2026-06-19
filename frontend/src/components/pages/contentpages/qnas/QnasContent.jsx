@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
-import SEO from "../../../seo/SEO.jsx";
+import SEO from "../../../SEO/SEO.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { Link } from "react-router-dom";
