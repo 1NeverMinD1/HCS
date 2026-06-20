@@ -133,7 +133,8 @@ export default function ArticlesContent() {
     return () => observer.disconnect();
   }, [loadNext, hasMore]);
 
-  if (articlesList.length === 0) return <h2>Загрузка...</h2>;
+  if (articlesList.length === 0)
+    return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const mainItem = articlesList[0];
   const imgUrl =

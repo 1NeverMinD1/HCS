@@ -133,7 +133,8 @@ export default function NewsContent() {
     return () => observer.disconnect();
   }, [loadNext, hasMore]);
 
-  if (newsList.length === 0) return <h2>Загрузка...</h2>;
+  if (newsList.length === 0)
+    return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const mainItem = newsList[0];
   const imgUrl =

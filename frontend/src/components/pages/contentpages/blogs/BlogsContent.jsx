@@ -59,7 +59,7 @@ export default function BlogsContent() {
       .then((data) => setBlogs(data.data));
   }, [documentId]);
 
-  if (!blogs) return <h2>Загрузка...</h2>;
+  if (!blogs) return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const date = new Date(blogs.publishDate);
 

@@ -202,6 +202,10 @@
     padding-inline: 150px;
   }
 }
+.loading {
+  margin-top: 30px;
+}
+
 .hero {
   text-decoration: none;
   width: 70%;

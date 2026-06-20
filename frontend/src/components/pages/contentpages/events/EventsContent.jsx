@@ -58,7 +58,7 @@ export default function EventsContent() {
       .then((data) => setEvents(data.data));
   }, [documentId]);
 
-  if (!events) return <h2>Загрузка...</h2>;
+  if (!events) return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("ru-RU", {
