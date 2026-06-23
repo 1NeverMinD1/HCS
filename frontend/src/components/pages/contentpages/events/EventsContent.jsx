@@ -49,6 +49,7 @@ export default function EventsContent() {
   const desc = getLangField(events, "desc", locale);
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
+  const category = getLangField(events?.categories?.[0], "name", locale);
 
   useEffect(() => {
     fetch(
@@ -89,7 +90,7 @@ export default function EventsContent() {
         </Link>
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
-            <p className="cat">{events.event_cats?.[0]?.name}</p>
+            <p className="cat">{category}</p>
             <h2 className="eventscontent__title">{name}</h2>
             <p className="eventscontent__desc">{desc}</p>
           </div>

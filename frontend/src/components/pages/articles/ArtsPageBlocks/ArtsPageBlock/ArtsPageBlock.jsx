@@ -16,7 +16,7 @@ export default function ArtsPageBlock({ item, index }) {
     item.desc_img?.formats?.medium?.url ||
     item.desc_img?.url;
 
-  const category = item.categories?.[0]?.name || item.tags?.[0]?.name;
+  const category = getLangField(item?.categories?.[0], "name", locale);
 
   const isReversed = index % 2 === 1;
 

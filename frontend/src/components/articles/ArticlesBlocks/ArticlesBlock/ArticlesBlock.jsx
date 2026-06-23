@@ -11,11 +11,9 @@ export default function ArticlesBlock({ article }) {
     article.desc_img?.formats?.medium?.url ||
     article.desc_img?.url;
 
-  const category = article?.tags?.[0]?.name || "";
-
   const title = getLangField(article, "title", locale);
-  const content = getLangField(article, "content", locale);
-
+  const content = article?.[`content_${locale}`] || article?.content_ru || [];
+  const category = getLangField(article?.categories?.[0], "name", locale);
   const text =
     content?.find((block) => block.type === "paragraph")?.children?.[0]?.text ||
     "";

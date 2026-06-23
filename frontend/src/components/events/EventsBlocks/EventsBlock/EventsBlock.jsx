@@ -15,6 +15,7 @@ export default function EventsBlock({ event }) {
   const name = getLangField(event, "name", locale);
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
+  const category = getLangField(event?.categories?.[0], "name", locale);
 
   const slug = name ? slugify(name) : "";
 
@@ -27,7 +28,7 @@ export default function EventsBlock({ event }) {
         <img src={imageUrl} alt={name} />
       </div>
       <div className="events__block-content">
-        <p className="cat">{event.event_cats?.[0]?.name}</p>
+        <p className="cat">{category}</p>
         <h2 className="events__block-title">{name}</h2>
         <p className="events__block-text">{desc}</p>
         <div className="events__block-footer">

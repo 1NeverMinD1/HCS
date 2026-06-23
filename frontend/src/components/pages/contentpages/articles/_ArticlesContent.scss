@@ -167,6 +167,19 @@
           font-size: 15px;
         }
       }
+      .artscontent__tags {
+        margin-top: 10px;
+        p {
+          background: variables.$primary-color;
+          width: fit-content;
+          padding: 5px;
+          color: white;
+          border-radius: 5px;
+          &::before {
+            content: "#";
+          }
+        }
+      }
     }
   }
 

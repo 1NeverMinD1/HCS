@@ -32,8 +32,7 @@ export default function Hero({ onLoadFeatured }) {
       : `https://hcs-production-423d.up.railway.app${featured.desc_img.url}`
     : "";
 
-  const category = featured?.categories?.[0]?.name;
-
+  const category = getLangField(featured?.header_cats?.[0], "name", locale);
   const title = getLangField(featured, "title", locale);
   const desc = getLangField(featured, "desc", locale);
 
@@ -48,7 +47,7 @@ export default function Hero({ onLoadFeatured }) {
         className="hero__bg"
         style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
       />
-      {category && <p className="cat">{category}</p>}
+      <p className="cat">{category}</p>
 
       <h1 className="hero__title">{title}</h1>
       <p className="hero__text">{desc}</p>

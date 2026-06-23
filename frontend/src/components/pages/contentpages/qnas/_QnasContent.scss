@@ -32,6 +32,7 @@
     box-shadow:
       1px 1px 10px rgb(179, 179, 179),
       -1px 1px 10px rgb(179, 179, 179);
+    padding-bottom: 20px;
     border-radius: 10px;
     .qnascontent__main-header {
       padding: 10px 20px;
@@ -59,7 +60,7 @@
       }
     }
     .qnascontent__main-text {
-      padding: 10px 20px;
+      padding: 5px 20px;
       .qnascontent__main-short-block {
         margin-block: 20px;
         display: flex;
@@ -143,6 +144,19 @@
           line-height: 200%;
           font-style: italic;
         }
+      }
+    }
+  }
+  .qnascontent__tags {
+    margin-left: 20px;
+    p {
+      background: variables.$primary-color;
+      width: fit-content;
+      padding: 5px;
+      color: white;
+      border-radius: 5px;
+      &::before {
+        content: "#";
       }
     }
   }

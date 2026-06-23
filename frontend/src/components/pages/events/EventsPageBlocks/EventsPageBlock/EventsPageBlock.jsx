@@ -19,14 +19,7 @@ export default function EventsPageBlock({ event }) {
     event.desc_img?.formats?.medium?.url ||
     event.desc_img?.url;
 
-  const category = event.event_cats?.[0]?.name;
-
-  const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+  const category = getLangField(event?.categories?.[0], "name", locale);
 
   return (
     <Link
@@ -73,7 +66,8 @@ export default function EventsPageBlock({ event }) {
               <path d="M18.954 20.284a7.051 7.051 0 0 0-3.085-5.114A4.956 4.956 0 0 0 17 12a5 5 0 1 0-8.869 3.17 7.051 7.051 0 0 0-3.085 5.114 14.923 14.923 0 0 0 1.968.849C7.012 21.088 7 21.046 7 21a5.031 5.031 0 0 1 3.233-4.678 1 1 0 0 0 .175-1.785A2.964 2.964 0 0 1 9 12a3 3 0 1 1 6 0 2.964 2.964 0 0 1-1.408 2.537 1 1 0 0 0 .175 1.785A5.031 5.031 0 0 1 17 21c0 .046-.012.088-.013.133a14.919 14.919 0 0 0 1.967-.849z" />
             </svg>
             <p>
-              {event.amount.toLocaleString()} {t("participants")}
+              {event.amount != null ? event.amount.toLocaleString() : "—"}{" "}
+              {t("participants")}{" "}
             </p>
           </div>
         </div>

@@ -15,7 +15,6 @@ export default function QnasPageBlock({ qna }) {
       className="qnas__main-item"
     >
       <h3 className="qnas__main-item-title">{title}</h3>
-
       <div className="qnas__main-item-date">
         <p>{formatLocalizedDate(qna.publishDate, locale)}</p>
       </div>

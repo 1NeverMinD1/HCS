@@ -48,6 +48,8 @@ function NewsItem({ item, isFirst }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
+  const category = getLangField(item?.header_cats?.[0], "name", locale);
+
   return (
     <div className="newscontent">
       {isFirst && (
@@ -59,7 +61,7 @@ function NewsItem({ item, isFirst }) {
         </Link>
       )}
       <div className="newscontent__header">
-        <p className="cat">{item.categories?.[0]?.name}</p>
+        <p className="cat">{category}</p>
         <div className="newscontent__header-date">
           <p>
             {date.toLocaleDateString("ru-RU", {

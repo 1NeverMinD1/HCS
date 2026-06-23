@@ -186,6 +186,19 @@
         font-size: 15px;
       }
     }
+    .blogscontent__tags {
+      margin-top: 10px;
+      p {
+        background: variables.$primary-color;
+        width: fit-content;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        &::before {
+          content: "#";
+        }
+      }
+    }
     .blogscontent__footer {
       margin-top: 20px;
       margin-left: 20px;

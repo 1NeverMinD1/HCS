@@ -16,7 +16,12 @@ export default function NewsPageHero({ news }) {
     news.desc_img?.formats?.small?.url ||
     news.desc_img?.url;
 
-  const latestNewsCategory = news.categories?.[0]?.name;
+  const latestNewsCategory = getLangField(
+    news?.header_cats?.[0],
+    "name",
+    locale,
+  );
+
   const latestNewsDate = new Date(news.publishDate);
 
   return (
@@ -29,7 +34,7 @@ export default function NewsPageHero({ news }) {
     >
       <div className="newspage__hero-overlay" />
 
-      {latestNewsCategory && <p className="cat">{latestNewsCategory}</p>}
+      <p className="cat">{latestNewsCategory}</p>
 
       <h1 className="newspage__hero-main-title">{title}</h1>
 

@@ -197,6 +197,19 @@
         font-size: 15px;
       }
     }
+    .eventscontent__tags {
+      margin-top: 10px;
+      p {
+        background: variables.$primary-color;
+        width: fit-content;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        &::before {
+          content: "#";
+        }
+      }
+    }
   }
   .eventscontent__layout-sidemenu {
     width: 30%;

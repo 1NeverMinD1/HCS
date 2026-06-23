@@ -50,6 +50,7 @@ export default function BlogsContent() {
   const content = getLangField(blogs, "content", locale);
   const author = getLangField(blogs, "author", locale);
   const position = getLangField(blogs, "position", locale);
+  const category = getLangField(blogs?.categories?.[0], "name", locale);
 
   useEffect(() => {
     fetch(
@@ -97,7 +98,7 @@ export default function BlogsContent() {
             })}
           </p>
         </div>
-        <p className="cat">{blogs.tags?.[0]?.name}</p>
+        <p className="cat">{category}</p>
         <h2 className="blogscontent__title">{title}</h2>
         <img src={imgUrl} alt="desc_img" className="blogscontent__img" />
         <hr />

@@ -11,7 +11,7 @@ export default function NewsPageBlock({ item }) {
 
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
-  const category = item.categories?.[0]?.name;
+  const category = getLangField(item?.header_cats?.[0], "name", locale);
 
   return (
     <Link
