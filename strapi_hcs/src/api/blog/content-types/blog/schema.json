@@ -50,6 +50,18 @@
     "publishDate": {
       "type": "datetime"
     },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "blogs"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "blogs"
+    },
     "content_ru": {
       "type": "blocks"
     },
@@ -68,18 +80,6 @@
         "videos",
         "audios"
       ]
-    },
-    "tags": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tag.tag",
-      "inversedBy": "blogs"
-    },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "blogs"
     },
     "back_img": {
       "type": "media",
