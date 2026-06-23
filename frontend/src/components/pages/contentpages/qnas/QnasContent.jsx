@@ -78,7 +78,7 @@ function getPlainText(children) {
 function renderBlock(block, index) {
   if (block.type === "paragraph") {
     const parsed = parseCodeWord(getPlainText(block.children));
-    if (!parsed) return null; // параграф без кодового слова — пропускаем
+    if (!parsed) return null;
 
     const { config, text } = parsed;
     return (
@@ -153,6 +153,11 @@ export default function QnasContent() {
 
         <div className="qnascontent__main-text">
           {content.map((block, index) => renderBlock(block, index))}
+        </div>
+        <div className="qnascontent__tags">
+          {qnas.tags?.map((tag) => (
+            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+          ))}
         </div>
       </div>
     </div>

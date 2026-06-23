@@ -156,6 +156,11 @@ export default function EventsContent() {
         <div className="eventscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
         </div>
+        <div className="eventscontent__tags">
+          {events.tags?.map((tag) => (
+            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+          ))}
+        </div>
       </div>
       <div className="eventscontent__layout-sidemenu">
         <SideMenu currentId={documentId} />

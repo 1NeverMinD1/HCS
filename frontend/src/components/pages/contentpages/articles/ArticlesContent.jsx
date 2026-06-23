@@ -77,7 +77,7 @@ function ArticleItem({ item, isFirst }) {
       <div className="artscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}
       </div>
-      <div className="newscontent__tags">
+      <div className="artscontent__tags">
         {item.tags?.map((tag) => (
           <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
         ))}

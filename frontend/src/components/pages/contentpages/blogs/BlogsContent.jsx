@@ -104,7 +104,7 @@ export default function BlogsContent() {
         <div className="blogscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
         </div>
-        <div className="newscontent__tags">
+        <div className="blogscontent__tags">
           {blogs.tags?.map((tag) => (
             <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
           ))}
