@@ -138,8 +138,19 @@ export default function QnasContent() {
 
   return (
     <div className="qnascontent wrapper">
-      <SEO title={title} type="article" />
-      <Link to="/${locale}/q-and-as" className="back">
+      <SEO
+        title={qnas.seo_title || getLangField(qnas, "title", locale)}
+        description={qnas.seo_description || title}
+        image={
+          qnas.seo_image?.formats?.large?.url ||
+          qnas.seo_image?.url ||
+          qnas.desc_img?.formats?.large?.url ||
+          qnas.desc_img?.formats?.medium?.url ||
+          qnas.desc_img?.url
+        }
+        type="article"
+      />
+      <Link to={`/${locale}/q-and-as`} className="back">
         <svg className="arrow_reverse" viewBox="0 0 5 9">
           <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
         </svg>

@@ -80,7 +80,18 @@ export default function EventsContent() {
     events.desc_img?.url;
   return (
     <div className="eventscontent__layout">
-      <SEO title={name} description={desc} image={imgUrl} type="article" />
+      <SEO
+        title={events.seo_title || getLangField(events, "title", locale)}
+        description={events.seo_desc || getLangField(events, "desc", locale)}
+        image={
+          events.seo_image?.formats?.large?.url ||
+          events.seo_image?.url ||
+          events.desc_img?.formats?.large?.url ||
+          events.desc_img?.formats?.medium?.url ||
+          events.desc_img?.url
+        }
+        type="article"
+      />
       <div className="eventscontent wrapper">
         <Link to="/${locale}/events" className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">

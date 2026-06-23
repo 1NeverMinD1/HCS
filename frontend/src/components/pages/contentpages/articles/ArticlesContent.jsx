@@ -149,9 +149,13 @@ export default function ArticlesContent() {
   return (
     <div className="artscontent__layout">
       <SEO
-        title={getLangField(mainItem, "title", locale)}
-        description={mainItem.tags?.[0]?.name}
+        title={mainItem.seo_title || getLangField(mainItem, "title", locale)}
+        description={
+          mainItem.seo_desc || getLangField(mainItem, "desc", locale)
+        }
         image={
+          mainItem.seo_image?.formats?.large?.url ||
+          mainItem.seo_image?.url ||
           mainItem.desc_img?.formats?.large?.url ||
           mainItem.desc_img?.formats?.medium?.url ||
           mainItem.desc_img?.url

@@ -73,7 +73,18 @@ export default function BlogsContent() {
 
   return (
     <div className="blogscontent__layout">
-      <SEO title={title} description={desc} image={imgUrl} type="article" />
+      <SEO
+        title={blogs.seo_title || getLangField(blogs, "title", locale)}
+        description={blogs.seo_desc || getLangField(blogs, "desc", locale)}
+        image={
+          blogs.seo_image?.formats?.large?.url ||
+          blogs.seo_image?.url ||
+          blogs.desc_img?.formats?.large?.url ||
+          blogs.desc_img?.formats?.medium?.url ||
+          blogs.desc_img?.url
+        }
+        type="article"
+      />
       <div className="blogscontent">
         <Link to={`/${locale}/blogs`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
