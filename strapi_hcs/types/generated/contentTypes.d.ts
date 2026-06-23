@@ -478,6 +478,10 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks;
@@ -521,6 +525,10 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     author_kk: Schema.Attribute.String;
     author_ru: Schema.Attribute.String;
     back_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks;
@@ -563,9 +571,12 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -575,8 +586,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name_en: Schema.Attribute.String;
     name_kk: Schema.Attribute.String;
     name_ru: Schema.Attribute.String;
-    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
+    qnas: Schema.Attribute.Relation<'manyToMany', 'api::q-and-a.q-and-a'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -595,6 +606,10 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
   attributes: {
     amount: Schema.Attribute.Integer;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks;
@@ -621,6 +636,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     seo_title: Schema.Attribute.String;
     start: Schema.Attribute.DateTime;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -650,6 +666,7 @@ export interface ApiHeaderCatHeaderCat extends Struct.CollectionTypeSchema {
     name_en: Schema.Attribute.String;
     name_kk: Schema.Attribute.String;
     name_ru: Schema.Attribute.String;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -668,10 +685,6 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
-    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks;
@@ -685,6 +698,10 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    header_cats: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::header-cat.header-cat'
+    >;
     isFeatured: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::new.new'> &
@@ -716,6 +733,10 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks;
@@ -733,6 +754,7 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
     seo_desc: Schema.Attribute.Text;
     seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     seo_title: Schema.Attribute.String;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
     title_ru: Schema.Attribute.String;
@@ -758,6 +780,7 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
       Schema.Attribute.Private;
@@ -766,6 +789,7 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     name_ru: Schema.Attribute.String;
     news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
+    qnas: Schema.Attribute.Relation<'manyToMany', 'api::q-and-a.q-and-a'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

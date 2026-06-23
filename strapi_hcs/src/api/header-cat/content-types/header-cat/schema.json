@@ -19,6 +19,12 @@
     },
     "name_en": {
       "type": "string"
+    },
+    "news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::new.new",
+      "inversedBy": "header_cats"
     }
   }
 }

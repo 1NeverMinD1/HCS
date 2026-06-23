@@ -74,7 +74,7 @@ export default function BlogsContent() {
     <div className="blogscontent__layout">
       <SEO title={title} description={desc} image={imgUrl} type="article" />
       <div className="blogscontent">
-        <Link to="/blogs" className="back">
+        <Link to={`/${locale}/blogs`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
@@ -103,6 +103,11 @@ export default function BlogsContent() {
         <hr />
         <div className="blogscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
+        </div>
+        <div className="newscontent__tags">
+          {blogs.tags?.map((tag) => (
+            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+          ))}
         </div>
       </div>
       <div className="blogscontent__layout-sidemenu">

@@ -64,10 +64,10 @@
       "target": "api::tag.tag",
       "mappedBy": "news"
     },
-    "categories": {
+    "header_cats": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::category.category",
+      "target": "api::header-cat.header-cat",
       "mappedBy": "news"
     },
     "seo_title": {

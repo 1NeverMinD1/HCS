@@ -47,8 +47,7 @@ function NewsItem({ item, isFirst }) {
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-  const content = getLangField(item, "content", locale);
-
+  const content = item?.[`content_${locale}`] || item?.content_ru || [];
   return (
     <div className="newscontent">
       {isFirst && (
@@ -78,11 +77,18 @@ function NewsItem({ item, isFirst }) {
       <div className="newscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}
       </div>
+      <div className="newscontent__tags">
+        {item.tags?.map((tag) => (
+          <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default function NewsContent() {
+  const { locale } = useLocale();
+
   const { documentId } = useParams();
   const [newsList, setNewsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -139,7 +145,6 @@ export default function NewsContent() {
   const mainItem = newsList[0];
   const imgUrl =
     mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
-  const { locale } = useLocale();
 
   return (
     <div className="newscontent__layout">

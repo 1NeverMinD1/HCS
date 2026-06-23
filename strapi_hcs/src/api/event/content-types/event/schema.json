@@ -69,6 +69,18 @@
     "content_en": {
       "type": "blocks"
     },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "events"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "events"
+    },
     "seo_title": {
       "type": "string"
     },

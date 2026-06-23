@@ -32,6 +32,18 @@
     "content_en": {
       "type": "blocks"
     },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "qnas"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "qnas"
+    },
     "seo_title": {
       "type": "string"
     },

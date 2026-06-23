@@ -47,12 +47,12 @@ function ArticleItem({ item, isFirst }) {
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-  const content = getLangField(item, "content", locale);
+  const content = item?.[`content_${locale}`] || item?.content_ru || [];
 
   return (
     <div className="artscontent">
       {isFirst && (
-        <Link to="/${locale}/articles" className="back">
+        <Link to={`/${locale}/articles`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
@@ -76,6 +76,11 @@ function ArticleItem({ item, isFirst }) {
       <hr />
       <div className="artscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}
+      </div>
+      <div className="newscontent__tags">
+        {item.tags?.map((tag) => (
+          <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+        ))}
       </div>
     </div>
   );

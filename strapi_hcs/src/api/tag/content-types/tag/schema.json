@@ -37,6 +37,18 @@
       "relation": "manyToMany",
       "target": "api::blog.blog",
       "mappedBy": "tags"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "mappedBy": "tags"
+    },
+    "qnas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::q-and-a.q-and-a",
+      "mappedBy": "tags"
     }
   }
 }

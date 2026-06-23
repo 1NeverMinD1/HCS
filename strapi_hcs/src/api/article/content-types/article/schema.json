@@ -48,6 +48,12 @@
       "target": "api::tag.tag",
       "inversedBy": "articles"
     },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "articles"
+    },
     "seo_title": {
       "type": "string"
     },

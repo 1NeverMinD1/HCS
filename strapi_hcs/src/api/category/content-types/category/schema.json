@@ -20,11 +20,29 @@
     "name_en": {
       "type": "string"
     },
-    "news": {
+    "events": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::new.new",
+      "target": "api::event.event",
       "inversedBy": "categories"
+    },
+    "qnas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::q-and-a.q-and-a",
+      "inversedBy": "categories"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "categories"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "categories"
     }
   }
 }
