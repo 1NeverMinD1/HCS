@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { slugify } from "../../../../../utils/slugify.js";
 
 export default function BlogsPageBlock({ blog }) {
   const { locale } = useLocale();
@@ -9,11 +10,7 @@ export default function BlogsPageBlock({ blog }) {
   const desc = getLangField(blog, "desc", locale);
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
-  const slug =
-    title
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = title ? slugify(title) : "";
   if (!blog) return null;
 
   const imgUrl =

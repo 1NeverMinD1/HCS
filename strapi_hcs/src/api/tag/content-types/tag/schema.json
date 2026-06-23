@@ -11,7 +11,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "name_ru": {
+      "type": "string"
+    },
+    "name_kk": {
+      "type": "string"
+    },
+    "name_en": {
       "type": "string"
     },
     "news": {

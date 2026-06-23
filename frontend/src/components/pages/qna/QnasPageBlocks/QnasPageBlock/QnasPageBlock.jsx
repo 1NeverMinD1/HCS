@@ -2,15 +2,12 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
+import { slugify } from "../../../../../utils/slugify.js";
 
 export default function QnasPageBlock({ qna }) {
   const { locale } = useLocale();
   const title = getLangField(qna, "title", locale);
-  const slug =
-    title
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = title ? slugify(title) : "";
 
   return (
     <Link

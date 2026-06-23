@@ -139,12 +139,13 @@ export default function NewsContent() {
   const mainItem = newsList[0];
   const imgUrl =
     mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
+  const { locale } = useLocale();
 
   return (
     <div className="newscontent__layout">
       <SEO
-        title={mainItem.title}
-        description={mainItem.desc}
+        title={getLangField(mainItem, "title", locale)}
+        description={getLangField(mainItem, "desc", locale)}
         image={imgUrl}
         type="article"
       />

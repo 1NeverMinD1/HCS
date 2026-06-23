@@ -31,6 +31,22 @@
     },
     "content_en": {
       "type": "blocks"
+    },
+    "seo_title": {
+      "type": "string"
+    },
+    "seo_desc": {
+      "type": "text"
+    },
+    "seo_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

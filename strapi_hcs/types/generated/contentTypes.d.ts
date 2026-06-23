@@ -493,6 +493,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishDate: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
+    seo_desc: Schema.Attribute.Text;
+    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_title: Schema.Attribute.String;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
@@ -536,6 +539,9 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     position_ru: Schema.Attribute.String;
     publishDate: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
+    seo_desc: Schema.Attribute.Text;
+    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_title: Schema.Attribute.String;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
@@ -566,37 +572,10 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       'api::category.category'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name_en: Schema.Attribute.String;
+    name_kk: Schema.Attribute.String;
+    name_ru: Schema.Attribute.String;
     news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiEventCatEventCat extends Struct.CollectionTypeSchema {
-  collectionName: 'event_cats';
-  info: {
-    displayName: 'EventCat';
-    pluralName: 'event-cats';
-    singularName: 'event-cat';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::event-cat.event-cat'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -627,10 +606,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     desc_kk: Schema.Attribute.Text;
     desc_ru: Schema.Attribute.String;
     end: Schema.Attribute.DateTime;
-    event_cats: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::event-cat.event-cat'
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -642,7 +617,40 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_ru: Schema.Attribute.String;
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    seo_desc: Schema.Attribute.Text;
+    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_title: Schema.Attribute.String;
     start: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHeaderCatHeaderCat extends Struct.CollectionTypeSchema {
+  collectionName: 'header_cats';
+  info: {
+    displayName: 'HeaderCat';
+    pluralName: 'header-cats';
+    singularName: 'header-cat';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::header-cat.header-cat'
+    > &
+      Schema.Attribute.Private;
+    name_en: Schema.Attribute.String;
+    name_kk: Schema.Attribute.String;
+    name_ru: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -684,6 +692,9 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     main: Schema.Attribute.Boolean;
     publishDate: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
+    seo_desc: Schema.Attribute.Text;
+    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_title: Schema.Attribute.String;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
@@ -719,6 +730,9 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishDate: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
+    seo_desc: Schema.Attribute.Text;
+    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_title: Schema.Attribute.String;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
     title_ru: Schema.Attribute.String;
@@ -747,7 +761,9 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name_en: Schema.Attribute.String;
+    name_kk: Schema.Attribute.String;
+    name_ru: Schema.Attribute.String;
     news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1271,8 +1287,8 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
-      'api::event-cat.event-cat': ApiEventCatEventCat;
       'api::event.event': ApiEventEvent;
+      'api::header-cat.header-cat': ApiHeaderCatHeaderCat;
       'api::new.new': ApiNewNew;
       'api::q-and-a.q-and-a': ApiQAndAQAndA;
       'api::tag.tag': ApiTagTag;

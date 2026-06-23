@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { slugify } from "../../../../utils/slugify.js";
 
 export default function SideMenu({ currentId }) {
   const [items, setItems] = useState([]);
@@ -63,11 +64,7 @@ export default function SideMenu({ currentId }) {
               ? getLangField(item, "name", locale)
               : getLangField(item, "title", locale);
 
-          const slug =
-            title
-              ?.toLowerCase()
-              .replace(/[^\wа-яё\s]/gi, "")
-              .replace(/\s+/g, "-") || "";
+          const slug = title ? slugify(title) : "";
 
           return (
             <Link

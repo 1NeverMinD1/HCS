@@ -5,6 +5,7 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
+import { slugify } from "../../utils/slugify.js";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -43,11 +44,9 @@ export default function EventsList() {
       </div>
 
       {events.map((event) => {
-        const slug =
-          getLangField(event, "name", locale)
-            ?.toLowerCase()
-            .replace(/[^\wа-яё\s]/gi, "")
-            .replace(/\s+/g, "-") || "";
+        const name = getLangField(event, "name", locale);
+
+        const slug = name ? slugify(name) : "";
 
         return (
           <Link

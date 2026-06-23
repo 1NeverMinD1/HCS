@@ -4,6 +4,7 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
+import { slugify } from "../../../../../utils/slugify.js";
 
 export default function EventsPageBlock({ event }) {
   const { locale } = useLocale();
@@ -12,11 +13,7 @@ export default function EventsPageBlock({ event }) {
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
 
-  const slug =
-    name
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = name ? slugify(name) : "";
   const imgUrl =
     event.desc_img?.formats?.small?.url ||
     event.desc_img?.formats?.medium?.url ||

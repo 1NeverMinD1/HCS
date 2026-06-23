@@ -73,8 +73,10 @@ export default function EventsContent() {
       minute: "2-digit",
     });
 
-  const imgUrl = events.desc_img?.formats?.small?.url || events.desc_img?.url;
-
+  const imgUrl =
+    events.desc_img?.formats?.large?.url ||
+    events.desc_img?.formats?.medium?.url ||
+    events.desc_img?.url;
   return (
     <div className="eventscontent__layout">
       <SEO title={name} description={desc} image={imgUrl} type="article" />

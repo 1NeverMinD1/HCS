@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { slugify } from "../../../../utils/slugify.js";
 
 export default function LatestNewsBlock({ item }) {
   const { locale } = useLocale();
@@ -15,11 +16,7 @@ export default function LatestNewsBlock({ item }) {
 
   const category = item.categories?.[0]?.name;
 
-  const slug =
-    title
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = title ? slugify(title) : "";
 
   return (
     <Link

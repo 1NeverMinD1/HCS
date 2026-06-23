@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { slugify } from "../../../../../utils/slugify.js";
 
 export default function ArticlesFirstBlock({ article }) {
   const { locale } = useLocale();
@@ -18,13 +19,7 @@ export default function ArticlesFirstBlock({ article }) {
     article?.content?.find((block) => block.type === "paragraph")?.children?.[0]
       ?.text || "";
 
-  const slug =
-    title
-      ?.toLowerCase()
-      .trim()
-      .replace(/[^\wа-яё\s-]/gi, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-") || "";
+  const slug = title ? slugify(title) : "";
 
   return (
     <Link

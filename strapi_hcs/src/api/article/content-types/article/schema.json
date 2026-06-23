@@ -47,6 +47,22 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "articles"
+    },
+    "seo_title": {
+      "type": "string"
+    },
+    "seo_desc": {
+      "type": "text"
+    },
+    "seo_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

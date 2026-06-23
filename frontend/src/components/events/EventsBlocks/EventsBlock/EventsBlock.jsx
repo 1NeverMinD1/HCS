@@ -3,6 +3,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
+import { slugify } from "../../../../utils/slugify.js";
 
 export default function EventsBlock({ event }) {
   const { locale } = useLocale();
@@ -15,11 +16,7 @@ export default function EventsBlock({ event }) {
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
 
-  const slug =
-    name
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = name ? slugify(name) : "";
 
   return (
     <Link

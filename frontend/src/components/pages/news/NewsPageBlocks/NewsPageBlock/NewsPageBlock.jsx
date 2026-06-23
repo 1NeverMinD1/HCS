@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { slugify } from "../../../../../utils/slugify.js";
 
 export default function NewsPageBlock({ item }) {
   const { locale } = useLocale();
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-  const slug =
-    title
-      ?.toLowerCase()
-      .replace(/[^\wа-яё\s]/gi, "")
-      .replace(/\s+/g, "-") || "";
+  const slug = title ? slugify(title) : "";
 
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 

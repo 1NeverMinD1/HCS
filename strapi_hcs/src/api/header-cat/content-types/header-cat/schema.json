@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "header_cats",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category"
+    "singularName": "header-cat",
+    "pluralName": "header-cats",
+    "displayName": "HeaderCat"
   },
   "options": {
     "draftAndPublish": true
@@ -19,12 +19,6 @@
     },
     "name_en": {
       "type": "string"
-    },
-    "news": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::new.new",
-      "inversedBy": "categories"
     }
   }
 }
