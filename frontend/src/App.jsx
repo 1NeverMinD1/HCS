@@ -37,38 +37,23 @@ export default function App() {
           {/* Категории новостей */}
           <Route path="/:locale/news/category/:id" element={<NewsPage />} />
           {/* Полная новость */}
-          <Route
-            path="/:locale/news/:documentId/:slug"
-            element={<NewsContent />}
-          />
+          <Route path="/:locale/news/:slug" element={<NewsContent />} />
           {/* Все статьи */}
           <Route path="/:locale/articles" element={<ArtsPage />} />
           {/* Полная статья */}
-          <Route
-            path="/:locale/articles/:documentId/:slug"
-            element={<ArticlesContent />}
-          />
+          <Route path="/:locale/articles/:slug" element={<ArticlesContent />} />
           {/* Все блоги */}
           <Route path="/:locale/blogs" element={<BlogsPage />} />
           {/* Полный блог */}
-          <Route
-            path="/:locale/blogs/:documentId/:slug"
-            element={<BlogsContent />}
-          />
+          <Route path="/:locale/blogs/:slug" element={<BlogsContent />} />
           {/* Все мероприятия */}
           <Route path="/:locale/events" element={<EventsPage />} />
           {/* Полное мероприятие */}
-          <Route
-            path="/:locale/events/:documentId/:slug"
-            element={<EventsContent />}
-          />
+          <Route path="/:locale/events/:slug" element={<EventsContent />} />
           {/* Вопросы и ответы */}
           <Route path="/:locale/q-and-as" element={<QNA />} />
           {/* Полный вопрос */}
-          <Route
-            path="/:locale/q-and-as/:documentId/:slug"
-            element={<QnasContent />}
-          />
+          <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
         </Routes>
         <hr className="main_divide" />
         <div className="wrapper">

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
-import { slugify } from "../../utils/slugify.js";
 
 export default function Trendings() {
   const [news, setNews] = useState([]);
@@ -36,10 +35,9 @@ export default function Trendings() {
           const imgUrl =
             item.desc_img?.formats?.thumbnail?.url || item.desc_img?.url;
           const title = getLangField(item, "title", locale);
-          const slug = title ? slugify(title) : "";
           return (
             <Link
-              to={`/${locale}/news/${item.documentId}/${slug}`}
+              to={`/${locale}/news/${item.slug}`}
               key={item.id}
               className="trendings__block"
             >

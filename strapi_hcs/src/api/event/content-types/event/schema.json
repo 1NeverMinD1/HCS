@@ -96,6 +96,10 @@
         "videos",
         "audios"
       ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name_ru"
     }
   }
 }

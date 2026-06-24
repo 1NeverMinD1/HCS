@@ -53,7 +53,7 @@ function NewsItem({ item, isFirst }) {
   return (
     <div className="newscontent">
       {isFirst && (
-        <Link to="/${locale}/news" className="back">
+        <Link to={`/${locale}/news`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
@@ -90,8 +90,7 @@ function NewsItem({ item, isFirst }) {
 
 export default function NewsContent() {
   const { locale } = useLocale();
-
-  const { documentId } = useParams();
+  const { slug } = useParams();
   const [newsList, setNewsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
@@ -101,11 +100,11 @@ export default function NewsContent() {
     setHasMore(true);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/news/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/news?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setNewsList([data.data]));
-  }, [documentId]);
+      .then((data) => setNewsList([data.data?.[0]]));
+  }, [slug]);
 
   const loadNext = useCallback(async () => {
     if (newsList.length === 0) return;
@@ -145,8 +144,6 @@ export default function NewsContent() {
     return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const mainItem = newsList[0];
-  const imgUrl =
-    mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
 
   return (
     <div className="newscontent__layout">
@@ -179,7 +176,7 @@ export default function NewsContent() {
         )}
       </div>
       <div className="newscontent__layout-sidemenu">
-        <SideMenu currentId={documentId} />
+        <SideMenu currentId={slug} />
       </div>
     </div>
   );
