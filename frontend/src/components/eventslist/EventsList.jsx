@@ -5,7 +5,6 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
-import { slugify } from "../../utils/slugify.js";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -46,11 +45,9 @@ export default function EventsList() {
       {events.map((event) => {
         const name = getLangField(event, "name", locale);
 
-        const slug = name ? slugify(name) : "";
-
         return (
           <Link
-            to={`/${locale}/events/${event.documentId}/${slug}`}
+            to={`/${locale}/events/${event.slug}`}
             className="home__arts-eventlist-item"
             key={event.id}
           >

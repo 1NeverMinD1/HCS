@@ -3,14 +3,12 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function NewsPageHero({ news }) {
   const { locale } = useLocale();
   const title = getLangField(news, "title", locale);
   const desc = getLangField(news, "desc", locale);
   const { t } = useTranslation();
-  const slug = title ? slugify(title) : "";
   const latestNewsImage =
     news.desc_img?.formats?.medium?.url ||
     news.desc_img?.formats?.small?.url ||
@@ -26,7 +24,7 @@ export default function NewsPageHero({ news }) {
 
   return (
     <Link
-      to={`/${locale}/news/${news.documentId}/${slug}`}
+      to={`/${locale}/news/${news.slug}`}
       className="newspage__hero-main"
       style={{
         "--bg": `url(${latestNewsImage})`,

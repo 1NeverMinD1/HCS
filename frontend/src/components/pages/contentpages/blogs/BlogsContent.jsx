@@ -43,22 +43,22 @@ function renderBlock(block, i) {
 
 export default function BlogsContent() {
   const { locale } = useLocale();
-  const { documentId } = useParams();
+  const { slug } = useParams();
   const [blogs, setBlogs] = useState(null);
   const title = getLangField(blogs, "title", locale);
   const desc = getLangField(blogs, "desc", locale);
-  const content = getLangField(blogs, "content", locale);
+  const content = blogs?.[`content_${locale}`] || blogs?.content_ru || [];
   const author = getLangField(blogs, "author", locale);
   const position = getLangField(blogs, "position", locale);
   const category = getLangField(blogs?.categories?.[0], "name", locale);
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/blogs/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/blogs?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setBlogs(data.data));
-  }, [documentId]);
+      .then((data) => setBlogs(data.data?.[0]));
+  }, [slug]);
 
   if (!blogs) return <h2 className="loading wrapper">Загрузка...</h2>;
 
@@ -123,7 +123,7 @@ export default function BlogsContent() {
         </div>
       </div>
       <div className="blogscontent__layout-sidemenu">
-        <SideMenu currentId={documentId} />
+        <SideMenu currentId={slug} />
       </div>
     </div>
   );

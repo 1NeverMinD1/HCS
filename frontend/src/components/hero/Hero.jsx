@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
-import { slugify } from "../../utils/slugify.js";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
@@ -36,13 +35,8 @@ export default function Hero({ onLoadFeatured }) {
   const title = getLangField(featured, "title", locale);
   const desc = getLangField(featured, "desc", locale);
 
-  const slug = title ? slugify(title) : "";
-
   return (
-    <Link
-      to={`/${locale}/news/${featured.documentId}/${slug}`}
-      className="hero"
-    >
+    <Link to={`/${locale}/news/${featured.slug}`} className="hero">
       <div
         className="hero__bg"
         style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}

@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function NewsPageListBlock({ item }) {
   const { locale } = useLocale();
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-
-  const slug = title ? slugify(title) : "";
 
   const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
 
@@ -17,10 +14,7 @@ export default function NewsPageListBlock({ item }) {
   const date = new Date(item.publishDate);
 
   return (
-    <Link
-      to={`/${locale}/news/${item.documentId}/${slug}`}
-      className="newspage__main-item"
-    >
+    <Link to={`/${locale}/news/${item.slug}`} className="newspage__main-item">
       <div className="check">
         <img src={imgUrl} alt={title} />
       </div>

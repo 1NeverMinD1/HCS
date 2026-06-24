@@ -4,7 +4,6 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function EventsPageBlock({ event }) {
   const { locale } = useLocale();
@@ -13,7 +12,6 @@ export default function EventsPageBlock({ event }) {
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
 
-  const slug = name ? slugify(name) : "";
   const imgUrl =
     event.desc_img?.formats?.small?.url ||
     event.desc_img?.formats?.medium?.url ||
@@ -22,10 +20,7 @@ export default function EventsPageBlock({ event }) {
   const category = getLangField(event?.categories?.[0], "name", locale);
 
   return (
-    <Link
-      to={`/${locale}/events/${event.documentId}/${slug}`}
-      className="eventspage__item"
-    >
+    <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
       <div className="img__wrapper">
         <img src={imgUrl} alt="back_img" />
       </div>

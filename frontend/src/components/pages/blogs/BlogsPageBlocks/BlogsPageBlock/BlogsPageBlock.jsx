@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function BlogsPageBlock({ blog }) {
   const { locale } = useLocale();
@@ -10,7 +9,6 @@ export default function BlogsPageBlock({ blog }) {
   const desc = getLangField(blog, "desc", locale);
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
-  const slug = title ? slugify(title) : "";
   if (!blog) return null;
 
   const imgUrl =
@@ -28,10 +26,7 @@ export default function BlogsPageBlock({ blog }) {
   const date = new Date(blog.publishDate);
 
   return (
-    <Link
-      to={`/${locale}/blogs/${blog.documentId}/${slug}`}
-      className="blogspage__item"
-    >
+    <Link to={`/${locale}/blogs/${blog.slug}`} className="blogspage__item">
       <div className="blogspage__item-header">
         <img src={imgUrl} alt="profile_photo" className="profile" />
         <div className="blogspage__item-about">

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { slugify } from "../../../../utils/slugify.js";
 
 export default function SideMenu({ currentId }) {
   const [items, setItems] = useState([]);
@@ -64,12 +63,10 @@ export default function SideMenu({ currentId }) {
               ? getLangField(item, "name", locale)
               : getLangField(item, "title", locale);
 
-          const slug = title ? slugify(title) : "";
-
           return (
             <Link
               key={`${item.type}-${item.id}`}
-              to={`/${locale}/${linkMap[item.type]}/${item.documentId}/${slug}`}
+              to={`/${locale}/${linkMap[item.type]}/${item.slug}`}
               className={`sidemenu__item sidemenu__item--${item.type}`}
             >
               <div className="sidemenu__item-img">

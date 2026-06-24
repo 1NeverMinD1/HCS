@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { slugify } from "../../../../utils/slugify.js";
 
 export default function LatestNewsBlock({ item }) {
   const { locale } = useLocale();
@@ -13,16 +12,10 @@ export default function LatestNewsBlock({ item }) {
 
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-
-  const category = item.categories?.[0]?.name;
-
-  const slug = title ? slugify(title) : "";
+  const category = getLangField(item.categories?.[0], "name", locale);
 
   return (
-    <Link
-      to={`/${locale}/news/${item.documentId}/${slug}`}
-      className="latest__block"
-    >
+    <Link to={`/${locale}/news/${item.slug}`} className="latest__block">
       <div className="img_wrapper">
         <img src={imgUrl} alt={item.title} className="latest__block-img" />
       </div>

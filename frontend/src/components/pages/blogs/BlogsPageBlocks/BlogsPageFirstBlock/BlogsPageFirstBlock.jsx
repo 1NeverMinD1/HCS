@@ -10,7 +10,6 @@ export default function BlogsPageFirstBlock({ blog }) {
   const desc = getLangField(blog, "desc", locale);
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
-  const slug = title ? slugify(title) : "";
 
   const imageUrl =
     blog.desc_img?.formats?.medium?.url ||
@@ -23,7 +22,7 @@ export default function BlogsPageFirstBlock({ blog }) {
 
   return (
     <Link
-      to={`/${locale}/blogs/${blog.documentId}/${slug}`}
+      to={`/${locale}/blogs/${blog.slug}`}
       className="blogspage__hero"
       style={{
         backgroundImage: `url(${firstBlockImg})`,

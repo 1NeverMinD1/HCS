@@ -89,7 +89,7 @@ function ArticleItem({ item, isFirst }) {
 
 export default function ArticlesContent() {
   const { locale } = useLocale();
-  const { documentId } = useParams();
+  const { slug } = useParams();
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
@@ -99,11 +99,11 @@ export default function ArticlesContent() {
     setHasMore(true);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/articles?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setArticlesList([data.data]));
-  }, [documentId]);
+      .then((data) => setArticlesList([data.data?.[0]]));
+  }, [slug]);
 
   const loadNext = useCallback(async () => {
     if (articlesList.length === 0) return;
@@ -176,7 +176,7 @@ export default function ArticlesContent() {
         )}
       </div>
       <div className="artscontent__layout-sidemenu">
-        <SideMenu currentId={documentId} />
+        <SideMenu currentId={slug} />
       </div>
     </div>
   );

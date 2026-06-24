@@ -43,7 +43,7 @@ function renderBlock(block, i) {
 
 export default function EventsContent() {
   const { locale } = useLocale();
-  const { documentId } = useParams();
+  const { slug } = useParams();
   const [events, setEvents] = useState(null);
   const name = getLangField(events, "name", locale);
   const desc = getLangField(events, "desc", locale);
@@ -53,11 +53,11 @@ export default function EventsContent() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/events/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/events?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setEvents(data.data));
-  }, [documentId]);
+      .then((data) => setEvents(data.data?.[0]));
+  }, [slug]);
 
   if (!events) return <h2 className="loading wrapper">Загрузка...</h2>;
 
@@ -93,7 +93,7 @@ export default function EventsContent() {
         type="article"
       />
       <div className="eventscontent wrapper">
-        <Link to="/${locale}/events" className="back">
+        <Link to={`/${locale}/events`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
@@ -175,7 +175,7 @@ export default function EventsContent() {
         </div>
       </div>
       <div className="eventscontent__layout-sidemenu">
-        <SideMenu currentId={documentId} />
+        <SideMenu currentId={slug} />
       </div>
     </div>
   );

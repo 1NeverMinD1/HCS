@@ -7,5 +7,11 @@ export const getLangField = (item, field, locale) => {
 
   const lang = map[locale] || "ru";
 
-  return item?.[`${field}_${lang}`] || item?.[field] || "";
+  if (lang === "ru") {
+    return item?.[`${field}_ru`] || item?.[field] || "";
+  }
+
+  return (
+    item?.[`${field}_${lang}`] || item?.[`${field}_ru`] || item?.[field] || ""
+  );
 };

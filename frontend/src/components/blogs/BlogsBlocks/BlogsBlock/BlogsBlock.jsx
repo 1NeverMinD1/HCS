@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { slugify } from "../../../../utils/slugify.js";
 
 export default function BlogsBlock({ blog }) {
   const imageUrl = blog?.desc_img?.url || "";
@@ -13,13 +12,8 @@ export default function BlogsBlock({ blog }) {
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
 
-  const slug = title ? slugify(title) : "";
-
   return (
-    <Link
-      to={`/${locale}/blogs/${blog.documentId}/${slug}`}
-      className="blogs__block"
-    >
+    <Link to={`/${locale}/blogs/${blog.slug}`} className="blogs__block">
       <img src={imageUrl} alt="profile_photo" className="profile" />
 
       <div className="blogs__block-content">

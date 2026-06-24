@@ -116,7 +116,7 @@ function renderBlock(block, index) {
 }
 
 export default function QnasContent() {
-  const { documentId } = useParams();
+  const { slug } = useParams();
   const [qnas, setQnas] = useState(null);
   const { locale } = useLocale();
   const { t } = useTranslation(locale);
@@ -125,11 +125,11 @@ export default function QnasContent() {
     setQnas(null);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as/${documentId}?populate=*`,
+      `https://hcs-production-423d.up.railway.app/api/q-and-as?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
-      .then((data) => setQnas(data.data));
-  }, [documentId]);
+      .then((data) => setQnas(data.data?.[0]));
+  }, [slug]);
 
   if (!qnas) return <h2 className="loading wrapper">Загрузка...</h2>;
 

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function ArticlesFirstBlock({ article }) {
   const { locale } = useLocale();
@@ -19,15 +18,13 @@ export default function ArticlesFirstBlock({ article }) {
     article?.content?.find((block) => block.type === "paragraph")?.children?.[0]
       ?.text || "";
 
-  const slug = title ? slugify(title) : "";
-
   return (
     <Link
-      to={`/${locale}/articles/${article.documentId}/${slug}`}
+      to={`/${locale}/articles/${article.slug}`}
       className="articles__first-block"
     >
       <div className="img_wrapper">
-        <img src={imgUrl} alt={article.title} />
+        <img src={imgUrl} alt={title} />
       </div>
 
       <div className="articles__first-content">

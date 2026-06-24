@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
-import { slugify } from "../../../../../utils/slugify.js";
 
 export default function ArtsPageBlock({ item, index }) {
   const { locale } = useLocale();
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-  const slug = title ? slugify(title) : "";
   if (!item) return null;
 
   const imgUrl =
@@ -22,7 +20,7 @@ export default function ArtsPageBlock({ item, index }) {
 
   return (
     <Link
-      to={`/${locale}/articles/${item.documentId}/${slug}`}
+      to={`/${locale}/articles/${item.slug}`}
       className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
     >
       {imgUrl && <img src={imgUrl} alt={title} />}
