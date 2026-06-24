@@ -712,6 +712,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     seo_desc: Schema.Attribute.Text;
     seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     seo_title: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
