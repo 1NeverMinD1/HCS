@@ -54,7 +54,7 @@ export default function BlogsContent() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/blogs?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setBlogs(data.data?.[0]));

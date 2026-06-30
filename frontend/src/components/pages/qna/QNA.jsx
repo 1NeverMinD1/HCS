@@ -12,9 +12,7 @@ export default function QNA() {
   const { t } = useTranslation(locale);
 
   useEffect(() => {
-    fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as?populate=*&sort=publishDate:desc`,
-    )
+    fetch(`https://api.zhkh24.kz/api/q-and-as?populate=*&sort=publishDate:desc`)
       .then((res) => res.json())
       .then((data) => {
         setQnas(data.data || []);

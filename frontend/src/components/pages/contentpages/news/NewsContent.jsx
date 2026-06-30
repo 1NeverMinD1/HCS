@@ -100,7 +100,7 @@ export default function NewsContent() {
     setHasMore(true);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/news?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/news?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setNewsList([data.data?.[0]]));
@@ -112,7 +112,7 @@ export default function NewsContent() {
     const last = newsList[newsList.length - 1];
 
     const res = await fetch(
-      `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
+      `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
     );
     const data = await res.json();
     const next = data.data?.[0];

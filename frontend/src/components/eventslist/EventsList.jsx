@@ -15,7 +15,7 @@ export default function EventsList() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/events?populate=*&sort=start:asc&pagination[pageSize]=3`,
+        `https://api.zhkh24.kz/api/events?populate=*&sort=start:asc&pagination[pageSize]=3`,
       );
       const data = await res.json();
       setEvents(data.data);

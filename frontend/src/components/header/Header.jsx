@@ -20,7 +20,7 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    fetch("https://hcs-production-423d.up.railway.app/api/header-cats")
+    fetch("https://api.zhkh24.kz/api/header-cats")
       .then((res) => res.json())
       .then((data) => setCategories(data.data || []));
   }, []);

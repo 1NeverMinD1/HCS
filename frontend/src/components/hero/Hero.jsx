@@ -10,7 +10,7 @@ export default function Hero({ onLoadFeatured }) {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc`,
+      `https://api.zhkh24.kz/api/news?filters[isFeatured][$eq]=true&populate=*&sort=publishDate:desc`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -28,7 +28,7 @@ export default function Hero({ onLoadFeatured }) {
   const imageUrl = featured?.desc_img?.url
     ? featured.desc_img.url.startsWith("http")
       ? featured.desc_img.url
-      : `https://hcs-production-423d.up.railway.app${featured.desc_img.url}`
+      : `https://api.zhkh24.kz${featured.desc_img.url}`
     : "";
 
   const category = getLangField(featured?.header_cats?.[0], "name", locale);

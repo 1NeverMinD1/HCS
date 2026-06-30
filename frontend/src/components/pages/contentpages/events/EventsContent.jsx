@@ -53,7 +53,7 @@ export default function EventsContent() {
 
   useEffect(() => {
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/events?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setEvents(data.data?.[0]));

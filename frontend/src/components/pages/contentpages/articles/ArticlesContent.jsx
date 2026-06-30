@@ -99,7 +99,7 @@ export default function ArticlesContent() {
     setHasMore(true);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setArticlesList([data.data?.[0]]));
@@ -111,7 +111,7 @@ export default function ArticlesContent() {
     const last = articlesList[articlesList.length - 1];
 
     const res = await fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
+      `https://api.zhkh24.kz/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
     );
     const data = await res.json();
     const next = data.data?.[0];

@@ -125,7 +125,7 @@ export default function QnasContent() {
     setQnas(null);
 
     fetch(
-      `https://hcs-production-423d.up.railway.app/api/q-and-as?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/q-and-as?filters[slug][$eq]=${slug}&populate=*`,
     )
       .then((res) => res.json())
       .then((data) => setQnas(data.data?.[0]));

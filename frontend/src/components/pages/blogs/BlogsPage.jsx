@@ -10,9 +10,7 @@ export default function BlogsPage() {
   const { t } = useTranslation(locale);
 
   useEffect(() => {
-    fetch(
-      `https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc`,
-    )
+    fetch(`https://api.zhkh24.kz/api/blogs?populate=*&sort=publishDate:desc`)
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);

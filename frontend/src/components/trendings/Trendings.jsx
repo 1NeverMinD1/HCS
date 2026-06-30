@@ -13,7 +13,7 @@ export default function Trendings() {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6`,
+        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6`,
       );
 
       const json = await res.json();

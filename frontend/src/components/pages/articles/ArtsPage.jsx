@@ -11,9 +11,7 @@ export default function ArtsPage() {
   const { t } = useTranslation(locale);
 
   useEffect(() => {
-    fetch(
-      `https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc`,
-    )
+    fetch(`https://api.zhkh24.kz/api/articles?populate=*&sort=publishDate:desc`)
       .then((res) => res.json())
       .then((data) => {
         setArticles(data.data || []);

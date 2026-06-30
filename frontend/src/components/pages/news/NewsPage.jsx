@@ -21,11 +21,11 @@ export default function NewsPage() {
   useEffect(() => {
     let url;
     if (isMain) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
+      url = `https://api.zhkh24.kz/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
     } else if (id) {
-      url = `https://hcs-production-423d.up.railway.app/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
+      url = `https://api.zhkh24.kz/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
     } else {
-      url = `https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc`;
+      url = `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc`;
     }
 
     fetch(url)

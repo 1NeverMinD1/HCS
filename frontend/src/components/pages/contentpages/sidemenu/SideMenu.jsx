@@ -10,16 +10,16 @@ export default function SideMenu({ currentId }) {
   useEffect(() => {
     Promise.all([
       fetch(
-        "https://hcs-production-423d.up.railway.app/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
       ).then((res) => res.json()),
       fetch(
-        "https://hcs-production-423d.up.railway.app/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
       ).then((res) => res.json()),
       fetch(
-        "https://hcs-production-423d.up.railway.app/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
       ).then((res) => res.json()),
       fetch(
-        "https://hcs-production-423d.up.railway.app/api/events?populate=*&sort=start:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/events?populate=*&sort=start:desc&pagination[pageSize]=3",
       ).then((res) => res.json()),
     ]).then(([news, articles, blogs, events]) => {
       const all = [
