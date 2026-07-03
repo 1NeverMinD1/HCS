@@ -1,4 +1,4 @@
-name: Deploy Strapi
+name: Deploy Fullstack (Strapi + Frontend)
 
 on:
   push:
@@ -10,15 +10,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to server
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+
           script: |
+            set -e
+
             cd ${{ secrets.PROJECT_PATH }}
             git pull
-            npm install
+
+            # =========================
+            # BACKEND (Strapi)
+            # =========================
+            cd strapi_hcs
+            npm ci
             npm run build
-            pm2 restart strapi
+            pm2 reload strapi || pm2 start npm --name strapi -- run start
+
+            # =========================
+            # FRONTEND (React / Vite)
+            # =========================
+            cd ../frontend
+            npm ci
+            npm run build
+
+            # Nginx deploy folder
+            rm -rf /var/www/frontend/*
+            cp -r dist/* /var/www/frontend/ || cp -r build/* /var/www/frontend/
