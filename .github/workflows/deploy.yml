@@ -20,24 +20,23 @@ jobs:
           script: |
             set -e
 
-            cd ${{ secrets.PROJECT_PATH }}
+            cd /var/www/project
             git pull
 
-            # =========================
-            # BACKEND (Strapi)
-            # =========================
+            # =====================
+            # STRAPI
+            # =====================
             cd strapi_hcs
             npm ci
             npm run build
-            pm2 reload strapi || pm2 start npm --name strapi -- run start
+            pm2 reload strapi
 
-            # =========================
-            # FRONTEND (React / Vite)
-            # =========================
+            # =====================
+            # FRONTEND
+            # =====================
             cd ../frontend
             npm ci
             npm run build
 
-            # Nginx deploy folder
             rm -rf /var/www/frontend/*
             cp -r dist/* /var/www/frontend/ || cp -r build/* /var/www/frontend/
