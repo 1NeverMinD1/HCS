@@ -11,6 +11,9 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "test": {
+      "type": "string"
+    },
     "title_ru": {
       "type": "string"
     },
