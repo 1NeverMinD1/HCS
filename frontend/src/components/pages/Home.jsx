@@ -34,7 +34,7 @@ export default function Home() {
                   setFeaturedTag(item.categories?.[0]?.name || null);
                 }}
               />
-              {featuredId && <Ad />}
+              <Ad />
             </div>
             <LatestNews featuredId={featuredId} />
           </div>
@@ -49,11 +49,9 @@ export default function Home() {
 
       <Events />
 
-      {featuredId && (
-        <div className="wrapper">
-          <Email />
-        </div>
-      )}
+      <div className="wrapper">
+        <Email />
+      </div>
     </div>
   );
 }

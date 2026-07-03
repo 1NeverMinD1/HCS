@@ -12,11 +12,12 @@ export default function EventsBlocks({ events }) {
     const middleElement = container.children[middleIndex];
 
     if (middleElement) {
-      middleElement.scrollIntoView({
-        behavior: "instant",
-        inline: "center",
-        block: "nearest",
-      });
+      const containerWidth = container.offsetWidth;
+      const elementLeft = middleElement.offsetLeft;
+      const elementWidth = middleElement.offsetWidth;
+
+      container.scrollLeft =
+        elementLeft - containerWidth / 2 + elementWidth / 2;
     }
   }, [events]);
 

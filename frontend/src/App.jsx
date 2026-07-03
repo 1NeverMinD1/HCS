@@ -1,6 +1,3 @@
-//   const content = article?.[`content_${locale}`] || article?.content_ru || [];
-// const category = getLangField(article?.categories?.[0], "name", locale);
-
 import { Routes, Route } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";
