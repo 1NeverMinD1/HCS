@@ -502,7 +502,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     seo_title: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
-    test: Schema.Attribute.String;
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
     title_ru: Schema.Attribute.String;
