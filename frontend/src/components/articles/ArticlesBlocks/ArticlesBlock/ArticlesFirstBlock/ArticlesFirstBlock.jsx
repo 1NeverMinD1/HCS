@@ -12,7 +12,7 @@ export default function ArticlesFirstBlock({ article }) {
 
   const title = getLangField(article, "title", locale);
 
-  const category = article?.tags?.[0]?.name || "";
+  const category = getLangField(article?.categories?.[0], "name", locale);
 
   const text =
     article?.content?.find((block) => block.type === "paragraph")?.children?.[0]

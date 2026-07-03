@@ -211,3 +211,48 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 430px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+
+    .menu {
+      max-width: 100%;
+      width: fit-content;
+      margin: 0 auto;
+      overflow: hidden;
+
+      .menu__list {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
+        max-width: 100%;
+
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .menu__list-item {
+          font-size: 18px;
+          flex: 0 0 auto;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .interaction {
+      .locale-switcher {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    .subscribe {
+      display: none;
+    }
+  }
+}

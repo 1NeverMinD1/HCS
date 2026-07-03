@@ -139,3 +139,9 @@
     }
   }
 }
+
+@media (max-width: 430px) {
+  .home__arts-eventlist {
+    display: none;
+  }
+}

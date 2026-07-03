@@ -55,3 +55,25 @@
     }
   }
 }
+
+@media (max-width: 430px) {
+  .articles__first-block {
+    height: 600px;
+    .img_wrapper {
+      img {
+        width: 100%;
+        height: 100%;
+        object-position: 50% 100%;
+      }
+    }
+    .articles__first-content {
+      .articles__first-cat {
+        font-size: 16px;
+        margin-left: 0px;
+      }
+      .articles__first-title {
+        font-size: 18px;
+      }
+    }
+  }
+}

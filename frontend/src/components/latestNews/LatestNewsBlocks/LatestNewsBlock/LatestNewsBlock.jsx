@@ -12,7 +12,7 @@ export default function LatestNewsBlock({ item }) {
 
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
-  const category = getLangField(item.categories?.[0], "name", locale);
+  const category = getLangField(item.header_cats?.[0], "name", locale);
 
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="latest__block">

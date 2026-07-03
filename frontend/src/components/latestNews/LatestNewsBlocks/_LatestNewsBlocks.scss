@@ -3,3 +3,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
+
+@media (max-width: 430px) {
+  .latest__blocks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
