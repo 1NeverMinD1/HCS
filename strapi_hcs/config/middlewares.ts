@@ -25,6 +25,8 @@ const config: Core.Config.Middlewares = [
     name: "strapi::cors",
     config: {
       origin: [
+        "https://zhkh24.kz",
+        "https://www.zhkh24.kz",
         "https://hcs-eight.vercel.app",
         "http://localhost:5173",
         "http://localhost:5174",
