@@ -34,3 +34,37 @@
     }
   }
 }
+
+@media (max-width: 430px) {
+  .footer__content {
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    .footer__intro {
+      width: 100%;
+      margin-bottom: 10px;
+      .logo {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      p {
+        width: 100%;
+        font-size: 16px;
+      }
+    }
+    .footer__contacts {
+      width: 100%;
+      .footer__contacts-block {
+        h3 {
+          font-size: 18px;
+        }
+        .footer__contacts-list {
+          .footer__contacts-item {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}

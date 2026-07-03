@@ -6,7 +6,10 @@ export default function Footer() {
       <FooterContent />
       <hr />
       <div className="footer__end">
-        <p>© 2026 ВЕСТНИК. Все права защищены</p>
+        <div className="rights">
+          <p>© 2026 ВЕСТНИК. </p>
+          <p>Все права защищены</p>
+        </div>
         <div className="rules">
           <p>Политика конфиденциальности</p>
           <p>Условия использования</p>
