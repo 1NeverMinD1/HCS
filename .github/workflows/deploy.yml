@@ -23,20 +23,13 @@ jobs:
             cd /var/www/project
             git pull
 
-            # =====================
-            # STRAPI
-            # =====================
+            # Backend
             cd strapi_hcs
             npm ci
             npm run build
             pm2 reload strapi
 
-            # =====================
-            # FRONTEND
-            # =====================
+            # Frontend
             cd ../frontend
             npm ci
             npm run build
-
-            rm -rf /var/www/frontend/*
-            cp -r dist/* /var/www/frontend/ || cp -r build/* /var/www/frontend/
