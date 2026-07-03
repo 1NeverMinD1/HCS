@@ -3226,4 +3226,10 @@ ul {
   width: 12px;
   height: 12px;
   fill: black;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
 }/*# sourceMappingURL=style.css.map */
