@@ -42,6 +42,7 @@
 
     .articles__block-cat {
       margin-left: 10px;
+      width: 100%;
     }
     .articles__block-title {
       display: -webkit-box;
@@ -72,7 +73,7 @@
     .articles__block-content {
       .articles__block-cat {
         margin-left: 0px;
-        font-size: 16px;
+        font-size: 14px;
       }
       .articles__block-title {
         -webkit-line-clamp: 4;
