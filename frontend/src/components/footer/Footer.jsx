@@ -7,7 +7,7 @@ export default function Footer() {
       <hr />
       <div className="footer__end">
         <div className="rights">
-          <p>© 2026 ВЕСТНИК. </p>
+          <p>© 2026 ЖКХ24. </p>
           <p>Все права защищены</p>
         </div>
         <div className="rules">

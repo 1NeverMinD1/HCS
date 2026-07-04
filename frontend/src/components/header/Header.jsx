@@ -49,7 +49,7 @@ export default function Header() {
       id="header"
     >
       <Link to="/" className="logo">
-        ВЕСТНИК
+        ЖКХ24
       </Link>
 
       <div className="menu">

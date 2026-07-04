@@ -11,7 +11,7 @@ export default function FooterContent() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="logo"
         >
-          ВЕСТНИК
+          ЖКХ24
         </button>
 
         <p>
