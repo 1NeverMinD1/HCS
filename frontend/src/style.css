@@ -1061,6 +1061,7 @@
   }
   .email .email__content .email__input-block {
     flex-direction: column;
+    align-items: center;
   }
   .email .email__content .email__input-block .email_input {
     width: 100%;
