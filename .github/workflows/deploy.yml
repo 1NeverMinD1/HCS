@@ -25,11 +25,13 @@ jobs:
 
             # Backend
             cd strapi_hcs
+            rm -rf node_modules
             npm ci
             npm run build
             pm2 reload strapi
 
             # Frontend
             cd ../frontend
+            rm -rf node_modules
             npm ci
             npm run build
