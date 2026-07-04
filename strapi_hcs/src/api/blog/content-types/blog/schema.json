@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "author_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "author_kk": {
       "type": "string"
@@ -21,7 +22,8 @@
       "type": "string"
     },
     "position_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "position_kk": {
       "type": "string"
@@ -30,7 +32,8 @@
       "type": "string"
     },
     "title_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "title_kk": {
       "type": "string"
@@ -39,7 +42,8 @@
       "type": "string"
     },
     "desc_ru": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "desc_kk": {
       "type": "text"
@@ -48,7 +52,8 @@
       "type": "text"
     },
     "publishDate": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "tags": {
       "type": "relation",
@@ -63,7 +68,8 @@
       "inversedBy": "blogs"
     },
     "content_ru": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "content_kk": {
       "type": "blocks"
@@ -74,6 +80,7 @@
     "desc_img": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -84,6 +91,7 @@
     "back_img": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",

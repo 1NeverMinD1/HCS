@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "name_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "name_kk": {
       "type": "string"
@@ -21,7 +22,8 @@
       "type": "string"
     },
     "desc_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "desc_kk": {
       "type": "text"
@@ -30,13 +32,16 @@
       "type": "text"
     },
     "start": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "end": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "place_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "place_kk": {
       "type": "string"
@@ -45,14 +50,17 @@
       "type": "string"
     },
     "amount": {
-      "type": "integer"
+      "type": "integer",
+      "required": false
     },
     "price": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "desc_img": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -61,7 +69,8 @@
       ]
     },
     "content_ru": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "content_kk": {
       "type": "blocks"

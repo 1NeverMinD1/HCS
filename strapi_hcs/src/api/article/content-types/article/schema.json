@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "title_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "title_kk": {
       "type": "string"
@@ -21,10 +22,12 @@
       "type": "string"
     },
     "publishDate": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "content_ru": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "content_kk": {
       "type": "blocks"
@@ -35,6 +38,7 @@
     "desc_img": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
