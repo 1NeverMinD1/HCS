@@ -46,9 +46,9 @@ export default function Hero({ onLoadFeatured }) {
       <h1 className="hero__title">{title}</h1>
       <p className="hero__text">{desc}</p>
 
-      <div className="hero__date">
-        <p>{formatLocalizedDate(featured.publishDate, locale)}</p>
-      </div>
+      <p className="hero__date">
+        {formatLocalizedDate(featured.publishDate, locale)}
+      </p>
     </Link>
   );
 }

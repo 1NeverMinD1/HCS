@@ -21,9 +21,7 @@ export default function EventsPageBlock({ event }) {
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
-      <div className="img__wrapper">
-        <img src={imgUrl} alt="back_img" />
-      </div>
+      <img src={imgUrl} alt="back_img" />
       <div className="eventspage__content">
         <p className="eventspage__item-cat">{category}</p>
         <h3 className="eventspage__item-title">{name}</h3>

@@ -84,3 +84,20 @@
 .newspage__hero-main:hover::before {
   transform: scale(1.08);
 }
+
+@media (max-width: 430px) {
+  .newspage__hero-main {
+    width: 100%;
+    height: 300px;
+    .cat {
+      margin-top: 0px;
+      font-size: variables.$mobile-text-font-size - 2px;
+    }
+    .newspage__hero-main-title {
+      font-size: variables.$mobile-subtitle-font-size;
+    }
+    .newspage__hero-main-text {
+      font-size: variables.$mobile-text-font-size;
+    }
+  }
+}

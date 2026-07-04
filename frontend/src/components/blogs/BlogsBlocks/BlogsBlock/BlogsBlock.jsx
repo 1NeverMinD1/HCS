@@ -26,11 +26,9 @@ export default function BlogsBlock({ blog }) {
 
           <p className="blogs__block-text">{desc}</p>
 
-          <div className="blogs__block-footer">
-            <p className="date">
-              {new Date(blog.publishDate).toLocaleDateString()}
-            </p>
-          </div>
+          <p className="date">
+            {new Date(blog.publishDate).toLocaleDateString()}
+          </p>
         </div>
       </div>
     </Link>

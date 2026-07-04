@@ -80,17 +80,17 @@
     margin-top: 0px;
     width: 100%;
     .trendings__title {
-      font-size: 18px;
+      font-size: variables.$mobile-subtitle-font-size;
       .trendings__block {
         .trendings__block-info {
           h3 {
-            font-size: 16px;
+            font-size: variables.$mobile-text-font-size;
           }
         }
       }
     }
     .see_all {
-      font-size: 18px;
+      font-size: variables.$mobile-subtitle-font-size;
     }
   }
 }

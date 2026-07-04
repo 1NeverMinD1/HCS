@@ -68,3 +68,28 @@
     }
   }
 }
+
+@media (max-width: 430px) {
+  .newspage__main-item {
+    height: 325px;
+    .check {
+      height: 40%;
+    }
+    .newspage__main-item-content {
+      .newspage__main-item-cat {
+        font-size: variables.$mobile-text-font-size - 2px;
+      }
+      .newspage__main-item-title {
+        font-size: variables.$mobile-subtitle-font-size;
+      }
+      .newspage__main-item-text {
+        font-size: variables.$mobile-text-font-size;
+      }
+      .newspage__main-item-date {
+        p {
+          font-size: variables.$mobile-text-font-size - 2px;
+        }
+      }
+    }
+  }
+}

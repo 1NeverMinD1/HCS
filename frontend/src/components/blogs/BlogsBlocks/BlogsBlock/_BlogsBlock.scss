@@ -62,11 +62,6 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
       }
-      .blogs__block-footer {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-      }
     }
   }
 }
@@ -77,20 +72,21 @@
     .blogs__block-content {
       .blogs__block-header {
         .author {
-          font-size: 18px;
+          font-size: variables.$mobile-subtitle-font-size;
         }
         .spec {
-          font-size: 16px;
+          font-size: variables.$mobile-text-font-size;
         }
       }
       .blogs__block-info {
         .blogs__block-title {
-          font-size: 18px;
+          font-size: variables.$mobile-subtitle-font-size;
         }
         .blogs__block-text {
-          font-size: 16px;
+          font-size: variables.$mobile-text-font-size;
         }
-        .blogs__block-footer {
+        .date {
+          font-size: variables.$mobile-text-font-size - 2px;
         }
       }
     }

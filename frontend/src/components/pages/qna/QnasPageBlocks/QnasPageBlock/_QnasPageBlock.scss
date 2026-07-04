@@ -30,3 +30,15 @@
     text-align: left;
   }
 }
+
+@media (max-width: 800px) {
+  .qnas__main-item {
+    width: 100%;
+    .qnas__main-item-title {
+      font-size: variables.$mobile-subtitle-font-size;
+    }
+    .qnas__main-item-date {
+      font-size: variables.$mobile-text-font-size - 2px;
+    }
+  }
+}

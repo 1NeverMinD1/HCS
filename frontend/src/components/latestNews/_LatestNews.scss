@@ -45,11 +45,11 @@
   .latest {
     .latest__link {
       .view_all {
-        font-size: 16px;
+        font-size: variables.$mobile-text-font-size;
       }
     }
   }
   .view_all {
-    font-size: 16px;
+    font-size: variables.$mobile-text-font-size;
   }
 }

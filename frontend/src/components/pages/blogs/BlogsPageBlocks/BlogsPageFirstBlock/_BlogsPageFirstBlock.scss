@@ -1,3 +1,5 @@
+@use "../../../../../variables";
+
 .blogspage__hero {
   text-decoration: none;
   position: relative;
@@ -95,7 +97,7 @@
     flex-direction: column;
     gap: 20px;
 
-    h1 {
+    .blogspage__hero-title {
       font-size: 42px;
       line-height: 1.1;
       font-weight: 700;
@@ -113,27 +115,36 @@
     }
   }
 
-  .blogs__block-footer {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  .date {
+    opacity: 0.85;
+  }
+}
 
-    .date {
-      opacity: 0.85;
-    }
-
-    .likes,
-    .comms {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      svg {
-        width: 15px;
-        height: 15px;
-
-        fill: white;
+@media (max-width: 430px) {
+  .blogspage__hero {
+    height: 350px;
+    .blogspage__hero-header {
+      padding-top: 0;
+      .blogspage__hero-about {
+        .author {
+          font-size: variables.$mobile-subtitle-font-size;
+        }
+        .spec {
+          font-size: variables.$mobile-text-font-size;
+        }
       }
+    }
+    .blogspage__hero-content {
+      width: 100%;
+      .blogspage__hero-title {
+        font-size: variables.$mobile-subtitle-font-size;
+      }
+      .blogspage__hero-text {
+        font-size: variables.$mobile-text-font-size;
+      }
+    }
+    .date {
+      font-size: variables.$mobile-text-font-size - 2px;
     }
   }
 }

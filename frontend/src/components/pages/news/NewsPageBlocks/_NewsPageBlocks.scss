@@ -12,3 +12,16 @@
     justify-content: space-around;
   }
 }
+
+@media (max-width: 430px) {
+  .newspage__hero {
+    flex-direction: column;
+    gap: 10px;
+    .newspage__hero-list {
+      margin-top: 20px;
+      width: 100%;
+      gap: 20px;
+      height: auto;
+    }
+  }
+}

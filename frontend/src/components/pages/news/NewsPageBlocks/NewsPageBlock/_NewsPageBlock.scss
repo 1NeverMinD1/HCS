@@ -72,3 +72,9 @@
     overflow: hidden;
   }
 }
+
+@media (max-width: 430px) {
+  .newspage__hero-item {
+    height: 150px;
+  }
+}

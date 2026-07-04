@@ -110,23 +110,26 @@
   .events__block {
     .events__block-content {
       .cat {
-        font-size: 16px;
+        font-size: variables.$mobile-text-font-size - 2px;
       }
       .events__block-title {
-        font-size: 18px;
+        font-size: variables.$mobile-subtitle-font-size;
       }
       .events__block-text {
-        font-size: 16px;
+        font-size: variables.$mobile-text-font-size;
       }
       .events__block-footer {
         .date,
         .place,
         .amount {
           p {
-            font-size: 14px;
+            font-size: variables.$mobile-text-font-size - 2px;
           }
         }
       }
+    }
+    .subscribe {
+      font-size: variables.$mobile-text-font-size;
     }
   }
 }

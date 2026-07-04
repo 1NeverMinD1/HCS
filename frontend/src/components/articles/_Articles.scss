@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .articles {
   width: 60%;
   margin-block: 50px;
@@ -26,10 +28,10 @@
     width: 100%;
     .articles__header {
       .articles__header-title {
-        font-size: 26px;
+        font-size: variables.$mobile-title-font-size;
       }
       .view_all {
-        font-size: 16px;
+        font-size: variables.$mobile-text-font-size;
       }
     }
   }

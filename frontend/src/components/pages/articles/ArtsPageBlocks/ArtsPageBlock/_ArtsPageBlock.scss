@@ -36,7 +36,7 @@
     border-left: none;
 
     .artspage__list-block-cat {
-      font-size: 14px;
+      font-size: 16px;
       color: gray;
     }
 
@@ -59,10 +59,8 @@
       overflow: hidden;
     }
 
-    .newspage__main-item-date {
-      display: flex;
-      gap: 10px;
-      font-size: 14px;
+    .artspage__list-block-date {
+      font-size: 16px;
       color: #777;
     }
   }
@@ -79,6 +77,24 @@
       border-left: 1px solid rgb(220, 220, 220);
       border-right: none;
       border-radius: 10px 0 0 10px;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .artspage__list-block {
+    height: 200px;
+    width: 100%;
+    .artspage__list-block-content {
+      .artspage__list-block-title {
+        font-size: variables.$mobile-subtitle-font-size;
+      }
+      .artspage__list-block-text {
+        font-size: variables.$mobile-text-font-size;
+      }
+      .artspage__list-block-date {
+        font-size: variables.$mobile-text-font-size - 2px;
+      }
     }
   }
 }

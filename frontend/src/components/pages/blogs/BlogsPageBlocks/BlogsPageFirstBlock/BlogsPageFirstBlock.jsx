@@ -40,11 +40,7 @@ export default function BlogsPageFirstBlock({ blog }) {
         <p className="blogspage__hero-text">{desc}</p>
       </div>
 
-      <div className="blogs__block-footer">
-        <p className="date">
-          {new Date(blog.publishDate).toLocaleDateString()}
-        </p>
-      </div>
+      <p className="date">{new Date(blog.publishDate).toLocaleDateString()}</p>
     </Link>
   );
 }

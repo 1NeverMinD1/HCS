@@ -30,9 +30,9 @@ export default function ArtsPageBlock({ item, index }) {
         <h3 className="artspage__list-block-title">{title}</h3>
         <p className="artspage__list-block-text">{desc}</p>
 
-        <div className="newspage__main-item-date">
-          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
-        </div>
+        <p className="artspage__list-block-date">
+          {formatLocalizedDate(item.publishDate, locale)}
+        </p>
       </div>
     </Link>
   );
