@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";
+import { useYandexMetrika } from "./utils/useYandexMetrika.js";
 
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
@@ -19,6 +21,15 @@ import EventsContent from "./components/pages/contentpages/events/EventsContent.
 import QnasContent from "./components/pages/contentpages/qnas/QnasContent.jsx";
 
 export default function App() {
+  useYandexMetrika();
+
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <LocaleProvider>
       <div className="main">
@@ -31,7 +42,7 @@ export default function App() {
           <Route path="/:locale/news" element={<NewsPage />} />
           {/* Главные новости */}
           <Route path="/:locale/news/main" element={<NewsPage />} />
-          {/* Категории новостей */}
+          {/* Категории новостей */}
           <Route path="/:locale/news/category/:id" element={<NewsPage />} />
           {/* Полная новость */}
           <Route path="/:locale/news/:slug" element={<NewsContent />} />
@@ -41,7 +52,7 @@ export default function App() {
           <Route path="/:locale/articles/:slug" element={<ArticlesContent />} />
           {/* Все блоги */}
           <Route path="/:locale/blogs" element={<BlogsPage />} />
-          {/* Полный блог */}
+          {/* Полный блог */}
           <Route path="/:locale/blogs/:slug" element={<BlogsContent />} />
           {/* Все мероприятия */}
           <Route path="/:locale/events" element={<EventsPage />} />
@@ -49,7 +60,7 @@ export default function App() {
           <Route path="/:locale/events/:slug" element={<EventsContent />} />
           {/* Вопросы и ответы */}
           <Route path="/:locale/q-and-as" element={<QNA />} />
-          {/* Полный вопрос */}
+          {/* Полный вопрос */}
           <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
         </Routes>
         <hr className="main_divide" />
