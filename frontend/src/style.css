@@ -145,6 +145,7 @@
   border: none;
   background: rgb(0, 60, 255);
   color: white;
+  width: 150px;
   font-size: 18px;
   border-radius: 8px;
   padding: 10px 20px;
@@ -3277,10 +3278,4 @@ ul {
   width: 12px;
   height: 12px;
   fill: black;
-}
-
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100%;
 }/*# sourceMappingURL=style.css.map */
