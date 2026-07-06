@@ -21,6 +21,9 @@
     border: 1px solid variables.$primary-color;
     border-radius: 5px;
     transform: scale(1.05);
+    .qnas__main-item-title {
+      color: variables.$primary-color;
+    }
   }
   .qnas__main-item-title {
     display: -webkit-box;

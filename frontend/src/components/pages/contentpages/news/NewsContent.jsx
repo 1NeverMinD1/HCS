@@ -62,15 +62,13 @@ function NewsItem({ item, isFirst }) {
       )}
       <div className="newscontent__header">
         <p className="cat">{category}</p>
-        <div className="newscontent__header-date">
-          <p>
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-        </div>
+        <p className="newscontent__header-date">
+          {date.toLocaleDateString("ru-RU", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </p>
       </div>
       <h2 className="newscontent__title">{title}</h2>
       <p className="newscontent__intro">{desc}</p>
