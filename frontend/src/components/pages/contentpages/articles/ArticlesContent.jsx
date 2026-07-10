@@ -146,23 +146,28 @@ export default function ArticlesContent() {
     return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const mainItem = articlesList[0];
-  const imgUrl =
-    mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url;
+  const imgUrl = getImageUrl(
+    mainItem.desc_img?.formats?.medium?.url || mainItem.desc_img?.url,
+  );
 
   return (
     <div className="artscontent__layout">
       <SEO
-        title={mainItem.seo_title || getLangField(mainItem, "title", locale)}
+        title={
+          getLangField(mainItem.SEO, "seo_title", locale) ||
+          getLangField(mainItem, "title", locale)
+        }
         description={
-          mainItem.seo_desc || getLangField(mainItem, "desc", locale)
+          getLangField(mainItem.SEO, "seo_desc", locale) ||
+          getLangField(mainItem, "desc", locale)
         }
-        image={
-          mainItem.seo_image?.formats?.large?.url ||
-          mainItem.seo_image?.url ||
-          mainItem.desc_img?.formats?.large?.url ||
-          mainItem.desc_img?.formats?.medium?.url ||
-          mainItem.desc_img?.url
-        }
+        image={getImageUrl(
+          mainItem.SEO?.seo_image?.formats?.large?.url ||
+            mainItem.SEO?.seo_image?.url ||
+            mainItem.desc_img?.formats?.large?.url ||
+            mainItem.desc_img?.formats?.medium?.url ||
+            mainItem.desc_img?.url,
+        )}
         type="article"
       />
       <div className="artscontent__layout-main">

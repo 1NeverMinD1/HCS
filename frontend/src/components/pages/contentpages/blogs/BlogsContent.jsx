@@ -71,20 +71,26 @@ export default function BlogsContent() {
       blogs.back_img?.url,
   );
 
-  const profImg = blogs?.desc_img?.url || "";
+  const profImg = getImageUrl(blogs?.desc_img?.url || "");
 
   return (
     <div className="blogscontent__layout">
       <SEO
-        title={blogs.seo_title || getLangField(blogs, "title", locale)}
-        description={blogs.seo_desc || getLangField(blogs, "desc", locale)}
-        image={
-          blogs.seo_image?.formats?.large?.url ||
-          blogs.seo_image?.url ||
-          blogs.desc_img?.formats?.large?.url ||
-          blogs.desc_img?.formats?.medium?.url ||
-          blogs.desc_img?.url
+        title={
+          getLangField(blogs.SEO, "seo_title", locale) ||
+          getLangField(blogs, "title", locale)
         }
+        description={
+          getLangField(blogs.SEO, "seo_desc", locale) ||
+          getLangField(blogs, "desc", locale)
+        }
+        image={getImageUrl(
+          blogs.SEO?.seo_image?.formats?.large?.url ||
+            blogs.SEO?.seo_image?.url ||
+            blogs.desc_img?.formats?.large?.url ||
+            blogs.desc_img?.formats?.medium?.url ||
+            blogs.desc_img?.url,
+        )}
         type="article"
       />
       <div className="blogscontent">

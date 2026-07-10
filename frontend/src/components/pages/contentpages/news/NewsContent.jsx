@@ -149,13 +149,17 @@ export default function NewsContent() {
   return (
     <div className="newscontent__layout">
       <SEO
-        title={mainItem.seo_title || getLangField(mainItem, "title", locale)}
+        title={
+          getLangField(mainItem.SEO, "seo_title", locale) ||
+          getLangField(mainItem, "title", locale)
+        }
         description={
-          mainItem.seo_desc || getLangField(mainItem, "desc", locale)
+          getLangField(mainItem.SEO, "seo_desc", locale) ||
+          getLangField(mainItem, "desc", locale)
         }
         image={getImageUrl(
-          mainItem.seo_image?.formats?.large?.url ||
-            mainItem.seo_image?.url ||
+          mainItem.SEO?.seo_image?.formats?.large?.url ||
+            mainItem.SEO?.seo_image?.url ||
             mainItem.desc_img?.formats?.large?.url ||
             mainItem.desc_img?.formats?.medium?.url ||
             mainItem.desc_img?.url,

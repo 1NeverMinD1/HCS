@@ -31,6 +31,21 @@ export const translations = {
     eventsIntroText: "Конференции, выставки, встречи и другие события",
     qandasIntro: "Вопросы и ответы",
     qandasIntroText: "Быстрые ответы на интересующие вопросы",
+    seo_static_title_home: "Главная",
+    seo_static_desc_home:
+      "Актуальные новости, статьи, блоги и события на портале ЖКХ24",
+    seo_static_title_news: "Новости",
+    seo_static_desc_news: "Актуальные новости на портале ЖКХ24",
+    seo_static_title_arts: "Аналитические статьи",
+    seo_static_desc_arts:
+      "Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших авторов",
+    seo_static_title_blogs: "Авторские блоги",
+    seo_static_desc_blogs:
+      "Личные мнения, истории и размышления от нашего сообщества",
+    seo_static_title_events: "События и мероприятия",
+    seo_static_desc_events: "Конференции, выставки, встречи и другие события",
+    seo_static_title_qandas: "Вопросы и ответы",
+    seo_static_desc_qandas: "Быстрые ответы на интересующие вопросы",
   },
   kk: {
     news: "Жаңалықтар",
@@ -65,6 +80,23 @@ export const translations = {
       "Конференциялар, көрмелер, кездесулер және басқа да іс-шаралар",
     qandasIntro: "Сұрақтар мен жауаптар",
     qandasIntroText: "Сіздің сұрақтарыңызға жылдам жауаптар",
+    seo_static_title_home: "Басты бет",
+    seo_static_desc_home:
+      "ZhKKh24 порталындағы соңғы жаңалықтар, мақалалар, блогтар және іс-шаралар.",
+    seo_static_title_news: "Жаңалықтар",
+    seo_static_desc_news:
+      "Соңғы жаңалықтар, мақалалар, блогтар және іс-шаралар.",
+    seo_static_title_arts: "Сараптамалық мақалалар",
+    seo_static_desc_arts:
+      "Авторларымыздың терең зерттеулері, сарапшылардың пікірлері және маңызды тақырыптарға шолулар",
+    seo_static_title_blogs: "Автор блогтары",
+    seo_static_desc_blogs:
+      "Қауымдастығымыздың жеке пікірлері, әңгімелері және ойлары",
+    seo_static_title_events: "Іс-шаралар",
+    seo_static_desc_events:
+      "Конференциялар, көрмелер, кездесулер және басқа да іс-шаралар",
+    seo_static_title_qandas: "Сұрақтар мен жауаптар",
+    seo_static_desc_qandas: "Сіздің сұрақтарыңызға жылдам жауаптар",
   },
   en: {
     news: "News",
@@ -99,5 +131,19 @@ export const translations = {
     eventsIntroText: "Conferences, exhibitions, meetings, and other events",
     qandasIntro: "Questions and Answers",
     qandasIntroText: "Quick answers to your questions",
+    seo_static_title_home: "Home",
+    seo_static_desc_home:
+      "Actual news, articles, blogs and events on the portal ЖКХ24",
+    seo_static_title_arts: "Analytical articles",
+    seo_static_desc_arts:
+      "Deep research, expert insights, and key topic reviews from our authors",
+    seo_static_title_blogs: "Author Blogs",
+    seo_static_desc_blogs:
+      "Personal opinions, stories, and reflections from our community",
+    seo_static_title_events: "Events and Activities",
+    seo_static_desc_events:
+      "Conferences, exhibitions, meetings, and other events",
+    seo_static_title_qandas: "Questions and Answers",
+    seo_static_desc_qandas: "Quick answers to your questions",
   },
 };

@@ -11,17 +11,19 @@ import Ad from "../ad/Ad";
 import Trendings from "../trendings/Trendings";
 import EventsList from "../eventslist/EventsList";
 import SEO from "../SEO/SEO.jsx";
+import { useTranslation } from "../../utils/useTranslation.js";
 
 export default function Home() {
   const { locale } = useLocale();
   const [featuredId, setFeaturedId] = useState(null);
   const [featuredTag, setFeaturedTag] = useState(null);
+  const { t } = useTranslation(locale);
 
   return (
     <div className="home">
       <SEO
-        title="Главная"
-        description="Актуальные новости, статьи, блоги и события на портале Вестник"
+        title={t("seo_static_title_home")}
+        description={t("seo_static_desc_home")}
       />
 
       <div className="wrapper">

@@ -14,7 +14,7 @@ export default function SEO({
   const { pathname } = useLocation();
   const lang = locale.split("-")[0];
 
-  const siteName = "Вестник";
+  const siteName = "ЖКХ24";
   const baseUrl = "https://hcs-eight.vercel.app";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const defaultDescription =

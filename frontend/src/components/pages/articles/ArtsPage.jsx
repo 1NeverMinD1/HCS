@@ -23,8 +23,8 @@ export default function ArtsPage() {
   return (
     <div className="artspage wrapper">
       <SEO
-        title="Аналитические статьи"
-        description="Глубокие исследования, экспертные мнения и обзоры ключевых тем от наших авторов"
+        title={t("seo_static_title_arts")}
+        description={t("seo_static_desc_arts")}
       />
       <h2 className="artspage__title">{t("artsIntro")}</h2>
       <p className="artspage__intro">{t("artsIntroText")}</p>

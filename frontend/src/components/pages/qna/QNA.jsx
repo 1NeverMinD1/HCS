@@ -22,8 +22,8 @@ export default function QNA() {
   return (
     <div className="qnaspage wrapper">
       <SEO
-        title="Вопросы и ответы"
-        description="Быстрые ответы на интересующие вопросы"
+        title={t("seo_static_title_qandas")}
+        description={t("seo_static_desc_qandas")}
       />
       <h2 className="qnaspage__title">{t("qandasIntro")}</h2>
       <p className="qnaspage__intro">{t("qandasIntroText")}</p>

@@ -22,8 +22,8 @@ export default function EventsPage() {
   return (
     <div className="eventspage wrapper">
       <SEO
-        title="События и мероприятия"
-        description="Конференции, выставки, встречи и другие события"
+        title={t("seo_static_title_events")}
+        description={t("seo_static_desc_events")}
       />
       <h2 className="eventspage__title">{t("eventsIntro")}</h2>
       <p className="eventspage__intro">{t("eventsIntroText")}</p>

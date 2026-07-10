@@ -57,8 +57,8 @@ export default function NewsPage() {
   return (
     <div className="newspage wrapper">
       <SEO
-        title={title}
-        description="Актуальные новости и события на портале Вестник"
+        title={t("seo_static_title_news")}
+        description={t("seo_static_desc_news")}
       />
       <h1 className="newspage__title">{title}</h1>
 

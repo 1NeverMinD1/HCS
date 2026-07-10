@@ -83,15 +83,21 @@ export default function EventsContent() {
   return (
     <div className="eventscontent__layout">
       <SEO
-        title={events.seo_title || getLangField(events, "title", locale)}
-        description={events.seo_desc || getLangField(events, "desc", locale)}
-        image={
-          events.seo_image?.formats?.large?.url ||
-          events.seo_image?.url ||
-          events.desc_img?.formats?.large?.url ||
-          events.desc_img?.formats?.medium?.url ||
-          events.desc_img?.url
+        title={
+          getLangField(events.SEO, "seo_title", locale) ||
+          getLangField(events, "title", locale)
         }
+        description={
+          getLangField(events.SEO, "seo_desc", locale) ||
+          getLangField(events, "desc", locale)
+        }
+        image={getImageUrl(
+          events.SEO?.seo_image?.formats?.large?.url ||
+            events.SEO?.seo_image?.url ||
+            events.desc_img?.formats?.large?.url ||
+            events.desc_img?.formats?.medium?.url ||
+            events.desc_img?.url,
+        )}
         type="article"
       />
       <div className="eventscontent wrapper">

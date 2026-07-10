@@ -20,8 +20,8 @@ export default function BlogsPage() {
   return (
     <div className="blogspage wrapper">
       <SEO
-        title="Авторские блоги"
-        description="Личные мнения, истории и размышления от нашего сообщества"
+        title={t("seo_static_title_blogs")}
+        description={t("seo_static_desc_blogs")}
       />
       <h2 className="blogspage__title">{t("blogsIntro")}</h2>
       <p className="blogspage__intro">{t("blogsIntroText")}</p>
