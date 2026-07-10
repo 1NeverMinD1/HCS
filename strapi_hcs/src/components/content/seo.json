@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_content_seos",
+  "info": {
+    "displayName": "SEO"
+  },
+  "options": {},
+  "attributes": {
+    "seo_title_ru": {
+      "type": "string"
+    },
+    "seo_desc_ru": {
+      "type": "string"
+    },
+    "seo_title_kk": {
+      "type": "string"
+    },
+    "seo_desc_kk": {
+      "type": "string"
+    },
+    "seo_title_en": {
+      "type": "string"
+    },
+    "seo_desc_en": {
+      "type": "string"
+    },
+    "seo_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -498,9 +498,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    seo_desc: Schema.Attribute.Text;
-    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    seo_title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
@@ -551,9 +549,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     position_ru: Schema.Attribute.String & Schema.Attribute.Required;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    seo_desc: Schema.Attribute.Text;
-    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    seo_title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
@@ -638,9 +634,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    seo_desc: Schema.Attribute.Text;
-    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    seo_title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'name_ru'>;
     start: Schema.Attribute.DateTime & Schema.Attribute.Required;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
@@ -718,9 +712,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     main: Schema.Attribute.Boolean;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    seo_desc: Schema.Attribute.Text;
-    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    seo_title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;
@@ -761,9 +753,7 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    seo_desc: Schema.Attribute.Text;
-    seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    seo_title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title_en: Schema.Attribute.String;

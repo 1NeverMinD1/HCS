@@ -47,21 +47,10 @@
       "target": "api::category.category",
       "mappedBy": "qnas"
     },
-    "seo_title": {
-      "type": "string"
-    },
-    "seo_desc": {
-      "type": "text"
-    },
-    "seo_image": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "SEO": {
+      "type": "component",
+      "component": "content.seo",
+      "repeatable": false
     },
     "slug": {
       "type": "uid",

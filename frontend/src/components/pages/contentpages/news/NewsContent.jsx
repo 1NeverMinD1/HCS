@@ -153,13 +153,13 @@ export default function NewsContent() {
         description={
           mainItem.seo_desc || getLangField(mainItem, "desc", locale)
         }
-        image={
+        image={getImageUrl(
           mainItem.seo_image?.formats?.large?.url ||
-          mainItem.seo_image?.url ||
-          mainItem.desc_img?.formats?.large?.url ||
-          mainItem.desc_img?.formats?.medium?.url ||
-          mainItem.desc_img?.url
-        }
+            mainItem.seo_image?.url ||
+            mainItem.desc_img?.formats?.large?.url ||
+            mainItem.desc_img?.formats?.medium?.url ||
+            mainItem.desc_img?.url,
+        )}
         type="article"
       />
 
