@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { slugify } from "../../../../../utils/slugify.js";
+import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
 export default function BlogsPageFirstBlock({ blog }) {
   if (!blog) return null;
@@ -11,14 +12,16 @@ export default function BlogsPageFirstBlock({ blog }) {
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
 
-  const imageUrl =
+  const imageUrl = getImageUrl(
     blog.desc_img?.formats?.medium?.url ||
-    blog.desc_img?.formats?.small?.url ||
-    blog.desc_img?.url;
-  const firstBlockImg =
+      blog.desc_img?.formats?.small?.url ||
+      blog.desc_img?.url,
+  );
+  const firstBlockImg = getImageUrl(
     blog.back_img?.formats?.medium?.url ||
-    blog.back_img?.formats?.small?.url ||
-    blog.back_img?.url;
+      blog.back_img?.formats?.small?.url ||
+      blog.back_img?.url,
+  );
 
   return (
     <Link

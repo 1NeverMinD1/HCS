@@ -5,6 +5,7 @@ import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -23,7 +24,7 @@ function renderBlock(block, i) {
       return (
         <img
           key={i}
-          src={block.image.url}
+          src={getImageUrl(block.image.url)}
           alt={block.image.alternativeText || ""}
         />
       );
@@ -74,10 +75,11 @@ export default function EventsContent() {
       minute: "2-digit",
     });
 
-  const imgUrl =
+  const imgUrl = getImageUrl(
     events.desc_img?.formats?.large?.url ||
-    events.desc_img?.formats?.medium?.url ||
-    events.desc_img?.url;
+      events.desc_img?.formats?.medium?.url ||
+      events.desc_img?.url,
+  );
   return (
     <div className="eventscontent__layout">
       <SEO

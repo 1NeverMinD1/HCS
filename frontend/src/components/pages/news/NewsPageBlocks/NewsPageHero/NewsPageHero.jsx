@@ -3,16 +3,18 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
+import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
 export default function NewsPageHero({ news }) {
   const { locale } = useLocale();
   const title = getLangField(news, "title", locale);
   const desc = getLangField(news, "desc", locale);
   const { t } = useTranslation();
-  const latestNewsImage =
+  const latestNewsImage = getImageUrl(
     news.desc_img?.formats?.medium?.url ||
-    news.desc_img?.formats?.small?.url ||
-    news.desc_img?.url;
+      news.desc_img?.formats?.small?.url ||
+      news.desc_img?.url,
+  );
 
   const latestNewsCategory = getLangField(
     news?.header_cats?.[0],

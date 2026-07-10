@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
+import { getImageUrl } from "../../utils/getImageUrl.js";
 
 export default function Trendings() {
   const [news, setNews] = useState([]);
@@ -32,8 +33,9 @@ export default function Trendings() {
       <h2 className="trendings__title">{t("latestNews")}</h2>
       <div className="trendings__list">
         {news.map((item) => {
-          const imgUrl =
-            item.desc_img?.formats?.thumbnail?.url || item.desc_img?.url;
+          const imgUrl = getImageUrl(
+            item.desc_img?.formats?.thumbnail?.url || item.desc_img?.url,
+          );
           const title = getLangField(item, "title", locale);
           return (
             <Link

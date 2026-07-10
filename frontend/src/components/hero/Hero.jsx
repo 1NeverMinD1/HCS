@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
+import { getImageUrl } from "../../utils/getImageUrl.js";
 
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
@@ -25,11 +26,7 @@ export default function Hero({ onLoadFeatured }) {
 
   if (!featured) return null;
 
-  const imageUrl = featured?.desc_img?.url
-    ? featured.desc_img.url.startsWith("http")
-      ? featured.desc_img.url
-      : `https://api.zhkh24.kz${featured.desc_img.url}`
-    : "";
+  const imageUrl = getImageUrl(featured?.desc_img?.url) || "";
 
   const category = getLangField(featured?.header_cats?.[0], "name", locale);
   const title = getLangField(featured, "title", locale);

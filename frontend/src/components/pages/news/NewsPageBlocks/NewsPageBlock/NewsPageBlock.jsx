@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
 export default function NewsPageBlock({ item }) {
   const { locale } = useLocale();
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
 
-  const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
+  const imgUrl = getImageUrl(
+    item.desc_img?.formats?.small?.url || item.desc_img?.url,
+  );
 
   const category = getLangField(item?.header_cats?.[0], "name", locale);
 

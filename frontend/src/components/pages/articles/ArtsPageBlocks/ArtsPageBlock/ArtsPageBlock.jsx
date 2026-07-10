@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
+import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
 export default function ArtsPageBlock({ item, index }) {
   const { locale } = useLocale();
@@ -9,10 +10,11 @@ export default function ArtsPageBlock({ item, index }) {
   const desc = getLangField(item, "desc", locale);
   if (!item) return null;
 
-  const imgUrl =
+  const imgUrl = getImageUrl(
     item.desc_img?.formats?.small?.url ||
-    item.desc_img?.formats?.medium?.url ||
-    item.desc_img?.url;
+      item.desc_img?.formats?.medium?.url ||
+      item.desc_img?.url,
+  );
 
   const category = getLangField(item?.categories?.[0], "name", locale);
 

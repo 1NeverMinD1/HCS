@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
+import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
 export default function ArticlesFirstBlock({ article }) {
   const { locale } = useLocale();
 
-  const imgUrl =
+  const imgUrl = getImageUrl(
     article.desc_img?.formats?.small?.url ||
-    article.desc_img?.formats?.medium?.url ||
-    article.desc_img?.url;
+      article.desc_img?.formats?.medium?.url ||
+      article.desc_img?.url,
+  );
 
   const title = getLangField(article, "title", locale);
 

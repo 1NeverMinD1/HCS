@@ -5,6 +5,7 @@ import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -23,7 +24,7 @@ function renderBlock(block, i) {
       return (
         <img
           key={i}
-          src={block.image.url}
+          src={getImageUrl(block.image.url)}
           alt={block.image.alternativeText || ""}
         />
       );
@@ -44,7 +45,9 @@ function renderBlock(block, i) {
 function ArticleItem({ item, isFirst }) {
   const { locale } = useLocale();
   const date = new Date(item.publishDate);
-  const imgUrl = item.desc_img?.formats?.small?.url || item.desc_img?.url;
+  const imgUrl = getImageUrl(
+    item.desc_img?.formats?.small?.url || item.desc_img?.url,
+  );
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];

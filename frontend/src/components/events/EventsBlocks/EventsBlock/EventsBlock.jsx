@@ -3,13 +3,15 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
+import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 export default function EventsBlock({ event }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
 
-  const imageUrl =
-    event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "";
+  const imageUrl = getImageUrl(
+    event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "",
+  );
 
   const name = getLangField(event, "name", locale);
   const desc = getLangField(event, "desc", locale);

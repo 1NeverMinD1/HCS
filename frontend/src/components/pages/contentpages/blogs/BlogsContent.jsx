@@ -5,6 +5,7 @@ import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
+import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 function renderBlock(block, i) {
   switch (block.type) {
@@ -23,7 +24,7 @@ function renderBlock(block, i) {
       return (
         <img
           key={i}
-          src={block.image.url}
+          src={getImageUrl(block.image.url)}
           alt={block.image.alternativeText || ""}
         />
       );
@@ -64,10 +65,11 @@ export default function BlogsContent() {
 
   const date = new Date(blogs.publishDate);
 
-  const imgUrl =
+  const imgUrl = getImageUrl(
     blogs.back_img?.formats?.large?.url ||
-    blogs.back_img?.formats?.medium?.url ||
-    blogs.back_img?.url;
+      blogs.back_img?.formats?.medium?.url ||
+      blogs.back_img?.url,
+  );
 
   const profImg = blogs?.desc_img?.url || "";
 

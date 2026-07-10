@@ -5,6 +5,7 @@ import SEO from "../../../SEO/SEO.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 const BLOCK_CONFIG = {
   "Краткий ответ": {
@@ -61,7 +62,6 @@ const PRACTICE_ICON = (
   </svg>
 );
 
-// Достаёт кодовое слово и текст из параграфа вида ("Краткий ответ") текст...
 function parseCodeWord(rawText) {
   const match = rawText.match(/^\(\s*["«](.+?)["»]\s*\)\s*(.*)/s);
   if (!match) return null;

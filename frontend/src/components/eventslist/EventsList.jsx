@@ -5,6 +5,7 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
+import { getImageUrl } from "../../utils/getImageUrl.js";
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -54,11 +55,11 @@ export default function EventsList() {
             <div className="item__intro">
               <div className="img-wrapper">
                 <img
-                  src={
+                  src={getImageUrl(
                     event?.desc_img?.formats?.medium?.url ||
-                    event?.desc_img?.url ||
-                    ""
-                  }
+                      event?.desc_img?.url ||
+                      "",
+                  )}
                   alt="back_img"
                 />
               </div>

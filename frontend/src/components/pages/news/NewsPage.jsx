@@ -23,7 +23,7 @@ export default function NewsPage() {
     if (isMain) {
       url = `https://api.zhkh24.kz/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc`;
     } else if (id) {
-      url = `https://api.zhkh24.kz/api/news?filters[categories][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
+      url = `https://api.zhkh24.kz/api/news?filters[header_cats][id][$eq]=${id}&populate=*&sort=publishDate:desc`;
     } else {
       url = `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc`;
     }
@@ -34,7 +34,7 @@ export default function NewsPage() {
         setNews(data.data || []);
 
         if (id && data.data?.length > 0) {
-          const cat = data.data[0].categories?.find(
+          const cat = data.data[0].header_cats?.find(
             (c) => String(c.id) === String(id),
           );
           setCategoryName(cat?.name || null);
