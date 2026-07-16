@@ -15,7 +15,7 @@ export default function SEO({
   const lang = locale.split("-")[0];
 
   const siteName = "ЖКХ24";
-  const baseUrl = "https://hcs-eight.vercel.app";
+  const baseUrl = "https://zhkh24.kz";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const defaultDescription =
     "Современный новостной портал с актуальными новостями, аналитикой и авторскими материалами.";
