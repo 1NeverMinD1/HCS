@@ -19,20 +19,29 @@ jobs:
 
           timeout: 30m
           command_timeout: 30m
-
           script: |
             set -e
+
+            echo "=== START ==="
 
             cd /var/www/project
             git pull
 
-            # Backend
+            echo "=== STRAPI INSTALL ==="
             cd strapi_hcs
             npm install
+
+            echo "=== STRAPI BUILD ==="
             npm run build
+
+            echo "=== RESTART STRAPI ==="
             pm2 reload strapi
 
-            # Frontend
+            echo "=== FRONTEND INSTALL ==="
             cd ../frontend
             npm install
+
+            echo "=== FRONTEND BUILD ==="
             npm run build
+
+            echo "=== DONE ==="
