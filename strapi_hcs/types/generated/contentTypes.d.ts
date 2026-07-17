@@ -496,6 +496,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
+    OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
@@ -544,6 +545,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
+    OG: Schema.Attribute.Component<'content.og', false>;
     position_en: Schema.Attribute.String;
     position_kk: Schema.Attribute.String;
     position_ru: Schema.Attribute.String & Schema.Attribute.Required;
@@ -629,6 +631,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     name_en: Schema.Attribute.String;
     name_kk: Schema.Attribute.String;
     name_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    OG: Schema.Attribute.Component<'content.og', false>;
     place_en: Schema.Attribute.String;
     place_kk: Schema.Attribute.String;
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
@@ -710,6 +713,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::new.new'> &
       Schema.Attribute.Private;
     main: Schema.Attribute.Boolean;
+    OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
@@ -751,6 +755,7 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
       'api::q-and-a.q-and-a'
     > &
       Schema.Attribute.Private;
+    OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;

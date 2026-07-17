@@ -95,6 +95,11 @@
       "component": "content.seo",
       "repeatable": false
     },
+    "OG": {
+      "type": "component",
+      "component": "content.og",
+      "repeatable": false
+    },
     "slug": {
       "type": "uid",
       "targetField": "name_ru"
