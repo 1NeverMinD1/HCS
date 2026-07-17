@@ -26,6 +26,9 @@ export interface ContentSeo extends Struct.ComponentSchema {
     seo_desc_kk: Schema.Attribute.String;
     seo_desc_ru: Schema.Attribute.String;
     seo_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    seo_keywords_en: Schema.Attribute.Text;
+    seo_keywords_kk: Schema.Attribute.Text;
+    seo_keywords_ru: Schema.Attribute.Text;
     seo_title_en: Schema.Attribute.String;
     seo_title_kk: Schema.Attribute.String;
     seo_title_ru: Schema.Attribute.String;

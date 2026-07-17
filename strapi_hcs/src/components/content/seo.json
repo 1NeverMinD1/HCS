@@ -23,6 +23,15 @@
     "seo_desc_en": {
       "type": "string"
     },
+    "seo_keywords_ru": {
+      "type": "text"
+    },
+    "seo_keywords_kk": {
+      "type": "text"
+    },
+    "seo_keywords_en": {
+      "type": "text"
+    },
     "seo_image": {
       "type": "media",
       "multiple": false,
