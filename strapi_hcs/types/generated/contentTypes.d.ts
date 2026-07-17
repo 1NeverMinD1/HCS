@@ -635,7 +635,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_en: Schema.Attribute.String;
     place_kk: Schema.Attribute.String;
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.Integer & Schema.Attribute.Required;
+    price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'name_ru'>;

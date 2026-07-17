@@ -36,8 +36,11 @@ export default function EventsPageBlock({ event }) {
             <p>
               {formatLocalizedDate(event.start, locale)}
               {event.end ? ` — ${formatLocalizedDate(event.end, locale)}` : ""}
+              {event.start_time
+                ? `, ${event.start_time.slice(0, 5)}`
+                : ", время не указано"}
             </p>
-          </div>
+          </div>{" "}
           <div className="place">
             <svg
               fill="#000000"

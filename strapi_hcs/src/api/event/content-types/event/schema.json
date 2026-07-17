@@ -58,7 +58,7 @@
     },
     "price": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "desc_img": {
       "type": "media",
