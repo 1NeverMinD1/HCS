@@ -51,7 +51,6 @@ export default function EventsContent() {
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
-  const imgUrl = getImageUrl(events?.desc_img?.formats?.large?.url);
 
   useEffect(() => {
     fetch(
