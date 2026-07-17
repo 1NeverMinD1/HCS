@@ -51,6 +51,7 @@ export default function EventsContent() {
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
+  const imgUrl = getImageUrl(events?.desc_img?.formats?.large?.url);
 
   useEffect(() => {
     fetch(
@@ -74,6 +75,12 @@ export default function EventsContent() {
       hour: "2-digit",
       minute: "2-digit",
     });
+
+  const imgUrl = getImageUrl(
+    events.desc_img?.formats?.large?.url ||
+      events.desc_img?.formats?.medium?.url ||
+      events.desc_img?.url,
+  );
 
   return (
     <div className="eventscontent__layout">
