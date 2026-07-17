@@ -75,25 +75,16 @@ export default function EventsContent() {
       minute: "2-digit",
     });
 
-  const imgUrl = getImageUrl(
-    events.desc_img?.formats?.large?.url ||
-      events.desc_img?.formats?.medium?.url ||
-      events.desc_img?.url,
-  );
   return (
     <div className="eventscontent__layout">
       <SEO
-        title={
-          getLangField(events.SEO, "seo_title", locale) ||
-          getLangField(events, "title", locale)
-        }
-        description={
-          getLangField(events.SEO, "seo_desc", locale) ||
-          getLangField(events, "desc", locale)
-        }
+        seo={events.SEO}
+        og={events.OG}
+        title={getLangField(events, "title", locale)}
+        description={getLangField(events, "desc", locale)}
         image={getImageUrl(
-          events.SEO?.seo_image?.formats?.large?.url ||
-            events.SEO?.seo_image?.url ||
+          events.OG?.og_image?.formats?.large?.url ||
+            events.OG?.og_image?.url ||
             events.desc_img?.formats?.large?.url ||
             events.desc_img?.formats?.medium?.url ||
             events.desc_img?.url,

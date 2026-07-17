@@ -76,20 +76,16 @@ export default function BlogsContent() {
   return (
     <div className="blogscontent__layout">
       <SEO
-        title={
-          getLangField(blogs.SEO, "seo_title", locale) ||
-          getLangField(blogs, "title", locale)
-        }
-        description={
-          getLangField(blogs.SEO, "seo_desc", locale) ||
-          getLangField(blogs, "desc", locale)
-        }
+        seo={blogs.SEO}
+        og={blogs.OG}
+        title={getLangField(blogs, "title", locale)}
+        description={getLangField(blogs, "desc", locale)}
         image={getImageUrl(
-          blogs.SEO?.seo_image?.formats?.large?.url ||
-            blogs.SEO?.seo_image?.url ||
-            blogs.desc_img?.formats?.large?.url ||
-            blogs.desc_img?.formats?.medium?.url ||
-            blogs.desc_img?.url,
+          blogs.OG?.og_image?.formats?.large?.url ||
+            blogs.OG?.og_image?.url ||
+            blogs.back_img?.formats?.large?.url ||
+            blogs.back_img?.formats?.medium?.url ||
+            blogs.back_img?.url,
         )}
         type="article"
       />

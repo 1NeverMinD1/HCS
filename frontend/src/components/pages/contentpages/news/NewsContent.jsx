@@ -149,24 +149,19 @@ export default function NewsContent() {
   return (
     <div className="newscontent__layout">
       <SEO
-        title={
-          getLangField(mainItem.SEO, "seo_title", locale) ||
-          getLangField(mainItem, "title", locale)
-        }
-        description={
-          getLangField(mainItem.SEO, "seo_desc", locale) ||
-          getLangField(mainItem, "desc", locale)
-        }
+        seo={mainItem.SEO}
+        og={mainItem.OG}
+        title={getLangField(mainItem, "title", locale)}
+        description={getLangField(mainItem, "desc", locale)}
         image={getImageUrl(
-          mainItem.SEO?.seo_image?.formats?.large?.url ||
-            mainItem.SEO?.seo_image?.url ||
+          mainItem.OG?.og_image?.formats?.large?.url ||
+            mainItem.OG?.og_image?.url ||
             mainItem.desc_img?.formats?.large?.url ||
             mainItem.desc_img?.formats?.medium?.url ||
             mainItem.desc_img?.url,
         )}
         type="article"
       />
-
       <div className="newscontent__layout-main">
         {newsList.map((item, index) => (
           <NewsItem key={item.id} item={item} isFirst={index === 0} />

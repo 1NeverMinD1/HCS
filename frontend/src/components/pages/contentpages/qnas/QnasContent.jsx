@@ -139,14 +139,13 @@ export default function QnasContent() {
   return (
     <div className="qnascontent wrapper">
       <SEO
-        title={
-          getLangField(qnas.SEO, "seo_title", locale) ||
-          getLangField(qnas, "title", locale)
-        }
-        description={getLangField(qnas.SEO, "seo_desc", locale) || title}
+        seo={qnas.SEO}
+        og={qnas.OG}
+        title={getLangField(qnas, "title", locale)}
+        description={getLangField(qnas, "desc", locale)}
         image={getImageUrl(
-          qnas.SEO?.seo_image?.formats?.large?.url ||
-            qnas.SEO?.seo_image?.url ||
+          qnas.OG?.og_image?.formats?.large?.url ||
+            qnas.OG?.og_image?.url ||
             qnas.desc_img?.formats?.large?.url ||
             qnas.desc_img?.formats?.medium?.url ||
             qnas.desc_img?.url,
