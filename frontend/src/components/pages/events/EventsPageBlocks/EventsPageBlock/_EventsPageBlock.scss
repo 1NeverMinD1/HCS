@@ -17,13 +17,15 @@
     cursor: pointer;
   }
   img {
-    width: 50%;
+    width: 35%;
     height: 100%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     object-fit: cover;
+    flex-shrink: 0;
   }
   .eventspage__content {
+    width: 65%;
     display: flex;
     flex-direction: column;
     margin-block: 20px;
