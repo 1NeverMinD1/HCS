@@ -11,7 +11,7 @@ export default function EventsPage() {
   const { t } = useTranslation(locale);
 
   useEffect(() => {
-    fetch(`https://api.zhkh24.kz/api/events?populate=*`)
+    fetch(`https://api.zhkh24.kz/api/events?populate=*&sort=start:desc`)
       .then((res) => res.json())
       .then((data) => {
         setEvents(data.data || []);

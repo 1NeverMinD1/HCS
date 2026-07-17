@@ -72,10 +72,10 @@
     .blogs__block-content {
       .blogs__block-header {
         .author {
-          font-size: variables.$mobile-subtitle-font-size;
+          font-size: variables.$mobile-text-font-size;
         }
         .spec {
-          font-size: variables.$mobile-text-font-size;
+          font-size: variables.$mobile-text-font-size - 2px;
         }
       }
       .blogs__block-info {

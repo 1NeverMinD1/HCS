@@ -624,7 +624,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required;
     desc_kk: Schema.Attribute.Text;
     desc_ru: Schema.Attribute.String & Schema.Attribute.Required;
-    end: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    end: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -639,7 +639,8 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'name_ru'>;
-    start: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    start: Schema.Attribute.Date & Schema.Attribute.Required;
+    start_time: Schema.Attribute.Time;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

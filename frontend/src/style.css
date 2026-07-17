@@ -647,6 +647,9 @@
     -o-object-position: 30% 100%;
        object-position: 30% 100%;
   }
+  .articles__block .articles__block-content {
+    padding: 5px;
+  }
   .articles__block .articles__block-content .articles__block-cat {
     margin-left: 0px;
     font-size: 14px;
@@ -723,6 +726,9 @@
     height: 100%;
     -o-object-position: 50% 100%;
        object-position: 50% 100%;
+  }
+  .articles__first-block .articles__first-content {
+    padding: 5px;
   }
   .articles__first-block .articles__first-content .articles__first-cat {
     font-size: 14px;
@@ -835,10 +841,10 @@
     height: 250px;
   }
   .blogs__block .blogs__block-content .blogs__block-header .author {
-    font-size: 18px;
+    font-size: 16px;
   }
   .blogs__block .blogs__block-content .blogs__block-header .spec {
-    font-size: 16px;
+    font-size: 14px;
   }
   .blogs__block .blogs__block-content .blogs__block-info .blogs__block-title {
     font-size: 18px;
@@ -2437,6 +2443,7 @@
     display: none;
   }
   .eventspage__item .eventspage__content {
+    width: 100%;
     padding: 20px 10px;
     margin-block: 0px;
     justify-content: space-between;
@@ -2620,6 +2627,69 @@
   content: "#";
 }
 
+@media (max-width: 430px) {
+  .qnascontent {
+    width: 100%;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-header {
+    padding: 10px 15px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-header .question_ico {
+    font-size: 16px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-header h1 {
+    font-size: 18px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text {
+    padding: 5px 10px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-short-block {
+    margin-block: 10px;
+    padding: 10px;
+    gap: 5px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-short-block p {
+    font-size: 18px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-short-block .short_answer {
+    font-size: 16px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-practice-block .galochka {
+    width: 20px;
+    height: 20px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-practice-block .practice_p {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-practice {
+    margin-bottom: 20px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-practice li {
+    gap: 10px;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(71, 71, 71);
+    margin-bottom: 10px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-practice li::before {
+    width: 8px;
+    height: 8px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-zakon-block .qnascontent__main-zakon-block-intro .molotok {
+    width: 20px;
+    height: 20px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-zakon-block .qnascontent__main-zakon-block-intro .zakon_p {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .qnascontent .qnascontent__main .qnascontent__main-text .qnascontent__main-zakon-block .zakon {
+    width: 100%;
+    font-size: 16px;
+    line-height: 200%;
+  }
+}
 .newscontent__layout {
   display: flex;
   margin-top: 40px;

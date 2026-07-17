@@ -32,12 +32,15 @@
       "type": "text"
     },
     "start": {
-      "type": "datetime",
+      "type": "date",
       "required": true
     },
     "end": {
-      "type": "datetime",
-      "required": true
+      "type": "date",
+      "required": false
+    },
+    "start_time": {
+      "type": "time"
     },
     "place_ru": {
       "type": "string",
