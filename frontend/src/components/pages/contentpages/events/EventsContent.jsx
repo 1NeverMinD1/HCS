@@ -69,11 +69,8 @@ export default function EventsContent() {
       year: "numeric",
     });
 
-  const formatTime = (dateStr) =>
-    new Date(dateStr).toLocaleTimeString("ru-RU", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  const isSameDay = (a, b) =>
+    a && b && new Date(a).toDateString() === new Date(b).toDateString();
 
   const imgUrl = getImageUrl(
     events.desc_img?.formats?.large?.url ||
@@ -119,7 +116,9 @@ export default function EventsContent() {
                 <p>Дата проведения</p>
                 <p className="text">
                   {formatDate(events.start)}
-                  {events.end ? ` — ${formatDate(events.end)}` : ""}
+                  {events.end && !isSameDay(events.start, events.end)
+                    ? ` — ${formatDate(events.end)}`
+                    : ""}
                 </p>
               </div>
             </div>
@@ -130,8 +129,9 @@ export default function EventsContent() {
               <div className="info">
                 <p>Время</p>
                 <p className="text">
-                  {formatTime(events.start)}
-                  {events.end ? ` — ${formatTime(events.end)}` : ""}
+                  {events.start_time
+                    ? events.start_time.slice(0, 5)
+                    : "Не указано"}
                 </p>
               </div>
             </div>

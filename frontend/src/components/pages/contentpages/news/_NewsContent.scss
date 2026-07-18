@@ -275,15 +275,20 @@
             width: 100%;
           }
           ul {
+            font-weight: bold;
             li {
+              font-size: variables.$mobile-text-font-size;
               text-indent: 10px;
             }
           }
           ol {
-            padding-left: 10px;
-            // ИЗМЕНИТЬ СПИСОК
+            list-style: none;
+            counter-reset: my-counter;
+            padding-left: 30px;
             li {
-              padding-left: 20px;
+              counter-increment: my-counter;
+              position: relative;
+              padding-left: 40px;
               line-height: 140%;
               &::before {
                 content: counter(my-counter);
@@ -304,9 +309,7 @@
           }
           ul,
           ol {
-            font-size: 20px;
-            display: flex;
-            flex-direction: column;
+            font-size: variables.$mobile-text-font-size + 2px;
             gap: 10px;
           }
           h1,
@@ -315,41 +318,34 @@
           h4,
           h5,
           h6 {
-            margin-left: 40px;
+            margin-left: 10px;
             width: fit-content;
-            &::after {
-              content: "";
-              display: block;
-              width: 100%;
-              height: 2px;
-              background: variables.$hover-color;
-              margin-top: 5px;
-            }
+          }
+          h1 {
+            font-size: variables.$mobile-title-font-size;
+          }
+          h2 {
+            font-size: variables.$mobile-title-font-size - 2px;
           }
           h3 {
-            font-size: 30px;
+            font-size: variables.$mobile-title-font-size - 4px;
           }
           h4 {
-            font-size: 25px;
+            font-size: variables.$mobile-title-font-size - 6px;
           }
           h5 {
-            font-size: 20px;
+            font-size: variables.$mobile-title-font-size - 8px;
           }
           h6 {
-            font-size: 15px;
+            font-size: variables.$mobile-title-font-size - 10px;
           }
         }
         .newscontent__tags {
+          display: flex;
+          gap: 10px;
           margin-top: 10px;
           p {
-            background: variables.$primary-color;
-            width: fit-content;
-            padding: 5px;
-            color: white;
-            border-radius: 5px;
-            &::before {
-              content: "#";
-            }
+            font-size: variables.$mobile-text-font-size - 2px;
           }
         }
       }

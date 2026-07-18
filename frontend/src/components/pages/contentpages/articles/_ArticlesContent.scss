@@ -193,3 +193,158 @@
     margin-bottom: 60px;
   }
 }
+
+@media (max-width: 430px) {
+  .artscontent__layout {
+    display: flex;
+    margin-top: 0px;
+    margin-inline: 10px;
+    .artscontent__layout-main {
+      width: 100%;
+      .artscontent {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+        .back {
+          color: black;
+          font-size: variables.$mobile-text-font-size;
+          margin-block: 10px;
+          padding: 5px;
+        }
+
+        .artscontent__header {
+          gap: 0px;
+          flex-direction: column;
+          .artscontent__header-date {
+            p {
+              margin-bottom: 10px;
+              font-size: variables.$mobile-text-font-size;
+            }
+          }
+        }
+
+        .artscontent__title {
+          width: 100%;
+          text-indent: 0px;
+          font-size: variables.$mobile-title-font-size;
+        }
+
+        .artscontent__img {
+          width: 100%;
+        }
+
+        .artscontent__main {
+          gap: 10px;
+          p {
+            font-size: variables.$mobile-text-font-size;
+            text-indent: 10px;
+          }
+          // ИЗМЕНИТЬ СТИЛИ
+          blockquote {
+            margin-block: 20px;
+            background: variables.$hover-color;
+            padding: 30px;
+            padding-left: 50px;
+            width: 60%;
+            position: relative;
+            margin-left: 70px;
+            font-size: 20px;
+            text-indent: 20px;
+            line-height: 130%;
+            &::before {
+              content: "\201C";
+              position: absolute;
+              left: 10px;
+              top: 10px;
+              font-size: 70px;
+              color: variables.$primary-color;
+              font-family: Georgia, serif;
+            }
+          }
+          img {
+            margin-block: 20px;
+            width: 100%;
+          }
+          ul {
+            font-weight: bold;
+            li {
+              font-size: variables.$mobile-text-font-size;
+              text-indent: 10px;
+            }
+          }
+          ol {
+            list-style: none;
+            counter-reset: my-counter;
+            padding-left: 30px;
+            li {
+              counter-increment: my-counter;
+              position: relative;
+              padding-left: 40px;
+              line-height: 140%;
+              &::before {
+                content: counter(my-counter);
+                position: absolute;
+                left: 0;
+                width: 25px;
+                height: 25px;
+                background: variables.$hover-color;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: bold;
+              }
+            }
+          }
+          ul,
+          ol {
+            font-size: variables.$mobile-text-font-size + 2px;
+            gap: 10px;
+          }
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            margin-left: 10px;
+            width: fit-content;
+          }
+          h1 {
+            font-size: variables.$mobile-title-font-size;
+          }
+          h2 {
+            font-size: variables.$mobile-title-font-size - 2px;
+          }
+          h3 {
+            font-size: variables.$mobile-title-font-size - 4px;
+          }
+          h4 {
+            font-size: variables.$mobile-title-font-size - 6px;
+          }
+          h5 {
+            font-size: variables.$mobile-title-font-size - 8px;
+          }
+          h6 {
+            font-size: variables.$mobile-title-font-size - 10px;
+          }
+        }
+        .artscontent__tags {
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+          p {
+            font-size: variables.$mobile-text-font-size - 2px;
+          }
+        }
+      }
+    }
+
+    .artscontent__layout-sidemenu {
+      display: none;
+    }
+  }
+}

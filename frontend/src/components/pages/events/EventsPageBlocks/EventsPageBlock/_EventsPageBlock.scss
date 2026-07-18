@@ -80,6 +80,7 @@
       height: 20px;
       fill: variables.$primary-color;
       margin-right: 10px;
+      flex-shrink: 0;
     }
     .eventspage__item-more {
       display: flex;
@@ -109,18 +110,24 @@
 
 @media (max-width: 430px) {
   .eventspage__item {
-    height: 200px;
+    height: 375px;
     box-shadow:
       1px 1px 10px rgb(179, 179, 179),
       -1px 1px 10px rgb(179, 179, 179);
+    flex-direction: column;
     img {
-      display: none;
+      width: 100%;
+      height: 35%;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 10px;
     }
     .eventspage__content {
       width: 100%;
-      padding: 20px 10px;
+      height: 70%;
+      padding: 0px 10px 20px 10px;
       margin-block: 0px;
       justify-content: space-between;
+      gap: 5px;
       .eventspage__item-cat {
         margin-left: 10px;
         font-size: variables.$mobile-text-font-size - 2px;
@@ -132,11 +139,20 @@
         font-size: variables.$mobile-text-font-size;
       }
       .eventspage__item-footer {
-        display: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        .date,
+        .place {
+          align-items: center;
+        }
+        .amount {
+          display: none;
+        }
       }
       .eventspage__item-more {
         .eventspage__item-button {
-          margin-left: 10px;
+          margin-inline: auto;
+          width: 900%;
         }
         .price {
           display: none;

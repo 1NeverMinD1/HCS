@@ -234,6 +234,12 @@
         }
       }
       .qnascontent__tags {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        p {
+          font-size: variables.$mobile-text-font-size - 2px;
+        }
       }
     }
   }

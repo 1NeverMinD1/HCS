@@ -6,6 +6,9 @@ import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 
+const isSameDay = (a, b) =>
+  a && b && new Date(a).toDateString() === new Date(b).toDateString();
+
 export default function EventsPageBlock({ event }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
@@ -35,7 +38,9 @@ export default function EventsPageBlock({ event }) {
             </svg>
             <p>
               {formatLocalizedDate(event.start, locale)}
-              {event.end ? ` — ${formatLocalizedDate(event.end, locale)}` : ""}
+              {event.end && !isSameDay(event.start, event.end)
+                ? ` — ${formatLocalizedDate(event.end, locale)}`
+                : ""}
               {event.start_time
                 ? `, ${event.start_time.slice(0, 5)}`
                 : ", время не указано"}
