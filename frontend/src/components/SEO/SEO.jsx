@@ -36,11 +36,14 @@ export default function SEO({
   const ogTitle = getLangField(og, "og_title", locale);
   const ogDescription = getLangField(og, "og_desc", locale);
 
-  const ogImage = getImageUrl(
-    og?.og_image?.formats?.large?.url ||
-      og?.og_image?.formats?.medium?.url ||
-      og?.og_image?.url,
-  );
+  const ogImageData =
+    og?.og_image?.formats?.large ||
+    og?.og_image?.formats?.medium ||
+    og?.og_image;
+
+  const ogImage = getImageUrl(ogImageData?.url);
+  const ogImageWidth = ogImageData?.width;
+  const ogImageHeight = ogImageData?.height;
 
   const finalTitle = seoTitle || title || siteName;
   const fullTitle =
@@ -73,6 +76,12 @@ export default function SEO({
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
       <meta property="og:image" content={finalImage} />
+      {ogImageWidth && (
+        <meta property="og:image:width" content={ogImageWidth} />
+      )}
+      {ogImageHeight && (
+        <meta property="og:image:height" content={ogImageHeight} />
+      )}
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:locale" content={locale} />
