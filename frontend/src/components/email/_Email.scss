@@ -19,29 +19,38 @@
       margin-bottom: 10px;
     }
     h2 {
-      font-size: 30px;
+      font-size: variables.$subtitle-font-size;
       margin-bottom: 20px;
     }
     p {
       margin-bottom: 20px;
+      color: variables.$text-color;
     }
     .email__input-block {
       justify-content: center;
+      align-items: center;
       display: flex;
       width: 100%;
       gap: 20px;
+
+      .email_input,
+      .subscribe {
+        height: 44px;
+        box-sizing: border-box;
+      }
+
       .email_input {
-        padding-inline: 10px;
+        padding-inline: 15px;
         font-size: 16px;
         width: 25%;
-        border-radius: 0px;
+        border-radius: 10px;
         border: none;
         outline: none;
         background: white;
-        border-radius: 10px;
       }
       .subscribe {
-        width: object-fit;
+        padding-inline: 20px;
+        white-space: nowrap;
       }
     }
   }
@@ -51,10 +60,10 @@
   .email {
     .email__content {
       h2 {
-        font-size: 18px;
+        font-size: variables.$mobile-subtitle-font-size;
       }
       p {
-        font-size: 16px;
+        font-size: variables.$mobile-text-font-size;
       }
       .email__input-block {
         flex-direction: column;
@@ -64,7 +73,7 @@
           padding-block: 10px;
         }
         .subscribe {
-          font-size: 16px;
+          font-size: variables.$mobile-text-font-size;
         }
       }
     }
