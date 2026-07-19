@@ -17,7 +17,10 @@ export default function EventsPageBlock({ event }) {
   const place = getLangField(event, "place", locale);
 
   const imgUrl = getImageUrl(
-    event.desc_img?.formats?.small?.url ||
+    event.cover_img?.formats?.small?.url ||
+      event.cover_img?.formats?.medium?.url ||
+      event.cover_img?.url ||
+      event.desc_img?.formats?.small?.url ||
       event.desc_img?.formats?.medium?.url ||
       event.desc_img?.url,
   );

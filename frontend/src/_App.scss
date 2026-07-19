@@ -6,12 +6,18 @@
       display: flex;
       gap: 10px;
       .home__news-item {
-        width: 70%;
+        width: 79%;
+        display: flex;
+        flex-direction: column;
         .home__header {
           margin-top: 50px;
           height: 450px;
           display: flex;
           gap: 10px;
+          align-items: stretch;
+          &.home__header--no-ad .hero {
+            width: 100%;
+          }
         }
       }
     }

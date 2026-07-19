@@ -71,6 +71,16 @@
         "audios"
       ]
     },
+    "cover_img": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "content_ru": {
       "type": "blocks",
       "required": true

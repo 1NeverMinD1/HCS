@@ -13,9 +13,26 @@ export default function BlogsBlock({ blog }) {
   const position = getLangField(blog, "position", locale);
   const author = getLangField(blog, "author", locale);
 
+  const initials = author
+    ? author
+        .split(" ")
+        .map((word) => word[0])
+        .slice(0, 2)
+        .join("")
+        .toUpperCase()
+    : "?";
+
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogs__block">
-      <img src={imageUrl} alt="profile_photo" className="profile" />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={author || "profile_photo"}
+          className="profile"
+        />
+      ) : (
+        <div className="profile profile--fallback">{initials}</div>
+      )}
 
       <div className="blogs__block-content">
         <div className="blogs__block-header">

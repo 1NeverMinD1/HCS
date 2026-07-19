@@ -37,7 +37,7 @@ export default function EventsList() {
   return (
     <div className="home__arts-eventlist">
       <div className="home__arts-eventlist-nav">
-        <h2>{t("futureEvents")}</h2>
+        <h3>{t("futureEvents")}</h3>
         <Link to={`/${locale}/events`} className="see_all">
           {t("allEvents")}
         </Link>
@@ -56,7 +56,9 @@ export default function EventsList() {
               <div className="img-wrapper">
                 <img
                   src={getImageUrl(
-                    event?.desc_img?.formats?.medium?.url ||
+                    event?.cover_img?.formats?.medium?.url ||
+                      event?.cover_img?.url ||
+                      event?.desc_img?.formats?.medium?.url ||
                       event?.desc_img?.url ||
                       "",
                   )}

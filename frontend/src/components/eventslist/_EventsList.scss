@@ -1,7 +1,8 @@
 @use "../../variables";
 
 .home__arts-eventlist {
-  width: 30%;
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
   margin-top: 50px;
   height: 100%;
   padding: 20px 10px;
@@ -11,13 +12,13 @@
   border-radius: 10px;
   gap: 10px;
 
-  h2 {
+  h3 {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: variables.$text-font-size; // 3.3
   }
   .home__arts-eventlist-nav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: baseline;
     .see_all {
       text-decoration: none;
@@ -28,7 +29,6 @@
 
       &:hover {
         transition: 0.3s ease all;
-
         background: variables.$primary-color;
         color: white;
       }
@@ -98,7 +98,6 @@
         justify-content: flex-start;
         height: 30%;
         gap: 10px;
-        align-items: center;
         border-radius: 10px;
         svg {
           flex-shrink: 0;
@@ -107,7 +106,7 @@
           fill: black;
         }
         p {
-          font-size: 14px;
+          font-size: variables.$mobile-text-font-size;
         }
       }
       .item__about-date {
@@ -116,7 +115,7 @@
           flex-wrap: wrap;
           gap: 2px;
           p {
-            font-size: 14px;
+            font-size: variables.$mobile-text-font-size;
           }
         }
       }
@@ -127,7 +126,7 @@
     .home__arts-eventlist-content {
       margin-top: 10px;
       h3 {
-        font-size: 24px;
+        font-size: variables.$subtitle-font-size;
         color: black;
         display: -webkit-box;
         overflow: hidden;

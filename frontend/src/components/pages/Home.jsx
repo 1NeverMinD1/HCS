@@ -17,6 +17,7 @@ export default function Home() {
   const { locale } = useLocale();
   const [featuredId, setFeaturedId] = useState(null);
   const [featuredTag, setFeaturedTag] = useState(null);
+  const [hasAd, setHasAd] = useState(false);
   const { t } = useTranslation(locale);
 
   return (
@@ -29,14 +30,16 @@ export default function Home() {
       <div className="wrapper">
         <div className="home__news-block">
           <div className="home__news-item">
-            <div className="home__header">
+            <div
+              className={`home__header ${!hasAd ? "home__header--no-ad" : ""}`}
+            >
               <Hero
                 onLoadFeatured={(item) => {
                   setFeaturedId(item.id);
                   setFeaturedTag(item.categories?.[0]?.name || null);
                 }}
               />
-              <Ad />
+              <Ad hasAd={hasAd} />
             </div>
             <LatestNews featuredId={featuredId} />
           </div>

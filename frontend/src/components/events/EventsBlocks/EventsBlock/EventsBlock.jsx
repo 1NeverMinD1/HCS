@@ -10,7 +10,11 @@ export default function EventsBlock({ event }) {
   const { t } = useTranslation();
 
   const imageUrl = getImageUrl(
-    event?.desc_img?.formats?.medium?.url || event?.desc_img?.url || "",
+    event?.cover_img?.formats?.medium?.url ||
+      event?.cover_img?.url ||
+      event?.desc_img?.formats?.medium?.url ||
+      event?.desc_img?.url ||
+      "",
   );
 
   const name = getLangField(event, "name", locale);

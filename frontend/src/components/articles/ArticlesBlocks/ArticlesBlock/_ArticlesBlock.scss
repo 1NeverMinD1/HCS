@@ -1,13 +1,16 @@
 @use "../../../../variables";
 
 .articles__block {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: black;
   width: 100%;
-  height: 750px;
+  min-height: 480px;
   border-radius: 10px;
   transition: all 0.3s ease;
   overflow: hidden;
+
   &:hover {
     transition: all 0.3s ease;
     box-shadow: 0px 4px 10px rgb(179, 179, 179);
@@ -22,9 +25,12 @@
 
   .img_wrapper {
     width: 100%;
-    height: 30%;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
+    flex-shrink: 0;
     img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: 80% 30%;
       border-top-left-radius: 5px;
@@ -34,9 +40,9 @@
   }
 
   .articles__block-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 10px;
     gap: 10px;
 
@@ -45,9 +51,10 @@
       width: 100%;
     }
     .articles__block-title {
+      font-size: variables.$text-font-size;
       display: -webkit-box;
       overflow: hidden;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
     .articles__block-text {
@@ -57,31 +64,29 @@
       -webkit-box-orient: vertical;
       color: variables.$text-color;
     }
+    .articles__block-date {
+      margin-top: auto;
+      color: variables.$text-color;
+    }
   }
 }
 
 @media (max-width: 430px) {
   .articles__block {
-    height: 600px;
-    .img_wrapper {
-      img {
-        width: 100%;
-        height: 100%;
-        object-position: 30% 100%;
-      }
-    }
+    min-height: 400px;
     .articles__block-content {
       padding: 5px;
       .articles__block-cat {
         margin-left: 0px;
-        font-size: 14px;
+        font-size: variables.$mobile-text-font-size;
       }
       .articles__block-title {
-        -webkit-line-clamp: 4;
-        font-size: 18px;
+        -webkit-line-clamp: 2;
+        font-size: variables.$mobile-subtitle-font-size;
       }
       .articles__block-text {
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 3;
+        font-size: variables.$mobile-text-font-size;
       }
     }
   }

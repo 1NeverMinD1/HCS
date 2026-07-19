@@ -1,6 +1,7 @@
 .blogs__blocks {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
   gap: 30px;
 }
 

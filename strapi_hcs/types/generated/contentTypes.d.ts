@@ -616,6 +616,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    cover_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

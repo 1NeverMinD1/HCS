@@ -1,11 +1,18 @@
 .events__blocks {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 30px;
+  max-width: 900px;
+  margin-inline: auto;
+
+  &:has(> :nth-child(3):last-child) {
+    max-width: 1200px;
+  }
 }
 
 @media (max-width: 430px) {
   .events__blocks {
+    max-width: none;
     justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;

@@ -13,7 +13,7 @@ export default function Events() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/events?populate=*&sort=start:asc&pagination[pageSize]=3`,
+        `https://api.zhkh24.kz/api/events?populate=*&sort=start:asc&pagination[page]=2&pagination[pageSize]=3`,
       );
       const data = await res.json();
       setEvents(data.data);
