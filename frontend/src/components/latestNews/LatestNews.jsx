@@ -13,7 +13,7 @@ export default function LatestNews({ featuredId }) {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=6`,
+        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=10`,
       );
 
       const json = await res.json();
@@ -21,7 +21,7 @@ export default function LatestNews({ featuredId }) {
       const filtered = json.data.filter(
         (item) => item.id !== featuredId && item.main === true,
       );
-      setNews(filtered.slice(0, 4));
+      setNews(filtered.slice(0, 3));
       setIsLoading(false);
     }
 
