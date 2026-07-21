@@ -8,18 +8,53 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 function renderBlock(block, i) {
+  const renderChildren = (children = []) =>
+    children.map((child, j) => {
+      let content = child.text || "";
+
+      if (child.bold) {
+        content = <strong>{content}</strong>;
+      }
+
+      if (child.italic) {
+        content = <em>{content}</em>;
+      }
+
+      if (child.underline) {
+        content = <u>{content}</u>;
+      }
+
+      if (child.strikethrough) {
+        content = <s>{content}</s>;
+      }
+
+      if (child.code) {
+        content = <code>{content}</code>;
+      }
+
+      if (child.type === "link") {
+        return (
+          <a key={j} href={child.url} target="_blank" rel="noopener noreferrer">
+            {renderChildren(child.children)}
+          </a>
+        );
+      }
+
+      return <span key={j}>{content}</span>;
+    });
+
   switch (block.type) {
-    case "paragraph": {
-      const text = block.children?.[0]?.text;
-      if (!text) return null;
-      return <p key={i}>{text}</p>;
-    }
+    case "paragraph":
+      return <p key={i}>{renderChildren(block.children)}</p>;
+
     case "heading": {
-      const Tag = `h${block.level}`;
-      return <Tag key={i}>{block.children?.[0]?.text}</Tag>;
+      const Tag = `h${block.level || 2}`;
+      return <Tag key={i}>{renderChildren(block.children)}</Tag>;
     }
+
     case "quote":
-      return <blockquote key={i}>{block.children?.[0]?.text}</blockquote>;
+      return <blockquote key={i}>{renderChildren(block.children)}</blockquote>;
+
     case "image":
       return (
         <img
@@ -28,20 +63,26 @@ function renderBlock(block, i) {
           alt={block.image.alternativeText || ""}
         />
       );
-    case "list":
+
+    case "list": {
       const ListTag = block.format === "ordered" ? "ol" : "ul";
+
       return (
         <ListTag key={i}>
-          {block.children.map((item, j) => (
-            <li key={j}>{item.children?.[0]?.text}</li>
+          {block.children?.map((item, j) => (
+            <li key={j}>{renderChildren(item.children)}</li>
           ))}
         </ListTag>
       );
+    }
+
+    case "code":
+      return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
+
     default:
       return null;
   }
 }
-
 export default function EventsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
