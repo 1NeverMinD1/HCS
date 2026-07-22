@@ -148,7 +148,9 @@
     }
   }
   .qnascontent__tags {
-    margin-left: 20px;
+    margin-left: 10px;
+    display: flex;
+    gap: 10px;
     p {
       background: variables.$primary-color;
       width: fit-content;

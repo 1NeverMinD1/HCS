@@ -2660,7 +2660,9 @@
   font-style: italic;
 }
 .qnascontent .qnascontent__tags {
-  margin-left: 20px;
+  margin-left: 10px;
+  display: flex;
+  gap: 10px;
 }
 .qnascontent .qnascontent__tags p {
   background: rgb(0, 60, 255);
@@ -2924,6 +2926,8 @@
 }
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags {
   margin-top: 10px;
+  display: flex;
+  gap: 10px;
 }
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags p {
   background: rgb(0, 60, 255);
@@ -3170,7 +3174,7 @@
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin-top: 20px;
 }
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main p {
@@ -3192,8 +3196,8 @@
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 1%;
+  top: 15%;
   font-size: 70px;
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
@@ -3207,7 +3211,19 @@
   font-weight: bold;
 }
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul li {
+  position: relative;
   text-indent: 30px;
+  list-style: none;
+}
+.artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul li::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 60, 255, 0.658);
 }
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ol {
   list-style: none;
@@ -3224,6 +3240,7 @@
   content: counter(my-counter);
   position: absolute;
   left: 0;
+  top: 5%;
   width: 25px;
   height: 25px;
   background: rgba(0, 60, 255, 0.658);
@@ -3648,6 +3665,8 @@
 }
 .blogscontent__layout .blogscontent .blogscontent__tags {
   margin-top: 10px;
+  display: flex;
+  gap: 10px;
 }
 .blogscontent__layout .blogscontent .blogscontent__tags p {
   background: rgb(0, 60, 255);
@@ -4057,6 +4076,8 @@
 }
 .eventscontent__layout .eventscontent .eventscontent__tags {
   margin-top: 10px;
+  display: flex;
+  gap: 10px;
 }
 .eventscontent__layout .eventscontent .eventscontent__tags p {
   background: rgb(0, 60, 255);

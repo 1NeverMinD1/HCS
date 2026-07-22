@@ -72,7 +72,7 @@
       .artscontent__main {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
         margin-top: 20px;
         p {
           font-size: 20px;
@@ -92,8 +92,8 @@
           &::before {
             content: "\201C";
             position: absolute;
-            left: 10px;
-            top: 10px;
+            left: 1%;
+            top: 15%;
             font-size: 70px;
             color: variables.$primary-color;
             font-family: Georgia, serif;
@@ -107,7 +107,19 @@
         ul {
           font-weight: bold;
           li {
+            position: relative;
             text-indent: 30px;
+            list-style: none;
+            &::before {
+              content: "";
+              position: absolute;
+              left: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 8px;
+              height: 8px;
+              background: variables.$hover-color;
+            }
           }
         }
         ol {
@@ -123,6 +135,7 @@
               content: counter(my-counter);
               position: absolute;
               left: 0;
+              top: 5%;
               width: 25px;
               height: 25px;
               background: variables.$hover-color;
