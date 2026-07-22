@@ -715,7 +715,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
-    slug: Schema.Attribute.UID;
+    slug: Schema.Attribute.UID<'title_ru'>;
     start: Schema.Attribute.Date & Schema.Attribute.Required;
     start_time: Schema.Attribute.Time;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;

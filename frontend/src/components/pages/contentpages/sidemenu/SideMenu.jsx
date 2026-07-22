@@ -59,10 +59,7 @@ export default function SideMenu({ currentId }) {
       <h2>Последнее</h2>
       <div className="sidemenu__items">
         {items.map((item) => {
-          const title =
-            item.type === "event"
-              ? getLangField(item, "name", locale)
-              : getLangField(item, "title", locale);
+          const title = getLangField(item, "title", locale);
 
           return (
             <Link
