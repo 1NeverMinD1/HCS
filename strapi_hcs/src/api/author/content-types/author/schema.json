@@ -12,12 +12,21 @@
   "pluginOptions": {},
   "attributes": {
     "name_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "position_ru": {
+      "type": "string",
+      "required": true
     },
     "bio_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "name_kk": {
+      "type": "string"
+    },
+    "position_kk": {
       "type": "string"
     },
     "bio_kk": {
@@ -26,12 +35,16 @@
     "name_en": {
       "type": "string"
     },
+    "position_en": {
+      "type": "string"
+    },
     "bio_en": {
       "type": "string"
     },
     "profile_img": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",

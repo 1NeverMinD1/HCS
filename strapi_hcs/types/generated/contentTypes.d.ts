@@ -524,7 +524,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   attributes: {
     bio_en: Schema.Attribute.String;
     bio_kk: Schema.Attribute.String;
-    bio_ru: Schema.Attribute.String;
+    bio_ru: Schema.Attribute.String & Schema.Attribute.Required;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -538,10 +538,14 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name_en: Schema.Attribute.String;
     name_kk: Schema.Attribute.String;
-    name_ru: Schema.Attribute.String;
+    name_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    position_en: Schema.Attribute.String;
+    position_kk: Schema.Attribute.String;
+    position_ru: Schema.Attribute.String & Schema.Attribute.Required;
     profile_img: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
-    >;
+    > &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -656,7 +660,7 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     sity_en: Schema.Attribute.String;
     sity_kk: Schema.Attribute.String;
-    sity_ru: Schema.Attribute.String;
+    sity_ru: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

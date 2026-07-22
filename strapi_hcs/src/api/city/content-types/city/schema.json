@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "sity_ru": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "sity_kk": {
       "type": "string"
