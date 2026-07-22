@@ -67,6 +67,12 @@
       "target": "api::category.category",
       "inversedBy": "blogs"
     },
+    "authors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::author.author",
+      "mappedBy": "blogs"
+    },
     "content_ru": {
       "type": "blocks",
       "required": true

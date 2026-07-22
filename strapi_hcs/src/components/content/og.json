@@ -8,17 +8,17 @@
     "og_title_ru": {
       "type": "string"
     },
-    "og_title_kk": {
-      "type": "string"
-    },
-    "og_title_en": {
-      "type": "string"
-    },
     "og_desc_ru": {
       "type": "text"
     },
+    "og_title_kk": {
+      "type": "string"
+    },
     "og_desc_kk": {
       "type": "text"
+    },
+    "og_title_en": {
+      "type": "string"
     },
     "og_desc_en": {
       "type": "text"
