@@ -1,34 +1,11 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LatestNewsBlocks from "./LatestNewsBlocks/LatestNewsBlocks";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
 
-export default function LatestNews({ featuredId }) {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function LatestNews({ news }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    async function fetchNews() {
-      const res = await fetch(
-        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=10`,
-      );
-
-      const json = await res.json();
-
-      const filtered = json.data.filter(
-        (item) => item.id !== featuredId && item.main === true,
-      );
-      setNews(filtered.slice(0, 3));
-      setIsLoading(false);
-    }
-
-    fetchNews();
-  }, [featuredId]);
-
-  if (isLoading) return null;
 
   return (
     <div className="latest">

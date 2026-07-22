@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocale } from "../../context/LocaleContext.jsx";
 
 import Hero from "../hero/Hero";
@@ -19,6 +19,28 @@ export default function Home() {
   const [featuredTag, setFeaturedTag] = useState(null);
   const [hasAd, setHasAd] = useState(false);
   const { t } = useTranslation(locale);
+
+  const [allNews, setAllNews] = useState([]);
+  const [isNewsLoading, setIsNewsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchNews() {
+      const res = await fetch(
+        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=100`,
+      );
+      const json = await res.json();
+      setAllNews(json.data || []);
+      setIsNewsLoading(false);
+    }
+    fetchNews();
+  }, []);
+
+  const mainNews = allNews
+    .filter((item) => item.id !== featuredId && item.main === true)
+    .slice(0, 3);
+
+  const mainIds = new Set(mainNews.map((item) => item.id));
+  const trendingNews = allNews.filter((item) => !mainIds.has(item.id));
 
   return (
     <div className="home">
@@ -41,9 +63,9 @@ export default function Home() {
               />
               <Ad hasAd={hasAd} />
             </div>
-            <LatestNews featuredId={featuredId} />
+            {!isNewsLoading && <LatestNews news={mainNews} />}
           </div>
-          <Trendings />
+          {!isNewsLoading && <Trendings news={trendingNews} />}
         </div>
         <div className="home__arts-block">
           <Articles featuredTag={featuredTag} />
