@@ -17,7 +17,7 @@ export default function EventsBlock({ event }) {
       "",
   );
 
-  const name = getLangField(event, "name", locale);
+  const title = getLangField(event, "title", locale);
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
   const category = getLangField(event?.categories?.[0], "name", locale);
@@ -25,11 +25,11 @@ export default function EventsBlock({ event }) {
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="events__block">
       <div className="img_wrapper">
-        <img src={imageUrl} alt={name} />
+        <img src={imageUrl} alt={title} />
       </div>
       <div className="events__block-content">
         <p className="cat">{category}</p>
-        <h2 className="events__block-title">{name}</h2>
+        <h2 className="events__block-title">{title}</h2>
         <p className="events__block-text">{desc}</p>
         <div className="events__block-footer">
           <div className="date">

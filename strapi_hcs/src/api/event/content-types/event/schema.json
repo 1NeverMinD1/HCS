@@ -11,14 +11,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name_ru": {
+    "title_ru": {
       "type": "string",
       "required": true
     },
-    "name_kk": {
+    "title_kk": {
       "type": "string"
     },
-    "name_en": {
+    "title_en": {
       "type": "string"
     },
     "desc_ru": {
@@ -114,8 +114,7 @@
       "repeatable": false
     },
     "slug": {
-      "type": "uid",
-      "targetField": "name_ru"
+      "type": "uid"
     }
   }
 }

@@ -488,8 +488,11 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    desc_en: Schema.Attribute.Text;
     desc_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
+    desc_kk: Schema.Attribute.Text;
+    desc_ru: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -691,9 +694,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
-    name_en: Schema.Attribute.String;
-    name_kk: Schema.Attribute.String;
-    name_ru: Schema.Attribute.String & Schema.Attribute.Required;
     OG: Schema.Attribute.Component<'content.og', false>;
     place_en: Schema.Attribute.String;
     place_kk: Schema.Attribute.String;
@@ -701,10 +701,13 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;
-    slug: Schema.Attribute.UID<'name_ru'>;
+    slug: Schema.Attribute.UID;
     start: Schema.Attribute.Date & Schema.Attribute.Required;
     start_time: Schema.Attribute.Time;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
+    title_en: Schema.Attribute.String;
+    title_kk: Schema.Attribute.String;
+    title_ru: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -21,6 +21,15 @@
     "title_en": {
       "type": "string"
     },
+    "desc_ru": {
+      "type": "text"
+    },
+    "desc_kk": {
+      "type": "text"
+    },
+    "desc_en": {
+      "type": "text"
+    },
     "publishDate": {
       "type": "datetime",
       "required": true

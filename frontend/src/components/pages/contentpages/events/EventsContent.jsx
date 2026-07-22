@@ -87,7 +87,7 @@ export default function EventsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
   const [events, setEvents] = useState(null);
-  const name = getLangField(events, "name", locale);
+  const title = getLangField(events, "title", locale);
   const desc = getLangField(events, "desc", locale);
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
@@ -145,7 +145,7 @@ export default function EventsContent() {
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
             <p className="cat">{category}</p>
-            <h2 className="eventscontent__title">{name}</h2>
+            <h2 className="eventscontent__title">{title}</h2>
             <p className="eventscontent__desc">{desc}</p>
           </div>
           <div className="eventscontent__blocks">

@@ -12,7 +12,7 @@ const isSameDay = (a, b) =>
 export default function EventsPageBlock({ event }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-  const name = getLangField(event, "name", locale);
+  const title = getLangField(event, "title", locale);
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
 
@@ -32,7 +32,7 @@ export default function EventsPageBlock({ event }) {
       <img src={imgUrl} alt="back_img" />
       <div className="eventspage__content">
         <p className="eventspage__item-cat">{category}</p>
-        <h3 className="eventspage__item-title">{name}</h3>
+        <h3 className="eventspage__item-title">{title}</h3>
         <p className="eventspage__item-text">{desc}</p>
         <div className="eventspage__item-footer">
           <div className="date">
