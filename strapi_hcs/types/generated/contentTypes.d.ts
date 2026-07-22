@@ -564,9 +564,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    author_en: Schema.Attribute.String;
-    author_kk: Schema.Attribute.String;
-    author_ru: Schema.Attribute.String & Schema.Attribute.Required;
     authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     back_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
@@ -581,17 +578,12 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     desc_en: Schema.Attribute.Text;
-    desc_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
     desc_kk: Schema.Attribute.Text;
     desc_ru: Schema.Attribute.Text & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
     OG: Schema.Attribute.Component<'content.og', false>;
-    position_en: Schema.Attribute.String;
-    position_kk: Schema.Attribute.String;
-    position_ru: Schema.Attribute.String & Schema.Attribute.Required;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'content.seo', false>;

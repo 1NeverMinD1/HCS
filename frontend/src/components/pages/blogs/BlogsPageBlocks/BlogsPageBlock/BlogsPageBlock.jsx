@@ -8,20 +8,20 @@ export default function BlogsPageBlock({ blog }) {
   const { locale } = useLocale();
   const title = getLangField(blog, "title", locale);
   const desc = getLangField(blog, "desc", locale);
-  const position = getLangField(blog, "position", locale);
-  const author = getLangField(blog, "author", locale);
+  const author = getLangField(blog?.authors?.[0], "name", locale);
+  const position = getLangField(blog?.authors?.[0], "position", locale);
   if (!blog) return null;
 
-  const imgUrl = getImageUrl(
-    blog.desc_img?.formats?.small?.url ||
-      blog.desc_img?.formats?.medium?.url ||
-      blog.desc_img?.url,
+  const profileImg = getImageUrl(
+    blog?.authors?.[0]?.profile_img?.formats?.medium?.url ||
+      blog?.authors?.[0]?.profile_img?.formats?.small?.url ||
+      blog?.authors?.[0]?.profile_img?.url,
   );
 
   const backImg = getImageUrl(
-    blog.back_img?.formats?.medium?.url ||
-      blog.back_img?.formats?.small?.url ||
-      blog.back_img?.url,
+    blog?.back_img?.formats?.medium?.url ||
+      blog?.back_img?.formats?.small?.url ||
+      blog?.back_img?.url,
   );
 
   const category = blog.categories?.[0]?.name || blog.tags?.[0]?.name;
@@ -31,7 +31,7 @@ export default function BlogsPageBlock({ blog }) {
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogspage__item">
       <div className="blogspage__item-header">
-        <img src={imgUrl} alt="profile_photo" className="profile" />
+        <img src={profileImg} alt="profile_photo" className="profile" />
         <div className="blogspage__item-about">
           <p className="author">{author}</p>
           <p className="spec">{position}</p>

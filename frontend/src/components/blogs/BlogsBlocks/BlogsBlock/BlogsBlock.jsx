@@ -4,14 +4,13 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 
 export default function BlogsBlock({ blog }) {
-  const imageUrl = getImageUrl(blog?.desc_img?.url || "");
-
+  const imageUrl = getImageUrl(blog?.authors?.[0]?.profile_img?.url || "");
   const { locale } = useLocale();
 
   const title = getLangField(blog, "title", locale);
   const desc = getLangField(blog, "desc", locale);
-  const position = getLangField(blog, "position", locale);
-  const author = getLangField(blog, "author", locale);
+  const author = getLangField(blog?.authors?.[0], "name", locale);
+  const position = getLangField(blog?.authors?.[0], "position", locale);
 
   const initials = author
     ? author

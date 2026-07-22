@@ -90,8 +90,8 @@ export default function BlogsContent() {
   const title = getLangField(blogs, "title", locale);
   const desc = getLangField(blogs, "desc", locale);
   const content = blogs?.[`content_${locale}`] || blogs?.content_ru || [];
-  const author = getLangField(blogs, "author", locale);
-  const position = getLangField(blogs, "position", locale);
+  const author = getLangField(blogs?.authors?.[0], "name", locale);
+  const position = getLangField(blogs?.authors?.[0], "position", locale);
   const category = getLangField(blogs?.categories?.[0], "name", locale);
 
   useEffect(() => {
@@ -112,7 +112,11 @@ export default function BlogsContent() {
       blogs.back_img?.url,
   );
 
-  const profImg = getImageUrl(blogs?.desc_img?.url || "");
+  const profileImg = getImageUrl(
+    blogs?.authors?.[0]?.profile_img?.formats?.medium?.url ||
+      blogs?.authors?.[0]?.profile_img?.formats?.small?.url ||
+      blogs?.authors?.[0]?.profile_img?.url,
+  );
 
   return (
     <div className="blogscontent__layout">
@@ -139,7 +143,7 @@ export default function BlogsContent() {
         </Link>
 
         <div className="blogscontent__header">
-          <img src={profImg} alt="profile_photo" className="profile" />
+          <img src={profileImg} alt="profile_photo" className="profile" />
           <div className="blogscontent__author">
             <p className="author">{author}</p>
             <p className="spec">{position}</p>

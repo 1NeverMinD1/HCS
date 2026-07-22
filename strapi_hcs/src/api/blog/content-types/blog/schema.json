@@ -11,26 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "author_ru": {
-      "type": "string",
-      "required": true
-    },
-    "author_kk": {
-      "type": "string"
-    },
-    "author_en": {
-      "type": "string"
-    },
-    "position_ru": {
-      "type": "string",
-      "required": true
-    },
-    "position_kk": {
-      "type": "string"
-    },
-    "position_en": {
-      "type": "string"
-    },
     "title_ru": {
       "type": "string",
       "required": true
@@ -82,17 +62,6 @@
     },
     "content_en": {
       "type": "blocks"
-    },
-    "desc_img": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     },
     "back_img": {
       "type": "media",
