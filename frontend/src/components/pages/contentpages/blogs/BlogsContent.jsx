@@ -96,7 +96,7 @@ export default function BlogsContent() {
 
   useEffect(() => {
     fetch(
-      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&populate[authors][populate]=profile_img&populate[back_img][populate]=*&populate[OG][populate]=og_image&populate[SEO][populate]=*&populate[tags][populate]=*&populate[categories][populate]=*`,
     )
       .then((res) => res.json())
       .then((data) => setBlogs(data.data?.[0]));

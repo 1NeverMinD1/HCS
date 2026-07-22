@@ -2109,6 +2109,7 @@
   padding: 15px;
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 .blogspage__item .blogspage__item-header .profile {
   width: 50px;
@@ -2258,13 +2259,14 @@
   color: white;
 }
 .blogspage__hero .blogspage__hero-header {
-  padding-top: 10%;
+  padding-top: 5%;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 .blogspage__hero .blogspage__hero-header .profile {
-  width: 50px;
-  height: 50px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -2310,13 +2312,17 @@
     height: 350px;
   }
   .blogspage__hero .blogspage__hero-header {
-    padding-top: 0;
+    padding-top: 10%;
+  }
+  .blogspage__hero .blogspage__hero-header .profile {
+    width: 50px;
+    height: 50px;
   }
   .blogspage__hero .blogspage__hero-header .blogspage__hero-about .author {
-    font-size: 18px;
+    font-size: 16px;
   }
   .blogspage__hero .blogspage__hero-header .blogspage__hero-about .spec {
-    font-size: 16px;
+    font-size: 14px;
   }
   .blogspage__hero .blogspage__hero-content {
     width: 100%;

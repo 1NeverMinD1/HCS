@@ -60,14 +60,14 @@
   }
 
   .blogspage__hero-header {
-    padding-top: 10%;
+    padding-top: 5%;
 
     display: flex;
     gap: 10px;
-
+    align-items: center;
     .profile {
-      width: 50px;
-      height: 50px;
+      width: 90px;
+      height: 90px;
 
       border-radius: 50%;
       object-fit: cover;
@@ -124,13 +124,18 @@
   .blogspage__hero {
     height: 350px;
     .blogspage__hero-header {
-      padding-top: 0;
+      padding-top: 10%;
+
+      .profile {
+        width: 50px;
+        height: 50px;
+      }
       .blogspage__hero-about {
         .author {
-          font-size: variables.$mobile-subtitle-font-size;
+          font-size: variables.$mobile-subtitle-font-size - 2px;
         }
         .spec {
-          font-size: variables.$mobile-text-font-size;
+          font-size: variables.$mobile-text-font-size - 2px;
         }
       }
     }

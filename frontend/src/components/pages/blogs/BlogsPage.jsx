@@ -10,7 +10,9 @@ export default function BlogsPage() {
   const { t } = useTranslation(locale);
 
   useEffect(() => {
-    fetch(`https://api.zhkh24.kz/api/blogs?populate=*&sort=publishDate:desc`)
+    fetch(
+      `https://api.zhkh24.kz/api/blogs?populate[authors][populate]=profile_img&populate[back_img][populate]=*&sort=publishDate:desc`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);

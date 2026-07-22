@@ -13,7 +13,7 @@ export default function Blogs() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=4`,
+        `https://api.zhkh24.kz/api/blogs?populate[authors][populate]=profile_img&populate[back_img][populate]=*&sort=publishDate:desc`,
       );
       const data = await res.json();
       setBlogs(data.data);
