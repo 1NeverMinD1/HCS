@@ -23,6 +23,7 @@
     },
     "desc_ru": {
       "type": "text",
+      "maxLength": 200,
       "required": true
     },
     "desc_kk": {
@@ -87,6 +88,9 @@
     "slug": {
       "type": "uid",
       "targetField": "title_ru"
+    },
+    "isFeatured": {
+      "type": "boolean"
     }
   }
 }

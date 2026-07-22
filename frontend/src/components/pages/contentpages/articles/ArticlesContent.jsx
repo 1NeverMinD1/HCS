@@ -119,6 +119,7 @@ function ArticleItem({ item, isFirst }) {
       </div>
       <h2 className="artscontent__title">{title}</h2>
       <img src={imgUrl} alt="desc_img" className="artscontent__img" />
+      <p className="artscontent__desc">{desc}</p>
       <hr />
       <div className="artscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}

@@ -492,7 +492,12 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     desc_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
     desc_kk: Schema.Attribute.Text;
-    desc_ru: Schema.Attribute.Text;
+    desc_ru: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    isFeatured: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -582,7 +587,12 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     desc_en: Schema.Attribute.Text;
     desc_kk: Schema.Attribute.Text;
-    desc_ru: Schema.Attribute.Text & Schema.Attribute.Required;
+    desc_ru: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    isFeatured: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
@@ -689,7 +699,11 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     desc_img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
     desc_kk: Schema.Attribute.Text;
-    desc_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    desc_ru: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
     end: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &

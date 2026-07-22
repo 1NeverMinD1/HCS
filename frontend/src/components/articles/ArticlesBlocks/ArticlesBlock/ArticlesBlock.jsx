@@ -15,9 +15,7 @@ export default function ArticlesBlock({ article }) {
   const title = getLangField(article, "title", locale);
   const content = article?.[`content_${locale}`] || article?.content_ru || [];
   const category = getLangField(article?.categories?.[0], "name", locale);
-  const text =
-    content?.find((block) => block.type === "paragraph")?.children?.[0]?.text ||
-    "";
+  const desc = getLangField(article, "desc", locale);
 
   return (
     <Link
@@ -31,7 +29,7 @@ export default function ArticlesBlock({ article }) {
       <div className="articles__block-content">
         <p className="articles__block-cat">{category}</p>
         <h3 className="articles__block-title">{title}</h3>
-        <p className="articles__block-text">{text}</p>
+        <p className="articles__block-text">{desc}</p>
 
         <p className="articles__block-date">
           {new Date(article.publishDate).toLocaleDateString()}

@@ -55,6 +55,12 @@
         text-indent: 15px;
       }
 
+      .artscontent__desc {
+        font-size: 20px;
+        text-indent: 30px;
+        margin-bottom: 20px;
+      }
+
       .artscontent__img {
         width: 80%;
         margin-inline: auto;
@@ -169,6 +175,8 @@
       }
       .artscontent__tags {
         margin-top: 10px;
+        display: flex;
+        gap: 10px;
         p {
           background: variables.$primary-color;
           width: fit-content;
@@ -228,6 +236,11 @@
           width: 100%;
           text-indent: 0px;
           font-size: variables.$mobile-title-font-size;
+        }
+
+        .artscontent__desc {
+          font-size: variables.$mobile-text-font-size;
+          text-indent: 10px;
         }
 
         .artscontent__img {

@@ -23,6 +23,7 @@
     },
     "desc_ru": {
       "type": "string",
+      "maxLength": 200,
       "required": true
     },
     "desc_kk": {
