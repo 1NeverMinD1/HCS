@@ -76,9 +76,11 @@ export default function Home() {
 
       <Events />
 
-      <div className="wrapper">
-        <Email />
-      </div>
+      {!isNewsLoading && (
+        <div className="wrapper">
+          <Email />
+        </div>
+      )}
     </div>
   );
 }
