@@ -3004,24 +3004,17 @@
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main blockquote {
     margin-block: 10px;
-    background: rgba(0, 60, 255, 0.658);
-    padding: 30px;
-    padding-left: 50px;
-    width: 60%;
-    position: relative;
-    margin-left: 70px;
-    font-size: 20px;
-    text-indent: 20px;
-    line-height: 130%;
+    padding: 15px;
+    padding-left: 30px;
+    width: 100%;
+    margin-left: 0px;
+    font-size: 16px;
+    text-indent: 10px;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main blockquote::before {
-    content: "“";
-    position: absolute;
     left: 0px;
-    top: 35px;
-    font-size: 70px;
-    color: rgb(0, 60, 255);
-    font-family: Georgia, serif;
+    top: 25px;
+    font-size: 55px;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main img {
     margin-block: 20px;
@@ -3029,36 +3022,35 @@
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ul {
     font-weight: bold;
+    padding-left: 0;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ul li {
+    position: relative;
+    padding-left: 0px;
+    list-style: none;
     font-size: 16px;
-    text-indent: 10px;
+  }
+  .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ul li::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 60, 255, 0.658);
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ol {
-    list-style: none;
-    counter-reset: my-counter;
-    padding-left: 30px;
+    padding-left: 0px;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ol li {
-    counter-increment: my-counter;
-    position: relative;
-    padding-left: 40px;
-    line-height: 140%;
+    padding-left: 30px;
+    line-height: 120%;
+    font-size: 16px;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ol li::before {
-    content: counter(my-counter);
-    position: absolute;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    background: rgba(0, 60, 255, 0.658);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ul,
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main ol {
@@ -3370,25 +3362,18 @@
     text-indent: 10px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main blockquote {
-    margin-block: 20px;
-    background: rgba(0, 60, 255, 0.658);
-    padding: 30px;
-    padding-left: 50px;
-    width: 60%;
-    position: relative;
-    margin-left: 70px;
-    font-size: 20px;
-    text-indent: 20px;
-    line-height: 130%;
+    margin-block: 10px;
+    padding: 15px;
+    padding-left: 30px;
+    width: 100%;
+    margin-left: 0px;
+    font-size: 16px;
+    text-indent: 10px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main blockquote::before {
-    content: "“";
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 70px;
-    color: rgb(0, 60, 255);
-    font-family: Georgia, serif;
+    left: 0px;
+    top: 25px;
+    font-size: 55px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main img {
     margin-block: 20px;
@@ -3396,36 +3381,35 @@
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul {
     font-weight: bold;
+    padding-left: 0;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul li {
+    position: relative;
+    padding-left: 0px;
+    list-style: none;
     font-size: 16px;
-    text-indent: 10px;
+  }
+  .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul li::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 60, 255, 0.658);
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ol {
-    list-style: none;
-    counter-reset: my-counter;
-    padding-left: 30px;
+    padding-left: 0px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ol li {
-    counter-increment: my-counter;
-    position: relative;
-    padding-left: 40px;
-    line-height: 140%;
+    padding-left: 30px;
+    line-height: 120%;
+    font-size: 16px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ol li::before {
-    content: counter(my-counter);
-    position: absolute;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    background: rgba(0, 60, 255, 0.658);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
   }
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ul,
   .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main ol {
@@ -3756,25 +3740,18 @@
     text-indent: 10px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main blockquote {
-    margin-block: 20px;
-    background: rgba(0, 60, 255, 0.658);
-    padding: 30px;
-    padding-left: 50px;
-    width: 60%;
-    position: relative;
-    margin-left: 70px;
-    font-size: 20px;
-    text-indent: 20px;
-    line-height: 130%;
+    margin-block: 10px;
+    padding: 15px;
+    padding-left: 30px;
+    width: 100%;
+    margin-left: 0px;
+    font-size: 16px;
+    text-indent: 10px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main blockquote::before {
-    content: "“";
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 70px;
-    color: rgb(0, 60, 255);
-    font-family: Georgia, serif;
+    left: 0px;
+    top: 25px;
+    font-size: 55px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main img {
     margin-block: 20px;
@@ -3782,36 +3759,35 @@
   }
   .blogscontent__layout .blogscontent .blogscontent__main ul {
     font-weight: bold;
+    padding-left: 0;
   }
   .blogscontent__layout .blogscontent .blogscontent__main ul li {
+    position: relative;
+    padding-left: 0px;
+    list-style: none;
     font-size: 16px;
-    text-indent: 10px;
+  }
+  .blogscontent__layout .blogscontent .blogscontent__main ul li::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 60, 255, 0.658);
   }
   .blogscontent__layout .blogscontent .blogscontent__main ol {
-    list-style: none;
-    counter-reset: my-counter;
-    padding-left: 30px;
+    padding-left: 0px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main ol li {
-    counter-increment: my-counter;
-    position: relative;
-    padding-left: 40px;
-    line-height: 140%;
+    padding-left: 30px;
+    line-height: 120%;
+    font-size: 16px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main ol li::before {
-    content: counter(my-counter);
-    position: absolute;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    background: rgba(0, 60, 255, 0.658);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
   }
   .blogscontent__layout .blogscontent .blogscontent__main ul,
   .blogscontent__layout .blogscontent .blogscontent__main ol {
@@ -4173,25 +4149,18 @@
     text-indent: 10px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main blockquote {
-    margin-block: 20px;
-    background: rgba(0, 60, 255, 0.658);
-    padding: 30px;
-    padding-left: 50px;
-    width: 60%;
-    position: relative;
-    margin-left: 70px;
-    font-size: 20px;
-    text-indent: 20px;
-    line-height: 130%;
+    margin-block: 10px;
+    padding: 15px;
+    padding-left: 30px;
+    width: 100%;
+    margin-left: 0px;
+    font-size: 16px;
+    text-indent: 10px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main blockquote::before {
-    content: "“";
-    position: absolute;
     left: 0px;
-    top: 35px;
-    font-size: 70px;
-    color: rgb(0, 60, 255);
-    font-family: Georgia, serif;
+    top: 25px;
+    font-size: 55px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main img {
     margin-block: 20px;
@@ -4199,36 +4168,35 @@
   }
   .eventscontent__layout .eventscontent .eventscontent__main ul {
     font-weight: bold;
+    padding-left: 0;
   }
   .eventscontent__layout .eventscontent .eventscontent__main ul li {
+    position: relative;
+    padding-left: 0px;
+    list-style: none;
     font-size: 16px;
-    text-indent: 10px;
+  }
+  .eventscontent__layout .eventscontent .eventscontent__main ul li::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 60, 255, 0.658);
   }
   .eventscontent__layout .eventscontent .eventscontent__main ol {
-    list-style: none;
-    counter-reset: my-counter;
-    padding-left: 30px;
+    padding-left: 0px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main ol li {
-    counter-increment: my-counter;
-    position: relative;
-    padding-left: 40px;
-    line-height: 140%;
+    padding-left: 30px;
+    line-height: 120%;
+    font-size: 16px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main ol li::before {
-    content: counter(my-counter);
-    position: absolute;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    background: rgba(0, 60, 255, 0.658);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
   }
   .eventscontent__layout .eventscontent .eventscontent__main ul,
   .eventscontent__layout .eventscontent .eventscontent__main ol {

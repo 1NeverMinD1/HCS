@@ -249,27 +249,18 @@
             font-size: variables.$mobile-text-font-size;
             text-indent: 10px;
           }
-          // ИЗМЕНИТЬ цитаты
           blockquote {
             margin-block: 10px;
-            background: variables.$hover-color;
-            padding: 30px;
-            padding-left: 50px;
-            width: 60%;
-            position: relative;
-            margin-left: 70px;
-            font-size: 20px;
-            text-indent: 20px;
-            line-height: 130%;
+            padding: 15px;
+            padding-left: 30px;
+            width: 100%;
+            margin-left: 0px;
+            font-size: variables.$mobile-text-font-size;
+            text-indent: 10px;
             &::before {
-              content: "\201C";
-              position: absolute;
               left: 0px;
-              top: 35px;
-
-              font-size: 70px;
-              color: variables.$primary-color;
-              font-family: Georgia, serif;
+              top: 25px;
+              font-size: 55px;
             }
           }
           img {
@@ -278,34 +269,33 @@
           }
           ul {
             font-weight: bold;
+            padding-left: 0;
             li {
+              position: relative;
+              padding-left: 0px;
+              list-style: none;
               font-size: variables.$mobile-text-font-size;
-              text-indent: 10px;
+              &::before {
+                content: "";
+                position: absolute;
+                left: 10px;
+                top: 0.6em;
+                width: 6px;
+                height: 6px;
+                background: variables.$hover-color;
+              }
             }
           }
           ol {
-            list-style: none;
-            counter-reset: my-counter;
-            padding-left: 30px;
+            padding-left: 0px;
             li {
-              counter-increment: my-counter;
-              position: relative;
-              padding-left: 40px;
-              line-height: 140%;
+              padding-left: 30px;
+              line-height: 120%;
+              font-size: variables.$mobile-text-font-size;
               &::before {
-                content: counter(my-counter);
-                position: absolute;
-                left: 0;
-                width: 25px;
-                height: 25px;
-                background: variables.$hover-color;
-                color: white;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 14px;
-                font-weight: bold;
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
               }
             }
           }
