@@ -88,6 +88,12 @@
     "slug": {
       "type": "uid",
       "targetField": "title_ru"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::author.author",
+      "mappedBy": "news"
     }
   }
 }

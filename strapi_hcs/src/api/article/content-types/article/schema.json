@@ -32,6 +32,15 @@
     "desc_en": {
       "type": "text"
     },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::author.author",
+      "inversedBy": "articles"
+    },
     "publishDate": {
       "type": "datetime",
       "required": true
@@ -82,9 +91,6 @@
     "slug": {
       "type": "uid",
       "targetField": "title_ru"
-    },
-    "isFeatured": {
-      "type": "boolean"
     }
   }
 }

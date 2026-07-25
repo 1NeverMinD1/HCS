@@ -478,6 +478,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
@@ -530,6 +531,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
     bio_en: Schema.Attribute.String;
     bio_kk: Schema.Attribute.String;
     bio_ru: Schema.Attribute.String & Schema.Attribute.Required;
@@ -537,6 +539,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     links: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -547,6 +550,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     name_en: Schema.Attribute.String;
     name_kk: Schema.Attribute.String;
     name_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     position_en: Schema.Attribute.String;
     position_kk: Schema.Attribute.String;
     position_ru: Schema.Attribute.String & Schema.Attribute.Required;
@@ -555,6 +559,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    qnas: Schema.Attribute.Relation<'manyToMany', 'api::q-and-a.q-and-a'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -684,6 +689,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
   attributes: {
     amount: Schema.Attribute.Integer;
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
@@ -770,6 +776,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -820,6 +827,7 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
