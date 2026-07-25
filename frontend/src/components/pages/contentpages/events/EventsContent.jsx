@@ -133,7 +133,10 @@ export default function EventsContent() {
             events.desc_img?.formats?.medium?.url ||
             events.desc_img?.url,
         )}
-        type="article"
+        type="event"
+        startDate={events.start}
+        endDate={events.end}
+        location={place}
       />
       <div className="eventscontent wrapper">
         <Link to={`/${locale}/events`} className="back">

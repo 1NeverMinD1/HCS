@@ -151,6 +151,13 @@ export default function QnasContent() {
             qnas.desc_img?.url,
         )}
         type="article"
+        datePublished={qnas.publishDate}
+        dateModified={qnas.updatedAt}
+        authorName={
+          qnas.authors?.[0]
+            ? getLangField(qnas.authors[0], "name", locale)
+            : undefined
+        }
       />
       <Link to={`/${locale}/q-and-as`} className="back">
         <svg className="arrow_reverse" viewBox="0 0 5 9">

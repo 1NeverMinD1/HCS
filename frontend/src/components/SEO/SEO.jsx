@@ -13,6 +13,14 @@ export default function SEO({
   url,
   type = "website",
   noIndex = false,
+  datePublished,
+  dateModified,
+  authorName,
+  imageWidth,
+  imageHeight,
+  startDate,
+  endDate,
+  location,
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -56,8 +64,73 @@ export default function SEO({
   const finalOgTitle = ogTitle || finalTitle;
   const finalOgDescription = ogDescription || finalDescription;
 
+  const ogType = type === "event" ? "website" : type;
+
+  let structuredData = null;
+
+  if (type === "event") {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: finalOgTitle,
+      description: finalDescription,
+      image: [finalImage],
+      startDate: startDate,
+      endDate: endDate || startDate,
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      eventStatus: "https://schema.org/EventScheduled",
+      location: location
+        ? {
+            "@type": "Place",
+            name: location,
+          }
+        : undefined,
+      organizer: {
+        "@type": "Organization",
+        name: siteName,
+        url: baseUrl,
+      },
+    };
+  } else if (type === "article" || type === "news") {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": type === "news" ? "NewsArticle" : "Article",
+      headline: finalOgTitle,
+      description: finalDescription,
+      image: [finalImage],
+      datePublished: datePublished,
+      dateModified: dateModified || datePublished,
+      author: authorName
+        ? [
+            {
+              "@type": "Person",
+              name: authorName,
+            },
+          ]
+        : [
+            {
+              "@type": "Organization",
+              name: siteName,
+            },
+          ],
+      publisher: {
+        "@type": "Organization",
+        name: siteName,
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+      },
+    };
+  }
+
   return (
     <Helmet>
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
       <html lang={lang} />
 
       <title>{fullTitle}</title>
@@ -83,7 +156,7 @@ export default function SEO({
         <meta property="og:image:height" content={ogImageHeight} />
       )}
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content={type} />
+      <meta property="og:type" content={ogType} />
       <meta property="og:locale" content={locale} />
       <meta property="og:site_name" content={siteName} />
 

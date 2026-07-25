@@ -133,6 +133,13 @@ export default function BlogsContent() {
             blogs.back_img?.url,
         )}
         type="article"
+        datePublished={blogs.publishDate}
+        dateModified={blogs.updatedAt}
+        authorName={
+          blogs.authors?.[0]
+            ? getLangField(blogs.authors[0], "name", locale)
+            : undefined
+        }
       />
       <div className="blogscontent">
         <Link to={`/${locale}/blogs`} className="back">

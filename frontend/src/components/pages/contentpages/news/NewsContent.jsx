@@ -202,6 +202,13 @@ export default function NewsContent() {
             mainItem.desc_img?.url,
         )}
         type="article"
+        datePublished={mainItem.publishDate}
+        dateModified={mainItem.updatedAt}
+        authorName={
+          mainItem.authors?.[0]
+            ? getLangField(mainItem.authors[0], "name", locale)
+            : undefined
+        }
       />
       <div className="newscontent__layout-main">
         {newsList.map((item, index) => (
