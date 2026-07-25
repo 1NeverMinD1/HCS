@@ -75,6 +75,19 @@ function getPlainText(children) {
   return children.map((c) => c.text || "").join("");
 }
 
+function extractShortAnswer(content) {
+  for (const block of content) {
+    if (block.type === "paragraph") {
+      const text = getPlainText(block.children);
+      const match = text.match(/^\(\s*["«](.+?)["»]\s*\)\s*(.*)/s);
+      if (match && match[1].trim() === "Краткий ответ") {
+        return match[2].trim();
+      }
+    }
+  }
+  return null;
+}
+
 function renderBlock(block, index) {
   if (block.type === "paragraph") {
     const parsed = parseCodeWord(getPlainText(block.children));
@@ -135,6 +148,7 @@ export default function QnasContent() {
 
   const title = getLangField(qnas, "title", locale);
   const content = qnas[`content_${locale}`] || qnas.content_ru || [];
+  const shortAnswer = extractShortAnswer(content);
 
   return (
     <div className="qnascontent wrapper">
@@ -150,7 +164,8 @@ export default function QnasContent() {
             qnas.desc_img?.formats?.medium?.url ||
             qnas.desc_img?.url,
         )}
-        type="article"
+        type="qna"
+        answerText={shortAnswer}
         datePublished={qnas.publishDate}
         dateModified={qnas.updatedAt}
         authorName={

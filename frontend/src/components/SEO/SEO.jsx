@@ -21,6 +21,7 @@ export default function SEO({
   startDate,
   endDate,
   location,
+  answerText,
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -91,10 +92,15 @@ export default function SEO({
         url: baseUrl,
       },
     };
-  } else if (type === "article" || type === "news") {
+  } else if (type === "article" || type === "news" || type === "blog") {
     structuredData = {
       "@context": "https://schema.org",
-      "@type": type === "news" ? "NewsArticle" : "Article",
+      "@type":
+        type === "news"
+          ? "NewsArticle"
+          : type === "blog"
+            ? "BlogPosting"
+            : "Article",
       headline: finalOgTitle,
       description: finalDescription,
       image: [finalImage],
@@ -121,6 +127,37 @@ export default function SEO({
         "@type": "WebPage",
         "@id": canonicalUrl,
       },
+    };
+  } else if (type === "qna") {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": "QAPage",
+      mainEntity: {
+        "@type": "Question",
+        name: finalOgTitle,
+        text: finalDescription,
+        answerCount: 1,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answerText || finalDescription,
+        },
+      },
+    };
+  } else if (type === "website") {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          name: siteName,
+          url: baseUrl,
+        },
+        {
+          "@type": "Organization",
+          name: siteName,
+          url: baseUrl,
+        },
+      ],
     };
   }
 

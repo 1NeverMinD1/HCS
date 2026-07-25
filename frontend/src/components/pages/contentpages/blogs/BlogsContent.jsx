@@ -132,7 +132,7 @@ export default function BlogsContent() {
             blogs.back_img?.formats?.medium?.url ||
             blogs.back_img?.url,
         )}
-        type="article"
+        type="blog"
         datePublished={blogs.publishDate}
         dateModified={blogs.updatedAt}
         authorName={
