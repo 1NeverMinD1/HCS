@@ -223,7 +223,14 @@ export default function EventsContent() {
         <div className="eventscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
         </div>
-        <a className="register">Зарегистрироваться</a>
+        <a
+          href={registerLink}
+          className="register"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Зарегистрироваться
+        </a>
         <div className="eventscontent__tags">
           {events.tags?.map((tag) => (
             <p key={tag.id}>{getLangField(tag, "name", locale)}</p>

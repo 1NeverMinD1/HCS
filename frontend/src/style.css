@@ -2508,6 +2508,9 @@
     justify-content: space-between;
     gap: 5px;
   }
+  .eventspage__item .eventspage__content .event-status {
+    margin-bottom: 5px;
+  }
   .eventspage__item .eventspage__content .eventspage__item-cat {
     margin-left: 10px;
     font-size: 14px;

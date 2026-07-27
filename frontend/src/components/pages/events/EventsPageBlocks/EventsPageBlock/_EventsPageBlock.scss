@@ -152,6 +152,9 @@
       margin-block: 0px;
       justify-content: space-between;
       gap: 5px;
+      .event-status {
+        margin-bottom: 5px;
+      }
       .eventspage__item-cat {
         margin-left: 10px;
         font-size: variables.$mobile-text-font-size - 2px;
