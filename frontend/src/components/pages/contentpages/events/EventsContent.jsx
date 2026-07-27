@@ -92,7 +92,7 @@ export default function EventsContent() {
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
-  const registerLink = event?.register_link;
+  const registerLink = events?.register_link;
 
   useEffect(() => {
     fetch(
