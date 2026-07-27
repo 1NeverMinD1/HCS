@@ -4087,6 +4087,7 @@
   border-radius: 10px;
   margin-block: 20px;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 .eventscontent__layout .eventscontent .register:hover {
   cursor: pointer;
