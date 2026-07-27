@@ -15,8 +15,20 @@ export default function EventsList() {
 
   useEffect(() => {
     async function fetchData() {
+      const today = new Date().toISOString().split("T")[0];
+
+      const params = new URLSearchParams({
+        populate: "*",
+        sort: "start:asc",
+        "pagination[pageSize]": "3",
+      });
+
+      params.append("filters[$or][0][end][$gte]", today);
+      params.append("filters[$or][1][end][$null]", "true");
+      params.append("filters[$or][1][start][$gte]", today);
+
       const res = await fetch(
-        `https://api.zhkh24.kz/api/events?populate=*&sort=start:asc&pagination[pageSize]=3`,
+        `https://api.zhkh24.kz/api/events?${params.toString()}`,
       );
       const data = await res.json();
       setEvents(data.data);

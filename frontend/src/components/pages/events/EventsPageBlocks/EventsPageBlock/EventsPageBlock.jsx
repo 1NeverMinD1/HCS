@@ -27,10 +27,30 @@ export default function EventsPageBlock({ event }) {
 
   const category = getLangField(event?.categories?.[0], "name", locale);
 
+  const now = new Date();
+
+  const start = event.start ? new Date(event.start) : null;
+  const end = event.end ? new Date(event.end) : start;
+
+  const isUpcoming = start && start > now;
+  const isRunning = start && start <= now && end >= now;
+  const isFinished = end && end < now;
+
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
       <img src={imgUrl} alt="back_img" />
       <div className="eventspage__content">
+        {isUpcoming && (
+          <div className="event-status event-status--upcoming">Предстоит</div>
+        )}
+
+        {isRunning && (
+          <div className="event-status event-status--running">Идет сейчас</div>
+        )}
+
+        {isFinished && (
+          <div className="event-status event-status--finished">Завершено</div>
+        )}
         <p className="eventspage__item-cat">{category}</p>
         <h3 className="eventspage__item-title">{title}</h3>
         <p className="eventspage__item-text">{desc}</p>

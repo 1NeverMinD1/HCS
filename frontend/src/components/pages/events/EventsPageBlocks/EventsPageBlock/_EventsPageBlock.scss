@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   gap: 20px;
-  height: 250px;
+  min-height: 275px;
   transition: all 0.3s ease;
   border-radius: 10px;
   &:hover {
@@ -28,8 +28,32 @@
     width: 65%;
     display: flex;
     flex-direction: column;
-    margin-block: 20px;
+    margin-block: 10px 20px;
     justify-content: space-between;
+    .event-status {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+
+      &--upcoming {
+        background: #e8f1ff;
+        color: #1d4ed8;
+      }
+
+      &--running {
+        background: #eaf8ee;
+        color: #15803d;
+      }
+
+      &--finished {
+        background: #f3f4f6;
+        color: #6b7280;
+      }
+    }
     .eventspage__item-cat {
       display: inline-block;
       background: variables.$primary-color;
@@ -110,7 +134,7 @@
 
 @media (max-width: 430px) {
   .eventspage__item {
-    height: 375px;
+    min-height: 375px;
     box-shadow:
       1px 1px 10px rgb(179, 179, 179),
       -1px 1px 10px rgb(179, 179, 179);
