@@ -92,7 +92,6 @@ export default function EventsContent() {
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
-  const registerLink = events?.register_link;
 
   useEffect(() => {
     fetch(
@@ -217,14 +216,21 @@ export default function EventsContent() {
             </div>
           </div>
         </div>
-        <a className="register">Зарегистрироваться</a>
+        <a
+          href={events?.register_link}
+          className="register"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Зарегистрироваться
+        </a>{" "}
         <img src={imgUrl} alt="desc_img" className="eventscontent__img" />
         <hr />
         <div className="eventscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
         </div>
         <a
-          href={registerLink}
+          href={events?.register_link}
           className="register"
           target="_blank"
           rel="noopener noreferrer"
