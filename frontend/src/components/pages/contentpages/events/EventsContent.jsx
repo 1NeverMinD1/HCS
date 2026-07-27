@@ -95,7 +95,12 @@ export default function EventsContent() {
 
   useEffect(() => {
     fetch(
-      `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}` +
+        `&populate[OG][populate]=og_image` +
+        `&populate[SEO][populate]=*` +
+        `&populate[desc_img][populate]=*` +
+        `&populate[categories][populate]=*` +
+        `&populate[tags][populate]=*`,
     )
       .then((res) => res.json())
       .then((data) => setEvents(data.data?.[0]));

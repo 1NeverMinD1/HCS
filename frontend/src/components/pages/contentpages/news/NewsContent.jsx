@@ -142,7 +142,13 @@ export default function NewsContent() {
     setHasMore(true);
 
     fetch(
-      `https://api.zhkh24.kz/api/news?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/news?filters[slug][$eq]=${slug}` +
+        `&populate[OG][populate]=og_image` +
+        `&populate[SEO][populate]=*` +
+        `&populate[desc_img][populate]=*` +
+        `&populate[authors][populate]=*` +
+        `&populate[header_cats][populate]=*` +
+        `&populate[tags][populate]=*`,
     )
       .then((res) => res.json())
       .then((data) => setNewsList([data.data?.[0]]));
@@ -154,7 +160,13 @@ export default function NewsContent() {
     const last = newsList[newsList.length - 1];
 
     const res = await fetch(
-      `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}`,
+      `https://api.zhkh24.kz/api/news?sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}` +
+        `&populate[OG][populate]=og_image` +
+        `&populate[SEO][populate]=*` +
+        `&populate[desc_img][populate]=*` +
+        `&populate[authors][populate]=*` +
+        `&populate[header_cats][populate]=*` +
+        `&populate[tags][populate]=*`,
     );
     const data = await res.json();
     const next = data.data?.[0];
