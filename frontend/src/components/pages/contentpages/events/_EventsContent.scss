@@ -203,6 +203,24 @@
         font-size: 15px;
       }
     }
+    .register {
+      display: block;
+      width: 400px;
+      text-align: center;
+      margin-inline: auto;
+      background: variables.$primary-color;
+      color: white;
+      padding: 10px 20px;
+      font-size: variables.$mobile-subtitle-font-size;
+      border-radius: 10px;
+      margin-block: 20px;
+      transition: all 0.3s ease;
+      &:hover {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        transform: scale(1.05);
+      }
+    }
     .eventscontent__tags {
       margin-top: 10px;
       display: flex;

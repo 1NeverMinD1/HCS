@@ -123,6 +123,9 @@
       "relation": "manyToMany",
       "target": "api::author.author",
       "mappedBy": "events"
+    },
+    "register_link": {
+      "type": "text"
     }
   }
 }

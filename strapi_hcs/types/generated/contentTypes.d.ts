@@ -720,6 +720,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    register_link: Schema.Attribute.Text;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     start: Schema.Attribute.Date & Schema.Attribute.Required;

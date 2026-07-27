@@ -4072,6 +4072,24 @@
 .eventscontent__layout .eventscontent .eventscontent__main h6 {
   font-size: 15px;
 }
+.eventscontent__layout .eventscontent .register {
+  display: block;
+  width: 400px;
+  text-align: center;
+  margin-inline: auto;
+  background: rgb(0, 60, 255);
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-block: 20px;
+  transition: all 0.3s ease;
+}
+.eventscontent__layout .eventscontent .register:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1.05);
+}
 .eventscontent__layout .eventscontent .eventscontent__tags {
   margin-top: 10px;
   display: flex;
