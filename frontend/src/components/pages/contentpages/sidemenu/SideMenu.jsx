@@ -24,17 +24,24 @@ export default function SideMenu({ currentId }) {
       ).then((res) => res.json()),
     ]).then(([news, articles, blogs, events]) => {
       const all = [
-        ...(news.data || []).map((i) => ({ ...i, type: "news" })),
-        ...(articles.data || []).map((i) => ({ ...i, type: "article" })),
-        ...(blogs.data || []).map((i) => ({ ...i, type: "blog" })),
+        ...(news.data || []).map((i) => ({
+          ...i,
+          type: "news",
+        })),
+        ...(articles.data || []).map((i) => ({
+          ...i,
+          type: "article",
+        })),
+        ...(blogs.data || []).map((i) => ({
+          ...i,
+          type: "blog",
+        })),
         ...(events.data || []).map((i) => ({
           ...i,
           type: "event",
           publishDate: i.start,
         })),
-      ]
-        .filter((i) => i.documentId !== currentId)
-        .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+      ].sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
       setItems(all);
     });
@@ -54,11 +61,13 @@ export default function SideMenu({ currentId }) {
     event: "Событие",
   };
 
+  const visibleItems = items.filter((item) => item.slug !== currentId);
+
   return (
     <div className="sidemenu">
       <h2>Последнее</h2>
       <div className="sidemenu__items">
-        {items.map((item) => {
+        {visibleItems.map((item) => {
           const title = getLangField(item, "title", locale);
 
           return (
