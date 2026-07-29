@@ -149,7 +149,10 @@ export default function BlogsContent() {
           Все блоги
         </Link>
 
-        <Link to={"/author"} className="blogscontent__header">
+        <Link
+          to={`/${locale}/author/${blogs?.authors?.[0]?.slug}`}
+          className="blogscontent__header"
+        >
           <img src={profileImg} alt="profile_photo" className="profile" />
           <div className="blogscontent__author">
             <p className="author">{author}</p>
