@@ -149,13 +149,13 @@ export default function BlogsContent() {
           Все блоги
         </Link>
 
-        <div className="blogscontent__header">
+        <Link to={"/author"} className="blogscontent__header">
           <img src={profileImg} alt="profile_photo" className="profile" />
           <div className="blogscontent__author">
             <p className="author">{author}</p>
             <p className="spec">{position}</p>
           </div>
-        </div>
+        </Link>
         <div className="blogscontent__header-date">
           <p>
             {date.toLocaleDateString("ru-RU", {

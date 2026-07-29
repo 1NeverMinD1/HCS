@@ -560,6 +560,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     qnas: Schema.Attribute.Relation<'manyToMany', 'api::q-and-a.q-and-a'>;
+    slug: Schema.Attribute.UID<'name_ru'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

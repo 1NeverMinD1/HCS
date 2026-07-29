@@ -84,6 +84,10 @@
       "relation": "manyToMany",
       "target": "api::q-and-a.q-and-a",
       "inversedBy": "authors"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name_ru"
     }
   }
 }

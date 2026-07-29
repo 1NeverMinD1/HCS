@@ -3524,6 +3524,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  text-decoration: none;
 }
 .blogscontent__layout .blogscontent .blogscontent__header .profile {
   width: 50px;
@@ -4318,6 +4319,21 @@
     display: none;
   }
 }
+.authors__layout {
+  display: flex;
+  margin-top: 40px;
+  gap: 10px;
+  margin-inline: 200px;
+}
+.authors__layout .authors {
+  width: 70%;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 20px;
+}
+
 p,
 li {
   color: rgb(58, 58, 58);

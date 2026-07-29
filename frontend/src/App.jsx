@@ -20,6 +20,8 @@ import BlogsContent from "./components/pages/contentpages/blogs/BlogsContent.jsx
 import EventsContent from "./components/pages/contentpages/events/EventsContent.jsx";
 import QnasContent from "./components/pages/contentpages/qnas/QnasContent.jsx";
 
+import Authors from "./components/pages/contentpages/authors/Authors.jsx";
+
 export default function App() {
   useYandexMetrika();
 
@@ -62,6 +64,8 @@ export default function App() {
           <Route path="/:locale/q-and-as" element={<QNA />} />
           {/* Полный вопрос */}
           <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
+          {/* Автор */}
+          <Route path="/:locale/author/:slug" element={<Authors />} />
         </Routes>
         <hr className="main_divide" />
         <div className="wrapper">

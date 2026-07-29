@@ -1,0 +1,14 @@
+.authors__layout {
+  display: flex;
+  margin-top: 40px;
+  gap: 10px;
+  margin-inline: 200px;
+  .authors {
+    width: 70%;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 20px;
+  }
+}
