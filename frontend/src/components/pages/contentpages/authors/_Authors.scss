@@ -1,14 +1,186 @@
+@use "../../../../variables";
+
 .authors__layout {
   display: flex;
   margin-top: 40px;
   gap: 10px;
   margin-inline: 200px;
   .authors {
-    width: 70%;
+    width: 100%;
     margin-top: 20px;
     padding: 20px;
     border-radius: 20px;
     border: 1px solid rgb(220, 220, 220);
     border-radius: 20px;
+    .authors__intro {
+      display: flex;
+      gap: 20px;
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .authors__intro-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        &-role {
+          font-size: variables.$text-font-size + 2px;
+          text-transform: uppercase;
+        }
+        &-name {
+          font-size: variables.$subtitle-font-size + 2px;
+        }
+        &-position {
+          font-size: variables.$text-font-size + 2px;
+        }
+      }
+    }
+    .authors__main {
+      margin-top: 20px;
+      .authors__main-bio {
+        h3 {
+          margin-bottom: 10px;
+          font-size: variables.$subtitle-font-size;
+        }
+        p {
+          font-size: variables.$text-font-size;
+        }
+      }
+    }
+    .authors__works {
+      margin-top: 20px;
+      .authors__works-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        h3 {
+          font-size: variables.$subtitle-font-size;
+        }
+        .authors__works-list {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          .authors__work-card {
+            box-shadow: 1px 1px 10px rgb(179, 179, 179);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-block: 20px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            img {
+              flex-shrink: 0;
+              width: 40%;
+              height: 100%;
+              object-fit: cover;
+            }
+            .authors__work-title {
+              margin-inline: 20px;
+              width: 60%;
+              font-size: variables.$subtitle-font-size - 2px;
+              color: black;
+            }
+            &:hover {
+              .authors__work-title {
+                color: variables.$primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 430px) {
+  .authors__layout {
+    margin-inline: 12px;
+    margin-top: 20px;
+    gap: 0;
+
+    .authors {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 14px;
+
+      .authors__intro {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+
+        img {
+          width: 100px;
+          height: 100px;
+        }
+
+        .authors__intro-info {
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+
+          &-role {
+            font-size: variables.$mobile-text-font-size + 2px;
+          }
+          &-name {
+            font-size: variables.$mobile-subtitle-font-size + 2px;
+          }
+          &-position {
+            font-size: variables.$mobile-text-font-size + 2px;
+          }
+        }
+      }
+
+      .authors__main {
+        margin-top: 14px;
+        .authors__main-bio {
+          h3 {
+            margin-bottom: 8px;
+            font-size: variables.$mobile-subtitle-font-size;
+          }
+          p {
+            font-size: variables.$mobile-text-font-size;
+          }
+        }
+      }
+
+      .authors__works {
+        margin-top: 14px;
+
+        .authors__works-section {
+          h3 {
+            font-size: variables.$mobile-subtitle-font-size;
+          }
+
+          .authors__works-list {
+            gap: 12px;
+
+            .authors__work-card {
+              flex-direction: column;
+              align-items: stretch;
+              min-height: 100px;
+              margin-block: 12px;
+              border-radius: 8px;
+
+              img {
+                width: 100%;
+                height: 50%;
+                border-radius: 8px 8px 0 0;
+              }
+
+              .authors__work-title {
+                width: 100%;
+                margin-inline: 5px;
+                margin-block: auto;
+                font-weight: bold;
+                font-size: variables.$mobile-subtitle-font-size;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
