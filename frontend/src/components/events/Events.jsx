@@ -37,6 +37,7 @@ export default function Events() {
   }, []);
 
   if (isLoading) return null;
+  if (!events || events.length === 0) return null;
 
   return (
     <div className="events wrapper">

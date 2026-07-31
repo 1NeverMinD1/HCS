@@ -25,6 +25,7 @@
   .trendings__block {
     display: flex;
     gap: 10px;
+    min-height: 75px;
     align-items: flex-start;
     text-decoration: none;
     color: black;
@@ -62,13 +63,12 @@
 
   .see_all {
     display: inline-block;
-    margin-top: 14px;
     text-decoration: none;
     color: variables.$primary-color;
     font-size: 20px;
     font-weight: 600;
     transition: 0.2s ease all;
-
+    margin-top: 2px;
     &:hover {
       text-decoration: underline;
     }

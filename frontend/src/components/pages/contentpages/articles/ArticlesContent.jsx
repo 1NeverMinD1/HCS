@@ -58,11 +58,17 @@ function renderBlock(block, i) {
 
     case "image":
       return (
-        <img
-          key={i}
-          src={getImageUrl(block.image.url)}
-          alt={block.image.alternativeText || ""}
-        />
+        <figure key={i} className="richtext-image">
+          <img
+            src={getImageUrl(block.image.url)}
+            alt={block.image.alternativeText || ""}
+          />
+          {block.image.caption && (
+            <figcaption className="img_source">
+              {block.image.caption}
+            </figcaption>
+          )}
+        </figure>
       );
 
     case "list": {
@@ -118,7 +124,18 @@ function ArticleItem({ item, isFirst }) {
         </div>
       </div>
       <h2 className="artscontent__title">{title}</h2>
-      <img src={imgUrl} alt="desc_img" className="artscontent__img" />
+      <figure className="artscontent__cover">
+        <img
+          src={imgUrl}
+          alt={item.desc_img?.alternativeText || title}
+          className="artscontent__img"
+        />
+        {item.desc_img?.caption && (
+          <figcaption className="img_source">
+            {item.desc_img.caption}
+          </figcaption>
+        )}
+      </figure>
       <p className="artscontent__desc">{desc}</p>
       <hr />
       <div className="artscontent__main">

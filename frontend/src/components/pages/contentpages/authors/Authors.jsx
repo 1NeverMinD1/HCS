@@ -111,6 +111,7 @@ export default function Authors() {
                 <div className="authors__works-list">
                   {items.map((item) => {
                     const title = getLangField(item, "title", locale);
+                    const desc = getLangField(item, "desc", locale);
                     const cover = getImageUrl(
                       item.back_img?.formats?.medium?.url ||
                         item.cover_img?.formats?.medium?.url ||
@@ -125,7 +126,10 @@ export default function Authors() {
                         className="authors__work-card"
                       >
                         {cover && <img src={cover} alt={title} />}
-                        <p className="authors__work-title">{title}</p>
+                        <div className="authors__work-text">
+                          <p className="authors__work-title">{title}</p>
+                          <p className="authors__work-desc">{desc}</p>
+                        </div>
                       </Link>
                     );
                   })}

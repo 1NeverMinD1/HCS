@@ -112,7 +112,7 @@ export default function EventsList() {
             </div>
 
             <div className="home__arts-eventlist-content">
-              <h3>{getLangField(event, "name", locale)}</h3>
+              <h3>{getLangField(event, "title", locale)}</h3>
               <p>{getLangField(event, "desc", locale)}</p>
             </div>
           </Link>

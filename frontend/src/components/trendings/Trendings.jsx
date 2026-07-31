@@ -6,12 +6,13 @@ import { useTranslation } from "../../utils/useTranslation.js";
 export default function Trendings({ news }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
+  const visibleNews = news.slice(0, 9);
 
   return (
     <div className="trendings">
       <h2 className="trendings__title">{t("latestNews")}</h2>
       <div className="trendings__list">
-        {news.map((item) => {
+        {visibleNews.map((item) => {
           const title = getLangField(item, "title", locale);
           return (
             <Link

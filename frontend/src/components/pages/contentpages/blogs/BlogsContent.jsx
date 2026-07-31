@@ -57,11 +57,17 @@ function renderBlock(block, i) {
 
     case "image":
       return (
-        <img
-          key={i}
-          src={getImageUrl(block.image.url)}
-          alt={block.image.alternativeText || ""}
-        />
+        <figure key={i} className="richtext-image">
+          <img
+            src={getImageUrl(block.image.url)}
+            alt={block.image.alternativeText || ""}
+          />
+          {block.image.caption && (
+            <figcaption className="img_source">
+              {block.image.caption}
+            </figcaption>
+          )}
+        </figure>
       );
 
     case "list": {
@@ -170,7 +176,18 @@ export default function BlogsContent() {
         </div>
         <p className="cat">{category}</p>
         <h2 className="blogscontent__title">{title}</h2>
-        <img src={imgUrl} alt="desc_img" className="blogscontent__img" />
+        <figure className="blogscontent__cover">
+          <img
+            src={imgUrl}
+            alt={blogs.back_img?.alternativeText || title}
+            className="blogscontent__img"
+          />
+          {blogs.back_img?.caption && (
+            <figcaption className="img_source">
+              {blogs.back_img.caption}
+            </figcaption>
+          )}
+        </figure>
         <hr />
         <div className="blogscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}

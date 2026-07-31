@@ -76,15 +76,30 @@
               height: 100%;
               object-fit: cover;
             }
-            .authors__work-title {
-              margin-inline: 20px;
-              width: 60%;
-              font-size: variables.$subtitle-font-size - 2px;
-              color: black;
-            }
-            &:hover {
+            .authors__work-text {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
               .authors__work-title {
-                color: variables.$primary-color;
+                margin-inline: 20px;
+                width: 60%;
+                font-size: variables.$subtitle-font-size - 2px;
+                color: black;
+                font-weight: bold;
+              }
+              .authors__work-desc {
+                margin-inline: 20px;
+                width: 60%;
+                font-size: variables.$text-font-size;
+                color: black;
+              }
+            }
+
+            &:hover {
+              .authors__work-text {
+                .authors__work-title {
+                  color: variables.$primary-color;
+                }
               }
             }
           }

@@ -57,11 +57,17 @@ function renderBlock(block, i) {
 
     case "image":
       return (
-        <img
-          key={i}
-          src={getImageUrl(block.image.url)}
-          alt={block.image.alternativeText || ""}
-        />
+        <figure key={i} className="richtext-image">
+          <img
+            src={getImageUrl(block.image.url)}
+            alt={block.image.alternativeText || ""}
+          />
+          {block.image.caption && (
+            <figcaption className="img_source">
+              {block.image.caption}
+            </figcaption>
+          )}
+        </figure>
       );
 
     case "list": {
@@ -116,7 +122,18 @@ function NewsItem({ item, isFirst }) {
       </div>
       <h2 className="newscontent__title">{title}</h2>
       <p className="newscontent__intro">{desc}</p>
-      <img src={imgUrl} alt="desc_img" className="newscontent__img" />
+      <figure className="newscontent__cover">
+        <img
+          src={imgUrl}
+          alt={item.desc_img?.alternativeText || title}
+          className="newscontent__img"
+        />
+        {item.desc_img?.caption && (
+          <figcaption className="img_source">
+            {item.desc_img.caption}
+          </figcaption>
+        )}
+      </figure>
       <hr />
       <div className="newscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}

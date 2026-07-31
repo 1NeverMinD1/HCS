@@ -61,12 +61,20 @@
         margin-bottom: 20px;
       }
 
-      .artscontent__img {
-        width: 80%;
-        margin-inline: auto;
-        display: block;
-        margin-block: 20px;
-        border-radius: 10px;
+      .artscontent__cover {
+        .artscontent__img {
+          width: 80%;
+          margin-inline: auto;
+          display: block;
+          margin-block: 20px 10px;
+          border-radius: 10px;
+        }
+        .img_source {
+          width: 80%;
+          margin-inline: auto;
+          display: block;
+          margin-bottom: 20px;
+        }
       }
 
       .artscontent__main {

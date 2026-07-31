@@ -57,11 +57,17 @@ function renderBlock(block, i) {
 
     case "image":
       return (
-        <img
-          key={i}
-          src={getImageUrl(block.image.url)}
-          alt={block.image.alternativeText || ""}
-        />
+        <figure key={i} className="richtext-image">
+          <img
+            src={getImageUrl(block.image.url)}
+            alt={block.image.alternativeText || ""}
+          />
+          {block.image.caption && (
+            <figcaption className="img_source">
+              {block.image.caption}
+            </figcaption>
+          )}
+        </figure>
       );
 
     case "list": {
@@ -226,8 +232,18 @@ export default function EventsContent() {
             </a>
           </div>
         </div>
-
-        <img src={imgUrl} alt="desc_img" className="eventscontent__img" />
+        <figure className="eventscontent__cover">
+          <img
+            src={imgUrl}
+            alt={events.desc_img?.alternativeText || title}
+            className="eventscontent__img"
+          />
+          {events.desc_img?.caption && (
+            <figcaption className="img_source">
+              {events.desc_img.caption}
+            </figcaption>
+          )}
+        </figure>
         <hr />
         <div className="eventscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}

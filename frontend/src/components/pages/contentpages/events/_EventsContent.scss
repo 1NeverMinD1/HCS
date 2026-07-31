@@ -109,12 +109,20 @@
         }
       }
     }
-    .eventscontent__img {
-      width: 80%;
-      margin-inline: auto;
-      display: block;
-      margin-block: 20px;
-      border-radius: 10px;
+    .eventscontent__cover {
+      .eventscontent__img {
+        width: 80%;
+        margin-inline: auto;
+        display: block;
+        margin-block: 20px 10px;
+        border-radius: 10px;
+      }
+      .img_source {
+        width: 80%;
+        margin-inline: auto;
+        display: block;
+        margin-bottom: 20px;
+      }
     }
     .eventscontent__main {
       margin-top: 20px;
