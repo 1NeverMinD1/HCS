@@ -7,6 +7,7 @@ import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -111,6 +112,21 @@ function ArticleItem({ item, isFirst }) {
           Все статьи
         </Link>
       )}
+      {item.authors?.[0] && (
+        <div className="authorsHeader">
+          <AuthorsHeader
+            profileImg={getImageUrl(
+              item.authors?.[0]?.profile_img?.formats?.medium?.url ||
+                item.authors?.[0]?.profile_img?.formats?.small?.url ||
+                item.authors?.[0]?.profile_img?.url,
+            )}
+            author={getLangField(item.authors?.[0], "name", locale)}
+            position={getLangField(item.authors?.[0], "position", locale)}
+            authorSlug={item.authors?.[0]?.slug}
+          />
+        </div>
+      )}
+
       <div className="artscontent__header">
         <p className="cat">{category}</p>
         <div className="artscontent__header-date">

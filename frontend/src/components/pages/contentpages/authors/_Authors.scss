@@ -20,6 +20,7 @@
         height: 150px;
         border-radius: 50%;
         flex-shrink: 0;
+        object-fit: cover;
       }
       .authors__intro-info {
         display: flex;
@@ -46,6 +47,32 @@
         }
         p {
           font-size: variables.$text-font-size;
+          margin-bottom: 20px;
+        }
+      }
+      .authors__main-socials {
+        a {
+          width: fit-content;
+          text-decoration: none;
+          color: variables.$text-color;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .authors__socials-ico {
+            width: 25px;
+            height: 25px;
+          }
+          .authors__socials-label {
+            font-size: 20px;
+          }
+          &:hover {
+            .authors__socials-ico {
+              fill: variables.$primary-color;
+            }
+            .authors__socials-label {
+              color: variables.$primary-color;
+            }
+          }
         }
       }
     }
@@ -129,6 +156,8 @@
         img {
           width: 100px;
           height: 100px;
+          flex-shrink: 0;
+          object-fit: cover;
         }
 
         .authors__intro-info {
@@ -157,6 +186,13 @@
           }
           p {
             font-size: variables.$mobile-text-font-size;
+          }
+        }
+        .authors__main-socials {
+          a {
+            .authors__socials-label {
+              font-size: 16px;
+            }
           }
         }
       }

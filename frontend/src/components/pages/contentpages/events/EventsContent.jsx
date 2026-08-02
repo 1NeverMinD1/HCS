@@ -6,6 +6,7 @@ import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -105,6 +106,7 @@ export default function EventsContent() {
         `&populate[OG][populate]=og_image` +
         `&populate[SEO][populate]=*` +
         `&populate[desc_img][populate]=*` +
+        `&populate[authors][populate]=*` +
         `&populate[categories][populate]=*` +
         `&populate[tags][populate]=*`,
     )
@@ -156,6 +158,20 @@ export default function EventsContent() {
           </svg>
           Все события
         </Link>
+        {events.authors?.[0] && (
+          <div className="authorsHeader">
+            <AuthorsHeader
+              profileImg={getImageUrl(
+                events.authors?.[0]?.profile_img?.formats?.medium?.url ||
+                  events.authors?.[0]?.profile_img?.formats?.small?.url ||
+                  events.authors?.[0]?.profile_img?.url,
+              )}
+              author={getLangField(events.authors?.[0], "name", locale)}
+              position={getLangField(events.authors?.[0], "position", locale)}
+              authorSlug={events.authors?.[0]?.slug}
+            />
+          </div>
+        )}
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
             <p className="cat">{category}</p>

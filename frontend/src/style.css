@@ -3536,28 +3536,10 @@
 }
 .blogscontent__layout .blogscontent .blogscontent__header {
   display: flex;
-  gap: 20px;
-  align-items: center;
-  text-decoration: none;
+  gap: 10px;
+  align-items: baseline;
 }
-.blogscontent__layout .blogscontent .blogscontent__header .profile {
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  margin-left: 20px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.blogscontent__layout .blogscontent .blogscontent__header .blogscontent__author .author {
-  font-size: 24px;
-}
-.blogscontent__layout .blogscontent .blogscontent__header .blogscontent__author .spec {
-  font-size: 18px;
-}
-.blogscontent__layout .blogscontent .blogscontent__header-date {
-  margin-top: 20px;
-}
-.blogscontent__layout .blogscontent .blogscontent__header-date p {
+.blogscontent__layout .blogscontent .blogscontent__header .blogscontent__header-date {
   font-size: 16px;
   opacity: 0.8;
 }
@@ -4368,6 +4350,8 @@
   height: 150px;
   border-radius: 50%;
   flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .authors__layout .authors .authors__intro .authors__intro-info {
   display: flex;
@@ -4393,6 +4377,29 @@
 }
 .authors__layout .authors .authors__main .authors__main-bio p {
   font-size: 18px;
+  margin-bottom: 20px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a {
+  width: -moz-fit-content;
+  width: fit-content;
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a .authors__socials-ico {
+  width: 25px;
+  height: 25px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a .authors__socials-label {
+  font-size: 20px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a:hover .authors__socials-ico {
+  fill: rgb(0, 60, 255);
+}
+.authors__layout .authors .authors__main .authors__main-socials a:hover .authors__socials-label {
+  color: rgb(0, 60, 255);
 }
 .authors__layout .authors .authors__works {
   margin-top: 20px;
@@ -4469,6 +4476,9 @@
   .authors__layout .authors .authors__intro img {
     width: 100px;
     height: 100px;
+    flex-shrink: 0;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .authors__layout .authors .authors__intro .authors__intro-info {
     align-items: center;
@@ -4492,6 +4502,9 @@
     font-size: 18px;
   }
   .authors__layout .authors .authors__main .authors__main-bio p {
+    font-size: 16px;
+  }
+  .authors__layout .authors .authors__main .authors__main-socials a .authors__socials-label {
     font-size: 16px;
   }
   .authors__layout .authors .authors__works {
@@ -4523,6 +4536,28 @@
     font-size: 18px;
   }
 }
+.authors__header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.authors__header .profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  margin-left: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.authors__header .authors__author .author {
+  font-size: 24px;
+}
+.authors__header .authors__author .spec {
+  font-size: 18px;
+}
+
 p,
 li {
   color: rgb(58, 58, 58);

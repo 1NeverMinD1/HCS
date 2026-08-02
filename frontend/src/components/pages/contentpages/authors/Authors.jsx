@@ -3,6 +3,25 @@ import { useParams, Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import {
+  FaInstagram,
+  FaTelegram,
+  FaFacebook,
+  FaWhatsapp,
+  FaYoutube,
+  FaGlobe,
+  FaEnvelope,
+} from "react-icons/fa";
+
+const SOCIAL_ICONS = {
+  instagram: FaInstagram,
+  telegram: FaTelegram,
+  facebook: FaFacebook,
+  whatsapp: FaWhatsapp,
+  youtube: FaYoutube,
+  website: FaGlobe,
+  email: FaEnvelope,
+};
 
 const SECTIONS = [
   { key: "blogs", label: "Блоги", route: "blogs" },
@@ -39,7 +58,8 @@ export default function Authors() {
         `&populate[articles][populate]=*` +
         `&populate[events][populate]=*` +
         `&populate[news][populate]=*` +
-        `&populate[qnas][populate]=*`,
+        `&populate[qnas][populate]=*` +
+        `&populate[links]=true`,
     )
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -95,6 +115,35 @@ export default function Authors() {
           <div className="authors__main-bio">
             <h3>Биография:</h3>
             <p>{bio}</p>
+            <h3>Социальные сети:</h3>
+            {author.links?.length > 0 && (
+              <div className="authors__main-socials">
+                {author.links.map((link) => {
+                  const Icon = SOCIAL_ICONS[link.platform];
+                  if (!Icon) return null;
+
+                  const href =
+                    link.platform === "email" ? `mailto:${link.url}` : link.url;
+
+                  return (
+                    <a
+                      key={link.id}
+                      href={href}
+                      target={link.platform === "email" ? undefined : "_blank"}
+                      rel="noopener noreferrer"
+                      className="authors__socials-link"
+                      aria-label={link.platform}
+                    >
+                      <Icon className="authors__socials-ico" />
+                      <span className="authors__socials-label">
+                        {link.platform.charAt(0).toUpperCase() +
+                          link.platform.slice(1)}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
 
@@ -113,8 +162,10 @@ export default function Authors() {
                     const title = getLangField(item, "title", locale);
                     const desc = getLangField(item, "desc", locale);
                     const cover = getImageUrl(
-                      item.back_img?.formats?.medium?.url ||
+                      item.desc_img?.formats?.medium?.url ||
+                        item.back_img?.formats?.medium?.url ||
                         item.cover_img?.formats?.medium?.url ||
+                        item.desc_img?.url ||
                         item.back_img?.url ||
                         item.cover_img?.url,
                     );
