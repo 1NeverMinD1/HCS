@@ -1,0 +1,19 @@
+{
+  "name": "og-fix",
+  "version": "1.0.0",
+  "main": "fix-og-images.js",
+  "type": "module",
+  "scripts": {
+    "fix-og": "node fix-og-images.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "OG image optimizer for zhkh24.kz",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "form-data": "^4.0.6",
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.35.3"
+  }
+}
