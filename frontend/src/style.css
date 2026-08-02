@@ -4393,6 +4393,29 @@
 }
 .authors__layout .authors .authors__main .authors__main-bio p {
   font-size: 18px;
+  margin-bottom: 20px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a {
+  width: -moz-fit-content;
+  width: fit-content;
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a .authors__socials-ico {
+  width: 25px;
+  height: 25px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a .authors__socials-label {
+  font-size: 20px;
+}
+.authors__layout .authors .authors__main .authors__main-socials a:hover .authors__socials-ico {
+  fill: rgb(0, 60, 255);
+}
+.authors__layout .authors .authors__main .authors__main-socials a:hover .authors__socials-label {
+  color: rgb(0, 60, 255);
 }
 .authors__layout .authors .authors__works {
   margin-top: 20px;
@@ -4492,6 +4515,9 @@
     font-size: 18px;
   }
   .authors__layout .authors .authors__main .authors__main-bio p {
+    font-size: 16px;
+  }
+  .authors__layout .authors .authors__main .authors__main-socials a .authors__socials-label {
     font-size: 16px;
   }
   .authors__layout .authors .authors__works {
