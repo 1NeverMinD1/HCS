@@ -35,11 +35,33 @@ export interface ContentSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_content_social_links';
+  info: {
+    displayName: 'social-link';
+  };
+  attributes: {
+    platform: Schema.Attribute.Enumeration<
+      [
+        'instagram',
+        'telegram',
+        'facebook',
+        'whatsapp',
+        'youtube',
+        'website',
+        'email',
+      ]
+    >;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.og': ContentOg;
       'content.seo': ContentSeo;
+      'content.social-link': ContentSocialLink;
     }
   }
 }

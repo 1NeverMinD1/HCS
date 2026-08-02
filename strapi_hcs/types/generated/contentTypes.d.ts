@@ -540,7 +540,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
-    links: Schema.Attribute.Blocks;
+    links: Schema.Attribute.Component<'content.social-link', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

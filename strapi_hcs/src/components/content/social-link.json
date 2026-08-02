@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_content_social_links",
+  "info": {
+    "displayName": "social-link"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "instagram",
+        "telegram",
+        "facebook",
+        "whatsapp",
+        "youtube",
+        "website",
+        "email"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
