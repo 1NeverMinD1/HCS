@@ -20,6 +20,7 @@
         height: 150px;
         border-radius: 50%;
         flex-shrink: 0;
+        object-fit: cover;
       }
       .authors__intro-info {
         display: flex;
@@ -155,6 +156,8 @@
         img {
           width: 100px;
           height: 100px;
+          flex-shrink: 0;
+          object-fit: cover;
         }
 
         .authors__intro-info {

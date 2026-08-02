@@ -6,6 +6,7 @@ import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -154,19 +155,15 @@ export default function BlogsContent() {
           </svg>
           Все блоги
         </Link>
-
-        <Link
-          to={`/${locale}/author/${blogs?.authors?.[0]?.slug}`}
-          className="blogscontent__header"
-        >
-          <img src={profileImg} alt="profile_photo" className="profile" />
-          <div className="blogscontent__author">
-            <p className="author">{author}</p>
-            <p className="spec">{position}</p>
-          </div>
-        </Link>
-        <div className="blogscontent__header-date">
-          <p>
+        <AuthorsHeader
+          profileImg={profileImg}
+          author={author}
+          position={position}
+          authorSlug={blogs?.authors?.[0]?.slug}
+        />
+        <div className="blogscontent__header">
+          <p className="cat">{category}</p>
+          <p className="blogscontent__header-date">
             {date.toLocaleDateString("ru-RU", {
               day: "numeric",
               month: "long",
@@ -174,7 +171,7 @@ export default function BlogsContent() {
             })}
           </p>
         </div>
-        <p className="cat">{category}</p>
+
         <h2 className="blogscontent__title">{title}</h2>
         <figure className="blogscontent__cover">
           <img

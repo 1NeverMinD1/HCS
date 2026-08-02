@@ -162,8 +162,10 @@ export default function Authors() {
                     const title = getLangField(item, "title", locale);
                     const desc = getLangField(item, "desc", locale);
                     const cover = getImageUrl(
-                      item.back_img?.formats?.medium?.url ||
+                      item.desc_img?.formats?.medium?.url ||
+                        item.back_img?.formats?.medium?.url ||
                         item.cover_img?.formats?.medium?.url ||
+                        item.desc_img?.url ||
                         item.back_img?.url ||
                         item.cover_img?.url,
                     );

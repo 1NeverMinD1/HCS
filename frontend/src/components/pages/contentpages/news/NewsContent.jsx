@@ -6,6 +6,7 @@ import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext";
 import { getLangField } from "../../../../utils/getLangField";
 import { getImageUrl } from "../../../../utils/getImageUrl";
+import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -110,6 +111,21 @@ function NewsItem({ item, isFirst }) {
           Все новости
         </Link>
       )}
+      {item.authors?.[0] && (
+        <div className="authorsHeader">
+          <AuthorsHeader
+            profileImg={getImageUrl(
+              item.authors?.[0]?.profile_img?.formats?.medium?.url ||
+                item.authors?.[0]?.profile_img?.formats?.small?.url ||
+                item.authors?.[0]?.profile_img?.url,
+            )}
+            author={getLangField(item.authors?.[0], "name", locale)}
+            position={getLangField(item.authors?.[0], "position", locale)}
+            authorSlug={item.authors?.[0]?.slug}
+          />
+        </div>
+      )}
+
       <div className="newscontent__header">
         <p className="cat">{category}</p>
         <p className="newscontent__header-date">

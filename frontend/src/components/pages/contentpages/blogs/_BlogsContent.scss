@@ -38,32 +38,14 @@
     }
     .blogscontent__header {
       display: flex;
-      gap: 20px;
-      align-items: center;
-      text-decoration: none;
-      .profile {
-        width: 50px;
-        height: 50px;
-        border-radius: 50px;
-        margin-left: 20px;
-        object-fit: cover;
-      }
-      .blogscontent__author {
-        .author {
-          font-size: 24px;
-        }
-        .spec {
-          font-size: 18px;
-        }
-      }
-    }
-    .blogscontent__header-date {
-      margin-top: 20px;
-      p {
+      gap: 10px;
+      align-items: baseline;
+      .blogscontent__header-date {
         font-size: 16px;
         opacity: 0.8;
       }
     }
+
     .cat {
       margin-top: 20px;
       margin-left: 20px;
