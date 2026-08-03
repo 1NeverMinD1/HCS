@@ -18,6 +18,7 @@ export default function Home() {
   const [featuredId, setFeaturedId] = useState(null);
   const [featuredTag, setFeaturedTag] = useState(null);
   const [hasAd, setHasAd] = useState(false);
+  const [hasEvents, setHasEvents] = useState(true);
   const { t } = useTranslation(locale);
 
   const [allNews, setAllNews] = useState([]);
@@ -67,9 +68,11 @@ export default function Home() {
           </div>
           {!isNewsLoading && <Trendings news={trendingNews} />}
         </div>
-        <div className="home__arts-block">
-          <Articles featuredTag={featuredTag} />
-          <EventsList />
+        <div
+          className={`home__arts-block ${!hasEvents ? "home__arts-block--no-events" : ""}`}
+        >
+          <Articles featuredTag={featuredTag} fullWidth={!hasEvents} />
+          <EventsList onLoadEvents={setHasEvents} />
         </div>
         <Blogs />
       </div>

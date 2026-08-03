@@ -115,6 +115,8 @@
         margin-inline: auto;
         display: block;
         margin-block: 20px 10px;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
         border-radius: 10px;
       }
       .img_source {
@@ -156,9 +158,11 @@
         }
       }
       img {
-        margin-block: 40px;
+        margin-block: 20px;
         margin-inline: auto;
         width: 80%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
       }
       ul {
         font-weight: bold;

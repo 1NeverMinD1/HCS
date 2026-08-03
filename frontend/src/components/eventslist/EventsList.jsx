@@ -7,7 +7,7 @@ import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 
-export default function EventsList() {
+export default function EventsList({ onLoadEvents }) {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { locale } = useLocale();
@@ -31,14 +31,16 @@ export default function EventsList() {
         `https://api.zhkh24.kz/api/events?${params.toString()}`,
       );
       const data = await res.json();
-      setEvents(data.data);
+      const list = data.data || [];
+      setEvents(list);
       setIsLoading(false);
+      onLoadEvents?.(list.length > 0);
     }
 
     fetchData();
   }, []);
 
-  if (isLoading) return null;
+  if (isLoading || events.length === 0) return null;
 
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("ru-RU", {

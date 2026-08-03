@@ -24,6 +24,10 @@
     .home__arts-block {
       display: flex;
       gap: 80px;
+
+      &--no-events {
+        gap: 0;
+      }
     }
   }
   .main_divide {

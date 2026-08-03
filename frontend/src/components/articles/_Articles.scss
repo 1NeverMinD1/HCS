@@ -4,6 +4,11 @@
   width: 60%;
   margin-block: 50px;
   height: 100%;
+
+  &--full {
+    width: 100%;
+  }
+
   .articles__header {
     display: flex;
     justify-content: space-between;

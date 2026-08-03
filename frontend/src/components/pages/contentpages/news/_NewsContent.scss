@@ -65,6 +65,8 @@
           display: block;
           margin-block: 20px 10px;
           border-radius: 10px;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
         }
         .img_source {
           width: 80%;
@@ -109,6 +111,8 @@
           margin-block: 20px;
           margin-inline: auto;
           width: 80%;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
         }
         ul {
           font-weight: bold;

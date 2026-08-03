@@ -4,7 +4,7 @@ import ArticlesBlocks from "./ArticlesBlocks/ArticlesBlocks";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
 
-export default function Articles() {
+export default function Articles({ featuredTag, fullWidth }) {
   const { locale } = useLocale();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +27,7 @@ export default function Articles() {
   if (isLoading) return null;
 
   return (
-    <div className="articles">
+    <div className={`articles ${fullWidth ? "articles--full" : ""}`}>
       <div className="articles__header">
         <h2 className="articles__header-title">{t("articles")}</h2>
         <Link to={`/${locale}/articles`} className="view_all">
