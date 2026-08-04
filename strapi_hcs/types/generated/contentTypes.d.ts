@@ -666,6 +666,9 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
   attributes: {
     articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    city_en: Schema.Attribute.String;
+    city_kk: Schema.Attribute.String;
+    city_ru: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -675,9 +678,6 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
-    sity_en: Schema.Attribute.String;
-    sity_kk: Schema.Attribute.String;
-    sity_ru: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

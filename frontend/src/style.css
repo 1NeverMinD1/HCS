@@ -2983,7 +2983,7 @@
   display: flex;
   gap: 10px;
 }
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags p {
+.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .tag {
   background: rgb(0, 60, 255);
   width: -moz-fit-content;
   width: fit-content;
@@ -2991,7 +2991,7 @@
   color: white;
   border-radius: 5px;
 }
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags p::before {
+.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .tag::before {
   content: "#";
 }
 .newscontent__layout .newscontent__layout-sidemenu {

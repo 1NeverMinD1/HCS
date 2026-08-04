@@ -11,14 +11,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "sity_ru": {
+    "city_ru": {
       "type": "string",
       "required": true
     },
-    "sity_kk": {
+    "city_kk": {
       "type": "string"
     },
-    "sity_en": {
+    "city_en": {
       "type": "string"
     },
     "articles": {

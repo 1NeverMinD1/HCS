@@ -189,7 +189,7 @@
         margin-top: 10px;
         display: flex;
         gap: 10px;
-        p {
+        .tag {
           background: variables.$primary-color;
           width: fit-content;
           padding: 5px;
