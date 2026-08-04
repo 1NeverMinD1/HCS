@@ -91,6 +91,12 @@
     },
     "isFeatured": {
       "type": "boolean"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::city.city",
+      "inversedBy": "blogs"
     }
   }
 }

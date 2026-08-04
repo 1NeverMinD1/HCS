@@ -483,6 +483,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::category.category'
     >;
+    cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -585,6 +586,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::category.category'
     >;
+    cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -662,12 +664,16 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::city.city'> &
       Schema.Attribute.Private;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
     sity_en: Schema.Attribute.String;
     sity_kk: Schema.Attribute.String;
@@ -695,6 +701,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::category.category'
     >;
+    cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -779,6 +786,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
   };
   attributes: {
     authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
+    cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;

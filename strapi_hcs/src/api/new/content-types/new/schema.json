@@ -94,6 +94,12 @@
       "relation": "manyToMany",
       "target": "api::author.author",
       "mappedBy": "news"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::city.city",
+      "mappedBy": "news"
     }
   }
 }

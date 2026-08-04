@@ -126,6 +126,12 @@
     },
     "register_link": {
       "type": "text"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::city.city",
+      "mappedBy": "events"
     }
   }
 }

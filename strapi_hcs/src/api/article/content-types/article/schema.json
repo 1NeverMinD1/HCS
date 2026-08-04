@@ -91,6 +91,12 @@
     "slug": {
       "type": "uid",
       "targetField": "title_ru"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::city.city",
+      "inversedBy": "articles"
     }
   }
 }
