@@ -13,7 +13,7 @@ export default function Articles({ featuredTag, fullWidth }) {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=3`,
+        `https://api.zhkh24.kz/api/articles?fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=3`,
       );
 
       const data = await res.json();

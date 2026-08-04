@@ -15,7 +15,33 @@ export default function Events() {
       const today = new Date().toISOString().split("T")[0];
 
       const params = new URLSearchParams({
-        populate: "*",
+        "fields[0]": "title_ru",
+        "fields[1]": "title_kk",
+        "fields[2]": "title_en",
+
+        "fields[3]": "desc_ru",
+        "fields[4]": "desc_kk",
+        "fields[5]": "desc_en",
+
+        "fields[6]": "place_ru",
+        "fields[7]": "place_kk",
+        "fields[8]": "place_en",
+
+        "fields[9]": "slug",
+        "fields[10]": "start",
+        "fields[11]": "end",
+        "fields[12]": "amount",
+
+        "populate[cover_img][fields][0]": "url",
+        "populate[cover_img][fields][1]": "formats",
+
+        "populate[desc_img][fields][0]": "url",
+        "populate[desc_img][fields][1]": "formats",
+
+        "populate[categories][fields][0]": "name_ru",
+        "populate[categories][fields][1]": "name_kk",
+        "populate[categories][fields][2]": "name_en",
+
         sort: "start:asc",
         "pagination[page]": "2",
         "pagination[pageSize]": "3",

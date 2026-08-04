@@ -1252,7 +1252,7 @@
 .trendings .trendings__block {
   display: flex;
   gap: 10px;
-  min-height: 75px;
+  min-height: 110px;
   align-items: flex-start;
   text-decoration: none;
   color: black;
@@ -1275,6 +1275,10 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   transition: 0.2s ease color;
 }
 .trendings .trendings__block .trendings__block-info .trendings__block-date {

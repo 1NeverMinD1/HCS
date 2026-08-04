@@ -6,7 +6,7 @@ import { useTranslation } from "../../utils/useTranslation.js";
 export default function Trendings({ news }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-  const visibleNews = news.slice(0, 9);
+  const visibleNews = news.slice(0, 8);
 
   return (
     <div className="trendings">

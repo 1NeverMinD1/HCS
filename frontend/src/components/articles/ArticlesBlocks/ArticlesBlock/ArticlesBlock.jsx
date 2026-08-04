@@ -13,7 +13,6 @@ export default function ArticlesBlock({ article }) {
   );
 
   const title = getLangField(article, "title", locale);
-  const content = article?.[`content_${locale}`] || article?.content_ru || [];
   const category = getLangField(article?.categories?.[0], "name", locale);
   const desc = getLangField(article, "desc", locale);
 

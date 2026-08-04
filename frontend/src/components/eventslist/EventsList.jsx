@@ -18,7 +18,24 @@ export default function EventsList({ onLoadEvents }) {
       const today = new Date().toISOString().split("T")[0];
 
       const params = new URLSearchParams({
-        populate: "*",
+        "fields[0]": "title_ru",
+        "fields[1]": "title_kk",
+        "fields[2]": "title_en",
+        "fields[3]": "desc_ru",
+        "fields[4]": "desc_kk",
+        "fields[5]": "desc_en",
+        "fields[6]": "slug",
+        "fields[7]": "start",
+        "fields[8]": "end",
+        "fields[9]": "amount",
+        "fields[10]": "price",
+
+        "populate[cover_img][fields][0]": "url",
+        "populate[cover_img][fields][1]": "formats",
+
+        "populate[desc_img][fields][0]": "url",
+        "populate[desc_img][fields][1]": "formats",
+
         sort: "start:asc",
         "pagination[pageSize]": "3",
       });
