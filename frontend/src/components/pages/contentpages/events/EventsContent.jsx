@@ -126,7 +126,7 @@ export default function EventsContent() {
   const isSameDay = (a, b) =>
     a && b && new Date(a).toDateString() === new Date(b).toDateString();
 
-  const imgUrl = getImageUrl(item.desc_img?.url);
+  const imgUrl = getImageUrl(events.desc_img?.url);
 
   return (
     <div className="eventscontent__layout">
