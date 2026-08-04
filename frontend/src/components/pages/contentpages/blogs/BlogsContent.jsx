@@ -113,11 +113,7 @@ export default function BlogsContent() {
 
   const date = new Date(blogs.publishDate);
 
-  const imgUrl = getImageUrl(
-    blogs.back_img?.formats?.large?.url ||
-      blogs.back_img?.formats?.medium?.url ||
-      blogs.back_img?.url,
-  );
+  const imgUrl = getImageUrl(item.desc_img?.url);
 
   const profileImg = getImageUrl(
     blogs?.authors?.[0]?.profile_img?.formats?.medium?.url ||

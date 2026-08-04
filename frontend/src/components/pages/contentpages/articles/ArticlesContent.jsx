@@ -94,9 +94,7 @@ function renderBlock(block, i) {
 function ArticleItem({ item, isFirst }) {
   const { locale } = useLocale();
   const date = new Date(item.publishDate);
-  const imgUrl = getImageUrl(
-    item.desc_img?.formats?.small?.url || item.desc_img?.url,
-  );
+  const imgUrl = getImageUrl(item.desc_img?.url);
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
