@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale";
 import {
   FaInstagram,
   FaTelegram,
@@ -53,38 +54,71 @@ export default function Authors() {
 
     fetch(
       `https://api.zhkh24.kz/api/authors?filters[slug][$eq]=${slug}` +
+        // Автор
+        `&fields[0]=name_ru` +
+        `&fields[1]=name_kk` +
+        `&fields[2]=name_en` +
+        `&fields[3]=position_ru` +
+        `&fields[4]=position_kk` +
+        `&fields[5]=position_en` +
+        `&fields[6]=bio_ru` +
+        `&fields[7]=bio_kk` +
+        `&fields[8]=bio_en` +
+        `&fields[9]=slug` +
+        // Фото автора
         `&populate[profile_img][fields][0]=url` +
         `&populate[profile_img][fields][1]=formats` +
-        `&populate[blogs][fields][0]=title_${locale}` +
-        `&populate[blogs][fields][1]=desc_${locale}` +
-        `&populate[blogs][fields][2]=slug` +
-        `&populate[blogs][fields][3]=publishDate` +
-        `&populate[blogs][fields][4]=createdAt` +
+        // Блоги
+        `&populate[blogs][fields][0]=title_ru` +
+        `&populate[blogs][fields][1]=title_kk` +
+        `&populate[blogs][fields][2]=title_en` +
+        `&populate[blogs][fields][3]=desc_ru` +
+        `&populate[blogs][fields][4]=desc_kk` +
+        `&populate[blogs][fields][5]=desc_en` +
+        `&populate[blogs][fields][6]=slug` +
+        `&populate[blogs][fields][7]=publishDate` +
+        `&populate[blogs][fields][8]=createdAt` +
         `&populate[blogs][populate][back_img][fields][0]=url` +
         `&populate[blogs][populate][back_img][fields][1]=formats` +
-        `&populate[articles][fields][0]=title_${locale}` +
-        `&populate[articles][fields][1]=desc_${locale}` +
-        `&populate[articles][fields][2]=slug` +
-        `&populate[articles][fields][3]=publishDate` +
-        `&populate[articles][fields][4]=createdAt` +
+        // Статьи
+        `&populate[articles][fields][0]=title_ru` +
+        `&populate[articles][fields][1]=title_kk` +
+        `&populate[articles][fields][2]=title_en` +
+        `&populate[articles][fields][3]=desc_ru` +
+        `&populate[articles][fields][4]=desc_kk` +
+        `&populate[articles][fields][5]=desc_en` +
+        `&populate[articles][fields][6]=slug` +
+        `&populate[articles][fields][7]=publishDate` +
+        `&populate[articles][fields][8]=createdAt` +
         `&populate[articles][populate][desc_img][fields][0]=url` +
         `&populate[articles][populate][desc_img][fields][1]=formats` +
-        `&populate[events][fields][0]=title_${locale}` +
-        `&populate[events][fields][1]=desc_${locale}` +
-        `&populate[events][fields][2]=slug` +
-        `&populate[events][fields][3]=start` +
-        `&populate[events][fields][4]=createdAt` +
+        // Новости
+        `&populate[news][fields][0]=title_ru` +
+        `&populate[news][fields][1]=title_kk` +
+        `&populate[news][fields][2]=title_en` +
+        `&populate[news][fields][3]=desc_ru` +
+        `&populate[news][fields][4]=desc_kk` +
+        `&populate[news][fields][5]=desc_en` +
+        `&populate[news][fields][6]=slug` +
+        `&populate[news][fields][7]=publishDate` +
+        `&populate[news][fields][8]=createdAt` +
+        `&populate[news][populate][desc_img][fields][0]=url` +
+        `&populate[news][populate][desc_img][fields][1]=formats` +
+        // Мероприятия
+        `&populate[events][fields][0]=title_ru` +
+        `&populate[events][fields][1]=title_kk` +
+        `&populate[events][fields][2]=title_en` +
+        `&populate[events][fields][3]=desc_ru` +
+        `&populate[events][fields][4]=desc_kk` +
+        `&populate[events][fields][5]=desc_en` +
+        `&populate[events][fields][6]=slug` +
+        `&populate[events][fields][7]=start` +
+        `&populate[events][fields][8]=createdAt` +
         `&populate[events][populate][desc_img][fields][0]=url` +
         `&populate[events][populate][desc_img][fields][1]=formats` +
         `&populate[events][populate][cover_img][fields][0]=url` +
         `&populate[events][populate][cover_img][fields][1]=formats` +
-        `&populate[news][fields][0]=title_${locale}` +
-        `&populate[news][fields][1]=desc_${locale}` +
-        `&populate[news][fields][2]=slug` +
-        `&populate[news][fields][3]=publishDate` +
-        `&populate[news][fields][4]=createdAt` +
-        `&populate[news][populate][desc_img][fields][0]=url` +
-        `&populate[news][populate][desc_img][fields][1]=formats` +
+        // Соцсети
         `&populate[links]=true`,
     )
       .then((res) => {
@@ -106,7 +140,7 @@ export default function Authors() {
     return () => {
       cancelled = true;
     };
-  }, [slug, locale]);
+  }, [slug]);
 
   if (loading) return <h2 className="loading wrapper">Загрузка...</h2>;
   if (error || !author)
@@ -206,6 +240,12 @@ export default function Authors() {
                         <div className="authors__work-text">
                           <p className="authors__work-title">{title}</p>
                           <p className="authors__work-desc">{desc}</p>
+                          <p className="authors__work-date">
+                            {formatLocalizedDate(
+                              item.publishDate || item.start || item.createdAt,
+                              locale,
+                            )}
+                          </p>
                         </div>
                       </Link>
                     );

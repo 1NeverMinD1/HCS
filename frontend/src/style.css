@@ -4455,24 +4455,34 @@
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 10px 0 0 10px;
 }
 .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text {
+  padding-inline: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: space-between;
+  height: 70%;
 }
 .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text .authors__work-title {
-  margin-inline: 20px;
   width: 60%;
   font-size: 28px;
   color: black;
   font-weight: bold;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text .authors__work-desc {
-  margin-inline: 20px;
   width: 60%;
   font-size: 18px;
   color: black;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card:hover .authors__work-text .authors__work-title {
   color: rgb(0, 60, 255);
@@ -4542,7 +4552,7 @@
   .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card {
     flex-direction: column;
     align-items: stretch;
-    min-height: 100px;
+    min-height: 250px;
     margin-block: 12px;
     border-radius: 8px;
   }
@@ -4551,12 +4561,24 @@
     height: 50%;
     border-radius: 8px 8px 0 0;
   }
-  .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-title {
+  .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text {
+    padding: 5px 10px;
+    gap: 5px;
+  }
+  .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text .authors__work-title {
     width: 100%;
-    margin-inline: 5px;
     margin-block: auto;
     font-weight: bold;
     font-size: 18px;
+  }
+  .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text .authors__work-desc {
+    width: 100%;
+    margin-block: auto;
+    font-size: 16px;
+  }
+  .authors__layout .authors .authors__works .authors__works-section .authors__works-list .authors__work-card .authors__work-text .authors__work-date {
+    margin-block: auto;
+    font-size: 16px;
   }
 }
 .authors__header {

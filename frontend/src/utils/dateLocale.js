@@ -45,10 +45,16 @@ const monthNames = {
 };
 
 export const formatLocalizedDate = (dateStr, locale) => {
+  if (!dateStr) return "";
+
   const date = new Date(dateStr);
+
+  if (Number.isNaN(date.getTime())) return "";
+
   const day = date.getDate();
   const month =
-    monthNames[locale]?.[date.getMonth()] || monthNames.ru[date.getMonth()];
+    monthNames[locale]?.[date.getMonth()] ?? monthNames.ru[date.getMonth()];
   const year = date.getFullYear();
+
   return `${day} ${month} ${year}`;
 };
