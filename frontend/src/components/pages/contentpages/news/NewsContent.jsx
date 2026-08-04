@@ -154,7 +154,7 @@ function NewsItem({ item, isFirst }) {
       </div>
       <div className="newscontent__tags">
         <p className="city">
-          {getLangField(item?.sities?.[0], "sity", locale)}
+          {getLangField(item?.cities?.[0], "city", locale)}
         </p>
         {item.tags?.map((tag) => (
           <p className="tag" key={tag.id}>
@@ -192,7 +192,8 @@ export default function NewsContent() {
         `&populate[authors][populate][profile_img][fields][0]=url` +
         `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[header_cats][populate]=*` +
-        `&populate[tags][populate]=*`,
+        `&populate[tags][populate]=*` +
+        `&populate[cities][populate]=*`,
     )
       .then((res) => res.json())
       .then((data) => setNewsList([data.data?.[0]]));
@@ -218,7 +219,8 @@ export default function NewsContent() {
         `&populate[authors][populate][profile_img][fields][0]=url` +
         `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[header_cats][populate]=*` +
-        `&populate[tags][populate]=*`,
+        `&populate[tags][populate]=*` +
+        `&populate[cities][populate]=*`,
     );
     const data = await res.json();
     const next = data.data?.[0];
