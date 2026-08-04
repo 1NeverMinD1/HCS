@@ -2983,6 +2983,15 @@
   display: flex;
   gap: 10px;
 }
+.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .city {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .tag {
   background: rgb(0, 60, 255);
   width: -moz-fit-content;
@@ -3357,6 +3366,15 @@
   display: flex;
   gap: 10px;
 }
+.artscontent__layout .artscontent__layout-main .artscontent .artscontent__tags .city {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__tags p {
   background: rgb(0, 60, 255);
   width: -moz-fit-content;
@@ -3712,6 +3730,15 @@
   margin-top: 10px;
   display: flex;
   gap: 10px;
+}
+.blogscontent__layout .blogscontent .blogscontent__tags .city {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
 }
 .blogscontent__layout .blogscontent .blogscontent__tags p {
   background: rgb(0, 60, 255);
@@ -4161,6 +4188,15 @@
   margin-top: 10px;
   display: flex;
   gap: 10px;
+}
+.eventscontent__layout .eventscontent .eventscontent__tags .city {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
 }
 .eventscontent__layout .eventscontent .eventscontent__tags p {
   background: rgb(0, 60, 255);

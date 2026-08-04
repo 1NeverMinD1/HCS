@@ -269,6 +269,9 @@ export default function EventsContent() {
           Зарегистрироваться
         </a>
         <div className="eventscontent__tags">
+          <p className="city">
+            {getLangField(events?.cities?.[0], "city", locale)}
+          </p>
           {events.tags?.map((tag) => (
             <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
           ))}

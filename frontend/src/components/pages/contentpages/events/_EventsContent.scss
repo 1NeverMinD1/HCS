@@ -270,6 +270,14 @@
       margin-top: 10px;
       display: flex;
       gap: 10px;
+      .city {
+        background: variables.$primary-color;
+        width: fit-content;
+        padding: 5px;
+        font-weight: bold;
+        color: white;
+        border-radius: 5px;
+      }
       p {
         background: variables.$primary-color;
         width: fit-content;
