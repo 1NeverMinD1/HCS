@@ -60,8 +60,8 @@ export default function Authors() {
         `&populate[blogs][fields][2]=slug` +
         `&populate[blogs][fields][3]=publishDate` +
         `&populate[blogs][fields][4]=createdAt` +
-        `&populate[blogs][populate][desc_img][fields][0]=url` +
-        `&populate[blogs][populate][desc_img][fields][1]=formats` +
+        `&populate[blogs][populate][back_img][fields][0]=url` +
+        `&populate[blogs][populate][back_img][fields][1]=formats` +
         `&populate[articles][fields][0]=title_${locale}` +
         `&populate[articles][fields][1]=desc_${locale}` +
         `&populate[articles][fields][2]=slug` +
@@ -74,8 +74,10 @@ export default function Authors() {
         `&populate[events][fields][2]=slug` +
         `&populate[events][fields][3]=start` +
         `&populate[events][fields][4]=createdAt` +
-        `&populate[events][populate][back_img][fields][0]=url` +
-        `&populate[events][populate][back_img][fields][1]=formats` +
+        `&populate[events][populate][desc_img][fields][0]=url` +
+        `&populate[events][populate][desc_img][fields][1]=formats` +
+        `&populate[events][populate][cover_img][fields][0]=url` +
+        `&populate[events][populate][cover_img][fields][1]=formats` +
         `&populate[news][fields][0]=title_${locale}` +
         `&populate[news][fields][1]=desc_${locale}` +
         `&populate[news][fields][2]=slug` +
