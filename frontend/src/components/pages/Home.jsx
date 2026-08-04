@@ -27,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=100`,
+        `https://api.zhkh24.kz/api/news?fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=main&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=100`,
       );
       const json = await res.json();
       setAllNews(json.data || []);
