@@ -85,12 +85,6 @@ export default function Authors() {
         `&populate[news][fields][4]=createdAt` +
         `&populate[news][populate][desc_img][fields][0]=url` +
         `&populate[news][populate][desc_img][fields][1]=formats` +
-        `&populate[qnas][fields][0]=title_${locale}` +
-        `&populate[qnas][fields][1]=desc_${locale}` +
-        `&populate[qnas][fields][2]=slug` +
-        `&populate[qnas][fields][3]=createdAt` +
-        `&populate[qnas][populate][cover_img][fields][0]=url` +
-        `&populate[qnas][populate][cover_img][fields][1]=formats` +
         `&populate[links]=true`,
     )
       .then((res) => {
