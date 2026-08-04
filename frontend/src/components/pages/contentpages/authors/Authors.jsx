@@ -53,12 +53,42 @@ export default function Authors() {
 
     fetch(
       `https://api.zhkh24.kz/api/authors?filters[slug][$eq]=${slug}` +
-        `&populate[profile_img][populate]=*` +
-        `&populate[blogs][populate]=*` +
-        `&populate[articles][populate]=*` +
-        `&populate[events][populate]=*` +
-        `&populate[news][populate]=*` +
-        `&populate[qnas][populate]=*` +
+        `&populate[profile_img][fields][0]=url` +
+        `&populate[profile_img][fields][1]=formats` +
+        `&populate[blogs][fields][0]=title_${locale}` +
+        `&populate[blogs][fields][1]=desc_${locale}` +
+        `&populate[blogs][fields][2]=slug` +
+        `&populate[blogs][fields][3]=publishDate` +
+        `&populate[blogs][fields][4]=createdAt` +
+        `&populate[blogs][populate][desc_img][fields][0]=url` +
+        `&populate[blogs][populate][desc_img][fields][1]=formats` +
+        `&populate[articles][fields][0]=title_${locale}` +
+        `&populate[articles][fields][1]=desc_${locale}` +
+        `&populate[articles][fields][2]=slug` +
+        `&populate[articles][fields][3]=publishDate` +
+        `&populate[articles][fields][4]=createdAt` +
+        `&populate[articles][populate][desc_img][fields][0]=url` +
+        `&populate[articles][populate][desc_img][fields][1]=formats` +
+        `&populate[events][fields][0]=title_${locale}` +
+        `&populate[events][fields][1]=desc_${locale}` +
+        `&populate[events][fields][2]=slug` +
+        `&populate[events][fields][3]=start` +
+        `&populate[events][fields][4]=createdAt` +
+        `&populate[events][populate][back_img][fields][0]=url` +
+        `&populate[events][populate][back_img][fields][1]=formats` +
+        `&populate[news][fields][0]=title_${locale}` +
+        `&populate[news][fields][1]=desc_${locale}` +
+        `&populate[news][fields][2]=slug` +
+        `&populate[news][fields][3]=publishDate` +
+        `&populate[news][fields][4]=createdAt` +
+        `&populate[news][populate][desc_img][fields][0]=url` +
+        `&populate[news][populate][desc_img][fields][1]=formats` +
+        `&populate[qnas][fields][0]=title_${locale}` +
+        `&populate[qnas][fields][1]=desc_${locale}` +
+        `&populate[qnas][fields][2]=slug` +
+        `&populate[qnas][fields][3]=createdAt` +
+        `&populate[qnas][populate][cover_img][fields][0]=url` +
+        `&populate[qnas][populate][cover_img][fields][1]=formats` +
         `&populate[links]=true`,
     )
       .then((res) => {
@@ -80,7 +110,7 @@ export default function Authors() {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, locale]);
 
   if (loading) return <h2 className="loading wrapper">Загрузка...</h2>;
   if (error || !author)

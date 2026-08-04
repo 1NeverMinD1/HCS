@@ -177,7 +177,15 @@ export default function NewsContent() {
         `&populate[OG][populate]=og_image` +
         `&populate[SEO][populate]=*` +
         `&populate[desc_img][populate]=*` +
-        `&populate[authors][populate]=*` +
+        `&populate[authors][fields][0]=name_ru` +
+        `&populate[authors][fields][1]=name_kk` +
+        `&populate[authors][fields][2]=name_en` +
+        `&populate[authors][fields][3]=position_ru` +
+        `&populate[authors][fields][4]=position_kk` +
+        `&populate[authors][fields][5]=position_en` +
+        `&populate[authors][fields][6]=slug` +
+        `&populate[authors][populate][profile_img][fields][0]=url` +
+        `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[header_cats][populate]=*` +
         `&populate[tags][populate]=*`,
     )
@@ -195,7 +203,15 @@ export default function NewsContent() {
         `&populate[OG][populate]=og_image` +
         `&populate[SEO][populate]=*` +
         `&populate[desc_img][populate]=*` +
-        `&populate[authors][populate]=*` +
+        `&populate[authors][fields][0]=name_ru` +
+        `&populate[authors][fields][1]=name_kk` +
+        `&populate[authors][fields][2]=name_en` +
+        `&populate[authors][fields][3]=position_ru` +
+        `&populate[authors][fields][4]=position_kk` +
+        `&populate[authors][fields][5]=position_en` +
+        `&populate[authors][fields][6]=slug` +
+        `&populate[authors][populate][profile_img][fields][0]=url` +
+        `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[header_cats][populate]=*` +
         `&populate[tags][populate]=*`,
     );
