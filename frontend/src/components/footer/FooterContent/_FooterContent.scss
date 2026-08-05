@@ -4,7 +4,10 @@
   display: flex;
   margin-bottom: 20px;
   .footer__intro {
-    width: 40%;
+    width: 30%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
     button {
       border: none;
       background: none;
@@ -24,7 +27,7 @@
     }
   }
   .footer__contacts {
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: space-evenly;
     .footer__contacts-block {

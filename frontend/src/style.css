@@ -1141,7 +1141,10 @@
   margin-bottom: 20px;
 }
 .footer__content .footer__intro {
-  width: 40%;
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 .footer__content .footer__intro button {
   border: none;
@@ -1161,7 +1164,7 @@
   color: rgb(58, 58, 58);
 }
 .footer__content .footer__contacts {
-  width: 60%;
+  width: 70%;
   display: flex;
   justify-content: space-evenly;
 }
