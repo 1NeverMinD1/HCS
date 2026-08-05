@@ -7,6 +7,7 @@ import { useLocale } from "../../../../context/LocaleContext";
 import { getLangField } from "../../../../utils/getLangField";
 import { getImageUrl } from "../../../../utils/getImageUrl";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
+import Tags from "../tags/Tags.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -164,6 +165,7 @@ function NewsItem({ item, isFirst }) {
           </p>
         ))}
       </div>
+      {/* <Tags item={item} locale={locale} /> */}
     </div>
   );
 }
