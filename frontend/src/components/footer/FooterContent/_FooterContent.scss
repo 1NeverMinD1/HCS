@@ -90,8 +90,10 @@
       width: 100%;
       margin-bottom: 10px;
       .logo {
-        font-size: variables.$mobile-subtitle-font-size;
-        margin-bottom: 10px;
+        .logo_img {
+          width: auto;
+          height: 40px;
+        }
       }
       p {
         width: 100%;

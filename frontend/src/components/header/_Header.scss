@@ -217,7 +217,12 @@
   .header {
     flex-direction: column;
     gap: 10px;
-
+    .logo {
+      .logo_img {
+        width: auto;
+        height: 30px;
+      }
+    }
     .menu {
       max-width: 100%;
       width: fit-content;
