@@ -39,7 +39,7 @@ export default function App() {
 
         <Routes>
           {/* Домашняя страница */}
-          <Route path="/" element={<Home />} />
+          <Route path="/:locale" element={<Home />} />
           {/* Все новости */}
           <Route path="/:locale/news" element={<NewsPage />} />
           {/* Главные новости */}

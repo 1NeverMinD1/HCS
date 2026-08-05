@@ -21,10 +21,11 @@
     box-shadow 0.3s ease;
 
   .logo {
-    font-weight: bold;
-    font-size: 26px;
     text-decoration: none;
-    color: black;
+    .logo_img {
+      width: auto;
+      height: 80px;
+    }
   }
 
   .menu {

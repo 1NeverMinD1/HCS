@@ -13,10 +13,11 @@
   transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
 .header .logo {
-  font-weight: bold;
-  font-size: 26px;
   text-decoration: none;
-  color: black;
+}
+.header .logo .logo_img {
+  width: auto;
+  height: 80px;
 }
 .header .menu {
   position: relative;
@@ -1136,7 +1137,7 @@
   margin-bottom: 20px;
 }
 .footer__content .footer__intro {
-  width: 30%;
+  width: 40%;
 }
 .footer__content .footer__intro button {
   border: none;
@@ -1146,13 +1147,17 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+.footer__content .footer__intro button .logo_img {
+  width: auto;
+  height: 80px;
+}
 .footer__content .footer__intro p {
-  width: 75%;
+  width: 100%;
   line-height: 1.5;
   color: rgb(58, 58, 58);
 }
 .footer__content .footer__contacts {
-  width: 70%;
+  width: 60%;
   display: flex;
   justify-content: space-evenly;
 }

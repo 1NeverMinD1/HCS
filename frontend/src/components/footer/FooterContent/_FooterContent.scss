@@ -4,7 +4,7 @@
   display: flex;
   margin-bottom: 20px;
   .footer__intro {
-    width: 30%;
+    width: 40%;
     button {
       border: none;
       background: none;
@@ -12,15 +12,19 @@
       font-size: variables.$subtitle-font-size;
       font-weight: bold;
       margin-bottom: 20px;
+      .logo_img {
+        width: auto;
+        height: 80px;
+      }
     }
     p {
-      width: 75%;
+      width: 100%;
       line-height: 1.5;
       color: variables.$text-color;
     }
   }
   .footer__contacts {
-    width: 70%;
+    width: 60%;
     display: flex;
     justify-content: space-evenly;
     .footer__contacts-block {

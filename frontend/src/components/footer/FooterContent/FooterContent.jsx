@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../context/LocaleContext.jsx";
+import logo from "../../../assets/logo.svg";
 
 export default function FooterContent() {
   const { locale } = useLocale();
@@ -11,7 +12,7 @@ export default function FooterContent() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="logo"
         >
-          ЖКХ24
+          <img src={logo} alt="ЖКХ24" className="logo_img" />
         </button>
 
         <p>

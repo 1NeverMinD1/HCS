@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField";
 import { useTranslation } from "../../utils/useTranslation.js";
+import logo from "../../assets/logo.svg";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
@@ -48,8 +49,8 @@ export default function Header() {
       className={`header wrapper ${isScrolled ? "header--scrolled" : ""}`}
       id="header"
     >
-      <Link to="/" className="logo">
-        ЖКХ24
+      <Link to={`/${locale}`} className="logo">
+        <img src={logo} alt="ЖКХ24" className="logo_img" />
       </Link>
 
       <div className="menu">
