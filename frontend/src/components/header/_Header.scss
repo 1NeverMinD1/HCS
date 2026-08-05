@@ -22,7 +22,12 @@
 
   .logo {
     text-decoration: none;
+    position: relative;
+    height: 50px;
     .logo_img {
+      top: -5px;
+      left: -290px;
+      position: absolute;
       width: auto;
       height: 50px;
     }
@@ -218,9 +223,13 @@
     flex-direction: column;
     gap: 10px;
     .logo {
+      position: relative;
       .logo_img {
+        position: relative;
+        top: 0px;
+        left: -10px;
         width: auto;
-        height: 30px;
+        height: 40px;
       }
     }
     .menu {
@@ -252,8 +261,8 @@
     .interaction {
       .locale-switcher {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 15px;
+        right: 5px;
       }
     }
 

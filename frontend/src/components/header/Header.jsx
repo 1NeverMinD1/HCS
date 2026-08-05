@@ -15,8 +15,8 @@ export default function Header() {
   const dropdownRef = useRef(null);
 
   const locales = [
-    { code: "ru", label: "RU" },
     { code: "kk", label: "KK" },
+    { code: "ru", label: "RU" },
     { code: "en", label: "EN" },
   ];
 
