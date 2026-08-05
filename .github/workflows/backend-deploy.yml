@@ -27,7 +27,7 @@ jobs:
           script: |
             cd /var/www/project/strapi_hcs
 
-            git pull origin main
+            git pull origin master
 
             npm install
 
