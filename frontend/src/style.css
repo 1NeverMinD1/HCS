@@ -14,13 +14,8 @@
 }
 .header .logo {
   text-decoration: none;
-  position: relative;
-  height: 50px;
 }
 .header .logo .logo_img {
-  top: -5px;
-  left: -290px;
-  position: absolute;
   width: auto;
   height: 50px;
 }
@@ -178,12 +173,9 @@
     gap: 10px;
   }
   .header .logo {
-    position: relative;
+    margin-right: 200px;
   }
   .header .logo .logo_img {
-    position: relative;
-    top: 0px;
-    left: -10px;
     width: auto;
     height: 40px;
   }
