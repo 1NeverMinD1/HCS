@@ -13,7 +13,7 @@ export default function Blogs() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        `https://api.zhkh24.kz/api/blogs?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[authors][fields][0]=name_ru&populate[authors][fields][1]=name_kk&populate[authors][fields][2]=name_en&populate[authors][fields][3]=position_ru&populate[authors][fields][4]=position_kk&populate[authors][fields][5]=position_en&populate[authors][populate][profile_img][fields][0]=url&sort=publishDate:desc&pagination[pageSize]=1`,
+        `https://api.zhkh24.kz/api/blogs?fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[authors][fields][0]=name_ru&populate[authors][fields][1]=name_kk&populate[authors][fields][2]=name_en&populate[authors][fields][3]=position_ru&populate[authors][fields][4]=position_kk&populate[authors][fields][5]=position_en&populate[authors][populate][profile_img][fields][0]=url&sort=publishDate:desc&pagination[pageSize]=1`,
       );
       const data = await res.json();
       setBlogs(data.data);
