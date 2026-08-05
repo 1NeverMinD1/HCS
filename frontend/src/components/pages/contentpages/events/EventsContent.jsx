@@ -7,6 +7,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
+import Tags from "../tags/Tags.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -268,16 +269,7 @@ export default function EventsContent() {
         >
           Зарегистрироваться
         </a>
-        <div className="eventscontent__tags">
-          {events.cities?.[0] && (
-            <p className="city">
-              {getLangField(events?.cities?.[0], "city", locale)}
-            </p>
-          )}
-          {events.tags?.map((tag) => (
-            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
-          ))}
-        </div>
+        <Tags item={events} locale={locale} />
       </div>
       <div className="eventscontent__layout-sidemenu">
         <SideMenu currentId={slug} />

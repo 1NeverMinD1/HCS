@@ -7,6 +7,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
+import Tags from "../tags/Tags.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -185,16 +186,7 @@ export default function BlogsContent() {
         <div className="blogscontent__main">
           {content?.map((block, i) => renderBlock(block, i))}
         </div>
-        <div className="blogscontent__tags">
-          {blogs.cities?.[0] && (
-            <p className="city">
-              {getLangField(blogs?.cities?.[0], "city", locale)}
-            </p>
-          )}
-          {blogs.tags?.map((tag) => (
-            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
-          ))}
-        </div>
+        <Tags item={blogs} locale={locale} />
       </div>
       <div className="blogscontent__layout-sidemenu">
         <SideMenu currentId={slug} />

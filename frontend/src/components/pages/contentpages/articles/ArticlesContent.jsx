@@ -8,6 +8,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
+import Tags from "../tags/Tags.jsx";
 
 function renderBlock(block, i) {
   const renderChildren = (children = []) =>
@@ -155,16 +156,7 @@ function ArticleItem({ item, isFirst }) {
       <div className="artscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}
       </div>
-      <div className="artscontent__tags">
-        {item.cities?.[0] && (
-          <p className="city">
-            {getLangField(item?.cities?.[0], "city", locale)}
-          </p>
-        )}
-        {item.tags?.map((tag) => (
-          <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
-        ))}
-      </div>
+      <Tags item={item} locale={locale} />
     </div>
   );
 }
