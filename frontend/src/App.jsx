@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";
 import { useYandexMetrika } from "./utils/useYandexMetrika.js";
@@ -38,6 +38,7 @@ export default function App() {
         <Header />
 
         <Routes>
+          <Route path="/" element={<Navigate to="/ru" replace />} />
           {/* Домашняя страница */}
           <Route path="/:locale" element={<Home />} />
           {/* Все новости */}
