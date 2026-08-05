@@ -185,29 +185,6 @@
           font-size: 15px;
         }
       }
-      .newscontent__tags {
-        margin-top: 10px;
-        display: flex;
-        gap: 10px;
-        .city {
-          background: variables.$primary-color;
-          width: fit-content;
-          padding: 5px;
-          font-weight: bold;
-          color: white;
-          border-radius: 5px;
-        }
-        .tag {
-          background: variables.$primary-color;
-          width: fit-content;
-          padding: 5px;
-          color: white;
-          border-radius: 5px;
-          &::before {
-            content: "#";
-          }
-        }
-      }
     }
   }
   .newscontent__layout-sidemenu {
@@ -351,14 +328,6 @@
           }
           h6 {
             font-size: variables.$mobile-title-font-size - 10px;
-          }
-        }
-        .newscontent__tags {
-          display: flex;
-          gap: 10px;
-          margin-top: 10px;
-          p {
-            font-size: variables.$mobile-text-font-size - 2px;
           }
         }
       }

@@ -153,19 +153,7 @@ function NewsItem({ item, isFirst }) {
       <div className="newscontent__main">
         {content?.map((block, i) => renderBlock(block, i))}
       </div>
-      <div className="newscontent__tags">
-        {item.cities?.[0] && (
-          <p className="city">
-            {getLangField(item?.cities?.[0], "city", locale)}
-          </p>
-        )}
-        {item.tags?.map((tag) => (
-          <p className="tag" key={tag.id}>
-            {getLangField(tag, "name", locale)}
-          </p>
-        ))}
-      </div>
-      {/* <Tags item={item} locale={locale} /> */}
+      <Tags item={item} locale={locale} />
     </div>
   );
 }

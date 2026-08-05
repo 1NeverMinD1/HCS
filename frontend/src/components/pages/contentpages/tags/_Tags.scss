@@ -1,0 +1,39 @@
+@use "../../../../variables";
+
+.tags_block {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  .city {
+    background: variables.$primary-color;
+    width: fit-content;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+  }
+  .tag {
+    background: variables.$primary-color;
+    width: fit-content;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    font-size: variables.$text-font-size - 2px;
+    &::before {
+      content: "#";
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .tags_block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    .tag {
+      font-size: variables.$mobile-text-font-size - 2px;
+      height: fit-content;
+    }
+  }
+}

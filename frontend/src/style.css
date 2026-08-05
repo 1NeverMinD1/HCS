@@ -2983,31 +2983,6 @@
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main h6 {
   font-size: 15px;
 }
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-}
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .city {
-  background: rgb(0, 60, 255);
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 5px;
-  font-weight: bold;
-  color: white;
-  border-radius: 5px;
-}
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .tag {
-  background: rgb(0, 60, 255);
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 5px;
-  color: white;
-  border-radius: 5px;
-}
-.newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags .tag::before {
-  content: "#";
-}
 .newscontent__layout .newscontent__layout-sidemenu {
   width: 30%;
   position: sticky;
@@ -3152,14 +3127,6 @@
   }
   .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main h6 {
     font-size: 16px;
-  }
-  .newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .newscontent__layout .newscontent__layout-main .newscontent .newscontent__tags p {
-    font-size: 14px;
   }
   .newscontent__layout .newscontent__layout-sidemenu {
     display: none;
@@ -4660,6 +4627,46 @@
   }
   .blogscontent__header .blogscontent__author .spec {
     font-size: 14px;
+  }
+}
+.tags_block {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+.tags_block .city {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+.tags_block .tag {
+  background: rgb(0, 60, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.tags_block .tag::before {
+  content: "#";
+}
+
+@media (max-width: 430px) {
+  .tags_block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .tags_block .tag {
+    font-size: 14px;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 p,
