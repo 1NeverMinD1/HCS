@@ -10,11 +10,7 @@ export default function NewsPageHero({ news }) {
   const title = getLangField(news, "title", locale);
   const desc = getLangField(news, "desc", locale);
   const { t } = useTranslation();
-  const latestNewsImage = getImageUrl(
-    news.desc_img?.formats?.medium?.url ||
-      news.desc_img?.formats?.small?.url ||
-      news.desc_img?.url,
-  );
+  const latestNewsImage = getImageUrl(news.desc_img?.url);
 
   const latestNewsCategory = getLangField(
     news?.header_cats?.[0],
