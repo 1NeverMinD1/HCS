@@ -90,6 +90,15 @@
       "type": "component",
       "component": "content.social-link",
       "repeatable": true
+    },
+    "isJournalist": {
+      "type": "boolean"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::city.city",
+      "inversedBy": "authors"
     }
   }
 }

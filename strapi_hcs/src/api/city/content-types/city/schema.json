@@ -21,6 +21,15 @@
     "city_en": {
       "type": "string"
     },
+    "region_ru": {
+      "type": "string"
+    },
+    "region_kk": {
+      "type": "string"
+    },
+    "region_en": {
+      "type": "string"
+    },
     "articles": {
       "type": "relation",
       "relation": "manyToMany",
@@ -44,6 +53,15 @@
       "relation": "manyToMany",
       "target": "api::new.new",
       "inversedBy": "cities"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::author.author",
+      "mappedBy": "cities"
+    },
+    "displayName": {
+      "type": "string"
     }
   }
 }

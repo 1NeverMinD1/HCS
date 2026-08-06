@@ -537,10 +537,12 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     bio_kk: Schema.Attribute.String;
     bio_ru: Schema.Attribute.String & Schema.Attribute.Required;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
+    isJournalist: Schema.Attribute.Boolean;
     links: Schema.Attribute.Component<'content.social-link', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -665,6 +667,7 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     city_en: Schema.Attribute.String;
     city_kk: Schema.Attribute.String;
@@ -672,12 +675,16 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayName: Schema.Attribute.String;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::city.city'> &
       Schema.Attribute.Private;
     news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
+    region_en: Schema.Attribute.String;
+    region_kk: Schema.Attribute.String;
+    region_ru: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
