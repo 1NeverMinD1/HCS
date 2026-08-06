@@ -9,6 +9,8 @@ const indexNowHooks = createIndexNowLifecycle("article");
 
 module.exports = {
   async afterCreate(event) {
+    console.log("=== AFTER CREATE ARTICLE ===");
+
     const { result } = event;
     await optimizeOgImage(
       strapi,
@@ -20,6 +22,8 @@ module.exports = {
   },
 
   async afterUpdate(event) {
+    console.log("=== AFTER UPDATE ARTICLE ===");
+
     const { result } = event;
     await optimizeOgImage(
       strapi,
