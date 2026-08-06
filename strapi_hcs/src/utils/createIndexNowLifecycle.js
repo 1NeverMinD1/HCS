@@ -24,6 +24,7 @@ function createIndexNowLifecycle(collectionKey) {
   }
 
   async function notify(entry) {
+    console.log("[IndexNow DEBUG] entry:", JSON.stringify(entry, null, 2));
     if (!entry?.publishedAt) return;
 
     const urls = buildUrls(entry);
