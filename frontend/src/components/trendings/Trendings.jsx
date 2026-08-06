@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
+import { formatLocalizedDate } from "../../utils/dateLocale.js";
 
 export default function Trendings({ news }) {
   const { locale } = useLocale();
@@ -23,10 +24,7 @@ export default function Trendings({ news }) {
               <div className="trendings__block-info">
                 <h3>{title}</h3>
                 <p className="trendings__block-date">
-                  {new Date(item.publishDate).toLocaleDateString("ru-RU", {
-                    day: "numeric",
-                    month: "long",
-                  })}
+                  {formatLocalizedDate(item.publishDate, locale)}
                 </p>
               </div>
             </Link>

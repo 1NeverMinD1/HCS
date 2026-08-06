@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 
 export default function NewsPageListBlock({ item }) {
   const { locale } = useLocale();
@@ -15,6 +16,8 @@ export default function NewsPageListBlock({ item }) {
   const category = getLangField(item?.header_cats?.[0], "name", locale);
 
   const date = new Date(item.publishDate);
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
 
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="newspage__main-item">
@@ -29,19 +32,9 @@ export default function NewsPageListBlock({ item }) {
         <p className="newspage__main-item-text">{desc}</p>
 
         <div className="newspage__main-item-date">
+          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
           <p>
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-
-          <p>
-            {date.toLocaleTimeString("ru-RU", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+            {hours}:{minutes}
           </p>
         </div>
       </div>

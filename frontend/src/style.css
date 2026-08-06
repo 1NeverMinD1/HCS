@@ -2084,6 +2084,7 @@
 }
 .newspage__main-item .newspage__main-item-content .newspage__main-item-date {
   display: flex;
+  gap: 10px;
 }
 
 @media (max-width: 430px) {
