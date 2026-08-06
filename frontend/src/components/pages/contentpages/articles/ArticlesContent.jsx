@@ -5,12 +5,16 @@ import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
-import { getLangField } from "../../../../utils/getLangField.js";
+import {
+  getLangField,
+  parseMultilangField,
+} from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 
-function renderBlock(block, i) {
+function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -58,20 +62,38 @@ function renderBlock(block, i) {
     case "quote":
       return <blockquote key={i}>{renderChildren(block.children)}</blockquote>;
 
-    case "image":
+    case "image": {
+      const rawCaption = block.image.caption?.trim();
+      const caption = parseMultilangField(rawCaption, locale);
+      const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
+
+      const rawAlt = block.image.alternativeText?.trim();
+      const alt = parseMultilangField(rawAlt, locale);
+
       return (
         <figure key={i} className="richtext-image">
-          <img
-            src={getImageUrl(block.image.url)}
-            alt={block.image.alternativeText || ""}
-          />
-          {block.image.caption && (
+          <img src={getImageUrl(block.image.url)} alt={alt || ""} />
+          {caption && (
             <figcaption className="img_source">
-              {block.image.caption}
+              {t("source")}:{" "}
+              {isUrl ? (
+                <a
+                  href={
+                    caption.startsWith("http") ? caption : `https://${caption}`
+                  }
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  {caption.replace(/^https?:\/\//, "")}
+                </a>
+              ) : (
+                caption
+              )}
             </figcaption>
           )}
         </figure>
       );
+    }
 
     case "list": {
       const ListTag = block.format === "ordered" ? "ol" : "ul";
@@ -92,14 +114,27 @@ function renderBlock(block, i) {
       return null;
   }
 }
+
 function ArticleItem({ item, isFirst }) {
   const { locale } = useLocale();
+  const { t } = useTranslation();
   const date = new Date(item.publishDate);
   const imgUrl = getImageUrl(item.desc_img?.url);
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.categories?.[0], "name", locale);
+
+  const coverCaption = parseMultilangField(
+    item.desc_img?.caption?.trim(),
+    locale,
+  );
+  const coverCaptionIsUrl =
+    coverCaption && /^(https?:\/\/|www\.)/i.test(coverCaption);
+  const coverAlt = parseMultilangField(
+    item.desc_img?.alternativeText?.trim(),
+    locale,
+  );
 
   return (
     <div className="artscontent">
@@ -142,19 +177,34 @@ function ArticleItem({ item, isFirst }) {
       <figure className="artscontent__cover">
         <img
           src={imgUrl}
-          alt={item.desc_img?.alternativeText || title}
+          alt={coverAlt || title}
           className="artscontent__img"
         />
-        {item.desc_img?.caption && (
+        {coverCaption && (
           <figcaption className="img_source">
-            {item.desc_img.caption}
+            {t("source")}:{" "}
+            {coverCaptionIsUrl ? (
+              <a
+                href={
+                  coverCaption.startsWith("http")
+                    ? coverCaption
+                    : `https://${coverCaption}`
+                }
+                target="_blank"
+                rel="nofollow noopener"
+              >
+                {coverCaption.replace(/^https?:\/\//, "")}
+              </a>
+            ) : (
+              coverCaption
+            )}
           </figcaption>
         )}
       </figure>
       <p className="artscontent__desc">{desc}</p>
       <hr />
       <div className="artscontent__main">
-        {content?.map((block, i) => renderBlock(block, i))}
+        {content?.map((block, i) => renderBlock(block, i, locale, t))}
       </div>
       <Tags item={item} locale={locale} />
     </div>
@@ -177,7 +227,15 @@ export default function ArticlesContent() {
         `&populate[OG][populate]=og_image` +
         `&populate[SEO][populate]=*` +
         `&populate[desc_img][populate]=*` +
-        `&populate[authors][populate]=*` +
+        `&populate[authors][fields][0]=name_ru` +
+        `&populate[authors][fields][1]=name_kk` +
+        `&populate[authors][fields][2]=name_en` +
+        `&populate[authors][fields][3]=position_ru` +
+        `&populate[authors][fields][4]=position_kk` +
+        `&populate[authors][fields][5]=position_en` +
+        `&populate[authors][fields][6]=slug` +
+        `&populate[authors][populate][profile_img][fields][0]=url` +
+        `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[categories][populate]=*` +
         `&populate[tags][populate]=*`,
     )
@@ -195,7 +253,15 @@ export default function ArticlesContent() {
         `&populate[OG][populate]=og_image` +
         `&populate[SEO][populate]=*` +
         `&populate[desc_img][populate]=*` +
-        `&populate[authors][populate]=*` +
+        `&populate[authors][fields][0]=name_ru` +
+        `&populate[authors][fields][1]=name_kk` +
+        `&populate[authors][fields][2]=name_en` +
+        `&populate[authors][fields][3]=position_ru` +
+        `&populate[authors][fields][4]=position_kk` +
+        `&populate[authors][fields][5]=position_en` +
+        `&populate[authors][fields][6]=slug` +
+        `&populate[authors][populate][profile_img][fields][0]=url` +
+        `&populate[authors][populate][profile_img][fields][1]=formats` +
         `&populate[categories][populate]=*` +
         `&populate[tags][populate]=*`,
     );
@@ -254,9 +320,14 @@ export default function ArticlesContent() {
         }
       />
       <div className="artscontent__layout-main">
-        {articlesList.map((item, index) => (
-          <ArticleItem key={item.id} item={item} isFirst={index === 0} />
-        ))}
+        {articlesList
+          .filter(
+            (item, index, arr) =>
+              arr.findIndex((i) => i.id === item.id) === index,
+          )
+          .map((item, index) => (
+            <ArticleItem key={item.id} item={item} isFirst={index === 0} />
+          ))}
 
         {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
 

@@ -46,6 +46,7 @@ export const translations = {
     seo_static_desc_events: "Конференции, выставки, встречи и другие события",
     seo_static_title_qandas: "Вопросы и ответы",
     seo_static_desc_qandas: "Быстрые ответы на интересующие вопросы",
+    source: "Источник",
   },
   kk: {
     news: "Жаңалықтар",
@@ -97,6 +98,7 @@ export const translations = {
       "Конференциялар, көрмелер, кездесулер және басқа да іс-шаралар",
     seo_static_title_qandas: "Сұрақтар мен жауаптар",
     seo_static_desc_qandas: "Сіздің сұрақтарыңызға жылдам жауаптар",
+    source: "Дереккөз",
   },
   en: {
     news: "News",
@@ -145,5 +147,6 @@ export const translations = {
       "Conferences, exhibitions, meetings, and other events",
     seo_static_title_qandas: "Questions and Answers",
     seo_static_desc_qandas: "Quick answers to your questions",
+    source: "Source",
   },
 };

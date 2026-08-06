@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
-import { getLangField } from "../../../../utils/getLangField.js";
+import {
+  getLangField,
+  parseMultilangField,
+} from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 
-function renderBlock(block, i) {
+function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -57,20 +61,38 @@ function renderBlock(block, i) {
     case "quote":
       return <blockquote key={i}>{renderChildren(block.children)}</blockquote>;
 
-    case "image":
+    case "image": {
+      const rawCaption = block.image.caption?.trim();
+      const caption = parseMultilangField(rawCaption, locale);
+      const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
+
+      const rawAlt = block.image.alternativeText?.trim();
+      const alt = parseMultilangField(rawAlt, locale);
+
       return (
         <figure key={i} className="richtext-image">
-          <img
-            src={getImageUrl(block.image.url)}
-            alt={block.image.alternativeText || ""}
-          />
-          {block.image.caption && (
+          <img src={getImageUrl(block.image.url)} alt={alt || ""} />
+          {caption && (
             <figcaption className="img_source">
-              {block.image.caption}
+              {t("source")}:{" "}
+              {isUrl ? (
+                <a
+                  href={
+                    caption.startsWith("http") ? caption : `https://${caption}`
+                  }
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  {caption.replace(/^https?:\/\//, "")}
+                </a>
+              ) : (
+                caption
+              )}
             </figcaption>
           )}
         </figure>
       );
+    }
 
     case "list": {
       const ListTag = block.format === "ordered" ? "ol" : "ul";
@@ -94,6 +116,7 @@ function renderBlock(block, i) {
 export default function BlogsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
+  const { t } = useTranslation();
   const [blogs, setBlogs] = useState(null);
   const title = getLangField(blogs, "title", locale);
   const desc = getLangField(blogs, "desc", locale);
@@ -173,12 +196,35 @@ export default function BlogsContent() {
         <figure className="blogscontent__cover">
           <img
             src={imgUrl}
-            alt={blogs.back_img?.alternativeText || title}
+            alt={
+              parseMultilangField(
+                blogs.back_img?.alternativeText?.trim(),
+                locale,
+              ) || title
+            }
             className="blogscontent__img"
           />
-          {blogs.back_img?.caption && (
+          {parseMultilangField(blogs.back_img?.caption?.trim(), locale) && (
             <figcaption className="img_source">
-              {blogs.back_img.caption}
+              {t("source")}:{" "}
+              {(() => {
+                const c = parseMultilangField(
+                  blogs.back_img?.caption?.trim(),
+                  locale,
+                );
+                const isUrl = /^(https?:\/\/|www\.)/i.test(c);
+                return isUrl ? (
+                  <a
+                    href={c.startsWith("http") ? c : `https://${c}`}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    {c.replace(/^https?:\/\//, "")}
+                  </a>
+                ) : (
+                  c
+                );
+              })()}
             </figcaption>
           )}
         </figure>
