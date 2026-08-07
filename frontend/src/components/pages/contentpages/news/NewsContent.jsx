@@ -196,7 +196,7 @@ function NewsItem({ item, isFirst }) {
       </figure>
       <hr />
       <div className="newscontent__main">
-        {content?.map((block, i) => renderBlock(block, i))}
+        {content?.map((block, i) => renderBlock(block, i, locale, t))}
       </div>
       <Tags item={item} locale={locale} />
     </div>
