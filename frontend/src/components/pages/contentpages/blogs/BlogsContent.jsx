@@ -192,7 +192,7 @@ export default function BlogsContent() {
           </p>
         </div>
 
-        <h2 className="blogscontent__title">{title}</h2>
+        <h1 className="blogscontent__title">{title}</h1>
         <figure className="blogscontent__cover">
           <img
             src={imgUrl}

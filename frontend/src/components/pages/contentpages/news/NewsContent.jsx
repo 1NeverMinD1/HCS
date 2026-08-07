@@ -157,7 +157,7 @@ function NewsItem({ item, isFirst }) {
           })}
         </p>
       </div>
-      <h2 className="newscontent__title">{title}</h2>
+      <h1 className="newscontent__title">{title}</h1>
       <p className="newscontent__intro">{desc}</p>
       <figure className="newscontent__cover">
         <img

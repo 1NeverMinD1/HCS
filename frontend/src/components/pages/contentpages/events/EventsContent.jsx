@@ -195,7 +195,7 @@ export default function EventsContent() {
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
             <p className="cat">{category}</p>
-            <h2 className="eventscontent__title">{title}</h2>
+            <h1 className="eventscontent__title">{title}</h1>
             <p className="eventscontent__desc">{desc}</p>
           </div>
           <div className="eventscontent__info-blocks">

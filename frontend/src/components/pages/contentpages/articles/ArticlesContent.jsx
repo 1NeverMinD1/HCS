@@ -173,7 +173,7 @@ function ArticleItem({ item, isFirst }) {
           </p>
         </div>
       </div>
-      <h2 className="artscontent__title">{title}</h2>
+      <h1 className="artscontent__title">{title}</h1>
       <figure className="artscontent__cover">
         <img
           src={imgUrl}
