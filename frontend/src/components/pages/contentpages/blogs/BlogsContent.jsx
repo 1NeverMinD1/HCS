@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
+import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import {
   getLangField,
