@@ -31,9 +31,9 @@ export default function Trendings({ news }) {
           );
         })}
       </div>
-      <Link to={`/${locale}/news`} className="see_all">
+      {/* <Link to={`/${locale}/news`} className="see_all">
         {t("showAll")}
-      </Link>
+      </Link> */}
     </div>
   );
 }

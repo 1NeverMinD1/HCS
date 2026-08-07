@@ -4,11 +4,13 @@
   margin-block: 50px;
   width: 100%;
   .latest__link {
-    display: flex;
-    justify-content: flex-end;
+    margin-inline: auto;
     margin-top: 10px;
     .view_all {
-      width: fit-content;
+      display: block;
+      margin-inline: auto;
+      text-align: center;
+      width: 250px;
       margin-top: 20px;
       text-decoration: none;
       background: variables.$primary-color;
@@ -16,30 +18,17 @@
       padding: 5px 10px;
       border-radius: 5px;
       transition: all 0.3s ease;
-
       &:hover {
         transition: all 0.3s ease;
         background: variables.$hover-color;
         transform: scale(1.05);
       }
-      svg {
-        fill: white;
-        width: 15px;
-        height: 15px;
-      }
+      // svg {
+      //   fill: white;
+      //   width: 15px;
+      //   height: 15px;
+      // }
     }
-  }
-}
-
-.view_all {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: variables.$primary-color;
-  font-size: 18px;
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
   }
 }
 
@@ -48,6 +37,7 @@
     .latest__link {
       justify-content: center;
       .view_all {
+        width: fit-content;
         font-size: variables.$mobile-text-font-size;
       }
     }
