@@ -230,7 +230,7 @@ export default function BlogsContent() {
         </figure>
         <hr />
         <div className="blogscontent__main">
-          {content?.map((block, i) => renderBlock(block, i))}
+          {content?.map((block, i) => renderBlock(block, i, locale, t))}
         </div>
         <Tags item={blogs} locale={locale} />
       </div>

@@ -305,7 +305,7 @@ export default function EventsContent() {
         </figure>
         <hr />
         <div className="eventscontent__main">
-          {content?.map((block, i) => renderBlock(block, i))}
+          {content?.map((block, i) => renderBlock(block, i, locale, t))}
         </div>
         <a
           href={events?.register_link}
