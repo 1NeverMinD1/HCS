@@ -13,6 +13,7 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
+import ReadMore from "../readMore/ReadMore.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -199,6 +200,7 @@ function NewsItem({ item, isFirst }) {
       <div className="newscontent__main">
         {content?.map((block, i) => renderBlock(block, i, locale, t))}
       </div>
+      <ReadMore item={item} locale={locale} />
       <Tags item={item} locale={locale} />
     </div>
   );
