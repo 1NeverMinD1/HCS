@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useLocation } from "react-router-dom";
-import { getLangField } from "../../utils/getLangField.js";
+import { getLangField, hasLangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 
 export default function SEO({
@@ -22,6 +22,8 @@ export default function SEO({
   endDate,
   location,
   answerText,
+  translationSourceItem,
+  translationField = "title",
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -66,6 +68,12 @@ export default function SEO({
   const finalOgDescription = ogDescription || finalDescription;
 
   const ogType = type === "event" ? "website" : type;
+
+  const isFallbackTranslation =
+    translationSourceItem &&
+    !hasLangField(translationSourceItem, translationField, locale);
+
+  const shouldNoIndex = noIndex || isFallbackTranslation;
 
   let structuredData = null;
 
@@ -178,7 +186,7 @@ export default function SEO({
 
       <meta
         name="robots"
-        content={noIndex ? "noindex,nofollow" : "index,follow"}
+        content={shouldNoIndex ? "noindex,nofollow" : "index,follow"}
       />
 
       <link rel="canonical" href={canonicalUrl} />

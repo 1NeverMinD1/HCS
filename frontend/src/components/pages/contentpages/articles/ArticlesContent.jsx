@@ -318,6 +318,8 @@ export default function ArticlesContent() {
             ? getLangField(mainItem.authors[0], "name", locale)
             : undefined
         }
+        translationSourceItem={mainItem}
+        translationField="title"
       />
       <div className="artscontent__layout-main">
         {articlesList

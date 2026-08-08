@@ -168,6 +168,8 @@ export default function BlogsContent() {
             ? getLangField(blogs.authors[0], "name", locale)
             : undefined
         }
+        translationSourceItem={blogs}
+        translationField="title"
       />
       <div className="blogscontent">
         <Link to={`/${locale}/blogs`} className="back">

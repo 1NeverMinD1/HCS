@@ -313,6 +313,8 @@ export default function NewsContent() {
             ? getLangField(mainItem.authors[0], "name", locale)
             : undefined
         }
+        translationSourceItem={mainItem}
+        translationField="title"
       />
       <div className="newscontent__layout-main">
         {newsList

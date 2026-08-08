@@ -173,6 +173,8 @@ export default function QnasContent() {
             ? getLangField(qnas.authors[0], "name", locale)
             : undefined
         }
+        translationSourceItem={qnas}
+        translationField="title"
       />
       <Link to={`/${locale}/q-and-as`} className="back">
         <svg className="arrow_reverse" viewBox="0 0 5 9">

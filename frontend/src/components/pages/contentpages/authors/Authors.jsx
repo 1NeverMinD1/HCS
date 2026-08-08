@@ -4,6 +4,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale";
+import SEO from "../../../SEO/SEO.jsx";
 import {
   FaInstagram,
   FaTelegram,
@@ -54,7 +55,6 @@ export default function Authors() {
 
     fetch(
       `https://api.zhkh24.kz/api/authors?filters[slug][$eq]=${slug}` +
-        // Автор
         `&fields[0]=name_ru` +
         `&fields[1]=name_kk` +
         `&fields[2]=name_en` +
@@ -65,10 +65,8 @@ export default function Authors() {
         `&fields[7]=bio_kk` +
         `&fields[8]=bio_en` +
         `&fields[9]=slug` +
-        // Фото автора
         `&populate[profile_img][fields][0]=url` +
         `&populate[profile_img][fields][1]=formats` +
-        // Блоги
         `&populate[blogs][fields][0]=title_ru` +
         `&populate[blogs][fields][1]=title_kk` +
         `&populate[blogs][fields][2]=title_en` +
@@ -80,7 +78,6 @@ export default function Authors() {
         `&populate[blogs][fields][8]=createdAt` +
         `&populate[blogs][populate][back_img][fields][0]=url` +
         `&populate[blogs][populate][back_img][fields][1]=formats` +
-        // Статьи
         `&populate[articles][fields][0]=title_ru` +
         `&populate[articles][fields][1]=title_kk` +
         `&populate[articles][fields][2]=title_en` +
@@ -92,7 +89,6 @@ export default function Authors() {
         `&populate[articles][fields][8]=createdAt` +
         `&populate[articles][populate][desc_img][fields][0]=url` +
         `&populate[articles][populate][desc_img][fields][1]=formats` +
-        // Новости
         `&populate[news][fields][0]=title_ru` +
         `&populate[news][fields][1]=title_kk` +
         `&populate[news][fields][2]=title_en` +
@@ -104,7 +100,6 @@ export default function Authors() {
         `&populate[news][fields][8]=createdAt` +
         `&populate[news][populate][desc_img][fields][0]=url` +
         `&populate[news][populate][desc_img][fields][1]=formats` +
-        // Мероприятия
         `&populate[events][fields][0]=title_ru` +
         `&populate[events][fields][1]=title_kk` +
         `&populate[events][fields][2]=title_en` +
@@ -118,7 +113,6 @@ export default function Authors() {
         `&populate[events][populate][desc_img][fields][1]=formats` +
         `&populate[events][populate][cover_img][fields][0]=url` +
         `&populate[events][populate][cover_img][fields][1]=formats` +
-        // Соцсети
         `&populate[links]=true`,
     )
       .then((res) => {
@@ -162,6 +156,14 @@ export default function Authors() {
 
   return (
     <div className="authors__layout">
+      <SEO
+        title={name}
+        description={bio || position}
+        image={profileImg}
+        type="website"
+        translationSourceItem={author}
+        translationField="name"
+      />
       <div className="authors">
         <div className="authors__intro">
           <img src={profileImg} alt="profile_photo" />

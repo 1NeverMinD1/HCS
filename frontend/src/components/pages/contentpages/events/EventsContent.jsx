@@ -171,6 +171,8 @@ export default function EventsContent() {
         startDate={events.start}
         endDate={events.end}
         location={place}
+        translationSourceItem={events}
+        translationField="title"
       />
       <div className="eventscontent wrapper">
         <Link to={`/${locale}/events`} className="back">
