@@ -2,9 +2,16 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const LocaleContext = createContext();
 
+const SUPPORTED_LOCALES = ["ru", "kk", "en"];
+
+function getLocaleFromPath() {
+  const segment = window.location.pathname.split("/")[1];
+  return SUPPORTED_LOCALES.includes(segment) ? segment : null;
+}
+
 export function LocaleProvider({ children }) {
   const [locale, setLocale] = useState(
-    () => localStorage.getItem("locale") || "ru",
+    () => getLocaleFromPath() || localStorage.getItem("locale") || "ru",
   );
 
   useEffect(() => {
