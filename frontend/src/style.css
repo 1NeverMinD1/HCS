@@ -407,6 +407,55 @@
     margin-block: 20px;
   }
 }
+.read__more {
+  margin-block: 20px;
+  padding-top: 10px;
+  border: 1px solid rgba(179, 179, 179, 0.6);
+  border-radius: 10px;
+}
+.read__more h2 {
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: rgb(0, 60, 255) !important;
+}
+.read__more h2::after {
+  height: 0px !important;
+}
+.read__more .read__more-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.read__more .read__more-blocks .read__more-block {
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+  padding: 5px;
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+.read__more .read__more-blocks .read__more-block .read__more-block-title {
+  font-size: 20px !important;
+  text-indent: 0px !important;
+  font-weight: bold;
+}
+.read__more .read__more-blocks .read__more-block .read__more-block-date {
+  font-size: 16px !important;
+  text-indent: 0px !important;
+  color: rgb(58, 58, 58);
+}
+.read__more .read__more-blocks .read__more-block:hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgb(179, 179, 179), -1px 1px 10px rgb(179, 179, 179);
+}
+.read__more .read__more-blocks .read__more-block:hover .read__more-block-title {
+  color: rgb(0, 60, 255);
+}
+.read__more .read__more-blocks :last-child:hover {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 .hero {
   text-decoration: none;
   width: 73.4%;
@@ -4792,41 +4841,6 @@
     height: fit-content;
   }
 }
-.read__more {
-  margin-block: 20px;
-  padding-top: 10px;
-  border: 1px solid rgba(179, 179, 179, 0.6);
-  border-radius: 10px;
-}
-.read__more h2 {
-  margin-bottom: 10px;
-  margin-left: 20px;
-}
-.read__more-blocks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.read__more-blocks .read__more-block {
-  text-decoration: none;
-  color: rgb(58, 58, 58);
-  padding: 5px;
-  padding-left: 20px;
-  transition: all 0.3s ease;
-}
-.read__more-blocks .read__more-block:hover {
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 1px 1px 10px rgb(179, 179, 179), -1px 1px 10px rgb(179, 179, 179);
-}
-.read__more-blocks .read__more-block:hover .read__more-block-title {
-  color: rgb(0, 60, 255);
-}
-.read__more-blocks :last-child:hover {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
 p,
 li {
   color: rgb(58, 58, 58);

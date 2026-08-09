@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
@@ -114,6 +114,56 @@ function renderBlock(block, i, locale, t) {
       return null;
   }
 }
+
+// Считаем "вес" каждого блока и находим индекс, ближайший к середине контента.
+// Не даём разрыву попасть сразу после heading или list — сдвигаем на
+// ближайший "нейтральный" блок (обычно paragraph), чтобы не рвать
+// заголовок/список от контента, который логически идёт следом.
+function findMidpointIndex(content) {
+  if (!content || content.length === 0) return -1;
+  if (content.length < 4) return -1; // короткие статьи — не вставляем в середину
+
+  const weights = content.map((block) => {
+    if (block.type === "paragraph" || block.type === "quote") {
+      const text = (block.children || []).map((c) => c.text || "").join("");
+      return Math.max(text.length, 20);
+    }
+    if (block.type === "heading") return 10;
+    if (block.type === "image") return 150;
+    if (block.type === "list") return 100;
+    return 20;
+  });
+
+  const total = weights.reduce((a, b) => a + b, 0);
+  let acc = 0;
+  let idx = content.length - 1;
+
+  for (let i = 0; i < weights.length; i++) {
+    acc += weights[i];
+    if (acc >= total / 2) {
+      idx = i;
+      break;
+    }
+  }
+
+  // Не разрываем сразу после heading или list
+  while (
+    idx < content.length - 1 &&
+    (content[idx].type === "heading" || content[idx].type === "list")
+  ) {
+    idx++;
+  }
+
+  // Не вставляем перед самым первым блоком статьи
+  if (idx === 0 && content.length > 1) idx = 1;
+
+  // И не даём встать прямо в конец — тогда просто не вставляем в середину,
+  // ReadMore и так отрендерится после контента как раньше
+  if (idx >= content.length - 1) return -1;
+
+  return idx;
+}
+
 function NewsItem({ item, isFirst }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
@@ -123,6 +173,8 @@ function NewsItem({ item, isFirst }) {
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.header_cats?.[0], "name", locale);
+
+  const midpointIndex = findMidpointIndex(content);
 
   return (
     <div className="newscontent">
@@ -198,9 +250,22 @@ function NewsItem({ item, isFirst }) {
       </figure>
       <hr />
       <div className="newscontent__main">
-        {content?.map((block, i) => renderBlock(block, i, locale, t))}
+        {content?.map((block, i) => {
+          const rendered = renderBlock(block, i, locale, t);
+
+          if (i === midpointIndex) {
+            return (
+              <Fragment key={`block-wrap-${i}`}>
+                {rendered}
+                <ReadMore item={item} locale={locale} contentType="news" />{" "}
+              </Fragment>
+            );
+          }
+
+          return rendered;
+        })}
       </div>
-      <ReadMore item={item} locale={locale} />
+      {midpointIndex === -1 && <ReadMore item={item} locale={locale} />}
       <Tags item={item} locale={locale} />
     </div>
   );

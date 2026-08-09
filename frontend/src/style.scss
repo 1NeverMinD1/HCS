@@ -1,5 +1,8 @@
 @use "./components/header/Header";
 @use "./App";
+// ReadMore
+@use "./components/pages/contentpages/readMore/ReadMore";
+// Hero
 @use "./components/hero/Hero";
 // Ad
 @use "./components/ad/Ad";
@@ -71,8 +74,7 @@
 @use "./components/authorsHeader/AuthorsHeader";
 // Tags
 @use "./components/pages/contentpages/tags/Tags";
-// ReadMore
-@use "./components/pages/contentpages/readMore/ReadMore";
+
 // Variables
 @use "./variables";
 

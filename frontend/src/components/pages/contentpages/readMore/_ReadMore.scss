@@ -8,8 +8,12 @@
   h2 {
     margin-bottom: 10px;
     margin-left: 20px;
+    color: variables.$primary-color !important;
+    &::after {
+      height: 0px !important;
+    }
   }
-  &-blocks {
+  .read__more-blocks {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -19,9 +23,15 @@
       padding: 5px;
       padding-left: 20px;
       transition: all 0.3s ease;
-      &-title {
+      .read__more-block-title {
+        font-size: variables.$text-font-size + 2px !important;
+        text-indent: 0px !important;
+        font-weight: bold;
       }
-      &-date {
+      .read__more-block-date {
+        font-size: variables.$text-font-size - 2px !important;
+        text-indent: 0px !important;
+        color: variables.$text-color;
       }
       &:hover {
         transition: all 0.3s ease;

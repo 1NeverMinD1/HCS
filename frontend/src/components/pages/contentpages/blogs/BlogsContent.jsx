@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Fragment } from "react";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
@@ -13,6 +14,7 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
+import ReadMore from "../readMore/ReadMore.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -114,6 +116,47 @@ function renderBlock(block, i, locale, t) {
       return null;
   }
 }
+
+function findMidpointIndex(content) {
+  if (!content || content.length === 0) return -1;
+  if (content.length < 4) return -1;
+
+  const weights = content.map((block) => {
+    if (block.type === "paragraph" || block.type === "quote") {
+      const text = (block.children || []).map((c) => c.text || "").join("");
+      return Math.max(text.length, 20);
+    }
+    if (block.type === "heading") return 10;
+    if (block.type === "image") return 150;
+    if (block.type === "list") return 100;
+    return 20;
+  });
+
+  const total = weights.reduce((a, b) => a + b, 0);
+  let acc = 0;
+  let idx = content.length - 1;
+
+  for (let i = 0; i < weights.length; i++) {
+    acc += weights[i];
+    if (acc >= total / 2) {
+      idx = i;
+      break;
+    }
+  }
+
+  while (
+    idx < content.length - 1 &&
+    (content[idx].type === "heading" || content[idx].type === "list")
+  ) {
+    idx++;
+  }
+
+  if (idx === 0 && content.length > 1) idx = 1;
+  if (idx >= content.length - 1) return -1;
+
+  return idx;
+}
+
 export default function BlogsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
@@ -125,6 +168,8 @@ export default function BlogsContent() {
   const author = getLangField(blogs?.authors?.[0], "name", locale);
   const position = getLangField(blogs?.authors?.[0], "position", locale);
   const category = getLangField(blogs?.categories?.[0], "name", locale);
+
+  const midpointIndex = findMidpointIndex(content);
 
   useEffect(() => {
     fetch(
@@ -233,7 +278,23 @@ export default function BlogsContent() {
         </figure>
         <hr />
         <div className="blogscontent__main">
-          {content?.map((block, i) => renderBlock(block, i, locale, t))}
+          {content?.map((block, i) => {
+            const rendered = renderBlock(block, i, locale, t);
+
+            if (i === midpointIndex) {
+              return (
+                <Fragment key={`block-wrap-${i}`}>
+                  {rendered}
+                  <ReadMore item={blogs} locale={locale} contentType="blog" />
+                </Fragment>
+              );
+            }
+
+            return rendered;
+          })}
+          {midpointIndex === -1 && (
+            <ReadMore item={blogs} locale={locale} contentType="blog" />
+          )}
         </div>
         <Tags item={blogs} locale={locale} />
       </div>

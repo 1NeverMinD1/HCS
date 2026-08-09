@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
@@ -13,8 +13,10 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
+import ReadMore from "../readMore/ReadMore.jsx";
 
 function renderBlock(block, i, locale, t) {
+  // ... без изменений, как было
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -115,6 +117,47 @@ function renderBlock(block, i, locale, t) {
   }
 }
 
+// Такая же логика, как в NewsContent.jsx
+function findMidpointIndex(content) {
+  if (!content || content.length === 0) return -1;
+  if (content.length < 4) return -1;
+
+  const weights = content.map((block) => {
+    if (block.type === "paragraph" || block.type === "quote") {
+      const text = (block.children || []).map((c) => c.text || "").join("");
+      return Math.max(text.length, 20);
+    }
+    if (block.type === "heading") return 10;
+    if (block.type === "image") return 150;
+    if (block.type === "list") return 100;
+    return 20;
+  });
+
+  const total = weights.reduce((a, b) => a + b, 0);
+  let acc = 0;
+  let idx = content.length - 1;
+
+  for (let i = 0; i < weights.length; i++) {
+    acc += weights[i];
+    if (acc >= total / 2) {
+      idx = i;
+      break;
+    }
+  }
+
+  while (
+    idx < content.length - 1 &&
+    (content[idx].type === "heading" || content[idx].type === "list")
+  ) {
+    idx++;
+  }
+
+  if (idx === 0 && content.length > 1) idx = 1;
+  if (idx >= content.length - 1) return -1;
+
+  return idx;
+}
+
 function ArticleItem({ item, isFirst }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
@@ -124,6 +167,8 @@ function ArticleItem({ item, isFirst }) {
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.categories?.[0], "name", locale);
+
+  const midpointIndex = findMidpointIndex(content);
 
   const coverCaption = parseMultilangField(
     item.desc_img?.caption?.trim(),
@@ -204,7 +249,23 @@ function ArticleItem({ item, isFirst }) {
       <p className="artscontent__desc">{desc}</p>
       <hr />
       <div className="artscontent__main">
-        {content?.map((block, i) => renderBlock(block, i, locale, t))}
+        {content?.map((block, i) => {
+          const rendered = renderBlock(block, i, locale, t);
+
+          if (i === midpointIndex) {
+            return (
+              <Fragment key={`block-wrap-${i}`}>
+                {rendered}
+                <ReadMore item={item} locale={locale} contentType="article" />
+              </Fragment>
+            );
+          }
+
+          return rendered;
+        })}
+        {midpointIndex === -1 && (
+          <ReadMore item={item} locale={locale} contentType="article" />
+        )}
       </div>
       <Tags item={item} locale={locale} />
     </div>
@@ -212,6 +273,7 @@ function ArticleItem({ item, isFirst }) {
 }
 
 export default function ArticlesContent() {
+  // ... без изменений
   const { locale } = useLocale();
   const { slug } = useParams();
   const [articlesList, setArticlesList] = useState([]);
