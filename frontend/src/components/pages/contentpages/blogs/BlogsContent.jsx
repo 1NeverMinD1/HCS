@@ -173,7 +173,39 @@ export default function BlogsContent() {
 
   useEffect(() => {
     fetch(
-      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&populate[authors][populate]=profile_img&populate[back_img][populate]=*&populate[OG][populate]=og_image&populate[SEO][populate]=*&populate[tags][populate]=*&populate[categories][populate]=*`,
+      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}` +
+        `&populate[authors][fields][0]=name_ru` +
+        `&populate[authors][fields][1]=name_kk` +
+        `&populate[authors][fields][2]=name_en` +
+        `&populate[authors][fields][3]=position_ru` +
+        `&populate[authors][fields][4]=position_kk` +
+        `&populate[authors][fields][5]=position_en` +
+        `&populate[authors][fields][6]=slug` +
+        `&populate[authors][populate][profile_img][fields][0]=url` +
+        `&populate[authors][populate][profile_img][fields][1]=formats` +
+        `&populate[back_img][fields][0]=url` +
+        `&populate[back_img][fields][1]=alternativeText` +
+        `&populate[back_img][fields][2]=caption` +
+        `&populate[back_img][fields][3]=formats` +
+        `&populate[OG][populate][og_image][fields][0]=url` +
+        `&populate[OG][populate][og_image][fields][1]=formats` +
+        `&populate[SEO][fields][0]=seo_title_ru` +
+        `&populate[SEO][fields][1]=seo_desc_ru` +
+        `&populate[SEO][fields][2]=seo_title_kk` +
+        `&populate[SEO][fields][3]=seo_desc_kk` +
+        `&populate[SEO][fields][4]=seo_title_en` +
+        `&populate[SEO][fields][5]=seo_desc_en` +
+        `&populate[SEO][fields][6]=seo_keywords_ru` +
+        `&populate[SEO][fields][7]=seo_keywords_kk` +
+        `&populate[SEO][fields][8]=seo_keywords_en` +
+        `&populate[SEO][populate][seo_image][fields][0]=url` +
+        `&populate[SEO][populate][seo_image][fields][1]=formats` +
+        `&populate[tags][fields][0]=name_ru` +
+        `&populate[tags][fields][1]=name_kk` +
+        `&populate[tags][fields][2]=name_en` +
+        `&populate[categories][fields][0]=name_ru` +
+        `&populate[categories][fields][1]=name_kk` +
+        `&populate[categories][fields][2]=name_en`,
     )
       .then((res) => res.json())
       .then((data) => setBlogs(data.data?.[0]));
