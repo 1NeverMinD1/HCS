@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "../../../utils/useTranslation.js";
-
+import { getLangField } from "../../../utils/getLangField.js";
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
@@ -40,12 +40,31 @@ export default function NewsPage() {
 
       let url;
 
+      const POPULATE_PARAMS =
+        `&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en` +
+        `&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en` +
+        `&fields[6]=slug&fields[7]=publishDate` +
+        `&populate[desc_img][fields][0]=url` +
+        `&populate[desc_img][fields][1]=formats` +
+        `&populate[header_cats][fields][0]=name_ru` +
+        `&populate[header_cats][fields][1]=name_kk` +
+        `&populate[header_cats][fields][2]=name_en`;
+
       if (isMain) {
-        url = `https://api.zhkh24.kz/api/news?filters[main][$eq]=true&populate=*&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`;
+        url =
+          `https://api.zhkh24.kz/api/news?filters[main][$eq]=true` +
+          `&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
+          POPULATE_PARAMS;
       } else if (id) {
-        url = `https://api.zhkh24.kz/api/news?filters[header_cats][id][$eq]=${id}&populate=*&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`;
+        url =
+          `https://api.zhkh24.kz/api/news?filters[header_cats][id][$eq]=${id}` +
+          `&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
+          POPULATE_PARAMS;
       } else {
-        url = `https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`;
+        url =
+          `https://api.zhkh24.kz/api/news?sort=publishDate:desc` +
+          `&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
+          POPULATE_PARAMS;
       }
 
       const res = await fetch(url);
@@ -64,7 +83,7 @@ export default function NewsPage() {
         const cat = newItems[0].header_cats?.find(
           (c) => String(c.id) === String(id),
         );
-        setCategoryName(cat?.name || null);
+        setCategoryName(getLangField(cat, "name", locale) || null);
       }
 
       if (page === 1 && !id) {
