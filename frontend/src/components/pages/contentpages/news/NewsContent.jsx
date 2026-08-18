@@ -115,10 +115,6 @@ function renderBlock(block, i, locale, t) {
   }
 }
 
-// Считаем "вес" каждого блока и находим индекс, ближайший к середине контента.
-// Не даём разрыву попасть сразу после heading или list — сдвигаем на
-// ближайший "нейтральный" блок (обычно paragraph), чтобы не рвать
-// заголовок/список от контента, который логически идёт следом.
 function findMidpointIndex(content) {
   if (!content || content.length === 0) return -1;
   if (content.length < 4) return -1; // короткие статьи — не вставляем в середину
@@ -146,7 +142,6 @@ function findMidpointIndex(content) {
     }
   }
 
-  // Не разрываем сразу после heading или list
   while (
     idx < content.length - 1 &&
     (content[idx].type === "heading" || content[idx].type === "list")
@@ -154,15 +149,49 @@ function findMidpointIndex(content) {
     idx++;
   }
 
-  // Не вставляем перед самым первым блоком статьи
   if (idx === 0 && content.length > 1) idx = 1;
 
-  // И не даём встать прямо в конец — тогда просто не вставляем в середину,
-  // ReadMore и так отрендерится после контента как раньше
   if (idx >= content.length - 1) return -1;
 
   return idx;
 }
+
+const NEWS_POPULATE_QUERY =
+  `populate[OG][populate][og_image][fields][0]=url` +
+  `&populate[OG][populate][og_image][fields][1]=formats` +
+  `&populate[SEO][fields][0]=seo_title_ru` +
+  `&populate[SEO][fields][1]=seo_desc_ru` +
+  `&populate[SEO][fields][2]=seo_title_kk` +
+  `&populate[SEO][fields][3]=seo_desc_kk` +
+  `&populate[SEO][fields][4]=seo_title_en` +
+  `&populate[SEO][fields][5]=seo_desc_en` +
+  `&populate[SEO][fields][6]=seo_keywords_ru` +
+  `&populate[SEO][fields][7]=seo_keywords_kk` +
+  `&populate[SEO][fields][8]=seo_keywords_en` +
+  `&populate[SEO][populate][seo_image][fields][0]=url` +
+  `&populate[SEO][populate][seo_image][fields][1]=formats` +
+  `&populate[desc_img][fields][0]=url` +
+  `&populate[desc_img][fields][1]=alternativeText` +
+  `&populate[desc_img][fields][2]=caption` +
+  `&populate[desc_img][fields][3]=formats` +
+  `&populate[authors][fields][0]=name_ru` +
+  `&populate[authors][fields][1]=name_kk` +
+  `&populate[authors][fields][2]=name_en` +
+  `&populate[authors][fields][3]=position_ru` +
+  `&populate[authors][fields][4]=position_kk` +
+  `&populate[authors][fields][5]=position_en` +
+  `&populate[authors][fields][6]=slug` +
+  `&populate[authors][populate][profile_img][fields][0]=url` +
+  `&populate[authors][populate][profile_img][fields][1]=formats` +
+  `&populate[header_cats][fields][0]=name_ru` +
+  `&populate[header_cats][fields][1]=name_kk` +
+  `&populate[header_cats][fields][2]=name_en` +
+  `&populate[tags][fields][0]=name_ru` +
+  `&populate[tags][fields][1]=name_kk` +
+  `&populate[tags][fields][2]=name_en` +
+  `&populate[cities][fields][0]=city_ru` +
+  `&populate[cities][fields][1]=city_kk` +
+  `&populate[cities][fields][2]=city_en`;
 
 function NewsItem({ item, isFirst }) {
   const { locale } = useLocale();
@@ -284,9 +313,23 @@ export default function NewsContent() {
 
     fetch(
       `https://api.zhkh24.kz/api/news?filters[slug][$eq]=${slug}` +
-        `&populate[OG][populate]=og_image` +
-        `&populate[SEO][populate]=*` +
-        `&populate[desc_img][populate]=*` +
+        `&populate[OG][populate][og_image][fields][0]=url` +
+        `&populate[OG][populate][og_image][fields][1]=formats` +
+        `&populate[SEO][fields][0]=seo_title_ru` +
+        `&populate[SEO][fields][1]=seo_desc_ru` +
+        `&populate[SEO][fields][2]=seo_title_kk` +
+        `&populate[SEO][fields][3]=seo_desc_kk` +
+        `&populate[SEO][fields][4]=seo_title_en` +
+        `&populate[SEO][fields][5]=seo_desc_en` +
+        `&populate[SEO][fields][6]=seo_keywords_ru` +
+        `&populate[SEO][fields][7]=seo_keywords_kk` +
+        `&populate[SEO][fields][8]=seo_keywords_en` +
+        `&populate[SEO][populate][seo_image][fields][0]=url` +
+        `&populate[SEO][populate][seo_image][fields][1]=formats` +
+        `&populate[desc_img][fields][0]=url` +
+        `&populate[desc_img][fields][1]=alternativeText` +
+        `&populate[desc_img][fields][2]=caption` +
+        `&populate[desc_img][fields][3]=formats` +
         `&populate[authors][fields][0]=name_ru` +
         `&populate[authors][fields][1]=name_kk` +
         `&populate[authors][fields][2]=name_en` +
@@ -296,9 +339,15 @@ export default function NewsContent() {
         `&populate[authors][fields][6]=slug` +
         `&populate[authors][populate][profile_img][fields][0]=url` +
         `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[header_cats][populate]=*` +
-        `&populate[tags][populate]=*` +
-        `&populate[cities][populate]=*`,
+        `&populate[header_cats][fields][0]=name_ru` +
+        `&populate[header_cats][fields][1]=name_kk` +
+        `&populate[header_cats][fields][2]=name_en` +
+        `&populate[tags][fields][0]=name_ru` +
+        `&populate[tags][fields][1]=name_kk` +
+        `&populate[tags][fields][2]=name_en` +
+        `&populate[cities][fields][0]=city_ru` +
+        `&populate[cities][fields][1]=city_kk` +
+        `&populate[cities][fields][2]=city_en`,
     )
       .then((res) => res.json())
       .then((data) => setNewsList([data.data?.[0]]));
@@ -311,9 +360,23 @@ export default function NewsContent() {
 
     const res = await fetch(
       `https://api.zhkh24.kz/api/news?sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}` +
-        `&populate[OG][populate]=og_image` +
-        `&populate[SEO][populate]=*` +
-        `&populate[desc_img][populate]=*` +
+        `&populate[OG][populate][og_image][fields][0]=url` +
+        `&populate[OG][populate][og_image][fields][1]=formats` +
+        `&populate[SEO][fields][0]=seo_title_ru` +
+        `&populate[SEO][fields][1]=seo_desc_ru` +
+        `&populate[SEO][fields][2]=seo_title_kk` +
+        `&populate[SEO][fields][3]=seo_desc_kk` +
+        `&populate[SEO][fields][4]=seo_title_en` +
+        `&populate[SEO][fields][5]=seo_desc_en` +
+        `&populate[SEO][fields][6]=seo_keywords_ru` +
+        `&populate[SEO][fields][7]=seo_keywords_kk` +
+        `&populate[SEO][fields][8]=seo_keywords_en` +
+        `&populate[SEO][populate][seo_image][fields][0]=url` +
+        `&populate[SEO][populate][seo_image][fields][1]=formats` +
+        `&populate[desc_img][fields][0]=url` +
+        `&populate[desc_img][fields][1]=alternativeText` +
+        `&populate[desc_img][fields][2]=caption` +
+        `&populate[desc_img][fields][3]=formats` +
         `&populate[authors][fields][0]=name_ru` +
         `&populate[authors][fields][1]=name_kk` +
         `&populate[authors][fields][2]=name_en` +
@@ -323,9 +386,15 @@ export default function NewsContent() {
         `&populate[authors][fields][6]=slug` +
         `&populate[authors][populate][profile_img][fields][0]=url` +
         `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[header_cats][populate]=*` +
-        `&populate[tags][populate]=*` +
-        `&populate[cities][populate]=*`,
+        `&populate[header_cats][fields][0]=name_ru` +
+        `&populate[header_cats][fields][1]=name_kk` +
+        `&populate[header_cats][fields][2]=name_en` +
+        `&populate[tags][fields][0]=name_ru` +
+        `&populate[tags][fields][1]=name_kk` +
+        `&populate[tags][fields][2]=name_en` +
+        `&populate[cities][fields][0]=city_ru` +
+        `&populate[cities][fields][1]=city_kk` +
+        `&populate[cities][fields][2]=city_en`,
     );
     const data = await res.json();
     const next = data.data?.[0];
