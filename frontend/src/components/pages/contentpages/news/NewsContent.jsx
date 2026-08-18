@@ -415,7 +415,7 @@ export default function NewsContent() {
           loadNext();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1, rootMargin: "800px" },
     );
 
     observer.observe(loaderRef.current);
