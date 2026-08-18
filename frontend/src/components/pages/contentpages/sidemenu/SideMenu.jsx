@@ -11,16 +11,29 @@ export default function SideMenu({ currentId }) {
   useEffect(() => {
     Promise.all([
       fetch(
-        "https://api.zhkh24.kz/api/news?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/news?sort=publishDate:desc&pagination[pageSize]=3" +
+          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
+          "&fields[3]=slug&fields[4]=publishDate" +
+          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
       ).then((res) => res.json()),
       fetch(
-        "https://api.zhkh24.kz/api/articles?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/articles?sort=publishDate:desc&pagination[pageSize]=3" +
+          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
+          "&fields[3]=slug&fields[4]=publishDate" +
+          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
       ).then((res) => res.json()),
       fetch(
-        "https://api.zhkh24.kz/api/blogs?populate=*&sort=publishDate:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/blogs?sort=publishDate:desc&pagination[pageSize]=3" +
+          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
+          "&fields[3]=slug&fields[4]=publishDate" +
+          "&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats",
       ).then((res) => res.json()),
       fetch(
-        "https://api.zhkh24.kz/api/events?populate=*&sort=start:desc&pagination[pageSize]=3",
+        "https://api.zhkh24.kz/api/events?sort=start:desc&pagination[pageSize]=3" +
+          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
+          "&fields[3]=slug&fields[4]=start" +
+          "&populate[cover_img][fields][0]=url&populate[cover_img][fields][1]=formats" +
+          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
       ).then((res) => res.json()),
     ]).then(([news, articles, blogs, events]) => {
       const all = [
