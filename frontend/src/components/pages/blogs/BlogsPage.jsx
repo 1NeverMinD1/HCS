@@ -97,7 +97,9 @@ export default function BlogsPage() {
     return () => observer.disconnect();
   }, [hasMore, loading]);
 
-  if (!blogs.length) return null;
+  if (!blogs.length) {
+    return <h2 className="empty wrapper">Блогов нет</h2>;
+  }
 
   return (
     <div className="blogspage wrapper">

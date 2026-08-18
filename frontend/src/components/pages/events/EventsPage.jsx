@@ -89,7 +89,9 @@ export default function EventsPage() {
     return () => observer.disconnect();
   }, [hasMore, loading]);
 
-  if (!events.length) return null;
+  if (!events.length) {
+    return <h2 className="empty wrapper">Событий нет</h2>;
+  }
 
   return (
     <div className="eventspage wrapper">

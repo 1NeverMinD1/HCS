@@ -85,7 +85,9 @@ export default function ArtsPage() {
     return () => observer.disconnect();
   }, [hasMore, loading]);
 
-  if (!articles.length) return null;
+  if (!articles.length) {
+    return <h2 className="empty wrapper">Статей нет</h2>;
+  }
 
   return (
     <div className="artspage wrapper">
