@@ -3031,12 +3031,12 @@
   opacity: 0.8;
 }
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__title {
-  width: 90%;
+  width: 100%;
   text-indent: 15px;
   font-size: 40px;
 }
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__intro {
-  width: 90%;
+  width: 100%;
   margin-block: 20px;
   text-indent: 20px;
   font-size: 24px;
@@ -3369,7 +3369,7 @@
   opacity: 0.8;
 }
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__title {
-  width: 90%;
+  width: 100%;
   font-size: 40px;
   text-indent: 15px;
 }
@@ -3752,7 +3752,7 @@
   margin-left: 20px;
 }
 .blogscontent__layout .blogscontent .blogscontent__title {
-  width: 90%;
+  width: 100%;
   text-indent: 15px;
   font-size: 40px;
 }
