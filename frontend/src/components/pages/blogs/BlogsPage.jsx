@@ -30,7 +30,27 @@ export default function BlogsPage() {
       setLoading(true);
 
       const res = await fetch(
-        `https://api.zhkh24.kz/api/blogs?populate[authors][populate]=profile_img&populate[back_img][populate]=*&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`,
+        `https://api.zhkh24.kz/api/blogs?sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
+          `&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en` +
+          `&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en` +
+          `&fields[6]=slug&fields[7]=publishDate` +
+          `&populate[back_img][fields][0]=url` +
+          `&populate[back_img][fields][1]=formats` +
+          `&populate[authors][fields][0]=name_ru` +
+          `&populate[authors][fields][1]=name_kk` +
+          `&populate[authors][fields][2]=name_en` +
+          `&populate[authors][fields][3]=position_ru` +
+          `&populate[authors][fields][4]=position_kk` +
+          `&populate[authors][fields][5]=position_en` +
+          `&populate[authors][fields][6]=slug` +
+          `&populate[authors][populate][profile_img][fields][0]=url` +
+          `&populate[authors][populate][profile_img][fields][1]=formats` +
+          `&populate[categories][fields][0]=name_ru` +
+          `&populate[categories][fields][1]=name_kk` +
+          `&populate[categories][fields][2]=name_en` +
+          `&populate[tags][fields][0]=name_ru` +
+          `&populate[tags][fields][1]=name_kk` +
+          `&populate[tags][fields][2]=name_en`,
       );
 
       const data = await res.json();
