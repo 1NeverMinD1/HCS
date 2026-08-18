@@ -114,7 +114,7 @@ export default function NewsPage() {
         }
       },
       {
-        rootMargin: "300px",
+        rootMargin: "800px",
       },
     );
 
