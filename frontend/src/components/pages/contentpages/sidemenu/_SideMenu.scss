@@ -2,7 +2,7 @@
 
 .sidemenu {
   border: 1px solid rgb(220, 220, 220);
-  padding: 20px;
+  padding: 20px 10px 20px 10px;
   border-radius: 20px;
   width: 100%;
   display: flex;
@@ -26,7 +26,7 @@
     color: black;
     display: flex;
     gap: 10px;
-    height: 150px;
+    height: 125px;
     transition: all 0.3s ease;
     border: 2px solid transparent;
     border-radius: 10px;
