@@ -86,11 +86,16 @@
     height: 200px;
     width: 100%;
     .artspage__list-block-content {
+      padding: 10px;
+      .artspage__list-block-cat {
+        font-size: variables.$mobile-text-font-size - 2px;
+      }
       .artspage__list-block-title {
         font-size: variables.$mobile-subtitle-font-size;
       }
       .artspage__list-block-text {
         font-size: variables.$mobile-text-font-size;
+        -webkit-line-clamp: 3;
       }
       .artspage__list-block-date {
         font-size: variables.$mobile-text-font-size - 2px;

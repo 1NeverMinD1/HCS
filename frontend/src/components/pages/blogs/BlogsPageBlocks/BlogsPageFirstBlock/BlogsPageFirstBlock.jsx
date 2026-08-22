@@ -18,11 +18,7 @@ export default function BlogsPageFirstBlock({ blog }) {
       blog?.authors?.[0]?.profile_img?.url,
   );
 
-  const firstBlockImg = getImageUrl(
-    blog?.back_img?.formats?.medium?.url ||
-      blog?.back_img?.formats?.small?.url ||
-      blog?.back_img?.url,
-  );
+  const firstBlockImg = getImageUrl(blog?.back_img?.url);
 
   return (
     <Link

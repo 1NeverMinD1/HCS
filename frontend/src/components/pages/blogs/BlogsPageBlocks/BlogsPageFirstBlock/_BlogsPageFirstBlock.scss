@@ -6,25 +6,18 @@
   color: black;
   isolation: isolate;
   overflow: hidden;
-
   padding: 30px;
   height: 450px;
-
   border-radius: 10px;
-
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   transition: background-size 0.4s ease;
-
   color: white;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-
   text-shadow:
     0 1px 1px rgba(0, 0, 0, 0.9),
     0 1px 1px rgba(0, 0, 0, 0.8);
@@ -61,14 +54,12 @@
 
   .blogspage__hero-header {
     padding-top: 5%;
-
     display: flex;
     gap: 10px;
     align-items: center;
     .profile {
       width: 90px;
       height: 90px;
-
       border-radius: 50%;
       object-fit: cover;
     }
@@ -105,10 +96,9 @@
 
     .blogspage__hero-text {
       display: -webkit-box;
-      overflow: hidden;
-
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-
+      overflow: hidden;
       line-height: 1.5;
       opacity: 0.95;
     }
@@ -122,6 +112,7 @@
 @media (max-width: 430px) {
   .blogspage__hero {
     height: 350px;
+    padding: 10px;
     .blogspage__hero-header {
       padding-top: 10%;
 
