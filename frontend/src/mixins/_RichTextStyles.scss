@@ -19,9 +19,10 @@
     &::before {
       content: "\201C";
       position: absolute;
-      left: 1%;
-      top: 15%;
+      left: 10px;
+      top: 10px;
       font-size: 70px;
+      line-height: 1;
       color: variables.$primary-color;
       font-family: Georgia, serif;
     }

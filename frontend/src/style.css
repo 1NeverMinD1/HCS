@@ -3090,9 +3090,10 @@
 .newscontent__layout .newscontent__layout-main .newscontent .newscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 1%;
-  top: 15%;
+  left: 10px;
+  top: 10px;
   font-size: 70px;
+  line-height: 1;
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
 }
@@ -3449,9 +3450,10 @@
 .artscontent__layout .artscontent__layout-main .artscontent .artscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 1%;
-  top: 15%;
+  left: 10px;
+  top: 10px;
   font-size: 70px;
+  line-height: 1;
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
 }
@@ -3836,9 +3838,10 @@
 .blogscontent__layout .blogscontent .blogscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 1%;
-  top: 15%;
+  left: 10px;
+  top: 10px;
   font-size: 70px;
+  line-height: 1;
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
 }
@@ -4285,9 +4288,10 @@
 .eventscontent__layout .eventscontent .eventscontent__main blockquote::before {
   content: "“";
   position: absolute;
-  left: 1%;
-  top: 15%;
+  left: 10px;
+  top: 10px;
   font-size: 70px;
+  line-height: 1;
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
 }
