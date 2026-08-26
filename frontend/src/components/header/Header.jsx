@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField";
 import { useTranslation } from "../../utils/useTranslation.js";
@@ -14,6 +14,8 @@ export default function Header() {
   const { t } = useTranslation();
 
   const { locale, setLocale } = useLocale();
+  const navigate = useNavigate();
+  const location = useLocation();
   const dropdownRef = useRef(null);
 
   const locales = [
@@ -21,6 +23,12 @@ export default function Header() {
     { code: "ru", label: "RU" },
     { code: "en", label: "EN" },
   ];
+
+  function handleLocaleChange(newLocale) {
+    const segments = location.pathname.split("/");
+    segments[1] = newLocale;
+    navigate(segments.join("/") + location.search);
+  }
 
   useEffect(() => {
     fetch("https://api.zhkh24.kz/api/header-cats")
@@ -49,7 +57,6 @@ export default function Header() {
     };
   }, []);
 
-  // Блокируем скролл body, когда открыто мобильное меню
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
     return () => {
@@ -177,7 +184,7 @@ export default function Header() {
               <button
                 key={l.code}
                 className={`locale-btn ${locale === l.code ? "locale-btn--active" : ""}`}
-                onClick={() => setLocale(l.code)}
+                onClick={() => handleLocaleChange(l.code)}
               >
                 {l.label}
               </button>
@@ -319,7 +326,7 @@ export default function Header() {
               <button
                 key={l.code}
                 className={`locale-btn ${locale === l.code ? "locale-btn--active" : ""}`}
-                onClick={() => setLocale(l.code)}
+                onClick={() => handleLocaleChange(l.code)}
               >
                 {l.label}
               </button>

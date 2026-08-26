@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const LocaleContext = createContext();
 
@@ -10,9 +11,17 @@ function getLocaleFromPath() {
 }
 
 export function LocaleProvider({ children }) {
+  const location = useLocation();
   const [locale, setLocale] = useState(
     () => getLocaleFromPath() || localStorage.getItem("locale") || "ru",
   );
+
+  useEffect(() => {
+    const pathLocale = getLocaleFromPath();
+    if (pathLocale && pathLocale !== locale) {
+      setLocale(pathLocale);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem("locale", locale);
