@@ -58,7 +58,9 @@ export default function Hero({ onLoadFeatured }) {
   const isBlog = featured.__type === "blog";
   const isArticle = featured.__type === "article";
 
-  const imageUrl = getImageUrl(featured?.desc_img?.url) || "";
+  const imageUrl =
+    getImageUrl(isBlog ? featured?.back_img?.url : featured?.desc_img?.url) ||
+    "";
 
   const category = isBlog
     ? getLangField(featured?.categories?.[0], "name", locale)
