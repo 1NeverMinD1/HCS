@@ -1,5 +1,5 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "footer_editorial_policies",
   "info": {
     "singularName": "footer-editorial-policy",

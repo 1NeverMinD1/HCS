@@ -467,7 +467,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAdvertisingAdvertising extends Struct.CollectionTypeSchema {
+export interface ApiAdvertisingAdvertising extends Struct.SingleTypeSchema {
   collectionName: 'advertisings';
   info: {
     displayName: 'FooterAdvertising';
@@ -781,7 +781,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiFooterAboutFooterAbout extends Struct.CollectionTypeSchema {
+export interface ApiFooterAboutFooterAbout extends Struct.SingleTypeSchema {
   collectionName: 'footer_abouts';
   info: {
     displayName: 'FooterAbout';
@@ -809,8 +809,7 @@ export interface ApiFooterAboutFooterAbout extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiFooterContactFooterContact
-  extends Struct.CollectionTypeSchema {
+export interface ApiFooterContactFooterContact extends Struct.SingleTypeSchema {
   collectionName: 'footer_contacts';
   info: {
     displayName: 'FooterContact';
@@ -842,7 +841,7 @@ export interface ApiFooterContactFooterContact
 }
 
 export interface ApiFooterEditorialPolicyFooterEditorialPolicy
-  extends Struct.CollectionTypeSchema {
+  extends Struct.SingleTypeSchema {
   collectionName: 'footer_editorial_policies';
   info: {
     displayName: 'FooterEditorialPolicy';
@@ -873,8 +872,7 @@ export interface ApiFooterEditorialPolicyFooterEditorialPolicy
   };
 }
 
-export interface ApiFooterImprintFooterImprint
-  extends Struct.CollectionTypeSchema {
+export interface ApiFooterImprintFooterImprint extends Struct.SingleTypeSchema {
   collectionName: 'footer_imprints';
   info: {
     displayName: 'FooterImprint';
@@ -905,8 +903,7 @@ export interface ApiFooterImprintFooterImprint
   };
 }
 
-export interface ApiFooterPrivacyFooterPrivacy
-  extends Struct.CollectionTypeSchema {
+export interface ApiFooterPrivacyFooterPrivacy extends Struct.SingleTypeSchema {
   collectionName: 'footer_privacies';
   info: {
     displayName: 'FooterPrivacy';
@@ -937,7 +934,7 @@ export interface ApiFooterPrivacyFooterPrivacy
   };
 }
 
-export interface ApiFooterTermFooterTerm extends Struct.CollectionTypeSchema {
+export interface ApiFooterTermFooterTerm extends Struct.SingleTypeSchema {
   collectionName: 'footer_terms';
   info: {
     displayName: 'FooterTerm';
