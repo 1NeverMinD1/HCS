@@ -4,6 +4,7 @@ import { useLocale } from "../../context/LocaleContext";
 import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
+import SEO from "../SEO/SEO.jsx";
 
 const INTERNAL_LINKS = {
   Контакты: "/contacts",
@@ -224,6 +225,15 @@ export default function About() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.AboutContent?.SEO}
+        og={page.AboutContent?.OG}
+        title="О редакции"
+        image={getImageUrl(
+          page.AboutContent?.OG?.og_image?.url ||
+            page.AboutContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>О редакции</h1>
 
       <div className="footer-links__content">

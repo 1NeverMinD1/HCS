@@ -261,6 +261,15 @@ export default function Advertising() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.AdvertisingContent?.SEO}
+        og={page.AdvertisingContent?.OG}
+        title="Реклама"
+        image={getImageUrl(
+          page.AdvertisingContent?.OG?.og_image?.url ||
+            page.AdvertisingContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Реклама</h1>
 
       <div className="footer-links__content">

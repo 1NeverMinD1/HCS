@@ -160,6 +160,25 @@ function renderBlock(block, i, locale, t) {
 }
 
 const POPULATE_QUERY = `populate[ImprintContent][populate]=*`;
+// `&populate[SEO][fields][0]=seo_title_ru` +
+// `&populate[SEO][fields][1]=seo_desc_ru` +
+// `populate[SEO][fields][2]=seo_keywords_ru` +
+// `populate[SEO][fields][3]=seo_title_kk` +
+// `populate[SEO][fields][4]=seo_desc_kk` +
+// `populate[SEO][fields][5]=seo_keywords_kk` +
+// `populate[SEO][fields][6]=seo_title_en` +
+// `populate[SEO][fields][7]=seo_desc_en` +
+// `populate[SEO][fields][8]=seo_keywords_en` +
+// `populate[SEO][populate][seo_image][fields][0]=url` +
+// `populate[SEO][populate][seo_image][fields][1]=formats` +
+// `populate[OG][fields][0]=og_title_ru` +
+// `populate[OG][fields][1]=og_desc_ru` +
+// `populate[OG][fields][2]=og_title_kk` +
+// `populate[OG][fields][3]=og_desc_kk` +
+// `populate[OG][fields][4]=og_title_en` +
+// `populate[OG][fields][5]=og_desc_en` +
+// `populate[OG][populate][og_image][fields][0]=url` +
+// `populate[OG][populate][og_image][fields][1]=formats`;
 
 export default function Imprint() {
   const { locale } = useLocale();
@@ -183,6 +202,15 @@ export default function Imprint() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.ImprintContent?.SEO}
+        og={page.ImprintContent?.OG}
+        title="Выходные данные"
+        image={getImageUrl(
+          page.ImprintContent?.OG?.og_image?.url ||
+            page.ImprintContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Выходные данные</h1>
 
       <div className="footer-links__content">

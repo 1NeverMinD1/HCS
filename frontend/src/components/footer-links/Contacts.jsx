@@ -261,6 +261,15 @@ export default function Contacts() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.ContactsContent?.SEO}
+        og={page.ContactsContent?.OG}
+        title="Контакты"
+        image={getImageUrl(
+          page.ContactsContent?.OG?.og_image?.url ||
+            page.ContactsContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Контакты</h1>
 
       <div className="footer-links__content">

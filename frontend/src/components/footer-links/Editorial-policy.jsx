@@ -4,6 +4,7 @@ import { useLocale } from "../../context/LocaleContext";
 import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
+import SEO from "../SEO/SEO.jsx";
 
 const INTERNAL_LINKS = {
   Контакты: "/contacts",
@@ -206,6 +207,15 @@ export default function EditorialPolicy() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.EditorialPolicyContent?.SEO}
+        og={page.EditorialPolicyContent?.OG}
+        title="Редакционная политика"
+        image={getImageUrl(
+          page.EditorialPolicyContent?.OG?.og_image?.url ||
+            page.EditorialPolicyContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Редакционная политика</h1>
 
       <div className="footer-links__content">

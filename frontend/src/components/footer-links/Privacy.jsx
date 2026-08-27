@@ -183,6 +183,15 @@ export default function Privacy() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.PrivacyContent?.SEO}
+        og={page.PrivacyContent?.OG}
+        title="Политика конфиденциальности"
+        image={getImageUrl(
+          page.PrivacyContent?.OG?.og_image?.url ||
+            page.PrivacyContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Политика конфиденциальности</h1>
 
       <div className="footer-links__content">

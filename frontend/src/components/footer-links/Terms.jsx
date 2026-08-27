@@ -183,6 +183,15 @@ export default function Terms() {
 
   return (
     <div className="footer-links wrapper">
+      <SEO
+        seo={page.TermsContent?.SEO}
+        og={page.TermsContent?.OG}
+        title="Пользовательское соглашение"
+        image={getImageUrl(
+          page.TermsContent?.OG?.og_image?.url ||
+            page.TermsContent?.SEO?.seo_image?.url,
+        )}
+      />
       <h1>Пользовательское соглашение</h1>
 
       <div className="footer-links__content">
