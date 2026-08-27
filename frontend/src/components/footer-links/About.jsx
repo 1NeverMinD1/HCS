@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import SEO from "../SEO/SEO.jsx";
 import { useLocale } from "../../context/LocaleContext";
 import { parseMultilangField } from "../../utils/getLangField.js";
@@ -88,27 +88,26 @@ function renderBlock(block, i, locale, t) {
   }
 }
 
-const ABOUT_POPULATE_QUERY =
-  `populate[AboutContent][populate]=*` +
-  `&populate[SEO][fields][0]=seo_title_ru` +
-  `&populate[SEO][fields][1]=seo_desc_ru` +
-  `&populate[SEO][fields][2]=seo_keywords_ru` +
-  `&populate[SEO][fields][3]=seo_title_kk` +
-  `&populate[SEO][fields][4]=seo_desc_kk` +
-  `&populate[SEO][fields][5]=seo_keywords_kk` +
-  `&populate[SEO][fields][6]=seo_title_en` +
-  `&populate[SEO][fields][7]=seo_desc_en` +
-  `&populate[SEO][fields][8]=seo_keywords_en` +
-  `&populate[SEO][populate][seo_image][fields][0]=url` +
-  `&populate[SEO][populate][seo_image][fields][1]=formats` +
-  `&populate[OG][fields][0]=og_title_ru` +
-  `&populate[OG][fields][1]=og_desc_ru` +
-  `&populate[OG][fields][2]=og_title_kk` +
-  `&populate[OG][fields][3]=og_desc_kk` +
-  `&populate[OG][fields][4]=og_title_en` +
-  `&populate[OG][fields][5]=og_desc_en` +
-  `&populate[OG][populate][og_image][fields][0]=url` +
-  `&populate[OG][populate][og_image][fields][1]=formats`;
+const POPULATE_QUERY = `populate[AboutContent][populate]=*`;
+// `&populate[SEO][fields][0]=seo_title_ru` +
+// `&populate[SEO][fields][1]=seo_desc_ru` +
+// `&populate[SEO][fields][2]=seo_keywords_ru` +
+// `&populate[SEO][fields][3]=seo_title_kk` +
+// `&populate[SEO][fields][4]=seo_desc_kk` +
+// `&populate[SEO][fields][5]=seo_keywords_kk` +
+// `&populate[SEO][fields][6]=seo_title_en` +
+// `&populate[SEO][fields][7]=seo_desc_en` +
+// `&populate[SEO][fields][8]=seo_keywords_en` +
+// `&populate[SEO][populate][seo_image][fields][0]=url` +
+// `&populate[SEO][populate][seo_image][fields][1]=formats` +
+// `&populate[OG][fields][0]=og_title_ru` +
+// `&populate[OG][fields][1]=og_desc_ru` +
+// `&populate[OG][fields][2]=og_title_kk` +
+// `&populate[OG][fields][3]=og_desc_kk` +
+// `&populate[OG][fields][4]=og_title_en` +
+// `&populate[OG][fields][5]=og_desc_en` +
+// `&populate[OG][populate][og_image][fields][0]=url` +
+// `&populate[OG][populate][og_image][fields][1]=formats`;
 
 export default function About() {
   const { locale } = useLocale();
@@ -116,9 +115,9 @@ export default function About() {
   const [page, setPage] = useState(null);
 
   useEffect(() => {
-    fetch(`https://api.zhkh24.kz/api/footer-abouts?${ABOUT_POPULATE_QUERY}`)
+    fetch(`https://api.zhkh24.kz/api/footer-about?${POPULATE_QUERY}`)
       .then((res) => res.json())
-      .then((data) => setPage(data.data?.[0] ?? null));
+      .then((data) => setPage(data.data ?? null));
   }, []);
 
   if (!page) return <h2 className="loading wrapper">Загрузка...</h2>;
@@ -129,15 +128,15 @@ export default function About() {
     [];
 
   return (
-    <div className="legal-page wrapper">
-      <SEO
+    <div className="footer-links wrapper">
+      {/* <SEO
         seo={page.SEO}
         og={page.OG}
         title="О редакции"
         image={getImageUrl(page.OG?.og_image?.url || page.SEO?.seo_image?.url)}
-      />
+      /> */}
       <h1>О редакции</h1>
-      <div className="legal-page__content">
+      <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}
       </div>
     </div>
