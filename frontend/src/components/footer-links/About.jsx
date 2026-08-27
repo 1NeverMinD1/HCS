@@ -1,27 +1,136 @@
 import { useEffect, useState } from "react";
-import SEO from "../SEO/SEO.jsx";
+import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext";
 import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 
+const INTERNAL_LINKS = {
+  Контакты: "/contacts",
+  "Все контакты": "/contacts",
+  "О редакции": "/about",
+  Реклама: "/advertising",
+  "Редакционная политика": "/editorial-policy",
+  "Политика конфиденциальности": "/privacy",
+  "Пользовательское соглашение": "/terms",
+  "Условия использования": "/terms",
+  "Выходные данные": "/imprint",
+};
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function renderText(text, locale) {
+  if (!text) return null;
+
+  const result = [];
+  let lastIndex = 0;
+
+  const regex = /(\[[^\]]+\]\([^)]+\)|\[[^\]]+\]|[^\s@]+@[^\s@]+\.[^\s@]+)/g;
+
+  const matches = [...text.matchAll(regex)];
+
+  matches.forEach((match, index) => {
+    const value = match[0];
+    const start = match.index;
+
+    if (start > lastIndex) {
+      result.push(text.slice(lastIndex, start));
+    }
+
+    if (value.startsWith("[") && value.includes("](")) {
+      const linkMatch = value.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+
+      if (linkMatch) {
+        const label = linkMatch[1];
+        const url = linkMatch[2];
+
+        if (EMAIL_REGEX.test(label) && url.startsWith("mailto:")) {
+          result.push(
+            <a key={`email-${index}`} href={`mailto:${label}`}>
+              {label}
+            </a>,
+          );
+        } else {
+          result.push(
+            <a
+              key={`link-${index}`}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label}
+            </a>,
+          );
+        }
+      }
+    } else if (value.startsWith("[") && value.endsWith("]")) {
+      const label = value.slice(1, -1).trim();
+      const path = INTERNAL_LINKS[label];
+
+      if (path) {
+        result.push(
+          <span key={`internal-${index}`}>
+            [<Link to={`/${locale}${path}`}>{label}</Link>]
+          </span>,
+        );
+      } else {
+        result.push(value);
+      }
+    } else if (EMAIL_REGEX.test(value)) {
+      result.push(
+        <a key={`email-${index}`} href={`mailto:${value}`}>
+          {value}
+        </a>,
+      );
+    } else {
+      result.push(value);
+    }
+
+    lastIndex = start + value.length;
+  });
+
+  if (lastIndex < text.length) {
+    result.push(text.slice(lastIndex));
+  }
+
+  if (result.length === 0) {
+    return text;
+  }
+
+  return result;
+}
+
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
-      let content = child.text || "";
-
-      if (child.bold) content = <strong>{content}</strong>;
-      if (child.italic) content = <em>{content}</em>;
-      if (child.underline) content = <u>{content}</u>;
-      if (child.strikethrough) content = <s>{content}</s>;
-      if (child.code) content = <code>{content}</code>;
-
       if (child.type === "link") {
         return (
           <a key={j} href={child.url} target="_blank" rel="noopener noreferrer">
             {renderChildren(child.children)}
           </a>
         );
+      }
+
+      let content = renderText(child.text || "", locale);
+
+      if (child.bold) {
+        content = <strong>{content}</strong>;
+      }
+
+      if (child.italic) {
+        content = <em>{content}</em>;
+      }
+
+      if (child.underline) {
+        content = <u>{content}</u>;
+      }
+
+      if (child.strikethrough) {
+        content = <s>{content}</s>;
+      }
+
+      if (child.code) {
+        content = <code>{content}</code>;
       }
 
       return <span key={j}>{content}</span>;
@@ -33,6 +142,7 @@ function renderBlock(block, i, locale, t) {
 
     case "heading": {
       const Tag = `h${block.level || 2}`;
+
       return <Tag key={i}>{renderChildren(block.children)}</Tag>;
     }
 
@@ -50,6 +160,7 @@ function renderBlock(block, i, locale, t) {
       return (
         <figure key={i} className="richtext-image">
           <img src={getImageUrl(block.image.url)} alt={alt || ""} />
+
           {caption && (
             <figcaption className="img_source">
               {t("source")}:{" "}
@@ -59,7 +170,7 @@ function renderBlock(block, i, locale, t) {
                     caption.startsWith("http") ? caption : `https://${caption}`
                   }
                   target="_blank"
-                  rel="nofollow noopener"
+                  rel="nofollow noopener noreferrer"
                 >
                   {caption.replace(/^https?:\/\//, "")}
                 </a>
@@ -74,6 +185,7 @@ function renderBlock(block, i, locale, t) {
 
     case "list": {
       const ListTag = block.format === "ordered" ? "ol" : "ul";
+
       return (
         <ListTag key={i}>
           {block.children?.map((item, j) => (
@@ -89,25 +201,6 @@ function renderBlock(block, i, locale, t) {
 }
 
 const POPULATE_QUERY = `populate[AboutContent][populate]=*`;
-// `&populate[SEO][fields][0]=seo_title_ru` +
-// `&populate[SEO][fields][1]=seo_desc_ru` +
-// `&populate[SEO][fields][2]=seo_keywords_ru` +
-// `&populate[SEO][fields][3]=seo_title_kk` +
-// `&populate[SEO][fields][4]=seo_desc_kk` +
-// `&populate[SEO][fields][5]=seo_keywords_kk` +
-// `&populate[SEO][fields][6]=seo_title_en` +
-// `&populate[SEO][fields][7]=seo_desc_en` +
-// `&populate[SEO][fields][8]=seo_keywords_en` +
-// `&populate[SEO][populate][seo_image][fields][0]=url` +
-// `&populate[SEO][populate][seo_image][fields][1]=formats` +
-// `&populate[OG][fields][0]=og_title_ru` +
-// `&populate[OG][fields][1]=og_desc_ru` +
-// `&populate[OG][fields][2]=og_title_kk` +
-// `&populate[OG][fields][3]=og_desc_kk` +
-// `&populate[OG][fields][4]=og_title_en` +
-// `&populate[OG][fields][5]=og_desc_en` +
-// `&populate[OG][populate][og_image][fields][0]=url` +
-// `&populate[OG][populate][og_image][fields][1]=formats`;
 
 export default function About() {
   const { locale } = useLocale();
@@ -120,7 +213,9 @@ export default function About() {
       .then((data) => setPage(data.data ?? null));
   }, []);
 
-  if (!page) return <h2 className="loading wrapper">Загрузка...</h2>;
+  if (!page) {
+    return <h2 className="loading wrapper">Загрузка...</h2>;
+  }
 
   const content =
     page.AboutContent?.[`content_${locale}`] ||
@@ -129,13 +224,8 @@ export default function About() {
 
   return (
     <div className="footer-links wrapper">
-      {/* <SEO
-        seo={page.SEO}
-        og={page.OG}
-        title="О редакции"
-        image={getImageUrl(page.OG?.og_image?.url || page.SEO?.seo_image?.url)}
-      /> */}
       <h1>О редакции</h1>
+
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}
       </div>

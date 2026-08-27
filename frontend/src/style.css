@@ -4940,6 +4940,13 @@
   flex-direction: column;
   gap: 10px;
 }
+.footer-links .footer-links__content a {
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+}
+.footer-links .footer-links__content a:hover {
+  color: rgb(0, 60, 255);
+}
 .footer-links .footer-links__content p {
   font-size: 20px;
   text-indent: 30px;

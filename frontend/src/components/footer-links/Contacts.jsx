@@ -5,17 +5,155 @@ import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 
+const INTERNAL_LINKS = {
+  ru: {
+    ЖКХ24: "/ru",
+    Новости: "/ru/news",
+    Статьи: "/ru/articles",
+    Блоги: "/ru/blogs",
+    События: "/ru/events",
+    Советы: "/ru/q-and-as",
+    "Q&A": "/ru/q-and-as",
+    "О редакции": "/ru/about",
+    "Редакционная политика": "/ru/editorial-policy",
+    Контакты: "/ru/contacts",
+    Реклама: "/ru/advertising",
+    "Выходные данные": "/ru/imprint",
+    "Политика конфиденциальности": "/ru/privacy",
+    "Пользовательское соглашение": "/ru/terms",
+  },
+  kk: {
+    ЖКХ24: "/kk",
+    Жаңалықтар: "/kk/news",
+    Мақалалар: "/kk/articles",
+    Блогтар: "/kk/blogs",
+    Оқиғалар: "/kk/events",
+    Кеңестер: "/kk/q-and-as",
+    "Q&A": "/kk/q-and-as",
+    "Редакция туралы": "/kk/about",
+    "Редакциялық саясат": "/kk/editorial-policy",
+    Байланыстар: "/kk/contacts",
+    Жарнама: "/kk/advertising",
+    "Шығыс деректері": "/kk/imprint",
+    "Құпиялылық саясаты": "/kk/privacy",
+    "Пайдаланушы келісімі": "/kk/terms",
+  },
+  en: {
+    ЖКХ24: "/en",
+    News: "/en/news",
+    Articles: "/en/articles",
+    Blogs: "/en/blogs",
+    Events: "/en/events",
+    Tips: "/en/q-and-as",
+    "Q&A": "/en/q-and-as",
+    About: "/en/about",
+    "Editorial Policy": "/en/editorial-policy",
+    Contacts: "/en/contacts",
+    Advertising: "/en/advertising",
+    Imprint: "/en/imprint",
+    "Privacy Policy": "/en/privacy",
+    "Terms of Use": "/en/terms",
+  },
+};
+
+function renderText(text, locale, keyPrefix) {
+  if (!text) return null;
+
+  const links = INTERNAL_LINKS[locale] || INTERNAL_LINKS.ru;
+
+  const regex =
+    /\[([^\]]+)\]\(([^)]+)\)|\[([^\]]+)\]|([^\s@]+@[^\s@]+\.[^\s@]+)/g;
+
+  const result = [];
+  let lastIndex = 0;
+  let match;
+  let index = 0;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      result.push(
+        <span key={`${keyPrefix}-text-${index}`}>
+          {text.slice(lastIndex, match.index)}
+        </span>,
+      );
+    }
+
+    const textValue = match[1];
+    const url = match[2];
+    const bracket = match[3];
+    const email = match[4];
+
+    // [Текст](URL)
+    if (textValue && url) {
+      const internalUrl = links[textValue.trim()];
+
+      if (internalUrl) {
+        result.push(
+          <span key={`${keyPrefix}-internal-link-${index}`}>
+            [<a href={internalUrl}>{textValue}</a>]
+          </span>,
+        );
+      } else if (url.startsWith("mailto:")) {
+        result.push(
+          <span key={`${keyPrefix}-mail-link-${index}`}>
+            [<a href={url}>{textValue}</a>]
+          </span>,
+        );
+      } else if (url.startsWith("data:")) {
+        result.push(
+          <span key={`${keyPrefix}-data-${index}`}>{textValue}</span>,
+        );
+      } else {
+        result.push(
+          <span key={`${keyPrefix}-external-link-${index}`}>
+            [
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {textValue}
+            </a>
+            ]
+          </span>,
+        );
+      }
+
+      // [Текст]
+    } else if (bracket) {
+      const internalUrl = links[bracket.trim()];
+
+      if (internalUrl) {
+        result.push(
+          <span key={`${keyPrefix}-bracket-link-${index}`}>
+            [<a href={internalUrl}>{bracket}</a>]
+          </span>,
+        );
+      } else {
+        result.push(
+          <span key={`${keyPrefix}-bracket-${index}`}>{match[0]}</span>,
+        );
+      }
+
+      // email
+    } else if (email) {
+      result.push(
+        <a key={`${keyPrefix}-email-${index}`} href={`mailto:${email}`}>
+          {email}
+        </a>,
+      );
+    }
+
+    lastIndex = regex.lastIndex;
+    index++;
+  }
+
+  if (lastIndex < text.length) {
+    result.push(<span key={`${keyPrefix}-tail`}>{text.slice(lastIndex)}</span>);
+  }
+
+  return result;
+}
+
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
-      let content = child.text || "";
-
-      if (child.bold) content = <strong>{content}</strong>;
-      if (child.italic) content = <em>{content}</em>;
-      if (child.underline) content = <u>{content}</u>;
-      if (child.strikethrough) content = <s>{content}</s>;
-      if (child.code) content = <code>{content}</code>;
-
       if (child.type === "link") {
         return (
           <a key={j} href={child.url} target="_blank" rel="noopener noreferrer">
@@ -23,6 +161,14 @@ function renderBlock(block, i, locale, t) {
           </a>
         );
       }
+
+      let content = renderText(child.text || "", locale, `${i}-${j}`);
+
+      if (child.bold) content = <strong>{content}</strong>;
+      if (child.italic) content = <em>{content}</em>;
+      if (child.underline) content = <u>{content}</u>;
+      if (child.strikethrough) content = <s>{content}</s>;
+      if (child.code) content = <code>{content}</code>;
 
       return <span key={j}>{content}</span>;
     });
@@ -33,6 +179,7 @@ function renderBlock(block, i, locale, t) {
 
     case "heading": {
       const Tag = `h${block.level || 2}`;
+
       return <Tag key={i}>{renderChildren(block.children)}</Tag>;
     }
 
@@ -40,16 +187,17 @@ function renderBlock(block, i, locale, t) {
       return <blockquote key={i}>{renderChildren(block.children)}</blockquote>;
 
     case "image": {
-      const rawCaption = block.image.caption?.trim();
+      const rawCaption = block.image?.caption?.trim();
       const caption = parseMultilangField(rawCaption, locale);
       const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
 
-      const rawAlt = block.image.alternativeText?.trim();
+      const rawAlt = block.image?.alternativeText?.trim();
       const alt = parseMultilangField(rawAlt, locale);
 
       return (
         <figure key={i} className="richtext-image">
-          <img src={getImageUrl(block.image.url)} alt={alt || ""} />
+          <img src={getImageUrl(block.image?.url)} alt={alt || ""} />
+
           {caption && (
             <figcaption className="img_source">
               {t("source")}:{" "}
@@ -74,6 +222,7 @@ function renderBlock(block, i, locale, t) {
 
     case "list": {
       const ListTag = block.format === "ordered" ? "ol" : "ul";
+
       return (
         <ListTag key={i}>
           {block.children?.map((item, j) => (
@@ -89,25 +238,6 @@ function renderBlock(block, i, locale, t) {
 }
 
 const POPULATE_QUERY = `populate[ContactsContent][populate]=*`;
-// `&populate[SEO][fields][0]=seo_title_ru` +
-// `&populate[SEO][fields][1]=seo_desc_ru` +
-// `&populate[SEO][fields][2]=seo_keywords_ru` +
-// `&populate[SEO][fields][3]=seo_title_kk` +
-// `&populate[SEO][fields][4]=seo_desc_kk` +
-// `&populate[SEO][fields][5]=seo_keywords_kk` +
-// `&populate[SEO][fields][6]=seo_title_en` +
-// `&populate[SEO][fields][7]=seo_desc_en` +
-// `&populate[SEO][fields][8]=seo_keywords_en` +
-// `&populate[SEO][populate][seo_image][fields][0]=url` +
-// `&populate[SEO][populate][seo_image][fields][1]=formats` +
-// `&populate[OG][fields][0]=og_title_ru` +
-// `&populate[OG][fields][1]=og_desc_ru` +
-// `&populate[OG][fields][2]=og_title_kk` +
-// `&populate[OG][fields][3]=og_desc_kk` +
-// `&populate[OG][fields][4]=og_title_en` +
-// `&populate[OG][fields][5]=og_desc_en` +
-// `&populate[OG][populate][og_image][fields][0]=url` +
-// `&populate[OG][populate][og_image][fields][1]=formats`;
 
 export default function Contacts() {
   const { locale } = useLocale();
@@ -120,7 +250,9 @@ export default function Contacts() {
       .then((data) => setPage(data.data ?? null));
   }, []);
 
-  if (!page) return <h2 className="loading wrapper">Загрузка...</h2>;
+  if (!page) {
+    return <h2 className="loading wrapper">Загрузка...</h2>;
+  }
 
   const content =
     page.ContactsContent?.[`content_${locale}`] ||
@@ -129,13 +261,8 @@ export default function Contacts() {
 
   return (
     <div className="footer-links wrapper">
-      {/* <SEO
-        seo={page.SEO}
-        og={page.OG}
-        title="О редакции"
-        image={getImageUrl(page.OG?.og_image?.url || page.SEO?.seo_image?.url)}
-      /> */}
       <h1>Контакты</h1>
+
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}
       </div>
