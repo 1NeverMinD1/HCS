@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "footer_contacts",
+  "info": {
+    "singularName": "footer-contact",
+    "pluralName": "footer-contacts",
+    "displayName": "FooterContact"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ContactsContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

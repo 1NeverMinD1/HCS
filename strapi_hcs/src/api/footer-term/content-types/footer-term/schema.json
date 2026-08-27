@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "footer_terms",
+  "info": {
+    "singularName": "footer-term",
+    "pluralName": "footer-terms",
+    "displayName": "FooterTerm"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TermsContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

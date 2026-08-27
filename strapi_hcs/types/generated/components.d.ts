@@ -56,12 +56,27 @@ export interface ContentSocialLink extends Struct.ComponentSchema {
   };
 }
 
+export interface FooterFooterRichText extends Struct.ComponentSchema {
+  collectionName: 'components_footer_footer_rich_texts';
+  info: {
+    displayName: 'FooterRichText';
+  };
+  attributes: {
+    content_en: Schema.Attribute.Blocks;
+    content_kk: Schema.Attribute.Blocks;
+    content_ru: Schema.Attribute.Blocks;
+    OG: Schema.Attribute.Component<'content.og', false>;
+    SEO: Schema.Attribute.Component<'content.seo', false>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.og': ContentOg;
       'content.seo': ContentSeo;
       'content.social-link': ContentSocialLink;
+      'footer.footer-rich-text': FooterFooterRichText;
     }
   }
 }

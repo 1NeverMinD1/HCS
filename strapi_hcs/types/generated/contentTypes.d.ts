@@ -467,6 +467,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAdvertisingAdvertising extends Struct.CollectionTypeSchema {
+  collectionName: 'advertisings';
+  info: {
+    displayName: 'FooterAdvertising';
+    pluralName: 'advertisings';
+    singularName: 'advertising';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AdvertisingContent: Schema.Attribute.Component<
+      'footer.footer-rich-text',
+      false
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::advertising.advertising'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -744,6 +775,190 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     title_en: Schema.Attribute.String;
     title_kk: Schema.Attribute.String;
     title_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterAboutFooterAbout extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_abouts';
+  info: {
+    displayName: 'FooterAbout';
+    pluralName: 'footer-abouts';
+    singularName: 'footer-about';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AboutContent: Schema.Attribute.Component<'footer.footer-rich-text', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-about.footer-about'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterContactFooterContact
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_contacts';
+  info: {
+    displayName: 'FooterContact';
+    pluralName: 'footer-contacts';
+    singularName: 'footer-contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ContactsContent: Schema.Attribute.Component<
+      'footer.footer-rich-text',
+      false
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-contact.footer-contact'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterEditorialPolicyFooterEditorialPolicy
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_editorial_policies';
+  info: {
+    displayName: 'FooterEditorialPolicy';
+    pluralName: 'footer-editorial-policies';
+    singularName: 'footer-editorial-policy';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    EditorialPolicyContent: Schema.Attribute.Component<
+      'footer.footer-rich-text',
+      false
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-editorial-policy.footer-editorial-policy'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterImprintFooterImprint
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_imprints';
+  info: {
+    displayName: 'FooterImprint';
+    pluralName: 'footer-imprints';
+    singularName: 'footer-imprint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ImprintContent: Schema.Attribute.Component<
+      'footer.footer-rich-text',
+      false
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-imprint.footer-imprint'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterPrivacyFooterPrivacy
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_privacies';
+  info: {
+    displayName: 'FooterPrivacy';
+    pluralName: 'footer-privacies';
+    singularName: 'footer-privacy';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-privacy.footer-privacy'
+    > &
+      Schema.Attribute.Private;
+    PrivacyContent: Schema.Attribute.Component<
+      'footer.footer-rich-text',
+      false
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterTermFooterTerm extends Struct.CollectionTypeSchema {
+  collectionName: 'footer_terms';
+  info: {
+    displayName: 'FooterTerm';
+    pluralName: 'footer-terms';
+    singularName: 'footer-term';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer-term.footer-term'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    TermsContent: Schema.Attribute.Component<'footer.footer-rich-text', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1420,12 +1635,19 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::advertising.advertising': ApiAdvertisingAdvertising;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
       'api::city.city': ApiCityCity;
       'api::event.event': ApiEventEvent;
+      'api::footer-about.footer-about': ApiFooterAboutFooterAbout;
+      'api::footer-contact.footer-contact': ApiFooterContactFooterContact;
+      'api::footer-editorial-policy.footer-editorial-policy': ApiFooterEditorialPolicyFooterEditorialPolicy;
+      'api::footer-imprint.footer-imprint': ApiFooterImprintFooterImprint;
+      'api::footer-privacy.footer-privacy': ApiFooterPrivacyFooterPrivacy;
+      'api::footer-term.footer-term': ApiFooterTermFooterTerm;
       'api::header-cat.header-cat': ApiHeaderCatHeaderCat;
       'api::new.new': ApiNewNew;
       'api::q-and-a.q-and-a': ApiQAndAQAndA;

@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "footer_editorial_policies",
+  "info": {
+    "singularName": "footer-editorial-policy",
+    "pluralName": "footer-editorial-policies",
+    "displayName": "FooterEditorialPolicy"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "EditorialPolicyContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "footer_imprints",
+  "info": {
+    "singularName": "footer-imprint",
+    "pluralName": "footer-imprints",
+    "displayName": "FooterImprint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ImprintContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

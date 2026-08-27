@@ -22,6 +22,16 @@ import QnasContent from "./components/pages/contentpages/qnas/QnasContent.jsx";
 
 import Authors from "./components/pages/contentpages/authors/Authors.jsx";
 
+// FooterLinks
+
+import Imprint from "./components/footer-links/Imprint.jsx";
+import About from "./components/footer-links/About.jsx";
+import Advertising from "./components/footer-links/Advertising.jsx";
+import Contacts from "./components/footer-links/Contacts.jsx";
+import EditorialPolicy from "./components/footer-links/Editorial-policy.jsx";
+import Privacy from "./components/footer-links/Privacy.jsx";
+import Terms from "./components/footer-links/Terms.jsx";
+
 export default function App() {
   useYandexMetrika();
 
@@ -67,6 +77,24 @@ export default function App() {
           <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
           {/* Автор */}
           <Route path="/:locale/author/:slug" element={<Authors />} />
+          {/* FooterLinks */}
+          {/* Imprint */}
+          <Route path="/:locale/imprint" element={<Imprint />} />
+          {/* About */}
+          <Route path="/:locale/about" element={<About />} />
+          {/* Advertising */}
+          <Route path="/:locale/advertising" element={<Advertising />} />
+          {/* Contacts */}
+          <Route path="/:locale/contacts" element={<Contacts />} />
+          {/* Editorial-policy */}
+          <Route
+            path="/:locale/editorial-policy"
+            element={<EditorialPolicy />}
+          />
+          {/* Privacy */}
+          <Route path="/:locale/privacy" element={<Privacy />} />
+          {/* Terms */}
+          <Route path="/:locale/terms" element={<Terms />} />
         </Routes>
         <hr className="main_divide" />
         <div className="wrapper">

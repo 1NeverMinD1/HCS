@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "advertisings",
+  "info": {
+    "singularName": "advertising",
+    "pluralName": "advertisings",
+    "displayName": "FooterAdvertising"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "AdvertisingContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

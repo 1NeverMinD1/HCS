@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "footer_privacies",
+  "info": {
+    "singularName": "footer-privacy",
+    "pluralName": "footer-privacies",
+    "displayName": "FooterPrivacy"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "PrivacyContent": {
+      "type": "component",
+      "component": "footer.footer-rich-text",
+      "repeatable": false
+    }
+  }
+}

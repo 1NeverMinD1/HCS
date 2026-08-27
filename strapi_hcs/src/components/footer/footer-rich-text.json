@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_footer_footer_rich_texts",
+  "info": {
+    "displayName": "FooterRichText"
+  },
+  "options": {},
+  "attributes": {
+    "content_ru": {
+      "type": "blocks"
+    },
+    "content_kk": {
+      "type": "blocks"
+    },
+    "content_en": {
+      "type": "blocks"
+    },
+    "SEO": {
+      "type": "component",
+      "component": "content.seo",
+      "repeatable": false
+    },
+    "OG": {
+      "type": "component",
+      "component": "content.og",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

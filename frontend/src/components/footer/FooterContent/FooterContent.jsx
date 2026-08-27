@@ -36,18 +36,70 @@ export default function FooterContent() {
             <Link to={`/${locale}/events`} className="footer__contacts-item">
               <li className="footer__contacts-item">События</li>
             </Link>
+            <Link to={`/${locale}/q-and-as`} className="footer__contacts-item">
+              <li className="footer__contacts-item">Q&A</li>
+            </Link>
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h3>КОМПАНИЯ</h3>
+          <h3>ИЗДАНИЕ</h3>
           <ul className="footer__contacts-list">
-            <li className="footer__contacts-item">О нас</li>
-            <li className="footer__contacts-item">Редакция</li>
-            <li className="footer__contacts-item">Карьера</li>
-            <li className="footer__contacts-item">Контакты</li>
+            <Link to={`/${locale}/about`} className="footer__contacts-item">
+              <li className="footer__contacts-item">О редакции</li>
+            </Link>
+            <Link
+              to={`/${locale}/editorial-policy`}
+              className="footer__contacts-item"
+            >
+              <li className="footer__contacts-item">Редакционная политика</li>
+            </Link>
+            <Link to={`/${locale}/contacts`} className="footer__contacts-item">
+              <li className="footer__contacts-item">Контакты</li>
+            </Link>
+            <Link
+              to={`/${locale}/advertising`}
+              className="footer__contacts-item"
+            >
+              <li className="footer__contacts-item">Реклама</li>
+            </Link>
           </ul>
         </div>
         <div className="footer__contacts-block">
+          <h3>Правовая информация</h3>
+          <ul className="footer__contacts-list">
+            <Link to={`/${locale}/imprint`} className="footer__contacts-item">
+              <li className="footer__contacts-item">Выходные данные</li>
+            </Link>
+            <Link to={`/${locale}/privacy`} className="footer__contacts-item">
+              Политика конфиденциальности
+            </Link>
+            <Link to={`/${locale}/terms`} className="footer__contacts-item">
+              Пользовательское соглашение
+            </Link>
+          </ul>
+        </div>
+        <div className="footer__contacts-block">
+          <h3>Главный офис</h3>
+          <ul className="footer__contacts-list">
+            <li className="footer__contacts-item adress">
+              <a
+                href="https://2gis.kz/astana/geo/9570784863371165/71.43852,51.120018"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>010000, г. Астана</span>{" "}
+                <span>ул. Алихана Бокейхана, 2, Н. П. 5Б</span>
+              </a>
+            </li>
+          </ul>
+          <h3>Редакция</h3>
+          <ul className="footer__contacts-list">
+            <li className="footer__contacts-item">
+              <a href="mailto:info@zhkh24.kz">info@zhkh24.kz</a>
+            </li>
+          </ul>
+        </div>
+        {/* <div className="footer__contacts-block">
           <h3>СОЦСЕТИ</h3>
           <ul className="footer__contacts-list footer__contacts-list--social">
             <li className="footer__contacts-item">
@@ -83,7 +135,7 @@ export default function FooterContent() {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

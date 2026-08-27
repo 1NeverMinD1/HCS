@@ -1,35 +1,20 @@
 .footer {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  .imprint {
+    margin-block: 20px;
+  }
   .footer__end {
-    display: flex;
     margin-top: 20px;
-    justify-content: space-between;
-    .rules {
-      display: flex;
-      gap: 30px;
-      p {
-      }
-    }
   }
 }
 
 @media (max-width: 430px) {
   .footer {
     .footer__end {
-      align-items: center;
       .rights {
         width: 50%;
         display: flex;
         flex-direction: column;
-        p {
-          text-align: center;
-          font-size: 16px;
-        }
-      }
-      .rules {
-        width: 50%;
-        flex-direction: column;
-        gap: 10px;
         p {
           text-align: center;
           font-size: 16px;
