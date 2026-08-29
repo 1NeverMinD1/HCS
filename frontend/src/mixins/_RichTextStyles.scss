@@ -124,4 +124,96 @@
   h6 {
     font-size: 16px;
   }
+  @media (max-width: 430px) {
+    p {
+      font-size: variables.$mobile-text-font-size;
+      text-indent: 10px;
+    }
+    blockquote {
+      margin-block: 10px;
+      padding: 20px 15px 15px 15px;
+      width: 100%;
+      margin-left: 0px;
+      font-size: variables.$mobile-text-font-size;
+      text-indent: 0px;
+      line-height: 140%;
+      &::before {
+        position: static;
+        display: block;
+        left: unset;
+        top: unset;
+        font-size: 40px;
+        line-height: 0.5;
+        margin-bottom: 5px;
+      }
+    }
+    img {
+      margin-block: 20px;
+      width: 100%;
+    }
+    ul {
+      padding-left: 0;
+      li {
+        position: relative;
+        padding-left: 20px;
+        list-style: none;
+        font-size: variables.$mobile-text-font-size;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0px;
+          top: 0.6em;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          background: variables.$hover-color;
+        }
+      }
+    }
+    ol {
+      padding-left: 0px;
+      li {
+        padding-left: 30px;
+        line-height: 120%;
+        font-size: variables.$mobile-text-font-size;
+        &::before {
+          width: 20px;
+          height: 20px;
+          font-size: 10px;
+        }
+      }
+    }
+    ul,
+    ol {
+      font-size: variables.$mobile-text-font-size + 2px;
+      gap: 10px;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-left: 10px;
+      width: fit-content;
+    }
+    h1 {
+      font-size: variables.$mobile-title-font-size;
+    }
+    h2 {
+      font-size: variables.$mobile-title-font-size - 2px;
+    }
+    h3 {
+      font-size: variables.$mobile-title-font-size - 4px;
+    }
+    h4 {
+      font-size: variables.$mobile-title-font-size - 6px;
+    }
+    h5 {
+      font-size: variables.$mobile-title-font-size - 8px;
+    }
+    h6 {
+      font-size: variables.$mobile-title-font-size - 10px;
+    }
+  }
 }
