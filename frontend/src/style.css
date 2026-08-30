@@ -3777,15 +3777,17 @@
   gap: 10px;
   margin-inline: 200px;
 }
-.blogscontent__layout .blogscontent {
+.blogscontent__layout .blogscontent__layout-main {
   width: 70%;
+}
+.blogscontent__layout .blogscontent__layout-main .blogscontent {
   margin-top: 20px;
   padding: 20px;
   border-radius: 20px;
   border: 1px solid rgb(220, 220, 220);
   border-radius: 20px;
 }
-.blogscontent__layout .blogscontent .back {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .back {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -3799,36 +3801,36 @@
   padding: 10px;
   border-radius: 10px;
 }
-.blogscontent__layout .blogscontent .back svg {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .back svg {
   transition: all 0.3s ease;
 }
-.blogscontent__layout .blogscontent .back:hover {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .back:hover {
   background: rgb(0, 60, 255);
   color: white;
 }
-.blogscontent__layout .blogscontent .back:hover svg {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .back:hover svg {
   fill: white;
   transition: all 0.3s ease;
 }
-.blogscontent__layout .blogscontent .blogscontent__header {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__header {
   display: flex;
   gap: 10px;
   align-items: baseline;
 }
-.blogscontent__layout .blogscontent .blogscontent__header .blogscontent__header-date {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__header .blogscontent__header-date {
   font-size: 16px;
   opacity: 0.8;
 }
-.blogscontent__layout .blogscontent .cat {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .cat {
   margin-top: 20px;
   margin-left: 20px;
 }
-.blogscontent__layout .blogscontent .blogscontent__title {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__title {
   width: 100%;
   text-indent: 15px;
   font-size: 40px;
 }
-.blogscontent__layout .blogscontent .blogscontent__cover .blogscontent__img {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__cover .blogscontent__img {
   width: 80%;
   margin-inline: auto;
   display: block;
@@ -3838,23 +3840,23 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.blogscontent__layout .blogscontent .blogscontent__cover .img_source {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__cover .img_source {
   width: 80%;
   margin-inline: auto;
   display: block;
   margin-bottom: 20px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main p {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main p {
   font-size: 20px;
   text-indent: 30px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main blockquote {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main blockquote {
   margin-block: 20px;
   background: rgba(0, 60, 255, 0.658);
   padding: 30px;
@@ -3866,7 +3868,7 @@
   text-indent: 20px;
   line-height: 130%;
 }
-.blogscontent__layout .blogscontent .blogscontent__main blockquote::before {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main blockquote::before {
   content: "“";
   position: absolute;
   left: 10px;
@@ -3876,7 +3878,7 @@
   color: rgb(0, 60, 255);
   font-family: Georgia, serif;
 }
-.blogscontent__layout .blogscontent .blogscontent__main img {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main img {
   margin-block: 20px;
   margin-inline: auto;
   width: 80%;
@@ -3884,18 +3886,18 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ul {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul {
   padding-left: 0;
   margin-block: 20px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ul li {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul li {
   position: relative;
   padding-left: 30px;
   list-style: none;
   font-size: 20px;
   line-height: 1.5;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ul li::before {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul li::before {
   content: "";
   position: absolute;
   left: 8px;
@@ -3905,18 +3907,18 @@
   height: 8px;
   background: rgba(0, 60, 255, 0.658);
 }
-.blogscontent__layout .blogscontent .blogscontent__main ol {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol {
   list-style: none;
   counter-reset: my-counter;
   padding-left: 30px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ol li {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol li {
   counter-increment: my-counter;
   position: relative;
   padding-left: 40px;
   line-height: 140%;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ol li::before {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol li::before {
   content: counter(my-counter);
   position: absolute;
   left: 0;
@@ -3932,29 +3934,29 @@
   font-size: 14px;
   font-weight: bold;
 }
-.blogscontent__layout .blogscontent .blogscontent__main ul,
-.blogscontent__layout .blogscontent .blogscontent__main ol {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol {
   font-size: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h1,
-.blogscontent__layout .blogscontent .blogscontent__main h2,
-.blogscontent__layout .blogscontent .blogscontent__main h3,
-.blogscontent__layout .blogscontent .blogscontent__main h4,
-.blogscontent__layout .blogscontent .blogscontent__main h5,
-.blogscontent__layout .blogscontent .blogscontent__main h6 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h1,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h2,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h3,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h4,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h5,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h6 {
   margin-left: 40px;
   width: -moz-fit-content;
   width: fit-content;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h1::after,
-.blogscontent__layout .blogscontent .blogscontent__main h2::after,
-.blogscontent__layout .blogscontent .blogscontent__main h3::after,
-.blogscontent__layout .blogscontent .blogscontent__main h4::after,
-.blogscontent__layout .blogscontent .blogscontent__main h5::after,
-.blogscontent__layout .blogscontent .blogscontent__main h6::after {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h1::after,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h2::after,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h3::after,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h4::after,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h5::after,
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h6::after {
   content: "";
   display: block;
   width: 100%;
@@ -3962,30 +3964,30 @@
   background: rgba(0, 60, 255, 0.658);
   margin-top: 5px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h1 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h1 {
   font-size: 32px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h2 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h2 {
   font-size: 26px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h3 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h3 {
   font-size: 22px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h4 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h4 {
   font-size: 19px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h5 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h5 {
   font-size: 17px;
 }
-.blogscontent__layout .blogscontent .blogscontent__main h6 {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h6 {
   font-size: 16px;
 }
 @media (max-width: 430px) {
-  .blogscontent__layout .blogscontent .blogscontent__main p {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main p {
     font-size: 16px;
     text-indent: 10px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main blockquote {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main blockquote {
     margin-block: 10px;
     padding: 20px 15px 15px 15px;
     width: 100%;
@@ -3994,7 +3996,7 @@
     text-indent: 0px;
     line-height: 140%;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main blockquote::before {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main blockquote::before {
     position: static;
     display: block;
     left: unset;
@@ -4003,20 +4005,20 @@
     line-height: 0.5;
     margin-bottom: 5px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main img {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main img {
     margin-block: 20px;
     width: 100%;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ul {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul {
     padding-left: 0;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ul li {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul li {
     position: relative;
     padding-left: 20px;
     list-style: none;
     font-size: 16px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ul li::before {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul li::before {
     content: "";
     position: absolute;
     left: 0px;
@@ -4026,59 +4028,59 @@
     height: 6px;
     background: rgba(0, 60, 255, 0.658);
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ol {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol {
     padding-left: 0px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ol li {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol li {
     padding-left: 30px;
     line-height: 120%;
     font-size: 16px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ol li::before {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol li::before {
     width: 20px;
     height: 20px;
     font-size: 10px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main ul,
-  .blogscontent__layout .blogscontent .blogscontent__main ol {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ul,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main ol {
     font-size: 18px;
     gap: 10px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h1,
-  .blogscontent__layout .blogscontent .blogscontent__main h2,
-  .blogscontent__layout .blogscontent .blogscontent__main h3,
-  .blogscontent__layout .blogscontent .blogscontent__main h4,
-  .blogscontent__layout .blogscontent .blogscontent__main h5,
-  .blogscontent__layout .blogscontent .blogscontent__main h6 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h1,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h2,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h3,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h4,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h5,
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h6 {
     margin-left: 10px;
     width: -moz-fit-content;
     width: fit-content;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h1 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h1 {
     font-size: 26px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h2 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h2 {
     font-size: 24px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h3 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h3 {
     font-size: 22px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h4 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h4 {
     font-size: 20px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h5 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h5 {
     font-size: 18px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main h6 {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main h6 {
     font-size: 16px;
   }
 }
-.blogscontent__layout .blogscontent .blogscontent__tags {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags {
   margin-top: 10px;
   display: flex;
   gap: 10px;
 }
-.blogscontent__layout .blogscontent .blogscontent__tags .city {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags .city {
   background: rgb(0, 60, 255);
   width: -moz-fit-content;
   width: fit-content;
@@ -4087,7 +4089,7 @@
   color: white;
   border-radius: 5px;
 }
-.blogscontent__layout .blogscontent .blogscontent__tags p {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags p {
   background: rgb(0, 60, 255);
   width: -moz-fit-content;
   width: fit-content;
@@ -4095,16 +4097,16 @@
   color: white;
   border-radius: 5px;
 }
-.blogscontent__layout .blogscontent .blogscontent__tags p::before {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags p::before {
   content: "#";
 }
-.blogscontent__layout .blogscontent .blogscontent__footer {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__footer {
   margin-top: 20px;
   margin-left: 20px;
   display: flex;
   gap: 20px;
 }
-.blogscontent__layout .blogscontent .blogscontent__footer hr {
+.blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__footer hr {
   border: 1px solid black;
   height: 20px;
 }
@@ -4125,50 +4127,53 @@
     margin-top: 0px;
     margin-inline: 10px;
   }
-  .blogscontent__layout .blogscontent {
+  .blogscontent__layout .blogscontent__layout-main {
+    width: 100%;
+  }
+  .blogscontent__layout .blogscontent__layout-main .blogscontent {
     margin-top: 20px;
     padding: 10px;
     border-radius: 10px;
     width: 100%;
   }
-  .blogscontent__layout .blogscontent .back {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .back {
     color: black;
     font-size: 16px;
     margin-block: 10px;
     padding: 5px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__header-date p {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__header-date p {
     font-size: 14px;
   }
-  .blogscontent__layout .blogscontent .cat {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .cat {
     font-size: 14px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__title {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__title {
     width: 100%;
     text-indent: 0px;
     font-size: 26px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__img {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__img {
     width: 100%;
   }
-  .blogscontent__layout .blogscontent .blogscontent__main {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__main {
     gap: 10px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__tags {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags {
     display: flex;
     gap: 10px;
     margin-top: 10px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__tags p {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__tags p {
     font-size: 14px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__footer {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__footer {
     margin-top: 20px;
     margin-left: 20px;
     display: flex;
     gap: 20px;
   }
-  .blogscontent__layout .blogscontent .blogscontent__footer hr {
+  .blogscontent__layout .blogscontent__layout-main .blogscontent .blogscontent__footer hr {
     border: 1px solid black;
     height: 20px;
   }

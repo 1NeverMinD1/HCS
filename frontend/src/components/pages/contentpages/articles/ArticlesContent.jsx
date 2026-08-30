@@ -273,51 +273,52 @@ function ArticleItem({ item, isFirst }) {
 }
 
 export default function ArticlesContent() {
-  // ... без изменений
   const { locale } = useLocale();
   const { slug } = useParams();
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
 
+  const ARTICLES_POPULATE_QUERY =
+    `populate[OG][populate][og_image][fields][0]=url` +
+    `&populate[OG][populate][og_image][fields][1]=formats` +
+    `&populate[SEO][fields][0]=seo_title_ru` +
+    `&populate[SEO][fields][1]=seo_desc_ru` +
+    `&populate[SEO][fields][2]=seo_title_kk` +
+    `&populate[SEO][fields][3]=seo_desc_kk` +
+    `&populate[SEO][fields][4]=seo_title_en` +
+    `&populate[SEO][fields][5]=seo_desc_en` +
+    `&populate[SEO][fields][6]=seo_keywords_ru` +
+    `&populate[SEO][fields][7]=seo_keywords_kk` +
+    `&populate[SEO][fields][8]=seo_keywords_en` +
+    `&populate[SEO][populate][seo_image][fields][0]=url` +
+    `&populate[SEO][populate][seo_image][fields][1]=formats` +
+    `&populate[desc_img][fields][0]=url` +
+    `&populate[desc_img][fields][1]=alternativeText` +
+    `&populate[desc_img][fields][2]=caption` +
+    `&populate[desc_img][fields][3]=formats` +
+    `&populate[authors][fields][0]=name_ru` +
+    `&populate[authors][fields][1]=name_kk` +
+    `&populate[authors][fields][2]=name_en` +
+    `&populate[authors][fields][3]=position_ru` +
+    `&populate[authors][fields][4]=position_kk` +
+    `&populate[authors][fields][5]=position_en` +
+    `&populate[authors][fields][6]=slug` +
+    `&populate[authors][populate][profile_img][fields][0]=url` +
+    `&populate[authors][populate][profile_img][fields][1]=formats` +
+    `&populate[categories][fields][0]=name_ru` +
+    `&populate[categories][fields][1]=name_kk` +
+    `&populate[categories][fields][2]=name_en` +
+    `&populate[tags][fields][0]=name_ru` +
+    `&populate[tags][fields][1]=name_kk` +
+    `&populate[tags][fields][2]=name_en`;
+
   useEffect(() => {
     setArticlesList([]);
     setHasMore(true);
 
     fetch(
-      `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}` +
-        `&populate[OG][populate][og_image][fields][0]=url` +
-        `&populate[OG][populate][og_image][fields][1]=formats` +
-        `&populate[SEO][fields][0]=seo_title_ru` +
-        `&populate[SEO][fields][1]=seo_desc_ru` +
-        `&populate[SEO][fields][2]=seo_title_kk` +
-        `&populate[SEO][fields][3]=seo_desc_kk` +
-        `&populate[SEO][fields][4]=seo_title_en` +
-        `&populate[SEO][fields][5]=seo_desc_en` +
-        `&populate[SEO][fields][6]=seo_keywords_ru` +
-        `&populate[SEO][fields][7]=seo_keywords_kk` +
-        `&populate[SEO][fields][8]=seo_keywords_en` +
-        `&populate[SEO][populate][seo_image][fields][0]=url` +
-        `&populate[SEO][populate][seo_image][fields][1]=formats` +
-        `&populate[desc_img][fields][0]=url` +
-        `&populate[desc_img][fields][1]=alternativeText` +
-        `&populate[desc_img][fields][2]=caption` +
-        `&populate[desc_img][fields][3]=formats` +
-        `&populate[authors][fields][0]=name_ru` +
-        `&populate[authors][fields][1]=name_kk` +
-        `&populate[authors][fields][2]=name_en` +
-        `&populate[authors][fields][3]=position_ru` +
-        `&populate[authors][fields][4]=position_kk` +
-        `&populate[authors][fields][5]=position_en` +
-        `&populate[authors][fields][6]=slug` +
-        `&populate[authors][populate][profile_img][fields][0]=url` +
-        `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[categories][fields][0]=name_ru` +
-        `&populate[categories][fields][1]=name_kk` +
-        `&populate[categories][fields][2]=name_en` +
-        `&populate[tags][fields][0]=name_ru` +
-        `&populate[tags][fields][1]=name_kk` +
-        `&populate[tags][fields][2]=name_en`,
+      `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}&${ARTICLES_POPULATE_QUERY}`,
     )
       .then((res) => res.json())
       .then((data) => setArticlesList([data.data?.[0]]));
@@ -329,39 +330,7 @@ export default function ArticlesContent() {
     const last = articlesList[articlesList.length - 1];
 
     const res = await fetch(
-      `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}` +
-        `&populate[OG][populate][og_image][fields][0]=url` +
-        `&populate[OG][populate][og_image][fields][1]=formats` +
-        `&populate[SEO][fields][0]=seo_title_ru` +
-        `&populate[SEO][fields][1]=seo_desc_ru` +
-        `&populate[SEO][fields][2]=seo_title_kk` +
-        `&populate[SEO][fields][3]=seo_desc_kk` +
-        `&populate[SEO][fields][4]=seo_title_en` +
-        `&populate[SEO][fields][5]=seo_desc_en` +
-        `&populate[SEO][fields][6]=seo_keywords_ru` +
-        `&populate[SEO][fields][7]=seo_keywords_kk` +
-        `&populate[SEO][fields][8]=seo_keywords_en` +
-        `&populate[SEO][populate][seo_image][fields][0]=url` +
-        `&populate[SEO][populate][seo_image][fields][1]=formats` +
-        `&populate[desc_img][fields][0]=url` +
-        `&populate[desc_img][fields][1]=alternativeText` +
-        `&populate[desc_img][fields][2]=caption` +
-        `&populate[desc_img][fields][3]=formats` +
-        `&populate[authors][fields][0]=name_ru` +
-        `&populate[authors][fields][1]=name_kk` +
-        `&populate[authors][fields][2]=name_en` +
-        `&populate[authors][fields][3]=position_ru` +
-        `&populate[authors][fields][4]=position_kk` +
-        `&populate[authors][fields][5]=position_en` +
-        `&populate[authors][fields][6]=slug` +
-        `&populate[authors][populate][profile_img][fields][0]=url` +
-        `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[categories][fields][0]=name_ru` +
-        `&populate[categories][fields][1]=name_kk` +
-        `&populate[categories][fields][2]=name_en` +
-        `&populate[tags][fields][0]=name_ru` +
-        `&populate[tags][fields][1]=name_kk` +
-        `&populate[tags][fields][2]=name_en`,
+      `https://api.zhkh24.kz/api/articles?sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}&${ARTICLES_POPULATE_QUERY}`,
     );
     const data = await res.json();
     const next = data.data?.[0];
@@ -382,7 +351,7 @@ export default function ArticlesContent() {
           loadNext();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1, rootMargin: "800px" },
     );
 
     observer.observe(loaderRef.current);

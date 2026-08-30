@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
@@ -157,178 +157,253 @@ function findMidpointIndex(content) {
   return idx;
 }
 
-export default function BlogsContent() {
-  const { locale } = useLocale();
-  const { slug } = useParams();
-  const { t } = useTranslation();
-  const [blogs, setBlogs] = useState(null);
-  const title = getLangField(blogs, "title", locale);
-  const desc = getLangField(blogs, "desc", locale);
-  const content = blogs?.[`content_${locale}`] || blogs?.content_ru || [];
-  const author = getLangField(blogs?.authors?.[0], "name", locale);
-  const position = getLangField(blogs?.authors?.[0], "position", locale);
-  const category = getLangField(blogs?.categories?.[0], "name", locale);
+function BlogItem({ item, locale, t, isFirst }) {
+  const title = getLangField(item, "title", locale);
+  const desc = getLangField(item, "desc", locale);
+  const content = item?.[`content_${locale}`] || item?.content_ru || [];
+  const author = getLangField(item?.authors?.[0], "name", locale);
+  const position = getLangField(item?.authors?.[0], "position", locale);
+  const category = getLangField(item?.categories?.[0], "name", locale);
 
   const midpointIndex = findMidpointIndex(content);
 
-  useEffect(() => {
-    fetch(
-      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}` +
-        `&populate[authors][fields][0]=name_ru` +
-        `&populate[authors][fields][1]=name_kk` +
-        `&populate[authors][fields][2]=name_en` +
-        `&populate[authors][fields][3]=position_ru` +
-        `&populate[authors][fields][4]=position_kk` +
-        `&populate[authors][fields][5]=position_en` +
-        `&populate[authors][fields][6]=slug` +
-        `&populate[authors][populate][profile_img][fields][0]=url` +
-        `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[back_img][fields][0]=url` +
-        `&populate[back_img][fields][1]=alternativeText` +
-        `&populate[back_img][fields][2]=caption` +
-        `&populate[back_img][fields][3]=formats` +
-        `&populate[OG][populate][og_image][fields][0]=url` +
-        `&populate[OG][populate][og_image][fields][1]=formats` +
-        `&populate[SEO][fields][0]=seo_title_ru` +
-        `&populate[SEO][fields][1]=seo_desc_ru` +
-        `&populate[SEO][fields][2]=seo_title_kk` +
-        `&populate[SEO][fields][3]=seo_desc_kk` +
-        `&populate[SEO][fields][4]=seo_title_en` +
-        `&populate[SEO][fields][5]=seo_desc_en` +
-        `&populate[SEO][fields][6]=seo_keywords_ru` +
-        `&populate[SEO][fields][7]=seo_keywords_kk` +
-        `&populate[SEO][fields][8]=seo_keywords_en` +
-        `&populate[SEO][populate][seo_image][fields][0]=url` +
-        `&populate[SEO][populate][seo_image][fields][1]=formats` +
-        `&populate[tags][fields][0]=name_ru` +
-        `&populate[tags][fields][1]=name_kk` +
-        `&populate[tags][fields][2]=name_en` +
-        `&populate[categories][fields][0]=name_ru` +
-        `&populate[categories][fields][1]=name_kk` +
-        `&populate[categories][fields][2]=name_en`,
-    )
-      .then((res) => res.json())
-      .then((data) => setBlogs(data.data?.[0]));
-  }, [slug]);
-
-  if (!blogs) return <h2 className="loading wrapper">Загрузка...</h2>;
-
-  const date = new Date(blogs.publishDate);
-
-  const imgUrl = getImageUrl(blogs?.back_img?.url);
+  const date = new Date(item.publishDate);
+  const imgUrl = getImageUrl(item?.back_img?.url);
 
   const profileImg = getImageUrl(
-    blogs?.authors?.[0]?.profile_img?.formats?.medium?.url ||
-      blogs?.authors?.[0]?.profile_img?.formats?.small?.url ||
-      blogs?.authors?.[0]?.profile_img?.url,
+    item?.authors?.[0]?.profile_img?.formats?.medium?.url ||
+      item?.authors?.[0]?.profile_img?.formats?.small?.url ||
+      item?.authors?.[0]?.profile_img?.url,
   );
 
   return (
-    <div className="blogscontent__layout">
-      <SEO
-        seo={blogs.SEO}
-        og={blogs.OG}
-        title={getLangField(blogs, "title", locale)}
-        description={getLangField(blogs, "desc", locale)}
-        image={getImageUrl(
-          blogs.OG?.og_image?.formats?.large?.url ||
-            blogs.OG?.og_image?.url ||
-            blogs.back_img?.formats?.large?.url ||
-            blogs.back_img?.formats?.medium?.url ||
-            blogs.back_img?.url,
-        )}
-        type="blog"
-        datePublished={blogs.publishDate}
-        dateModified={blogs.updatedAt}
-        authorName={
-          blogs.authors?.[0]
-            ? getLangField(blogs.authors[0], "name", locale)
-            : undefined
-        }
-        translationSourceItem={blogs}
-        translationField="title"
-      />
-      <div className="blogscontent">
+    <div className="blogscontent">
+      {isFirst && (
         <Link to={`/${locale}/blogs`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
           Все блоги
         </Link>
-        <AuthorsHeader
-          profileImg={profileImg}
-          author={author}
-          position={position}
-          authorSlug={blogs?.authors?.[0]?.slug}
-        />
-        <div className="blogscontent__header">
-          <p className="cat">{category}</p>
-          <p className="blogscontent__header-date">
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-        </div>
-
-        <h1 className="blogscontent__title">{title}</h1>
-        <figure className="blogscontent__cover">
-          <img
-            src={imgUrl}
-            alt={
-              parseMultilangField(
-                blogs.back_img?.alternativeText?.trim(),
-                locale,
-              ) || title
-            }
-            className="blogscontent__img"
-          />
-          {parseMultilangField(blogs.back_img?.caption?.trim(), locale) && (
-            <figcaption className="img_source">
-              {t("source")}:{" "}
-              {(() => {
-                const c = parseMultilangField(
-                  blogs.back_img?.caption?.trim(),
-                  locale,
-                );
-                const isUrl = /^(https?:\/\/|www\.)/i.test(c);
-                return isUrl ? (
-                  <a
-                    href={c.startsWith("http") ? c : `https://${c}`}
-                    target="_blank"
-                    rel="nofollow noopener"
-                  >
-                    {c.replace(/^https?:\/\//, "")}
-                  </a>
-                ) : (
-                  c
-                );
-              })()}
-            </figcaption>
-          )}
-        </figure>
-        <hr />
-        <div className="blogscontent__main">
-          {content?.map((block, i) => {
-            const rendered = renderBlock(block, i, locale, t);
-
-            if (i === midpointIndex) {
-              return (
-                <Fragment key={`block-wrap-${i}`}>
-                  {rendered}
-                  <ReadMore item={blogs} locale={locale} contentType="blog" />
-                </Fragment>
-              );
-            }
-
-            return rendered;
+      )}
+      <AuthorsHeader
+        profileImg={profileImg}
+        author={author}
+        position={position}
+        authorSlug={item?.authors?.[0]?.slug}
+      />
+      <div className="blogscontent__header">
+        <p className="cat">{category}</p>
+        <p className="blogscontent__header-date">
+          {date.toLocaleDateString("ru-RU", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
           })}
-          {midpointIndex === -1 && (
-            <ReadMore item={blogs} locale={locale} contentType="blog" />
-          )}
-        </div>
-        <Tags item={blogs} locale={locale} />
+        </p>
+      </div>
+
+      <h1 className="blogscontent__title">{title}</h1>
+      <figure className="blogscontent__cover">
+        <img
+          src={imgUrl}
+          alt={
+            parseMultilangField(
+              item.back_img?.alternativeText?.trim(),
+              locale,
+            ) || title
+          }
+          className="blogscontent__img"
+        />
+        {parseMultilangField(item.back_img?.caption?.trim(), locale) && (
+          <figcaption className="img_source">
+            {t("source")}:{" "}
+            {(() => {
+              const c = parseMultilangField(
+                item.back_img?.caption?.trim(),
+                locale,
+              );
+              const isUrl = /^(https?:\/\/|www\.)/i.test(c);
+              return isUrl ? (
+                <a
+                  href={c.startsWith("http") ? c : `https://${c}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  {c.replace(/^https?:\/\//, "")}
+                </a>
+              ) : (
+                c
+              );
+            })()}
+          </figcaption>
+        )}
+      </figure>
+      <hr />
+      <div className="blogscontent__main">
+        {content?.map((block, i) => {
+          const rendered = renderBlock(block, i, locale, t);
+
+          if (i === midpointIndex) {
+            return (
+              <Fragment key={`block-wrap-${i}`}>
+                {rendered}
+                <ReadMore item={item} locale={locale} contentType="blog" />
+              </Fragment>
+            );
+          }
+
+          return rendered;
+        })}
+        {midpointIndex === -1 && (
+          <ReadMore item={item} locale={locale} contentType="blog" />
+        )}
+      </div>
+      <Tags item={item} locale={locale} />
+    </div>
+  );
+}
+
+export default function BlogsContent() {
+  const { locale } = useLocale();
+  const { slug } = useParams();
+  const { t } = useTranslation();
+  const [blogsList, setBlogsList] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
+
+  const BLOGS_POPULATE_QUERY =
+    `populate[authors][fields][0]=name_ru` +
+    `&populate[authors][fields][1]=name_kk` +
+    `&populate[authors][fields][2]=name_en` +
+    `&populate[authors][fields][3]=position_ru` +
+    `&populate[authors][fields][4]=position_kk` +
+    `&populate[authors][fields][5]=position_en` +
+    `&populate[authors][fields][6]=slug` +
+    `&populate[authors][populate][profile_img][fields][0]=url` +
+    `&populate[authors][populate][profile_img][fields][1]=formats` +
+    `&populate[back_img][fields][0]=url` +
+    `&populate[back_img][fields][1]=alternativeText` +
+    `&populate[back_img][fields][2]=caption` +
+    `&populate[back_img][fields][3]=formats` +
+    `&populate[OG][populate][og_image][fields][0]=url` +
+    `&populate[OG][populate][og_image][fields][1]=formats` +
+    `&populate[SEO][fields][0]=seo_title_ru` +
+    `&populate[SEO][fields][1]=seo_desc_ru` +
+    `&populate[SEO][fields][2]=seo_title_kk` +
+    `&populate[SEO][fields][3]=seo_desc_kk` +
+    `&populate[SEO][fields][4]=seo_title_en` +
+    `&populate[SEO][fields][5]=seo_desc_en` +
+    `&populate[SEO][fields][6]=seo_keywords_ru` +
+    `&populate[SEO][fields][7]=seo_keywords_kk` +
+    `&populate[SEO][fields][8]=seo_keywords_en` +
+    `&populate[SEO][populate][seo_image][fields][0]=url` +
+    `&populate[SEO][populate][seo_image][fields][1]=formats` +
+    `&populate[tags][fields][0]=name_ru` +
+    `&populate[tags][fields][1]=name_kk` +
+    `&populate[tags][fields][2]=name_en` +
+    `&populate[categories][fields][0]=name_ru` +
+    `&populate[categories][fields][1]=name_kk` +
+    `&populate[categories][fields][2]=name_en`;
+
+  useEffect(() => {
+    setBlogsList([]);
+    setHasMore(true);
+
+    fetch(
+      `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&${BLOGS_POPULATE_QUERY}`,
+    )
+      .then((res) => res.json())
+      .then((data) => setBlogsList([data.data?.[0]]));
+  }, [slug]);
+
+  const loadNext = useCallback(async () => {
+    if (blogsList.length === 0) return;
+
+    const last = blogsList[blogsList.length - 1];
+
+    const res = await fetch(
+      `https://api.zhkh24.kz/api/blogs?sort=publishDate:desc&pagination[pageSize]=1&filters[publishDate][$lt]=${last.publishDate}&${BLOGS_POPULATE_QUERY}`,
+    );
+    const data = await res.json();
+    const next = data.data?.[0];
+
+    if (next) {
+      setBlogsList((prev) => [...prev, next]);
+    } else {
+      setHasMore(false);
+    }
+  }, [blogsList]);
+
+  useEffect(() => {
+    if (!loaderRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          loadNext();
+        }
+      },
+      { threshold: 0.1, rootMargin: "800px" },
+    );
+
+    observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [loadNext, hasMore]);
+
+  if (blogsList.length === 0)
+    return <h2 className="loading wrapper">Загрузка...</h2>;
+
+  const mainItem = blogsList[0];
+
+  return (
+    <div className="blogscontent__layout">
+      <SEO
+        seo={mainItem.SEO}
+        og={mainItem.OG}
+        title={getLangField(mainItem, "title", locale)}
+        description={getLangField(mainItem, "desc", locale)}
+        image={getImageUrl(
+          mainItem.OG?.og_image?.formats?.large?.url ||
+            mainItem.OG?.og_image?.url ||
+            mainItem.back_img?.formats?.large?.url ||
+            mainItem.back_img?.formats?.medium?.url ||
+            mainItem.back_img?.url,
+        )}
+        type="blog"
+        datePublished={mainItem.publishDate}
+        dateModified={mainItem.updatedAt}
+        authorName={
+          mainItem.authors?.[0]
+            ? getLangField(mainItem.authors[0], "name", locale)
+            : undefined
+        }
+        translationSourceItem={mainItem}
+        translationField="title"
+      />
+      <div className="blogscontent__layout-main">
+        {blogsList
+          .filter(
+            (item, index, arr) =>
+              arr.findIndex((i) => i.id === item.id) === index,
+          )
+          .map((item, index) => (
+            <BlogItem
+              key={item.id}
+              item={item}
+              locale={locale}
+              t={t}
+              isFirst={index === 0}
+            />
+          ))}
+
+        {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+
+        {!hasMore && (
+          <p style={{ textAlign: "center", padding: "2rem" }}>
+            Больше блогов нет
+          </p>
+        )}
       </div>
       <div className="blogscontent__layout-sidemenu">
         <SideMenu currentId={slug} />
