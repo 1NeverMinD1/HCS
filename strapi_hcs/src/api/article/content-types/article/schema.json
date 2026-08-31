@@ -97,6 +97,15 @@
       "relation": "manyToMany",
       "target": "api::city.city",
       "inversedBy": "articles"
+    },
+    "qanda_ru": {
+      "type": "blocks"
+    },
+    "qanda_kz": {
+      "type": "blocks"
+    },
+    "qanda_en": {
+      "type": "blocks"
     }
   }
 }
