@@ -117,7 +117,7 @@ function renderBlock(block, i, locale, t) {
 
 function findMidpointIndex(content) {
   if (!content || content.length === 0) return -1;
-  if (content.length < 4) return -1; // короткие статьи — не вставляем в середину
+  if (content.length < 4) return -1;
 
   const weights = content.map((block) => {
     if (block.type === "paragraph" || block.type === "quote") {
@@ -193,7 +193,7 @@ const NEWS_POPULATE_QUERY =
   `&populate[cities][fields][1]=city_kk` +
   `&populate[cities][fields][2]=city_en`;
 
-function NewsItem({ item, isFirst }) {
+function NewsItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
   const date = new Date(item.publishDate);
@@ -206,7 +206,7 @@ function NewsItem({ item, isFirst }) {
   const midpointIndex = findMidpointIndex(content);
 
   return (
-    <div className="newscontent">
+    <div className="newscontent" ref={(el) => registerRef(item.id, el)}>
       {isFirst && (
         <Link to={`/${locale}/news`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
@@ -305,11 +305,15 @@ export default function NewsContent() {
   const { slug } = useParams();
   const [newsList, setNewsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [activeId, setActiveId] = useState(null);
   const loaderRef = useRef(null);
+  const itemRefs = useRef(new Map());
 
   useEffect(() => {
     setNewsList([]);
     setHasMore(true);
+    setActiveId(null);
+    itemRefs.current.clear();
 
     fetch(
       `https://api.zhkh24.kz/api/news?filters[slug][$eq]=${slug}` +
@@ -350,7 +354,11 @@ export default function NewsContent() {
         `&populate[cities][fields][2]=city_en`,
     )
       .then((res) => res.json())
-      .then((data) => setNewsList([data.data?.[0]]));
+      .then((data) => {
+        const first = data.data?.[0];
+        setNewsList([first]);
+        if (first) setActiveId(first.id);
+      });
   }, [slug]);
 
   const loadNext = useCallback(async () => {
@@ -422,34 +430,90 @@ export default function NewsContent() {
     return () => observer.disconnect();
   }, [loadNext, hasMore]);
 
+  const registerRef = useCallback((id, el) => {
+    if (el) {
+      itemRefs.current.set(id, el);
+    } else {
+      itemRefs.current.delete(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (newsList.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.dataset.newsId;
+            setActiveId((prev) =>
+              String(prev) === id ? prev : Number(id) || id,
+            );
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -70% 0px" },
+    );
+
+    newsList.forEach((item) => {
+      const el = itemRefs.current.get(item.id);
+      if (el) {
+        el.dataset.newsId = item.id;
+        observer.observe(el);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [newsList]);
+
+  const activeItem =
+    newsList.find((item) => item.id === activeId) || newsList[0];
+
+  useEffect(() => {
+    if (!activeItem) return;
+
+    const newUrl = `/${locale}/news/${activeItem.slug}`;
+    if (window.location.pathname !== newUrl) {
+      window.history.replaceState(null, "", newUrl);
+
+      if (window.ym) {
+        window.ym(110367191, "hit", newUrl);
+      }
+      if (window.gtag) {
+        window.gtag("event", "page_view", {
+          page_path: newUrl,
+          page_title: getLangField(activeItem, "title", locale),
+        });
+      }
+    }
+  }, [activeItem, locale]);
+
   if (newsList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
-
-  const mainItem = newsList[0];
 
   return (
     <div className="newscontent__layout">
       <SEO
-        seo={mainItem.SEO}
-        og={mainItem.OG}
-        title={getLangField(mainItem, "title", locale)}
-        description={getLangField(mainItem, "desc", locale)}
+        seo={activeItem.SEO}
+        og={activeItem.OG}
+        title={getLangField(activeItem, "title", locale)}
+        description={getLangField(activeItem, "desc", locale)}
         image={getImageUrl(
-          mainItem.OG?.og_image?.formats?.large?.url ||
-            mainItem.OG?.og_image?.url ||
-            mainItem.desc_img?.formats?.large?.url ||
-            mainItem.desc_img?.formats?.medium?.url ||
-            mainItem.desc_img?.url,
+          activeItem.OG?.og_image?.formats?.large?.url ||
+            activeItem.OG?.og_image?.url ||
+            activeItem.desc_img?.formats?.large?.url ||
+            activeItem.desc_img?.formats?.medium?.url ||
+            activeItem.desc_img?.url,
         )}
         type="article"
-        datePublished={mainItem.publishDate}
-        dateModified={mainItem.updatedAt}
+        datePublished={activeItem.publishDate}
+        dateModified={activeItem.updatedAt}
         authorName={
-          mainItem.authors?.[0]
-            ? getLangField(mainItem.authors[0], "name", locale)
+          activeItem.authors?.[0]
+            ? getLangField(activeItem.authors[0], "name", locale)
             : undefined
         }
-        translationSourceItem={mainItem}
+        translationSourceItem={activeItem}
         translationField="title"
       />
       <div className="newscontent__layout-main">
@@ -459,7 +523,12 @@ export default function NewsContent() {
               arr.findIndex((i) => i.id === item.id) === index,
           )
           .map((item, index) => (
-            <NewsItem key={item.id} item={item} isFirst={index === 0} />
+            <NewsItem
+              key={item.id}
+              item={item}
+              isFirst={index === 0}
+              registerRef={registerRef}
+            />
           ))}
 
         {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
@@ -471,7 +540,7 @@ export default function NewsContent() {
         )}
       </div>
       <div className="newscontent__layout-sidemenu">
-        <SideMenu currentId={slug} />
+        <SideMenu currentId={activeItem.slug} />
       </div>
     </div>
   );

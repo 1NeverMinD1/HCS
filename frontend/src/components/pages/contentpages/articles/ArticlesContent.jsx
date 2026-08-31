@@ -16,7 +16,6 @@ import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 
 function renderBlock(block, i, locale, t) {
-  // ... без изменений, как было
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -117,7 +116,6 @@ function renderBlock(block, i, locale, t) {
   }
 }
 
-// Такая же логика, как в NewsContent.jsx
 function findMidpointIndex(content) {
   if (!content || content.length === 0) return -1;
   if (content.length < 4) return -1;
@@ -158,7 +156,7 @@ function findMidpointIndex(content) {
   return idx;
 }
 
-function ArticleItem({ item, isFirst }) {
+function ArticleItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
   const date = new Date(item.publishDate);
@@ -182,7 +180,7 @@ function ArticleItem({ item, isFirst }) {
   );
 
   return (
-    <div className="artscontent">
+    <div className="artscontent" ref={(el) => registerRef(item.id, el)}>
       {isFirst && (
         <Link to={`/${locale}/articles`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
@@ -277,7 +275,9 @@ export default function ArticlesContent() {
   const { slug } = useParams();
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [activeId, setActiveId] = useState(null);
   const loaderRef = useRef(null);
+  const itemRefs = useRef(new Map());
 
   const ARTICLES_POPULATE_QUERY =
     `populate[OG][populate][og_image][fields][0]=url` +
@@ -316,12 +316,18 @@ export default function ArticlesContent() {
   useEffect(() => {
     setArticlesList([]);
     setHasMore(true);
+    setActiveId(null);
+    itemRefs.current.clear();
 
     fetch(
       `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}&${ARTICLES_POPULATE_QUERY}`,
     )
       .then((res) => res.json())
-      .then((data) => setArticlesList([data.data?.[0]]));
+      .then((data) => {
+        const first = data.data?.[0];
+        setArticlesList([first]);
+        if (first) setActiveId(first.id);
+      });
   }, [slug]);
 
   const loadNext = useCallback(async () => {
@@ -358,34 +364,90 @@ export default function ArticlesContent() {
     return () => observer.disconnect();
   }, [loadNext, hasMore]);
 
+  const registerRef = useCallback((id, el) => {
+    if (el) {
+      itemRefs.current.set(id, el);
+    } else {
+      itemRefs.current.delete(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (articlesList.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.dataset.articleId;
+            setActiveId((prev) =>
+              String(prev) === id ? prev : Number(id) || id,
+            );
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -70% 0px" },
+    );
+
+    articlesList.forEach((item) => {
+      const el = itemRefs.current.get(item.id);
+      if (el) {
+        el.dataset.articleId = item.id;
+        observer.observe(el);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [articlesList]);
+
+  const activeItem =
+    articlesList.find((item) => item.id === activeId) || articlesList[0];
+
+  useEffect(() => {
+    if (!activeItem) return;
+
+    const newUrl = `/${locale}/articles/${activeItem.slug}`;
+    if (window.location.pathname !== newUrl) {
+      window.history.replaceState(null, "", newUrl);
+
+      if (window.ym) {
+        window.ym(110367191, "hit", newUrl);
+      }
+      if (window.gtag) {
+        window.gtag("event", "page_view", {
+          page_path: newUrl,
+          page_title: getLangField(activeItem, "title", locale),
+        });
+      }
+    }
+  }, [activeItem, locale]);
+
   if (articlesList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
-
-  const mainItem = articlesList[0];
 
   return (
     <div className="artscontent__layout">
       <SEO
-        seo={mainItem.SEO}
-        og={mainItem.OG}
-        title={getLangField(mainItem, "title", locale)}
-        description={getLangField(mainItem, "desc", locale)}
+        seo={activeItem.SEO}
+        og={activeItem.OG}
+        title={getLangField(activeItem, "title", locale)}
+        description={getLangField(activeItem, "desc", locale)}
         image={getImageUrl(
-          mainItem.OG?.og_image?.formats?.large?.url ||
-            mainItem.OG?.og_image?.url ||
-            mainItem.desc_img?.formats?.large?.url ||
-            mainItem.desc_img?.formats?.medium?.url ||
-            mainItem.desc_img?.url,
+          activeItem.OG?.og_image?.formats?.large?.url ||
+            activeItem.OG?.og_image?.url ||
+            activeItem.desc_img?.formats?.large?.url ||
+            activeItem.desc_img?.formats?.medium?.url ||
+            activeItem.desc_img?.url,
         )}
         type="article"
-        datePublished={mainItem.publishDate}
-        dateModified={mainItem.updatedAt}
+        datePublished={activeItem.publishDate}
+        dateModified={activeItem.updatedAt}
         authorName={
-          mainItem.authors?.[0]
-            ? getLangField(mainItem.authors[0], "name", locale)
+          activeItem.authors?.[0]
+            ? getLangField(activeItem.authors[0], "name", locale)
             : undefined
         }
-        translationSourceItem={mainItem}
+        translationSourceItem={activeItem}
         translationField="title"
       />
       <div className="artscontent__layout-main">
@@ -395,7 +457,12 @@ export default function ArticlesContent() {
               arr.findIndex((i) => i.id === item.id) === index,
           )
           .map((item, index) => (
-            <ArticleItem key={item.id} item={item} isFirst={index === 0} />
+            <ArticleItem
+              key={item.id}
+              item={item}
+              isFirst={index === 0}
+              registerRef={registerRef}
+            />
           ))}
 
         {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
@@ -407,7 +474,7 @@ export default function ArticlesContent() {
         )}
       </div>
       <div className="artscontent__layout-sidemenu">
-        <SideMenu currentId={slug} />
+        <SideMenu currentId={activeItem.slug} />
       </div>
     </div>
   );

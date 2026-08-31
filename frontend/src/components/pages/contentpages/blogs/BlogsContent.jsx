@@ -157,7 +157,7 @@ function findMidpointIndex(content) {
   return idx;
 }
 
-function BlogItem({ item, locale, t, isFirst }) {
+function BlogItem({ item, locale, t, isFirst, registerRef }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
@@ -177,7 +177,7 @@ function BlogItem({ item, locale, t, isFirst }) {
   );
 
   return (
-    <div className="blogscontent">
+    <div className="blogscontent" ref={(el) => registerRef(item.id, el)}>
       {isFirst && (
         <Link to={`/${locale}/blogs`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
@@ -270,7 +270,9 @@ export default function BlogsContent() {
   const { t } = useTranslation();
   const [blogsList, setBlogsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [activeId, setActiveId] = useState(null);
   const loaderRef = useRef(null);
+  const itemRefs = useRef(new Map());
 
   const BLOGS_POPULATE_QUERY =
     `populate[authors][fields][0]=name_ru` +
@@ -309,12 +311,18 @@ export default function BlogsContent() {
   useEffect(() => {
     setBlogsList([]);
     setHasMore(true);
+    setActiveId(null);
+    itemRefs.current.clear();
 
     fetch(
       `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&${BLOGS_POPULATE_QUERY}`,
     )
       .then((res) => res.json())
-      .then((data) => setBlogsList([data.data?.[0]]));
+      .then((data) => {
+        const first = data.data?.[0];
+        setBlogsList([first]);
+        if (first) setActiveId(first.id);
+      });
   }, [slug]);
 
   const loadNext = useCallback(async () => {
@@ -351,34 +359,90 @@ export default function BlogsContent() {
     return () => observer.disconnect();
   }, [loadNext, hasMore]);
 
+  const registerRef = useCallback((id, el) => {
+    if (el) {
+      itemRefs.current.set(id, el);
+    } else {
+      itemRefs.current.delete(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (blogsList.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.dataset.blogId;
+            setActiveId((prev) =>
+              String(prev) === id ? prev : Number(id) || id,
+            );
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -70% 0px" },
+    );
+
+    blogsList.forEach((item) => {
+      const el = itemRefs.current.get(item.id);
+      if (el) {
+        el.dataset.blogId = item.id;
+        observer.observe(el);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [blogsList]);
+
+  const activeItem =
+    blogsList.find((item) => item.id === activeId) || blogsList[0];
+
+  useEffect(() => {
+    if (!activeItem) return;
+
+    const newUrl = `/${locale}/blogs/${activeItem.slug}`;
+    if (window.location.pathname !== newUrl) {
+      window.history.replaceState(null, "", newUrl);
+
+      if (window.ym) {
+        window.ym(110367191, "hit", newUrl);
+      }
+      if (window.gtag) {
+        window.gtag("event", "page_view", {
+          page_path: newUrl,
+          page_title: getLangField(activeItem, "title", locale),
+        });
+      }
+    }
+  }, [activeItem, locale]);
+
   if (blogsList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
-
-  const mainItem = blogsList[0];
 
   return (
     <div className="blogscontent__layout">
       <SEO
-        seo={mainItem.SEO}
-        og={mainItem.OG}
-        title={getLangField(mainItem, "title", locale)}
-        description={getLangField(mainItem, "desc", locale)}
+        seo={activeItem.SEO}
+        og={activeItem.OG}
+        title={getLangField(activeItem, "title", locale)}
+        description={getLangField(activeItem, "desc", locale)}
         image={getImageUrl(
-          mainItem.OG?.og_image?.formats?.large?.url ||
-            mainItem.OG?.og_image?.url ||
-            mainItem.back_img?.formats?.large?.url ||
-            mainItem.back_img?.formats?.medium?.url ||
-            mainItem.back_img?.url,
+          activeItem.OG?.og_image?.formats?.large?.url ||
+            activeItem.OG?.og_image?.url ||
+            activeItem.back_img?.formats?.large?.url ||
+            activeItem.back_img?.formats?.medium?.url ||
+            activeItem.back_img?.url,
         )}
         type="blog"
-        datePublished={mainItem.publishDate}
-        dateModified={mainItem.updatedAt}
+        datePublished={activeItem.publishDate}
+        dateModified={activeItem.updatedAt}
         authorName={
-          mainItem.authors?.[0]
-            ? getLangField(mainItem.authors[0], "name", locale)
+          activeItem.authors?.[0]
+            ? getLangField(activeItem.authors[0], "name", locale)
             : undefined
         }
-        translationSourceItem={mainItem}
+        translationSourceItem={activeItem}
         translationField="title"
       />
       <div className="blogscontent__layout-main">
@@ -394,6 +458,7 @@ export default function BlogsContent() {
               locale={locale}
               t={t}
               isFirst={index === 0}
+              registerRef={registerRef}
             />
           ))}
 
@@ -406,7 +471,7 @@ export default function BlogsContent() {
         )}
       </div>
       <div className="blogscontent__layout-sidemenu">
-        <SideMenu currentId={slug} />
+        <SideMenu currentId={activeItem.slug} />
       </div>
     </div>
   );
