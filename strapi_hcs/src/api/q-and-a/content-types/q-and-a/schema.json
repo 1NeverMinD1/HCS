@@ -66,6 +66,14 @@
       "relation": "manyToMany",
       "target": "api::author.author",
       "mappedBy": "qnas"
+    },
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "qand-a.short-answer",
+        "qand-a.practice",
+        "qand-a.law"
+      ]
     }
   }
 }

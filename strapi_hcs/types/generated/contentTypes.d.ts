@@ -1061,6 +1061,9 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::category.category'
     >;
+    Content: Schema.Attribute.DynamicZone<
+      ['qand-a.short-answer', 'qand-a.practice', 'qand-a.law']
+    >;
     content_en: Schema.Attribute.Blocks;
     content_kk: Schema.Attribute.Blocks;
     content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
