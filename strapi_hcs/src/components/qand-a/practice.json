@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_qand_a_practices",
+  "info": {
+    "displayName": "Practice"
+  },
+  "options": {},
+  "attributes": {
+    "practice_content_ru": {
+      "type": "blocks"
+    },
+    "practice_content_kk": {
+      "type": "blocks"
+    },
+    "practice_content_en": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

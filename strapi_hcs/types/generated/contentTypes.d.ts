@@ -1076,6 +1076,9 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
     OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    QandAContent: Schema.Attribute.DynamicZone<
+      ['qand-a.short-answer', 'qand-a.practice', 'qand-a.law']
+    >;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;

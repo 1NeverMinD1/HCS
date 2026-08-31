@@ -70,6 +70,42 @@ export interface FooterFooterRichText extends Struct.ComponentSchema {
   };
 }
 
+export interface QandALaw extends Struct.ComponentSchema {
+  collectionName: 'components_qand_a_laws';
+  info: {
+    displayName: 'Law';
+  };
+  attributes: {
+    law_content_en: Schema.Attribute.Blocks;
+    law_content_kk: Schema.Attribute.Blocks;
+    law_content_ru: Schema.Attribute.Blocks;
+  };
+}
+
+export interface QandAPractice extends Struct.ComponentSchema {
+  collectionName: 'components_qand_a_practices';
+  info: {
+    displayName: 'Practice';
+  };
+  attributes: {
+    practice_content_en: Schema.Attribute.Blocks;
+    practice_content_kk: Schema.Attribute.Blocks;
+    practice_content_ru: Schema.Attribute.Blocks;
+  };
+}
+
+export interface QandAShortAnswer extends Struct.ComponentSchema {
+  collectionName: 'components_qand_a_short_answers';
+  info: {
+    displayName: 'ShortAnswer';
+  };
+  attributes: {
+    shortanswer_content_en: Schema.Attribute.Blocks;
+    shortanswer_content_kk: Schema.Attribute.Blocks;
+    shortanswer_content_ru: Schema.Attribute.Blocks;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -77,6 +113,9 @@ declare module '@strapi/strapi' {
       'content.seo': ContentSeo;
       'content.social-link': ContentSocialLink;
       'footer.footer-rich-text': FooterFooterRichText;
+      'qand-a.law': QandALaw;
+      'qand-a.practice': QandAPractice;
+      'qand-a.short-answer': QandAShortAnswer;
     }
   }
 }

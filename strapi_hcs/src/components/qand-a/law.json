@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_qand_a_laws",
+  "info": {
+    "displayName": "Law"
+  },
+  "options": {},
+  "attributes": {
+    "law_content_ru": {
+      "type": "blocks"
+    },
+    "law_content_kk": {
+      "type": "blocks"
+    },
+    "law_content_en": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

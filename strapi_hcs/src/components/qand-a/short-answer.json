@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_qand_a_short_answers",
+  "info": {
+    "displayName": "ShortAnswer"
+  },
+  "options": {},
+  "attributes": {
+    "shortanswer_content_ru": {
+      "type": "blocks"
+    },
+    "shortanswer_content_kk": {
+      "type": "blocks"
+    },
+    "shortanswer_content_en": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}
