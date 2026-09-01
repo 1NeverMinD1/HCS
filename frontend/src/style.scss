@@ -76,6 +76,12 @@
 @use "./components/pages/contentpages/tags/Tags";
 // FooterLinks
 @use "./components/footer-links/FooterLinksStyles";
+// Breadcrumbs
+@use "./components/breadcrumbs/Breadcrumbs";
+// Tags&Cats
+@use "./components/categoryScroll/ScrollBlock";
+@use "./components/pages/contentpages/tagPage/TagPage";
+@use "./components/pages/contentpages/сategoryPage/CategoryPage";
 // Variables
 @use "./variables";
 
@@ -136,15 +142,3 @@ ul {
   opacity: 0.6;
   margin-top: 0;
 }
-
-// .view_all {
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-//   color: variables.$primary-color;
-//   font-size: 18px;
-//   &:hover {
-//     text-decoration: underline;
-//     cursor: pointer;
-//   }
-// }

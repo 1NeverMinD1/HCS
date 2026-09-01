@@ -41,6 +41,14 @@
         display: flex;
         gap: 20px;
         align-items: baseline;
+        .cat {
+          text-decoration: none;
+          transition: all 0.3s ease;
+          &:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+          }
+        }
         .newscontent__header-date {
           p {
             font-size: 16px;

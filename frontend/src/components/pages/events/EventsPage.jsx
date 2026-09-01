@@ -3,6 +3,7 @@ import EventsPageBlocks from "./EventsPageBlocks/EventsPageBlocks";
 import { useLocale } from "../../../context/LocaleContext";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import SEO from "../../SEO/SEO.jsx";
+import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 
 const PAGE_SIZE = 20;
 
@@ -93,16 +94,22 @@ export default function EventsPage() {
     return <h2 className="empty wrapper">Событий нет</h2>;
   }
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("events") || "События" },
+  ];
+
   return (
     <div className="eventspage wrapper">
       <SEO
         title={t("seo_static_title_events")}
         description={t("seo_static_desc_events")}
+        breadcrumbs={breadcrumbItems}
       />
 
-      <h2 className="eventspage__title">{t("eventsIntro")}</h2>
+      <h1 className="eventspage__title">{t("eventsIntro")}</h1>
       <p className="eventspage__intro">{t("eventsIntroText")}</p>
-
+      <Breadcrumbs items={breadcrumbItems} />
       <EventsPageBlocks events={events} />
 
       {loading && (

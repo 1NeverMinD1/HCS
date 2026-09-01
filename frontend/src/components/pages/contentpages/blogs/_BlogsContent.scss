@@ -42,6 +42,14 @@
         display: flex;
         gap: 10px;
         align-items: baseline;
+        .cat {
+          text-decoration: none;
+          transition: all 0.3s ease;
+          &:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+          }
+        }
         .blogscontent__header-date {
           font-size: 16px;
           opacity: 0.8;

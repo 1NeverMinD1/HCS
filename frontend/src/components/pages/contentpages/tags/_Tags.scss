@@ -19,8 +19,14 @@
     color: white;
     border-radius: 5px;
     font-size: variables.$text-font-size - 2px;
+    text-decoration: none;
+    transition: all 0.3s ease;
     &::before {
       content: "#";
+    }
+    &:hover {
+      transition: all 0.3s ease;
+      transform: scale(1.05);
     }
   }
 }

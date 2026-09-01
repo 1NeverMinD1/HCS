@@ -21,6 +21,8 @@ import EventsContent from "./components/pages/contentpages/events/EventsContent.
 import QnasContent from "./components/pages/contentpages/qnas/QnasContent.jsx";
 
 import Authors from "./components/pages/contentpages/authors/Authors.jsx";
+import CategoryPage from "./components/pages/contentpages/сategoryPage/CategoryPage.jsx";
+import TagPage from "./components/pages/contentpages/tagPage/TagPage.jsx";
 
 // FooterLinks
 
@@ -95,6 +97,10 @@ export default function App() {
           <Route path="/:locale/privacy" element={<Privacy />} />
           {/* Terms */}
           <Route path="/:locale/terms" element={<Terms />} />
+          {/* Категория (для статей/блогов/событий/qna) */}
+          <Route path="/:locale/category/:id" element={<CategoryPage />} />
+          {/* Тег */}
+          <Route path="/:locale/tag/:id" element={<TagPage />} />
         </Routes>
         <hr className="main_divide" />
         <div className="wrapper">

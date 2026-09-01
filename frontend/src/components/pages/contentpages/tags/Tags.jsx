@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { getLangField } from "../../../../utils/getLangField";
 
 export default function Tags({ item, locale }) {
@@ -9,9 +10,9 @@ export default function Tags({ item, locale }) {
         </p>
       )}
       {item.tags?.map((tag) => (
-        <p className="tag" key={tag.id}>
+        <Link to={`/${locale}/tag/${tag.id}`} className="tag" key={tag.id}>
           {getLangField(tag, "name", locale)}
-        </p>
+        </Link>
       ))}
     </div>
   );

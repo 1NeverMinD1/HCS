@@ -14,6 +14,7 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
+import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -166,6 +167,12 @@ function ArticleItem({ item, isFirst, registerRef }) {
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.categories?.[0], "name", locale);
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("articles") || "Статьи", url: `/${locale}/articles` },
+    { name: title },
+  ];
+
   const midpointIndex = findMidpointIndex(content);
 
   const coverCaption = parseMultilangField(
@@ -205,7 +212,14 @@ function ArticleItem({ item, isFirst, registerRef }) {
       )}
 
       <div className="artscontent__header">
-        <p className="cat">{category}</p>
+        {item?.categories?.[0] && (
+          <Link
+            to={`/${locale}/category/${item.categories[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
         <div className="artscontent__header-date">
           <p>
             {date.toLocaleDateString("ru-RU", {
@@ -216,6 +230,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
           </p>
         </div>
       </div>
+      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="artscontent__title">{title}</h1>
       <figure className="artscontent__cover">
         <img
@@ -425,6 +440,14 @@ export default function ArticlesContent() {
   if (articlesList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
 
+  const activeItemBreadcrumbs = activeItem
+    ? [
+        { name: "Главная", url: `/${locale}` },
+        { name: "Статьи", url: `/${locale}/articles` },
+        { name: getLangField(activeItem, "title", locale) },
+      ]
+    : [];
+
   return (
     <div className="artscontent__layout">
       <SEO
@@ -449,6 +472,7 @@ export default function ArticlesContent() {
         }
         translationSourceItem={activeItem}
         translationField="title"
+        breadcrumbs={activeItemBreadcrumbs}
       />
       <div className="artscontent__layout-main">
         {articlesList

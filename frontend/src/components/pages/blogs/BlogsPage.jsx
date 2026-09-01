@@ -3,6 +3,7 @@ import { useLocale } from "../../../context/LocaleContext.jsx";
 import BlogsPageBlocks from "./BlogsPageBlocks/BlogsPageBlocks";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import SEO from "../../SEO/SEO.jsx";
+import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 
 const PAGE_SIZE = 20;
 
@@ -101,15 +102,22 @@ export default function BlogsPage() {
     return <h2 className="empty wrapper">Блогов нет</h2>;
   }
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("blogs") || "Блоги" },
+  ];
+
   return (
     <div className="blogspage wrapper">
       <SEO
         title={t("seo_static_title_blogs")}
         description={t("seo_static_desc_blogs")}
+        breadcrumbs={breadcrumbItems}
       />
 
-      <h2 className="blogspage__title">{t("blogsIntro")}</h2>
+      <h1 className="blogspage__title">{t("blogsIntro")}</h1>
       <p className="blogspage__intro">{t("blogsIntroText")}</p>
+      <Breadcrumbs items={breadcrumbItems} />
 
       <BlogsPageBlocks blogs={blogs} />
 

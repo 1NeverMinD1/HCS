@@ -24,6 +24,7 @@ export default function SEO({
   answerText,
   translationSourceItem,
   translationField = "title",
+  breadcrumbs,
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -169,11 +170,36 @@ export default function SEO({
     };
   }
 
+  const breadcrumbData =
+    breadcrumbs && breadcrumbs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumbs.map((crumb, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: crumb.name,
+            ...(index < breadcrumbs.length - 1 && crumb.url
+              ? {
+                  item: crumb.url.startsWith("http")
+                    ? crumb.url
+                    : `${baseUrl}${crumb.url}`,
+                }
+              : {}),
+          })),
+        }
+      : null;
+
   return (
     <Helmet>
       {structuredData && (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
+        </script>
+      )}
+      {breadcrumbData && (
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbData)}
         </script>
       )}
       <html lang={lang} />

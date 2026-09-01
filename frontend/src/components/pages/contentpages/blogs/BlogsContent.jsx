@@ -15,6 +15,7 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
+import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -165,6 +166,12 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
   const position = getLangField(item?.authors?.[0], "position", locale);
   const category = getLangField(item?.categories?.[0], "name", locale);
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("blogs") || "Блоги", url: `/${locale}/blogs` },
+    { name: title },
+  ];
+
   const midpointIndex = findMidpointIndex(content);
 
   const date = new Date(item.publishDate);
@@ -193,7 +200,14 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
         authorSlug={item?.authors?.[0]?.slug}
       />
       <div className="blogscontent__header">
-        <p className="cat">{category}</p>
+        {item?.categories?.[0] && (
+          <Link
+            to={`/${locale}/category/${item.categories[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
         <p className="blogscontent__header-date">
           {date.toLocaleDateString("ru-RU", {
             day: "numeric",
@@ -202,7 +216,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
           })}
         </p>
       </div>
-
+      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="blogscontent__title">{title}</h1>
       <figure className="blogscontent__cover">
         <img
@@ -420,6 +434,14 @@ export default function BlogsContent() {
   if (blogsList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
 
+  const activeItemBreadcrumbs = activeItem
+    ? [
+        { name: "Главная", url: `/${locale}` },
+        { name: "Блоги", url: `/${locale}/blogs` },
+        { name: getLangField(activeItem, "title", locale) },
+      ]
+    : [];
+
   return (
     <div className="blogscontent__layout">
       <SEO
@@ -444,6 +466,7 @@ export default function BlogsContent() {
         }
         translationSourceItem={activeItem}
         translationField="title"
+        breadcrumbs={activeItemBreadcrumbs}
       />
       <div className="blogscontent__layout-main">
         {blogsList

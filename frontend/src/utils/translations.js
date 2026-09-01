@@ -47,6 +47,9 @@ export const translations = {
     seo_static_title_qandas: "Вопросы и ответы",
     seo_static_desc_qandas: "Быстрые ответы на интересующие вопросы",
     source: "Источник",
+    home: "Главная",
+    category: "Категория",
+    noContent: "Нет материалов",
   },
   kk: {
     news: "Жаңалықтар",
@@ -99,6 +102,9 @@ export const translations = {
     seo_static_title_qandas: "Сұрақтар мен жауаптар",
     seo_static_desc_qandas: "Сіздің сұрақтарыңызға жылдам жауаптар",
     source: "Дереккөз",
+    home: "Басты бет",
+    category: "Категория",
+    noContent: "Материал жоқ",
   },
   en: {
     news: "News",
@@ -148,5 +154,8 @@ export const translations = {
     seo_static_title_qandas: "Questions and Answers",
     seo_static_desc_qandas: "Quick answers to your questions",
     source: "Source",
+    home: "Home",
+    category: "Category",
+    noContent: "No content",
   },
 };

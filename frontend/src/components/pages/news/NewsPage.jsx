@@ -6,6 +6,7 @@ import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
 import SEO from "../../SEO/SEO.jsx";
+import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 
 const PAGE_SIZE = 20;
 
@@ -133,15 +134,25 @@ export default function NewsPage() {
 
   const title = isMain ? "Главные новости" : (categoryName ?? t("news"));
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    ...(isMain || !id
+      ? [{ name: t("news") || "Новости" }]
+      : [
+          { name: t("news") || "Новости", url: `/${locale}/news` },
+          { name: categoryName || t("news") },
+        ]),
+  ];
+
   return (
     <div className="newspage wrapper">
       <SEO
         title={t("seo_static_title_news")}
         description={t("seo_static_desc_news")}
+        breadcrumbs={breadcrumbItems}
       />
-
       <h1 className="newspage__title">{title}</h1>
-
+      <Breadcrumbs items={breadcrumbItems} />
       <NewsPageBlocks hero={heroNews} list={topNews} />
 
       <div className="more_news">

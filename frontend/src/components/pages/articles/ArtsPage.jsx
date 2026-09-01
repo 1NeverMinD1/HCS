@@ -3,6 +3,7 @@ import { useLocale } from "../../../context/LocaleContext.jsx";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import ArtsPageBlocks from "./ArtsPageBlocks/ArtsPageBlocks";
 import SEO from "../../SEO/SEO.jsx";
+import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 
 const PAGE_SIZE = 20;
 
@@ -89,14 +90,20 @@ export default function ArtsPage() {
     return <h2 className="empty wrapper">Статей нет</h2>;
   }
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("articles") || "Статьи" },
+  ];
+
   return (
     <div className="artspage wrapper">
       <SEO
         title={t("seo_static_title_arts")}
         description={t("seo_static_desc_arts")}
+        breadcrumbs={breadcrumbItems}
       />
-
-      <h2 className="artspage__title">{t("artsIntro")}</h2>
+      <Breadcrumbs items={breadcrumbItems} />
+      <h1 className="artspage__title">{t("artsIntro")}</h1>
       <p className="artspage__intro">{t("artsIntroText")}</p>
 
       <ArtsPageBlocks articles={articles} />

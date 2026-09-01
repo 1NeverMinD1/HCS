@@ -41,6 +41,14 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       .eventscontent__header {
+        .cat {
+          text-decoration: none;
+          transition: all 0.3s ease;
+          &:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+          }
+        }
         .eventscontent__title {
           font-size: 40px;
         }

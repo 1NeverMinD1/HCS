@@ -13,6 +13,7 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
+import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -125,6 +126,12 @@ export default function EventsContent() {
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("events") || "События", url: `/${locale}/events` },
+    { name: title },
+  ];
+
   useEffect(() => {
     fetch(
       `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}` +
@@ -199,6 +206,7 @@ export default function EventsContent() {
         location={place}
         translationSourceItem={events}
         translationField="title"
+        breadcrumbs={breadcrumbItems}
       />
       <div className="eventscontent wrapper">
         <Link to={`/${locale}/events`} className="back">
@@ -223,7 +231,15 @@ export default function EventsContent() {
         )}
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
-            <p className="cat">{category}</p>
+            {events?.categories?.[0] && (
+              <Link
+                to={`/${locale}/category/${events.categories[0].id}`}
+                className="cat"
+              >
+                {category}
+              </Link>
+            )}
+            <Breadcrumbs items={breadcrumbItems} />
             <h1 className="eventscontent__title">{title}</h1>
             <p className="eventscontent__desc">{desc}</p>
           </div>

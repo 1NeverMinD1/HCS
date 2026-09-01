@@ -14,6 +14,7 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
+import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>
@@ -203,6 +204,12 @@ function NewsItem({ item, isFirst, registerRef }) {
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.header_cats?.[0], "name", locale);
 
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("news") || "Новости", url: `/${locale}/news` },
+    { name: title },
+  ];
+
   const midpointIndex = findMidpointIndex(content);
 
   return (
@@ -231,7 +238,14 @@ function NewsItem({ item, isFirst, registerRef }) {
       )}
 
       <div className="newscontent__header">
-        <p className="cat">{category}</p>
+        {item?.header_cats?.[0] && (
+          <Link
+            to={`/${locale}/news/category/${item.header_cats[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
         <p className="newscontent__header-date">
           {date.toLocaleDateString("ru-RU", {
             day: "numeric",
@@ -240,6 +254,7 @@ function NewsItem({ item, isFirst, registerRef }) {
           })}
         </p>
       </div>
+      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="newscontent__title">{title}</h1>
       <p className="newscontent__intro">{desc}</p>
       <figure className="newscontent__cover">
@@ -491,6 +506,14 @@ export default function NewsContent() {
   if (newsList.length === 0)
     return <h2 className="loading wrapper">Загрузка...</h2>;
 
+  const activeItemBreadcrumbs = activeItem
+    ? [
+        { name: "Главная", url: `/${locale}` },
+        { name: "Новости", url: `/${locale}/news` },
+        { name: getLangField(activeItem, "title", locale) },
+      ]
+    : [];
+
   return (
     <div className="newscontent__layout">
       <SEO
@@ -515,6 +538,7 @@ export default function NewsContent() {
         }
         translationSourceItem={activeItem}
         translationField="title"
+        breadcrumbs={activeItemBreadcrumbs}
       />
       <div className="newscontent__layout-main">
         {newsList
