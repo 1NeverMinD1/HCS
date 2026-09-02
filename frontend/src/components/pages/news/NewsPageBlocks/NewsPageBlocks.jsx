@@ -1,5 +1,7 @@
 import NewsPageBlock from "./NewsPageBlock/NewsPageBlock";
 import NewsPageHero from "./NewsPageHero/NewsPageHero";
+// Styles
+import "./_NewsPageBlocks.scss";
 
 export default function NewsPageBlocks({ hero, list }) {
   return (

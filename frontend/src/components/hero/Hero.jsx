@@ -4,6 +4,8 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
+// Styles
+import "./_Hero.scss";
 
 function isNewer(a, b) {
   const aPublish = new Date(a.publishDate).getTime();

@@ -1,3 +1,5 @@
+import "./_Ad.scss";
+
 export default function Ad({ hasAd = true }) {
   if (!hasAd) return null;
 

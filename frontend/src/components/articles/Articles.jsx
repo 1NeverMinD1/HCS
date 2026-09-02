@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import ArticlesBlocks from "./ArticlesBlocks/ArticlesBlocks";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
+// Styles
+import "./_Articles.scss";
 
 export default function Articles({ featuredTag, fullWidth }) {
   const { locale } = useLocale();

@@ -4,6 +4,8 @@ import { useTranslation } from "../../../utils/useTranslation.js";
 import ArtsPageBlocks from "./ArtsPageBlocks/ArtsPageBlocks";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_ArtsPage.scss";
 
 const PAGE_SIZE = 20;
 

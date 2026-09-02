@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import EventsBlocks from "./EventsBlocks/EventsBlocks";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
+// Styles
+import "./_Events.scss";
 
 export default function Events() {
   const [events, setEvents] = useState([]);

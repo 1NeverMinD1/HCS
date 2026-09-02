@@ -1,4 +1,6 @@
 import { useTranslation } from "../../utils/useTranslation";
+// Styles
+import "./_Email.scss";
 
 export default function Email() {
   const { t } = useTranslation();

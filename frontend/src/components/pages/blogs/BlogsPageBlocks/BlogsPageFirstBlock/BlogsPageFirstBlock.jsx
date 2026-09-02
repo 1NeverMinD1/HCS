@@ -3,6 +3,8 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { slugify } from "../../../../../utils/slugify.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+// Styles
+import "./_BlogsPageFirstBlock.scss";
 
 export default function BlogsPageFirstBlock({ blog }) {
   if (!blog) return null;

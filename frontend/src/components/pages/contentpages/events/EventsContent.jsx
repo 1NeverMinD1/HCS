@@ -14,6 +14,8 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_EventsContent.scss";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import BlogsBlocks from "./BlogsBlocks/BlogsBlocks";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
+// Styles
+import "./_Blogs.scss";
 
 export default function Blogs() {
   const { locale } = useLocale();

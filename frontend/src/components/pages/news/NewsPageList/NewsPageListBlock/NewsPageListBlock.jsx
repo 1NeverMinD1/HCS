@@ -3,6 +3,8 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
+// Styles
+import "./_NewsPageListBlock.scss";
 
 export default function NewsPageListBlock({ item }) {
   const { locale } = useLocale();

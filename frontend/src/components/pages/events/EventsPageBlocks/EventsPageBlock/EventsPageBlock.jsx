@@ -5,6 +5,8 @@ import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+// Styles
+import "./_EventsPageBlock.scss";
 
 const isSameDay = (a, b) =>
   a && b && new Date(a).toDateString() === new Date(b).toDateString();

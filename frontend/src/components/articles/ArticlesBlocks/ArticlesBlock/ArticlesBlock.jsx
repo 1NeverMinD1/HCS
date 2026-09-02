@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+// Styles
+import "./_ArticlesBlock.scss";
 
 export default function ArticlesBlock({ article }) {
   const { locale } = useLocale();

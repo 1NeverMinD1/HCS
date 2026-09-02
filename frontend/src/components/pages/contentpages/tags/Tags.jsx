@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { getLangField } from "../../../../utils/getLangField";
+// Styles
+import "./_Tags.scss";
 
 export default function Tags({ item, locale }) {
   return (

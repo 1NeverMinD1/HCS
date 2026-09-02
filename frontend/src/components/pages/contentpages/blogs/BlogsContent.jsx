@@ -16,6 +16,8 @@ import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_BlogsContent.scss";
 
 function renderBlock(block, i, locale, t) {
   const renderChildren = (children = []) =>

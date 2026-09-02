@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+// Styles
+import "./_NewsPageBlock.scss";
 
 export default function NewsPageBlock({ item }) {
   const { locale } = useLocale();

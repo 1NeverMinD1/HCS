@@ -4,6 +4,8 @@ import { getLangField } from "../../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+// Styles
+import "./_NewsPageHero.scss";
 
 export default function NewsPageHero({ news }) {
   const { locale } = useLocale();

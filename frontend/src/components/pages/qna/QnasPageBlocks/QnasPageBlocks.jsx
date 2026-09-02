@@ -1,4 +1,6 @@
 import QnasPageBlock from "./QnasPageBlock/QnasPageBlock";
+// Styles
+import "./_QnasPageBlocks.scss";
 
 export default function QnasPageBlocks({ qnas }) {
   return (

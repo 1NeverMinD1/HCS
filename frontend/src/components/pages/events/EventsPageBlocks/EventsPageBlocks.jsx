@@ -1,4 +1,6 @@
 import EventsPageBlock from "./EventsPageBlock/EventsPageBlock";
+// Styles
+import "./_EventsPageBlocks.scss";
 
 export default function EventsPageBlocks({ events }) {
   const remainder = events.length % 3;

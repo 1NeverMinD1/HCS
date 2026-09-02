@@ -1,4 +1,6 @@
 import BlogsBlock from "../BlogsBlocks/BlogsBlock/BlogsBlock";
+// Styles
+import "./_BlogsBlocks.scss";
 
 export default function BlogsBlocks({ blogs }) {
   if (!blogs?.length) return null;

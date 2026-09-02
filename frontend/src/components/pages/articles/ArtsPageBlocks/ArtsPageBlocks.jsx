@@ -1,4 +1,6 @@
 import ArtsPageBlock from "./ArtsPageBlock/ArtsPageBlock";
+// Styles
+import "./_ArtsPageBlocks.scss";
 
 export default function ArtsPageBlocks({ articles }) {
   const remainder = articles.length % 3;

@@ -7,6 +7,8 @@ import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_NewsPage.scss";
 
 const PAGE_SIZE = 20;
 

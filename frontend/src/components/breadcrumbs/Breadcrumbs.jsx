@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+// Styles
+import "./_Breadcrumbs.scss";
 
 export default function Breadcrumbs({ items }) {
   if (!items || items.length === 0) return null;

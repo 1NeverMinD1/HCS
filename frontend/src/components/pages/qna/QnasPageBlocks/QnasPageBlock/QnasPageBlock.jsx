@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
+// Styles
+import "./_QnasPageBlock.scss";
 
 export default function QnasPageBlock({ qna }) {
   const { locale } = useLocale();

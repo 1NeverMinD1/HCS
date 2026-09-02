@@ -6,6 +6,8 @@ import SEO from "../../../SEO/SEO.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 import ScrollBlock from "../../../categoryScroll/ScrollBlock.jsx";
 import useCategoryContent from "../../../../hooks/useCategoryContent.js";
+// Styles
+import "./_CategoryPage.scss";
 
 export default function CategoryPage() {
   const { id } = useParams();

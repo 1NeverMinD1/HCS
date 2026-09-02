@@ -14,6 +14,8 @@ import {
   FaGlobe,
   FaEnvelope,
 } from "react-icons/fa";
+// Styles
+import "./_Authors.scss";
 
 const SOCIAL_ICONS = {
   instagram: FaInstagram,

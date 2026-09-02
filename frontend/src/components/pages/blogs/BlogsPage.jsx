@@ -4,6 +4,8 @@ import BlogsPageBlocks from "./BlogsPageBlocks/BlogsPageBlocks";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_BlogsPage.scss";
 
 const PAGE_SIZE = 20;
 

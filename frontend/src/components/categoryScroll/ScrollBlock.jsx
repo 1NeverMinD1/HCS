@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
+// Styles
+import "./_ScrollBlock.scss";
 
 const PAGE_SIZE = 3;
 

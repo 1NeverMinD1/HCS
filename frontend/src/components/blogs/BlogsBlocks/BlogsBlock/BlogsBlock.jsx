@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+// Styles
+import "./_BlogsBlock.scss";
 
 export default function BlogsBlock({ blog }) {
   const imageUrl = getImageUrl(blog?.authors?.[0]?.profile_img?.url || "");

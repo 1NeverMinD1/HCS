@@ -4,6 +4,8 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+// Styles
+import "./_EventsBlock.scss";
 
 export default function EventsBlock({ event }) {
   const { locale } = useLocale();

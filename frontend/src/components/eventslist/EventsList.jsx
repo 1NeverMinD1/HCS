@@ -6,6 +6,8 @@ import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
+// Styles
+import "./_EventsList.scss";
 
 export default function EventsList({ onLoadEvents }) {
   const [events, setEvents] = useState([]);

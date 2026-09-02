@@ -1,5 +1,7 @@
 import React from "react";
 import NewsPageListBlock from "./NewsPageListBlock/NewsPageListBlock";
+// Styles
+import "./_NewsPageList.scss";
 
 export default function NewsPageList({ news, loaderRef }) {
   return (

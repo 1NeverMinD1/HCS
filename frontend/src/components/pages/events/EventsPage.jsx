@@ -4,6 +4,8 @@ import { useLocale } from "../../../context/LocaleContext";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
+// Styles
+import "./_EventsPage.scss";
 
 const PAGE_SIZE = 20;
 

@@ -3,6 +3,8 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+// Styles
+import "./_ArtsPageBlock.scss";
 
 export default function ArtsPageBlock({ item, index }) {
   const { locale } = useLocale();

@@ -1,4 +1,6 @@
 import ArticlesBlock from "./ArticlesBlock/ArticlesBlock";
+// Styles
+import "./_ArticlesBlocks.scss";
 
 export default function ArticlesBlocks({ articles }) {
   if (!articles || articles.length === 0) return null;

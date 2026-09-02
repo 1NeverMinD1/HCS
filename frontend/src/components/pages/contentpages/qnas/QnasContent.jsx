@@ -6,6 +6,8 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+// Styles
+import "./_QnasContent.scss";
 
 const BLOCK_CONFIG = {
   "Краткий ответ": {

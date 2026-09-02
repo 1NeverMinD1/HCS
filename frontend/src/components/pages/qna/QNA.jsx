@@ -5,6 +5,8 @@ import { useLocale } from "../../../context/LocaleContext";
 
 import QnasPageBlocks from "./QnasPageBlocks/QnasPageBlocks";
 import SEO from "../../SEO/SEO.jsx";
+// Styles
+import "./_QNA.scss";
 
 export default function QNA() {
   const { locale } = useLocale();

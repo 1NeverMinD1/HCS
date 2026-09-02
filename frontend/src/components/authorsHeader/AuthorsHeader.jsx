@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext";
+// Styles
+import "./_AuthorsHeader.scss";
 
 export default function AuthorsHeader({
   profileImg,

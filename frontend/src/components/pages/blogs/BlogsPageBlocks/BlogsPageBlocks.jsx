@@ -1,5 +1,7 @@
 import BlogsPageBlock from "./BlogsPageBlock/BlogsPageBlock";
 import BlogsPageFirstBlock from "./BlogsPageFirstBlock/BlogsPageFirstBlock";
+// Styles
+import "./_BlogsPageBlocks.scss";
 
 export default function BlogsPageBlocks({ blogs }) {
   const blog = blogs[0];

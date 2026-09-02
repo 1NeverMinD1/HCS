@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import EventsBlock from "./EventsBlock/EventsBlock";
+// Styles
+import "./_EventsBlocks.scss";
 
 export default function EventsBlocks({ events }) {
   const containerRef = useRef(null);

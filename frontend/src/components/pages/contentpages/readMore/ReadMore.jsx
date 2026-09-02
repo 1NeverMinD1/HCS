@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../../../utils/getLangField";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
+// Styles
+import "./_ReadMore.scss";
 
 const RELATED_FIELDS =
   `fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en` +

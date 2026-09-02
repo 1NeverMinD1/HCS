@@ -1,4 +1,6 @@
 import LatestNewsBlock from "./LatestNewsBlock/LatestNewsBlock";
+// Styles
+import "./_LatestNewsBlocks.scss";
 
 export default function LatestNewsBlocks({ news }) {
   return (

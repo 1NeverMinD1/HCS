@@ -3,6 +3,8 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
+// Styles
+import "./_Trendings.scss";
 
 export default function Trendings({ news }) {
   const { locale } = useLocale();

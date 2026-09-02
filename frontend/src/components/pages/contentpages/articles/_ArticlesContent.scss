@@ -43,6 +43,14 @@
         gap: 20px;
         align-items: baseline;
         .cat {
+          display: inline-block;
+          color: black;
+          background: variables.$primary-color;
+          color: white;
+          padding: 5px;
+          width: fit-content;
+          border-radius: 5px;
+          margin-block: 10px;
           text-decoration: none;
           transition: all 0.3s ease;
           &:hover {
