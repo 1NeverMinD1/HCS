@@ -3,10 +3,6 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 
 import FooterContent from "./FooterContent/FooterContent.jsx";
 
-// FooterLinks
-
-import Imprint from "../footer-links/Imprint.jsx";
-
 export default function Footer() {
   const { locale } = useLocale();
 
