@@ -5,6 +5,8 @@ import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import SEO from "../SEO/SEO.jsx";
+// Styles
+import "./_FooterLinksStyles.scss";
 
 const INTERNAL_LINKS = {
   Контакты: "/contacts",

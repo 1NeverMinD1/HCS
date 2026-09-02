@@ -4,6 +4,8 @@ import { useLocale } from "../../context/LocaleContext";
 import { parseMultilangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
 import { useTranslation } from "../../utils/useTranslation.js";
+// Styles
+import "./_FooterLinksStyles.scss";
 
 const INTERNAL_LINKS = {
   ЖКХ24: "/ru",
