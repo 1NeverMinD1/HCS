@@ -102,27 +102,38 @@ ul {
 }
 
 @font-face {
+  font-family: "Syne";
+  src: url("./static/syne-extrabold.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Main";
   src: url("./static/regular.woff2") format("woff2");
   font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Main";
   src: url("./static/medium.woff2") format("woff2");
   font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Main";
   src: url("./static/semibold.woff2") format("woff2");
   font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Main";
   src: url("./static/bold.woff2") format("woff2");
   font-weight: 700;
+  font-display: swap;
 }
 
 .arrow {
