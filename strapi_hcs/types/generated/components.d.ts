@@ -56,6 +56,14 @@ export interface ContentSocialLink extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentTable extends Struct.ComponentSchema {
+  collectionName: 'components_content_tables';
+  info: {
+    displayName: 'Table';
+  };
+  attributes: {};
+}
+
 export interface FooterFooterRichText extends Struct.ComponentSchema {
   collectionName: 'components_footer_footer_rich_texts';
   info: {
@@ -112,6 +120,7 @@ declare module '@strapi/strapi' {
       'content.og': ContentOg;
       'content.seo': ContentSeo;
       'content.social-link': ContentSocialLink;
+      'content.table': ContentTable;
       'footer.footer-rich-text': FooterFooterRichText;
       'qand-a.law': QandALaw;
       'qand-a.practice': QandAPractice;
