@@ -567,9 +567,9 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
-    bio_en: Schema.Attribute.String;
-    bio_kk: Schema.Attribute.String;
-    bio_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    bio_en: Schema.Attribute.Text;
+    bio_kk: Schema.Attribute.Text;
+    bio_ru: Schema.Attribute.Text & Schema.Attribute.Required;
     blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
     createdAt: Schema.Attribute.DateTime;

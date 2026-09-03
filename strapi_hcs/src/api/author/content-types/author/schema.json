@@ -20,7 +20,7 @@
       "required": true
     },
     "bio_ru": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "name_kk": {
@@ -30,7 +30,7 @@
       "type": "string"
     },
     "bio_kk": {
-      "type": "string"
+      "type": "text"
     },
     "name_en": {
       "type": "string"
@@ -39,7 +39,7 @@
       "type": "string"
     },
     "bio_en": {
-      "type": "string"
+      "type": "text"
     },
     "profile_img": {
       "type": "media",
