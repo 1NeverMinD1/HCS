@@ -530,7 +530,7 @@ export default function NewsContent() {
             activeItem.desc_img?.formats?.medium?.url ||
             activeItem.desc_img?.url,
         )}
-        type="article"
+        type="news"
         datePublished={activeItem.publishDate}
         dateModified={activeItem.updatedAt}
         authorName={
