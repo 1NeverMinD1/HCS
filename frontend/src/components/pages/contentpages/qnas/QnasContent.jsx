@@ -9,42 +9,27 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 // Styles
 import "./_QnasContent.scss";
 
-const BLOCK_CONFIG = {
-  "Краткий ответ": {
-    key: "short",
-    blockClass: "qnascontent__main-short-block",
-    quoteClass: "short_answer",
-    label: "Краткий ответ",
-    icon: null,
-  },
-  Закон: {
-    key: "zakon",
-    blockClass: "qnascontent__main-zakon-block",
-    quoteClass: "zakon",
-    label: "НОРМА",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="molotok"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M13 10l7.383 7.418c.823 .82 .823 2.148 0 2.967a2.11 2.11 0 0 1 -2.976 0l-7.407 -7.385" />
-        <path d="M6 9l4 4" />
-        <path d="M13 10l-4 -4" />
-        <path d="M3 21h7" />
-        <path d="M6.793 15.793l-3.586 -3.586a1 1 0 0 1 0 -1.414l2.293 -2.293l.5 .5l3 -3l-.5 -.5l2.293 -2.293a1 1 0 0 1 1.414 0l3.586 3.586a1 1 0 0 1 0 1.414l-2.293 2.293l-.5 -.5l-3 3l.5 .5l-2.293 2.293a1 1 0 0 1 -1.414 0" />
-      </svg>
-    ),
-  },
-};
+const ZAKON_ICON = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="molotok"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M13 10l7.383 7.418c.823 .82 .823 2.148 0 2.967a2.11 2.11 0 0 1 -2.976 0l-7.407 -7.385" />
+    <path d="M6 9l4 4" />
+    <path d="M13 10l-4 -4" />
+    <path d="M3 21h7" />
+    <path d="M6.793 15.793l-3.586 -3.586a1 1 0 0 1 0 -1.414l2.293 -2.293l.5 .5l3 -3l-.5 -.5l2.293 -2.293a1 1 0 0 1 1.414 0l3.586 3.586a1 1 0 0 1 0 1.414l-2.293 2.293l-.5 -.5l-3 3l.5 .5l-2.293 2.293a1 1 0 0 1 -1.414 0" />
+  </svg>
+);
 
 const PRACTICE_ICON = (
   <svg
@@ -64,57 +49,70 @@ const PRACTICE_ICON = (
   </svg>
 );
 
-function parseCodeWord(rawText) {
-  const match = rawText.match(/^\(\s*["«](.+?)["»]\s*\)\s*(.*)/s);
-  if (!match) return null;
-
-  const [, codeWord, rest] = match;
-  const config = BLOCK_CONFIG[codeWord.trim()];
-  return config ? { config, text: rest } : null;
-}
-
 function getPlainText(children) {
   return children.map((c) => c.text || "").join("");
 }
 
-function extractShortAnswer(content) {
-  for (const block of content) {
-    if (block.type === "paragraph") {
-      const text = getPlainText(block.children);
-      const match = text.match(/^\(\s*["«](.+?)["»]\s*\)\s*(.*)/s);
-      if (match && match[1].trim() === "Краткий ответ") {
-        return match[2].trim();
-      }
-    }
-  }
-  return null;
+function extractShortAnswer(contentBlocks, locale) {
+  const shortAnswerComponent = contentBlocks?.find(
+    (c) => c.__component === "qand-a.short-answer",
+  );
+  const blocks =
+    shortAnswerComponent?.[`shortanswer_content_${locale}`] ||
+    shortAnswerComponent?.shortanswer_content_ru ||
+    [];
+
+  return (
+    blocks
+      .map((b) => getPlainText(b.children))
+      .join(" ")
+      .trim() || null
+  );
 }
 
-function renderBlock(block, index) {
-  if (block.type === "paragraph") {
-    const parsed = parseCodeWord(getPlainText(block.children));
-    if (!parsed) return null;
+function renderComponent(component, index, locale) {
+  if (component.__component === "qand-a.short-answer") {
+    const blocks =
+      component[`shortanswer_content_${locale}`] ||
+      component.shortanswer_content_ru ||
+      [];
 
-    const { config, text } = parsed;
     return (
-      <div key={index} className={config.blockClass}>
-        {config.icon ? (
-          <div className={`${config.blockClass}-intro`}>
-            {config.icon}
-            <p className={`${config.key}_p`}>{config.label}</p>
-          </div>
-        ) : (
-          <p>{config.label}</p>
-        )}
-        <blockquote className={config.quoteClass}>{text}</blockquote>
+      <div key={index} className="qnascontent__main-short-block">
+        <p>Краткий ответ</p>
+        {blocks.map((b, i) => (
+          <blockquote key={i} className="short_answer">
+            {getPlainText(b.children)}
+          </blockquote>
+        ))}
       </div>
     );
   }
 
-  if (block.type === "list") {
-    const items = block.children.map((item, i) => (
-      <li key={i}>{getPlainText(item.children)}</li>
-    ));
+  if (component.__component === "qand-a.law") {
+    const blocks =
+      component[`law_content_${locale}`] || component.law_content_ru || [];
+
+    return (
+      <div key={index} className="qnascontent__main-zakon-block">
+        <div className="qnascontent__main-zakon-block-intro">
+          {ZAKON_ICON}
+          <p className="zakon_p">НОРМА</p>
+        </div>
+        {blocks.map((b, i) => (
+          <blockquote key={i} className="zakon">
+            {getPlainText(b.children)}
+          </blockquote>
+        ))}
+      </div>
+    );
+  }
+
+  if (component.__component === "qand-a.practice") {
+    const blocks =
+      component[`practice_content_${locale}`] ||
+      component.practice_content_ru ||
+      [];
 
     return (
       <div key={index} className="qnascontent__main-practice-wrap">
@@ -122,7 +120,11 @@ function renderBlock(block, index) {
           {PRACTICE_ICON}
           <p className="practice_p">Как на практике</p>
         </div>
-        <ul className="qnascontent__main-practice">{items}</ul>
+        <ul className="qnascontent__main-practice">
+          {blocks.map((b, i) => (
+            <li key={i}>{getPlainText(b.children)}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -149,8 +151,8 @@ export default function QnasContent() {
   if (!qnas) return <h2 className="loading wrapper">Загрузка...</h2>;
 
   const title = getLangField(qnas, "title", locale);
-  const content = qnas[`content_${locale}`] || qnas.content_ru || [];
-  const shortAnswer = extractShortAnswer(content);
+  const content = qnas.Content || [];
+  const shortAnswer = extractShortAnswer(content, locale);
 
   return (
     <div className="qnascontent wrapper">
@@ -191,7 +193,9 @@ export default function QnasContent() {
         </div>
 
         <div className="qnascontent__main-text">
-          {content.map((block, index) => renderBlock(block, index))}
+          {content.map((component, index) =>
+            renderComponent(component, index, locale),
+          )}
         </div>
         <div className="qnascontent__tags">
           {qnas.tags?.map((tag) => (

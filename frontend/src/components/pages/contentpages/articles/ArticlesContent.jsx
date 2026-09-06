@@ -189,6 +189,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
+  const faq = item?.[`qanda_${locale}`] || item?.qanda_ru || [];
   const category = getLangField(item?.categories?.[0], "name", locale);
 
   const breadcrumbItems = [
@@ -304,6 +305,12 @@ function ArticleItem({ item, isFirst, registerRef }) {
           <ReadMore item={item} locale={locale} contentType="article" />
         )}
       </div>
+      {faq.length > 0 && (
+        <div className="artscontent__faq">
+          <h2>FAQ</h2>
+          {faq.map((block, i) => renderBlock(block, i, locale, t))}
+        </div>
+      )}
       <Tags item={item} locale={locale} />
     </div>
   );

@@ -103,6 +103,18 @@
         margin-top: 20px;
         @include rich-text-styles;
       }
+
+      .artscontent__faq {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        @include rich-text-styles;
+        h2 {
+          margin-bottom: 10px;
+          font-size: variables.$title-font-size;
+        }
+      }
       .artscontent__tags {
         margin-top: 10px;
         display: flex;
