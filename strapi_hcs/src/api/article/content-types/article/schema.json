@@ -71,7 +71,12 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "tags": {
       "type": "relation",
@@ -113,6 +118,12 @@
     },
     "qanda_en": {
       "type": "blocks"
+    },
+    "send_to_tg": {
+      "type": "boolean"
+    },
+    "tg_sent": {
+      "type": "boolean"
     }
   }
 }

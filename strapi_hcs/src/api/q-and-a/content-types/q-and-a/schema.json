@@ -64,6 +64,12 @@
         "qand-a.practice",
         "qand-a.law"
       ]
+    },
+    "send_to_tg": {
+      "type": "boolean"
+    },
+    "tg_sent": {
+      "type": "boolean"
     }
   }
 }

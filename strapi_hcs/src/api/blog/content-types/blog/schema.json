@@ -80,7 +80,12 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "SEO": {
       "type": "component",
@@ -104,6 +109,12 @@
       "relation": "manyToMany",
       "target": "api::city.city",
       "inversedBy": "blogs"
+    },
+    "send_to_tg": {
+      "type": "boolean"
+    },
+    "tg_sent": {
+      "type": "boolean"
     }
   }
 }

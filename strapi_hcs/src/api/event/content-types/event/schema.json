@@ -65,12 +65,22 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "cover_img": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "content_ru": {
       "type": "customField",
@@ -134,6 +144,12 @@
       "relation": "manyToMany",
       "target": "api::city.city",
       "mappedBy": "events"
+    },
+    "send_to_tg": {
+      "type": "boolean"
+    },
+    "tg_sent": {
+      "type": "boolean"
     }
   }
 }

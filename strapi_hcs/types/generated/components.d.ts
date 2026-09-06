@@ -84,28 +84,9 @@ export interface QandALaw extends Struct.ComponentSchema {
     displayName: 'Law';
   };
   attributes: {
-    content_en: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::better-blocks.better-blocks',
-        {
-          detailsStyle: 'github';
-        }
-      >;
-    content_kk: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::better-blocks.better-blocks',
-        {
-          detailsStyle: 'github';
-        }
-      >;
-    content_ru: Schema.Attribute.JSON &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::better-blocks.better-blocks',
-        {
-          detailsStyle: 'github';
-        }
-      >;
+    law_content_en: Schema.Attribute.Blocks;
+    law_content_kk: Schema.Attribute.Blocks;
+    law_content_ru: Schema.Attribute.Blocks;
   };
 }
 

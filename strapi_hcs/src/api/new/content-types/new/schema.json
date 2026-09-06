@@ -68,7 +68,12 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "tags": {
       "type": "relation",
@@ -107,6 +112,12 @@
       "relation": "manyToMany",
       "target": "api::city.city",
       "mappedBy": "news"
+    },
+    "send_to_tg": {
+      "type": "boolean"
+    },
+    "tg_sent": {
+      "type": "boolean"
     }
   }
 }
