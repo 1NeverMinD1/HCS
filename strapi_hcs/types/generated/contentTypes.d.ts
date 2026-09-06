@@ -515,9 +515,28 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::category.category'
     >;
     cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
-    content_en: Schema.Attribute.Blocks;
-    content_kk: Schema.Attribute.Blocks;
-    content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    content_en: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    content_kk: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    content_ru: Schema.Attribute.JSON &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1047,9 +1066,28 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
   attributes: {
     authors: Schema.Attribute.Relation<'manyToMany', 'api::author.author'>;
     cities: Schema.Attribute.Relation<'manyToMany', 'api::city.city'>;
-    content_en: Schema.Attribute.Blocks;
-    content_kk: Schema.Attribute.Blocks;
-    content_ru: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    content_en: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    content_kk: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    content_ru: Schema.Attribute.JSON &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

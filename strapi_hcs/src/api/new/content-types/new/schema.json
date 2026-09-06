@@ -43,25 +43,32 @@
       "required": true
     },
     "content_ru": {
-      "type": "blocks",
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      },
       "required": true
     },
     "content_kk": {
-      "type": "blocks"
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      }
     },
     "content_en": {
-      "type": "blocks"
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      }
     },
     "desc_img": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "tags": {
       "type": "relation",
