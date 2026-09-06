@@ -115,6 +115,28 @@ function renderBlock(block, i, locale, t) {
     case "code":
       return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
 
+    case "table": {
+      return (
+        <table key={i} className="richtext-table">
+          <tbody>
+            {block.children?.map((row, rIdx) => (
+              <tr key={rIdx}>
+                {row.children?.map((cell, cIdx) => {
+                  const CellTag =
+                    cell.type === "table-header-cell" ? "th" : "td";
+                  return (
+                    <CellTag key={cIdx}>
+                      {renderChildren(cell.children)}
+                    </CellTag>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+
     default:
       return null;
   }

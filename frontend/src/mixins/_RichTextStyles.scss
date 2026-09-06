@@ -5,6 +5,29 @@
     font-size: 20px;
     text-indent: 30px;
   }
+  .richtext-table {
+    width: 100%;
+    margin-block: 30px;
+    border-collapse: collapse;
+    font-size: 18px;
+    th,
+    td {
+      padding: 14px 18px;
+      text-align: left;
+      border: 1px solid variables.$hover-color;
+    }
+    th {
+      background: variables.$hover-color;
+      color: white;
+      font-weight: bold;
+    }
+    tbody tr:nth-child(even) td {
+      background: rgba(variables.$hover-color, 0.08);
+    }
+    tbody tr:hover td {
+      background: rgba(variables.$primary-color, 0.08);
+    }
+  }
   blockquote {
     margin-block: 20px;
     background: variables.$hover-color;
