@@ -25,16 +25,6 @@
       "type": "date",
       "required": true
     },
-    "content_ru": {
-      "type": "blocks",
-      "required": true
-    },
-    "content_kk": {
-      "type": "blocks"
-    },
-    "content_en": {
-      "type": "blocks"
-    },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
