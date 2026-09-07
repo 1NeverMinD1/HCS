@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 
-export default function renderHTML({ html }) {
+function RenderHtml({ html }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -23,3 +23,5 @@ export default function renderHTML({ html }) {
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />;
 }
+
+export default memo(RenderHtml);

@@ -18,7 +18,7 @@ import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 // Styles
 import "./_ArticlesContent.scss";
 
-function renderBlock(block, i, locale, t) {
+function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -111,8 +111,16 @@ function renderBlock(block, i, locale, t) {
       );
     }
 
-    case "code":
-      return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
+    case "code": {
+      const codeword = block.children?.[0]?.text?.trim() || "";
+      const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
+
+      if (matchedScript) {
+        return <RenderHtml key={i} html={matchedScript.script} />;
+      }
+
+      return <RenderHtml key={i} html={codeword} />;
+    }
 
     case "table": {
       return (
@@ -191,6 +199,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const faq = item?.[`qanda_${locale}`] || item?.qanda_ru || [];
   const category = getLangField(item?.categories?.[0], "name", locale);
+  const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -288,7 +297,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
       <hr />
       <div className="artscontent__main">
         {content?.map((block, i) => {
-          const rendered = renderBlock(block, i, locale, t);
+          const rendered = renderBlock(block, i, locale, t, scripts);
 
           if (i === midpointIndex) {
             return (
@@ -308,7 +317,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
       {faq.length > 0 && (
         <div className="artscontent__faq">
           <h2>FAQ</h2>
-          {faq.map((block, i) => renderBlock(block, i, locale, t))}
+          {faq.map((block, i) => renderBlock(block, i, locale, t, scripts))}
         </div>
       )}
       <Tags item={item} locale={locale} />
@@ -357,7 +366,9 @@ export default function ArticlesContent() {
     `&populate[categories][fields][2]=name_en` +
     `&populate[tags][fields][0]=name_ru` +
     `&populate[tags][fields][1]=name_kk` +
-    `&populate[tags][fields][2]=name_en`;
+    `&populate[tags][fields][2]=name_en` +
+    `&populate[scripts][fields][0]=name` +
+    `&populate[scripts][fields][1]=script`;
 
   useEffect(() => {
     setArticlesList([]);

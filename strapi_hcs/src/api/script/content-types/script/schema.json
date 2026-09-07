@@ -14,7 +14,13 @@
     "name": {
       "type": "string"
     },
-    "script": {
+    "script_ru": {
+      "type": "text"
+    },
+    "script_kk": {
+      "type": "text"
+    },
+    "script_en": {
       "type": "text"
     },
     "articles": {

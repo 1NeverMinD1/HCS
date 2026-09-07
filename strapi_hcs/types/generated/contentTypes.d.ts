@@ -1201,7 +1201,9 @@ export interface ApiScriptScript extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    script: Schema.Attribute.Text;
+    script_en: Schema.Attribute.Text;
+    script_kk: Schema.Attribute.Text;
+    script_ru: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
