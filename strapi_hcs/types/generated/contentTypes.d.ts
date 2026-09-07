@@ -562,6 +562,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     qanda_en: Schema.Attribute.Blocks;
     qanda_kz: Schema.Attribute.Blocks;
     qanda_ru: Schema.Attribute.Blocks;
+    scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;
     send_to_tg: Schema.Attribute.Boolean;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
@@ -1177,6 +1178,36 @@ export interface ApiQAndAQAndA extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiScriptScript extends Struct.CollectionTypeSchema {
+  collectionName: 'scripts';
+  info: {
+    displayName: 'Script';
+    pluralName: 'scripts';
+    singularName: 'script';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::script.script'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    script: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTagTag extends Struct.CollectionTypeSchema {
   collectionName: 'tags';
   info: {
@@ -1737,6 +1768,7 @@ declare module '@strapi/strapi' {
       'api::header-cat.header-cat': ApiHeaderCatHeaderCat;
       'api::new.new': ApiNewNew;
       'api::q-and-a.q-and-a': ApiQAndAQAndA;
+      'api::script.script': ApiScriptScript;
       'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

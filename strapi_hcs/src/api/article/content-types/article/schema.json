@@ -124,6 +124,12 @@
     },
     "tg_sent": {
       "type": "boolean"
+    },
+    "scripts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::script.script",
+      "mappedBy": "articles"
     }
   }
 }
