@@ -1,6 +1,8 @@
 import { useEffect, useRef, memo } from "react";
 
 function RenderHtml({ html }) {
+  console.log("[RenderHtml] render called, html length:", html?.length);
+
   const ref = useRef(null);
 
   useEffect(() => {

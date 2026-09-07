@@ -370,9 +370,7 @@ export default function ArticlesContent() {
     `&populate[tags][fields][1]=name_kk` +
     `&populate[tags][fields][2]=name_en` +
     `&populate[scripts][fields][0]=name` +
-    `&populate[scripts][fields][1]=script_ru` +
-    `&populate[scripts][fields][2]=script_kk` +
-    `&populate[scripts][fields][3]=script_en`;
+    `&populate[scripts]=*`;
 
   useEffect(() => {
     setArticlesList([]);
