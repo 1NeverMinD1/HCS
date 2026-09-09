@@ -179,34 +179,40 @@ export default function Authors() {
           <div className="authors__main-bio">
             <h3>Биография:</h3>
             <p>{bio}</p>
-            <h3>Социальные сети:</h3>
             {author.links?.length > 0 && (
-              <div className="authors__main-socials">
-                {author.links.map((link) => {
-                  const Icon = SOCIAL_ICONS[link.platform];
-                  if (!Icon) return null;
+              <>
+                <h3>Социальные сети:</h3>
+                <div className="authors__main-socials">
+                  {author.links.map((link) => {
+                    const Icon = SOCIAL_ICONS[link.platform];
+                    if (!Icon) return null;
 
-                  const href =
-                    link.platform === "email" ? `mailto:${link.url}` : link.url;
+                    const href =
+                      link.platform === "email"
+                        ? `mailto:${link.url}`
+                        : link.url;
 
-                  return (
-                    <a
-                      key={link.id}
-                      href={href}
-                      target={link.platform === "email" ? undefined : "_blank"}
-                      rel="noopener noreferrer"
-                      className="authors__socials-link"
-                      aria-label={link.platform}
-                    >
-                      <Icon className="authors__socials-ico" />
-                      <span className="authors__socials-label">
-                        {link.platform.charAt(0).toUpperCase() +
-                          link.platform.slice(1)}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
+                    return (
+                      <a
+                        key={link.id}
+                        href={href}
+                        target={
+                          link.platform === "email" ? undefined : "_blank"
+                        }
+                        rel="noopener noreferrer"
+                        className="authors__socials-link"
+                        aria-label={link.platform}
+                      >
+                        <Icon className="authors__socials-ico" />
+                        <span className="authors__socials-label">
+                          {link.platform.charAt(0).toUpperCase() +
+                            link.platform.slice(1)}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
             )}
           </div>
         </div>
