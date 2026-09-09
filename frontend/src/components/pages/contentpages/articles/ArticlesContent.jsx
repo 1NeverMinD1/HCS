@@ -114,14 +114,8 @@ function renderBlock(block, i, locale, t, scripts = []) {
     case "code": {
       const codeword = block.children?.[0]?.text?.trim() || "";
       const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
-
-      if (matchedScript) {
-        const scriptHtml =
-          matchedScript[`script_${locale}`] || matchedScript.script_ru;
-        return <RenderHtml key={i} html={scriptHtml} />;
-      }
-
-      return <RenderHtml key={i} html={codeword} />;
+      const scriptHtml = matchedScript ? matchedScript.script : codeword;
+      return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
     }
 
     case "table": {
@@ -370,9 +364,7 @@ export default function ArticlesContent() {
     `&populate[tags][fields][1]=name_kk` +
     `&populate[tags][fields][2]=name_en` +
     `&populate[scripts][fields][0]=name` +
-    `&populate[scripts][fields][1]=script_ru` +
-    `&populate[scripts][fields][2]=script_kk` +
-    `&populate[scripts][fields][3]=script_en`;
+    `&populate[scripts][fields][1]=script`;
 
   useEffect(() => {
     setArticlesList([]);

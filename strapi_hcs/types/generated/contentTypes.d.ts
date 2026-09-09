@@ -684,6 +684,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;
     send_to_tg: Schema.Attribute.Boolean;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
@@ -832,6 +833,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     register_link: Schema.Attribute.Text;
+    scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;
     send_to_tg: Schema.Attribute.Boolean;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
@@ -1119,6 +1121,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;
     send_to_tg: Schema.Attribute.Boolean;
     SEO: Schema.Attribute.Component<'content.seo', false>;
     slug: Schema.Attribute.UID<'title_ru'>;
@@ -1190,9 +1193,11 @@ export interface ApiScriptScript extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1200,10 +1205,11 @@ export interface ApiScriptScript extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
     publishedAt: Schema.Attribute.DateTime;
-    script_en: Schema.Attribute.Text;
-    script_kk: Schema.Attribute.Text;
-    script_ru: Schema.Attribute.Text;
+    screen: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    script: Schema.Attribute.Text;
+    script_desc: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

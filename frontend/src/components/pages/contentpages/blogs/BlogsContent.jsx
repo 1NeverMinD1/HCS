@@ -19,7 +19,7 @@ import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 // Styles
 import "./_BlogsContent.scss";
 
-function renderBlock(block, i, locale, t) {
+function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -112,8 +112,12 @@ function renderBlock(block, i, locale, t) {
       );
     }
 
-    case "code":
-      return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
+    case "code": {
+      const codeword = block.children?.[0]?.text?.trim() || "";
+      const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
+      const scriptHtml = matchedScript ? matchedScript.script : codeword;
+      return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
+    }
 
     case "table": {
       return (
@@ -189,6 +193,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
   const author = getLangField(item?.authors?.[0], "name", locale);
   const position = getLangField(item?.authors?.[0], "position", locale);
   const category = getLangField(item?.categories?.[0], "name", locale);
+  const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -280,7 +285,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
       <hr />
       <div className="blogscontent__main">
         {content?.map((block, i) => {
-          const rendered = renderBlock(block, i, locale, t);
+          const rendered = renderBlock(block, i, locale, t, scripts);
 
           if (i === midpointIndex) {
             return (
@@ -344,7 +349,9 @@ export default function BlogsContent() {
     `&populate[tags][fields][2]=name_en` +
     `&populate[categories][fields][0]=name_ru` +
     `&populate[categories][fields][1]=name_kk` +
-    `&populate[categories][fields][2]=name_en`;
+    `&populate[categories][fields][2]=name_en` +
+    `&populate[scripts][fields][0]=name` +
+    `&populate[scripts][fields][1]=script`;
 
   useEffect(() => {
     setBlogsList([]);

@@ -17,7 +17,7 @@ import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 // Styles
 import "./_EventsContent.scss";
 
-function renderBlock(block, i, locale, t) {
+function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -110,8 +110,12 @@ function renderBlock(block, i, locale, t) {
       );
     }
 
-    case "code":
-      return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
+    case "code": {
+      const codeword = block.children?.[0]?.text?.trim() || "";
+      const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
+      const scriptHtml = matchedScript ? matchedScript.script : codeword;
+      return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
+    }
 
     case "table": {
       return (
@@ -149,6 +153,7 @@ export default function EventsContent() {
   const content = getLangField(events, "content", locale);
   const place = getLangField(events, "place", locale);
   const category = getLangField(events?.categories?.[0], "name", locale);
+  const scripts = events?.scripts || [];
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -190,7 +195,9 @@ export default function EventsContent() {
         `&populate[categories][fields][2]=name_en` +
         `&populate[tags][fields][0]=name_ru` +
         `&populate[tags][fields][1]=name_kk` +
-        `&populate[tags][fields][2]=name_en`,
+        `&populate[tags][fields][2]=name_en` +
+        `&populate[scripts][fields][0]=name` +
+        `&populate[scripts][fields][1]=script`,
     )
       .then((res) => res.json())
       .then((data) => setEvents(data.data?.[0]));
@@ -374,7 +381,9 @@ export default function EventsContent() {
         </figure>
         <hr />
         <div className="eventscontent__main">
-          {content?.map((block, i) => renderBlock(block, i, locale, t))}
+          {content?.map((block, i) =>
+            renderBlock(block, i, locale, t, scripts),
+          )}
         </div>
         <a
           href={events?.register_link}

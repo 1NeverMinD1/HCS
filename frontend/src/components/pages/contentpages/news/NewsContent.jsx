@@ -18,7 +18,7 @@ import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 // Styles
 import "./_NewsContent.scss";
 
-function renderBlock(block, i, locale, t) {
+function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -110,8 +110,12 @@ function renderBlock(block, i, locale, t) {
       );
     }
 
-    case "code":
-      return <RenderHtml key={i} html={block.children?.[0]?.text || ""} />;
+    case "code": {
+      const codeword = block.children?.[0]?.text?.trim() || "";
+      const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
+      const scriptHtml = matchedScript ? matchedScript.script : codeword;
+      return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
+    }
 
     case "table": {
       return (
@@ -227,6 +231,7 @@ function NewsItem({ item, isFirst, registerRef }) {
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.header_cats?.[0], "name", locale);
+  const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -319,7 +324,7 @@ function NewsItem({ item, isFirst, registerRef }) {
       <hr />
       <div className="newscontent__main">
         {content?.map((block, i) => {
-          const rendered = renderBlock(block, i, locale, t);
+          const rendered = renderBlock(block, i, locale, t, scripts);
 
           if (i === midpointIndex) {
             return (
@@ -390,7 +395,9 @@ export default function NewsContent() {
         `&populate[tags][fields][2]=name_en` +
         `&populate[cities][fields][0]=city_ru` +
         `&populate[cities][fields][1]=city_kk` +
-        `&populate[cities][fields][2]=city_en`,
+        `&populate[cities][fields][2]=city_en` +
+        `&populate[scripts][fields][0]=name` +
+        `&populate[scripts][fields][1]=script`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -441,7 +448,9 @@ export default function NewsContent() {
         `&populate[tags][fields][2]=name_en` +
         `&populate[cities][fields][0]=city_ru` +
         `&populate[cities][fields][1]=city_kk` +
-        `&populate[cities][fields][2]=city_en`,
+        `&populate[cities][fields][2]=city_en` +
+        `&populate[scripts][fields][0]=name` +
+        `&populate[scripts][fields][1]=script`,
     );
     const data = await res.json();
     const next = data.data?.[0];

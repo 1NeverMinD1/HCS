@@ -90,6 +90,12 @@
       "target": "api::category.category",
       "inversedBy": "articles"
     },
+    "scripts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::script.script",
+      "mappedBy": "articles"
+    },
     "SEO": {
       "type": "component",
       "component": "content.seo",
@@ -124,12 +130,6 @@
     },
     "tg_sent": {
       "type": "boolean"
-    },
-    "scripts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::script.script",
-      "mappedBy": "articles"
     }
   }
 }
