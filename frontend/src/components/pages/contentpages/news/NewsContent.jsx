@@ -569,6 +569,7 @@ export default function NewsContent() {
             ? getLangField(activeItem.authors[0], "name", locale)
             : undefined
         }
+        authorSlug={activeItem.authors?.[0]?.slug}
         translationSourceItem={activeItem}
         translationField="title"
         breadcrumbs={activeItemBreadcrumbs}

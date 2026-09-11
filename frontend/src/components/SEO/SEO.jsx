@@ -16,6 +16,7 @@ export default function SEO({
   datePublished,
   dateModified,
   authorName,
+  authorSlug,
   imageWidth,
   imageHeight,
   startDate,
@@ -30,6 +31,8 @@ export default function SEO({
   const { pathname } = useLocation();
 
   const lang = locale.split("-")[0];
+  const OG_LOCALE_MAP = { ru: "ru_RU", kk: "kk_KZ", en: "en_US" };
+  const ogLocale = OG_LOCALE_MAP[lang] || "ru_RU";
 
   const siteName = "ЖКХ24";
   const baseUrl = "https://zhkh24.kz";
@@ -40,6 +43,10 @@ export default function SEO({
   const defaultImage = `${baseUrl}/og-default.jpg`;
 
   const canonicalUrl = url || `${baseUrl}${pathname}`;
+
+  const authorUrl = authorSlug
+    ? `${baseUrl}/${lang}/author/${authorSlug}`
+    : undefined;
 
   const seoTitle = getLangField(seo, "seo_title", locale);
   const seoDescription = getLangField(seo, "seo_desc", locale);
@@ -84,6 +91,7 @@ export default function SEO({
       "@type": "Event",
       name: finalOgTitle,
       description: finalDescription,
+      inLanguage: lang,
       image: [finalImage],
       startDate: startDate,
       endDate: endDate || startDate,
@@ -100,6 +108,15 @@ export default function SEO({
         name: siteName,
         url: baseUrl,
       },
+      author: authorName
+        ? [
+            {
+              "@type": "Person",
+              name: authorName,
+              ...(authorUrl ? { url: authorUrl } : {}),
+            },
+          ]
+        : undefined,
     };
   } else if (type === "article" || type === "news" || type === "blog") {
     structuredData = {
@@ -115,11 +132,13 @@ export default function SEO({
       image: [finalImage],
       datePublished: datePublished,
       dateModified: dateModified || datePublished,
+      inLanguage: lang,
       author: authorName
         ? [
             {
               "@type": "Person",
               name: authorName,
+              ...(authorUrl ? { url: authorUrl } : {}),
             },
           ]
         : [
@@ -141,6 +160,7 @@ export default function SEO({
     structuredData = {
       "@context": "https://schema.org",
       "@type": "QAPage",
+      inLanguage: lang,
       mainEntity: {
         "@type": "Question",
         name: finalOgTitle,
@@ -160,6 +180,7 @@ export default function SEO({
           "@type": "WebSite",
           name: siteName,
           url: baseUrl,
+          inLanguage: lang,
         },
         {
           "@type": "Organization",
@@ -228,7 +249,7 @@ export default function SEO({
       )}
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content={ogType} />
-      <meta property="og:locale" content={locale} />
+      <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content={siteName} />
 
       <meta name="twitter:card" content="summary_large_image" />

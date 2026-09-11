@@ -234,6 +234,12 @@ export default function EventsContent() {
         type="event"
         startDate={events.start}
         endDate={events.end}
+        authorName={
+          events.authors?.[0]
+            ? getLangField(events.authors[0], "name", locale)
+            : undefined
+        }
+        authorSlug={events.authors?.[0]?.slug}
         location={place}
         translationSourceItem={events}
         translationField="title"
