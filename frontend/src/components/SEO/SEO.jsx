@@ -42,6 +42,9 @@ export default function SEO({
 
   const defaultImage = `${baseUrl}/og-default.jpg`;
 
+  const orgLogo = `${baseUrl}/logo.png`;
+  const orgId = `${baseUrl}/#organization`;
+
   const canonicalUrl = url || `${baseUrl}${pathname}`;
 
   const authorUrl = authorSlug
@@ -105,6 +108,7 @@ export default function SEO({
         : undefined,
       organizer: {
         "@type": "Organization",
+        "@id": orgId,
         name: siteName,
         url: baseUrl,
       },
@@ -144,12 +148,19 @@ export default function SEO({
         : [
             {
               "@type": "Organization",
+              "@id": orgId,
               name: siteName,
             },
           ],
       publisher: {
         "@type": "Organization",
+        "@id": orgId,
         name: siteName,
+        url: baseUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: orgLogo,
+        },
       },
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -184,8 +195,13 @@ export default function SEO({
         },
         {
           "@type": "Organization",
+          "@id": orgId,
           name: siteName,
           url: baseUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: orgLogo,
+          },
         },
       ],
     };
