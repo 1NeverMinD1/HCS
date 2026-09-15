@@ -1,7 +1,5 @@
-"use strict";
-
-module.exports = {
-  async generate(ctx) {
+export default {
+  async generate(ctx: any) {
     const { locale } = ctx.params;
 
     if (!["ru", "kk", "en"].includes(locale)) {
@@ -10,7 +8,7 @@ module.exports = {
 
     const xml = await strapi.service("api::rss.rss").generate(locale);
 
-    ctx.type = "application/rss+xml";
+    ctx.set("Content-Type", "application/rss+xml; charset=utf-8");
     ctx.body = xml;
   },
 };

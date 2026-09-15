@@ -1,0 +1,70 @@
+import { pingIndexNow } from "./utils/indexnow";
+import { ROUTE_SEGMENT } from "./utils/routeSegments";
+import { optimizeOgImage } from "./utils/og-image-optimizer";
+
+const BASE_URL = "https://zhkh24.kz";
+
+// primary + optional fallback поле обложки для каждого content-type
+const UID_TO_COVER_FIELDS: Record<string, { primary?: string; fallback?: string }> = {
+  "api::new.new": { primary: "desc_img" },
+  "api::article.article": { primary: "desc_img" },
+  "api::blog.blog": { primary: "back_img" },
+  "api::event.event": { primary: "cover_img", fallback: "desc_img" },
+  "api::q-and-a.q-and-a": {}, // своей обложки нет, только OG.og_image / SEO.seo_image
+};
+
+const UID_TO_ROUTE_KEY: Record<string, string> = {
+  "api::new.new": "new",
+  "api::article.article": "article",
+  "api::blog.blog": "blog",
+  "api::event.event": "event",
+  "api::q-and-a.q-and-a": "q-and-a",
+};
+
+function buildUrls(routeKey: string, entry: any) {
+  const segment = ROUTE_SEGMENT[routeKey];
+  if (!segment || !entry?.slug) return [];
+  const urls: string[] = [];
+  if (entry.title_ru) urls.push(`${BASE_URL}/ru/${segment}/${entry.slug}`);
+  if (entry.title_kk) urls.push(`${BASE_URL}/kk/${segment}/${entry.slug}`);
+  if (entry.title_en) urls.push(`${BASE_URL}/en/${segment}/${entry.slug}`);
+  return urls;
+}
+
+export default {
+  register({ strapi }: { strapi: any }) {
+    strapi.documents.use(async (context: any, next: any) => {
+      const result = await next();
+      const uid = context.uid;
+      const action = context.action;
+      if (!UID_TO_ROUTE_KEY[uid]) return result;
+      if (!["publish", "update"].includes(action)) return result;
+      try {
+        const entry = action === "publish" ? result?.entries?.[0] : result;
+        if (!entry) return result;
+        const documentId = result?.documentId || entry?.documentId;
+        const coverConfig = UID_TO_COVER_FIELDS[uid];
+        if (coverConfig && documentId) {
+          await optimizeOgImage(
+            strapi,
+            uid,
+            documentId,
+            coverConfig.primary,
+            coverConfig.fallback,
+          );
+        }
+        if (entry.publishedAt) {
+          const routeKey = UID_TO_ROUTE_KEY[uid];
+          const urls = buildUrls(routeKey, entry);
+          if (urls.length > 0) {
+            await pingIndexNow(urls);
+          }
+        }
+      } catch (err: any) {
+        strapi.log.error(`[DOC MIDDLEWARE] ${uid}: ошибка — ${err.message}`);
+      }
+      return result;
+    });
+  },
+  bootstrap() {},
+};

@@ -1,13 +1,8 @@
-// utils/indexnow.js
 const INDEXNOW_KEY = "e6e3b4be88df587f30acf3e8274fd98e";
 const HOST = "zhkh24.kz";
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
-/**
- * Отправляет один или несколько URL в IndexNow (Bing, Yandex и др.)
- * @param {string|string[]} urls
- */
-async function pingIndexNow(urls) {
+export async function pingIndexNow(urls: string | string[]) {
   const urlList = Array.isArray(urls)
     ? urls.filter(Boolean)
     : [urls].filter(Boolean);
@@ -35,9 +30,7 @@ async function pingIndexNow(urls) {
       const text = await response.text();
       console.error(`[IndexNow] Ошибка ${response.status}: ${text}`);
     }
-  } catch (err) {
+  } catch (err: any) {
     console.error("[IndexNow] Не удалось отправить запрос:", err.message);
   }
 }
-
-module.exports = { pingIndexNow };

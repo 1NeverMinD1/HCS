@@ -1,6 +1,5 @@
-"use strict";
-
 const BASE_URL = "https://zhkh24.kz";
+const API_URL = "https://api.zhkh24.kz";
 const LIMIT = 30;
 
 const CONTENT_TYPES = [
@@ -8,8 +7,8 @@ const CONTENT_TYPES = [
     uid: "api::new.new",
     route: "news",
     dateField: "publishDate",
-    titleField: (locale) => `title_${locale}`,
-    descriptionField: (locale) => `desc_${locale}`,
+    titleField: (locale: string) => `title_${locale}`,
+    descriptionField: (locale: string) => `desc_${locale}`,
     imageField: "desc_img",
     categoryField: "header_cats",
   },
@@ -17,8 +16,8 @@ const CONTENT_TYPES = [
     uid: "api::article.article",
     route: "articles",
     dateField: "publishDate",
-    titleField: (locale) => `title_${locale}`,
-    descriptionField: (locale) => `desc_${locale}`,
+    titleField: (locale: string) => `title_${locale}`,
+    descriptionField: (locale: string) => `desc_${locale}`,
     imageField: "desc_img",
     categoryField: "categories",
   },
@@ -26,8 +25,8 @@ const CONTENT_TYPES = [
     uid: "api::blog.blog",
     route: "blogs",
     dateField: "publishDate",
-    titleField: (locale) => `title_${locale}`,
-    descriptionField: (locale) => `desc_${locale}`,
+    titleField: (locale: string) => `title_${locale}`,
+    descriptionField: (locale: string) => `desc_${locale}`,
     imageField: "back_img",
     categoryField: "categories",
   },
@@ -35,17 +34,17 @@ const CONTENT_TYPES = [
     uid: "api::event.event",
     route: "events",
     dateField: "createdAt",
-    titleField: (locale) => `title_${locale}`,
-    descriptionField: (locale) => `desc_${locale}`,
-    imageField: "desc_img",
-    fallbackImageField: "cover_img",
+    titleField: (locale: string) => `title_${locale}`,
+    descriptionField: (locale: string) => `desc_${locale}`,
+    imageField: "cover_img",
+    fallbackImageField: "desc_img",
     categoryField: "categories",
   },
   {
     uid: "api::q-and-a.q-and-a",
     route: "qna",
     dateField: "publishDate",
-    titleField: (locale) => `title_${locale}`,
+    titleField: (locale: string) => `title_${locale}`,
     descriptionField: null,
     imageField: null,
     categoryField: "categories",
@@ -53,7 +52,7 @@ const CONTENT_TYPES = [
   },
 ];
 
-function escapeXml(value) {
+function escapeXml(value: unknown): string {
   if (value === null || value === undefined) {
     return "";
   }
@@ -66,23 +65,38 @@ function escapeXml(value) {
     .replace(/'/g, "&apos;");
 }
 
-function getMediaUrl(media) {
+function getMediaUrl(media: any): string | null {
   if (!media?.url) {
     return null;
   }
 
-  if (media.url.startsWith("http://") || media.url.startsWith("https://")) {
+  if (
+    media.url.startsWith("http://") ||
+    media.url.startsWith("https://")
+  ) {
     return media.url;
   }
 
   return `${BASE_URL}${media.url}`;
 }
 
-function getMediaType(media) {
+function getMediaType(media: any): string {
   return media?.mime || "image/jpeg";
 }
 
-function getCategory(item, config, locale) {
+function getMediaLength(media: any): number {
+  if (!media?.size) {
+    return 0;
+  }
+
+  return Math.round(Number(media.size) * 1024);
+}
+
+function getCategory(
+  item: any,
+  config: any,
+  locale: string,
+): string | null {
   const categories = item[config.categoryField];
 
   if (!Array.isArray(categories) || categories.length === 0) {
@@ -94,7 +108,7 @@ function getCategory(item, config, locale) {
   return category?.[`name_${locale}`] || null;
 }
 
-function getImage(item, config) {
+function getImage(item: any, config: any): any | null {
   if (config.imageField && item[config.imageField]) {
     return item[config.imageField];
   }
@@ -114,12 +128,21 @@ function getImage(item, config) {
   return null;
 }
 
-function getItemUrl(config, locale, slug) {
+function getItemUrl(
+  config: any,
+  locale: string,
+  slug: string,
+): string {
   return `${BASE_URL}/${locale}/${config.route}/${encodeURIComponent(slug)}`;
 }
 
-function buildItem(item, config, locale) {
+function buildItem(
+  item: any,
+  config: any,
+  locale: string,
+): string | null {
   const title = item[config.titleField(locale)];
+
   const description = config.descriptionField
     ? item[config.descriptionField(locale)]
     : null;
@@ -162,6 +185,7 @@ function buildItem(item, config, locale) {
       <enclosure
         url="${escapeXml(imageUrl)}"
         type="${escapeXml(getMediaType(image))}"
+        length="${getMediaLength(image)}"
       />
       `;
     }
@@ -174,18 +198,25 @@ function buildItem(item, config, locale) {
   return xml;
 }
 
-module.exports = {
-  async generate(locale) {
-    const allItems = [];
+export default {
+  async generate(locale: string): Promise<string> {
+    const allItems: Array<{
+      date: number;
+      xml: string;
+    }> = [];
 
     for (const config of CONTENT_TYPES) {
-      const fields = [config.titleField(locale), "slug", config.dateField];
+      const fields = [
+        config.titleField(locale),
+        "slug",
+        config.dateField,
+      ];
 
       if (config.descriptionField) {
         fields.push(config.descriptionField(locale));
       }
 
-      const populate = {};
+      const populate: Record<string, any> = {};
 
       if (config.imageField) {
         populate[config.imageField] = true;
@@ -215,11 +246,13 @@ module.exports = {
         };
       }
 
-      const items = await strapi.documents(config.uid).findMany({
+      const items = await (
+        strapi.documents(config.uid as any) as any
+      ).findMany({
         status: "published",
-        fields,
+        fields: fields as any,
         populate,
-        sort: [`${config.dateField}:desc`],
+        sort: [`${config.dateField}:desc`] as any,
         limit: LIMIT,
       });
 
@@ -244,7 +277,10 @@ module.exports = {
       .map((item) => item.xml)
       .join("\n");
 
-    const channelData = {
+    const channelData: Record<
+      string,
+      { title: string; description: string }
+    > = {
       ru: {
         title: "ЖКХ24 — последние публикации",
         description: "Последние публикации портала ЖКХ24",
@@ -260,18 +296,25 @@ module.exports = {
     };
 
     const data = channelData[locale];
-
     const siteUrl = `${BASE_URL}/${locale}`;
+    const feedUrl = `${API_URL}/api/rss/${locale}`;
 
     return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(data.title)}</title>
     <link>${escapeXml(siteUrl)}</link>
     <description>${escapeXml(data.description)}</description>
-    <language>${locale}</language>
+    <language>${escapeXml(locale)}</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-
+    <atom:link
+      href="${escapeXml(feedUrl)}"
+      rel="self"
+      type="application/rss+xml"
+    />
     ${itemsXml}
   </channel>
 </rss>`;

@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://zhkh24.kz/sitemap.xml
+Sitemap: https://zhkh24.kz/news-sitemap.xml
 
 # AI / GEO crawlers
 User-agent: GPTBot
