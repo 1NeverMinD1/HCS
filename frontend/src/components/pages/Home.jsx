@@ -79,11 +79,11 @@ export default function Home() {
 
       <Events />
 
-      {!isNewsLoading && (
+      {/* {!isNewsLoading && (
         <div className="wrapper">
           <Email />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

@@ -191,7 +191,7 @@ export default function Header() {
             ))}
           </div>
 
-          <button
+          {/* <button
             className="subscribe"
             onClick={() =>
               document
@@ -200,7 +200,7 @@ export default function Header() {
             }
           >
             {t("subscribe")}
-          </button>
+          </button> */}
         </div>
 
         {/* Кнопка-бургер (видна только на мобилке) */}
