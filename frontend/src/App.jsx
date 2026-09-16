@@ -7,7 +7,9 @@ import { useYandexMetrika } from "./utils/useYandexMetrika.js";
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
 
-const Home = lazy(() => import("./components/pages/Home.jsx"));
+import Home from "./components/pages/Home.jsx";
+
+// const Home = lazy(() => import("./components/pages/Home.jsx"));
 const NewsPage = lazy(() => import("./components/pages/news/NewsPage.jsx"));
 const ArtsPage = lazy(() => import("./components/pages/articles/ArtsPage.jsx"));
 const BlogsPage = lazy(() => import("./components/pages/blogs/BlogsPage.jsx"));
