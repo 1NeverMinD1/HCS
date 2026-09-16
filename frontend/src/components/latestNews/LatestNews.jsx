@@ -5,13 +5,17 @@ import { useTranslation } from "../../utils/useTranslation.js";
 // Styles
 import "./_LatestNews.scss";
 
-export default function LatestNews({ news }) {
+export default function LatestNews({ news, isLoading }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
 
   return (
     <div className="latest">
-      <LatestNewsBlocks news={news} />
+      {isLoading ? (
+        <div className="latest__blocks-skeleton" />
+      ) : (
+        <LatestNewsBlocks news={news} />
+      )}
 
       <div className="latest__link">
         <Link to={`/${locale}/news/`} className="view_all">

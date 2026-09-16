@@ -79,6 +79,11 @@
   }
 }
 
+.trendings__list-skeleton {
+  min-height: 908px;
+  background: #f0f0f0;
+}
+
 @media (max-width: 430px) {
   .trendings {
     margin-top: 0px;

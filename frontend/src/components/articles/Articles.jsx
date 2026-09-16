@@ -26,8 +26,6 @@ export default function Articles({ featuredTag, fullWidth }) {
     fetchData();
   }, []);
 
-  if (isLoading) return null;
-
   return (
     <div className={`articles ${fullWidth ? "articles--full" : ""}`}>
       <div className="articles__header">
@@ -40,7 +38,11 @@ export default function Articles({ featuredTag, fullWidth }) {
         </Link>
       </div>
 
-      <ArticlesBlocks articles={articles} />
+      {isLoading ? (
+        <div className="articles__blocks-skeleton" />
+      ) : (
+        <ArticlesBlocks articles={articles} />
+      )}
     </div>
   );
 }

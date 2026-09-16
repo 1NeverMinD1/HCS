@@ -25,8 +25,6 @@ export default function Blogs() {
     fetchData();
   }, []);
 
-  if (isLoading) return null;
-
   return (
     <div className="blogs">
       <div className="blogs__header">
@@ -39,7 +37,11 @@ export default function Blogs() {
         </Link>
       </div>
 
-      <BlogsBlocks blogs={blogs} />
+      {isLoading ? (
+        <div className="blogs__blocks-skeleton" />
+      ) : (
+        <BlogsBlocks blogs={blogs} />
+      )}
     </div>
   );
 }

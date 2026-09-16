@@ -23,13 +23,14 @@
         background: variables.$hover-color;
         transform: scale(1.05);
       }
-      // svg {
-      //   fill: white;
-      //   width: 15px;
-      //   height: 15px;
-      // }
     }
   }
+}
+
+.latest__blocks-skeleton {
+  min-height: 450px;
+  background: #f0f0f0;
+  border-radius: 5px;
 }
 
 @media (max-width: 430px) {
@@ -44,5 +45,8 @@
   }
   .view_all {
     font-size: variables.$mobile-text-font-size;
+  }
+  .latest__blocks-skeleton {
+    min-height: 300px;
   }
 }

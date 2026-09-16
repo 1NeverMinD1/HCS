@@ -23,6 +23,11 @@
   }
 }
 
+.events--skeleton {
+  min-height: 830px;
+  background: #1a1a1a;
+}
+
 @media (max-width: 430px) {
   .events {
     .events__header {

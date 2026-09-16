@@ -64,7 +64,7 @@ export default function Events() {
     fetchData();
   }, []);
 
-  if (isLoading) return null;
+  if (isLoading) return <div className="events events--skeleton wrapper" />;
   if (!events || events.length === 0) return null;
 
   return (

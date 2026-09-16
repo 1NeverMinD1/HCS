@@ -64,9 +64,9 @@ export default function Home() {
               />
               <Ad hasAd={hasAd} />
             </div>
-            {!isNewsLoading && <LatestNews news={mainNews} />}
+            <LatestNews news={mainNews} isLoading={isNewsLoading} />
           </div>
-          {!isNewsLoading && <Trendings news={trendingNews} />}
+          <Trendings news={trendingNews} isLoading={isNewsLoading} />
         </div>
         <div
           className={`home__arts-block ${!hasEvents ? "home__arts-block--no-events" : ""}`}
