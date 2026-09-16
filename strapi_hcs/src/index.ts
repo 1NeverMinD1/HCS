@@ -3,13 +3,90 @@ import { pingIndexNow } from "./utils/indexnow";
 import { ROUTE_SEGMENT } from "./utils/routeSegments";
 import { optimizeOgImage } from "./utils/og-image-optimizer";
 import { sendToTelegramChannel } from "./utils/telegram";
+import sharp from "sharp";
+import fs from "fs";
 
 const BASE_URL = "https://zhkh24.kz";
 const MEDIA_BASE_URL = "https://api.zhkh24.kz";
 const PROJECT_ROOT = "/var/www/project";
 const DEBOUNCE_MS = 15000;
 
-const UID_TO_COVER_FIELDS: Record<string, { primary?: string; fallback?: string }> = {
+async function convertFileEntryToWebp(strapi: any, file: any) {
+  if (!file || !["image/png", "image/jpeg"].includes(file.mime)) return;
+
+  const uploadDir = strapi.dirs.static.public + "/uploads";
+
+  async function convertOne(hash: string, ext: string) {
+    const inputPath = `${uploadDir}/${hash}${ext}`;
+    if (!fs.existsSync(inputPath)) return null;
+
+    const newHash = hash;
+    const outputPath = `${uploadDir}/${newHash}.webp`;
+
+    const info = await sharp(inputPath)
+      .webp({ quality: 82 })
+      .toFile(outputPath);
+    fs.unlinkSync(inputPath);
+
+    return {
+      hash: newHash,
+      ext: ".webp",
+      mime: "image/webp",
+      url: `/uploads/${newHash}.webp`,
+      size: Math.round((info.size / 1024) * 100) / 100,
+      sizeInBytes: info.size,
+      width: info.width,
+      height: info.height,
+    };
+  }
+
+  const mainResult = await convertOne(file.hash, file.ext);
+  if (!mainResult) return;
+
+  const newFormats: Record<string, any> = {};
+  if (file.formats) {
+    for (const key of Object.keys(file.formats)) {
+      const fmt = file.formats[key];
+      const converted = await convertOne(fmt.hash, fmt.ext);
+      if (converted) {
+        newFormats[key] = {
+          name: fmt.name.replace(/\.(png|jpe?g)$/i, ".webp"),
+          hash: converted.hash,
+          ext: converted.ext,
+          mime: converted.mime,
+          path: fmt.path,
+          width: converted.width,
+          height: converted.height,
+          size: converted.size,
+          sizeInBytes: converted.sizeInBytes,
+          url: converted.url,
+        };
+      }
+    }
+  }
+
+  await strapi.db.query("plugin::upload.file").update({
+    where: { id: file.id },
+    data: {
+      name: file.name.replace(/\.(png|jpe?g)$/i, ".webp"),
+      hash: mainResult.hash,
+      ext: mainResult.ext,
+      mime: mainResult.mime,
+      url: mainResult.url,
+      size: mainResult.size,
+      formats: newFormats,
+    },
+  });
+
+  strapi.log.info(
+    `[webp-convert] Файл #${file.id} (${file.name}) сконвертирован в WebP`,
+  );
+}
+
+const UID_TO_COVER_FIELDS: Record<
+  string,
+  { primary?: string; fallback?: string }
+> = {
   "api::new.new": { primary: "desc_img" },
   "api::article.article": { primary: "desc_img" },
   "api::blog.blog": { primary: "back_img" },
@@ -71,7 +148,7 @@ function runScript(scriptRelativePath: string, label: string, strapi: any) {
         return;
       }
       strapi.log.info(`[${label}] обновлён: ${stdout.trim()}`);
-    }
+    },
   );
 }
 
@@ -91,6 +168,14 @@ function scheduleNewsSitemapRegeneration(strapi: any) {
 
 export default {
   register({ strapi }: { strapi: any }) {
+    strapi.db.lifecycles.subscribe({
+      models: ["plugin::upload.file"],
+
+      async afterCreate(event) {
+        await convertFileEntryToWebp(strapi, event.result);
+      },
+    });
+
     strapi.documents.use(async (context: any, next: any) => {
       const result = await next();
       const uid = context.uid;
@@ -121,7 +206,9 @@ export default {
           );
         }
         if (entry.publishedAt) {
-        strapi.log.warn(`[DEBUG entry] ${uid}: ${JSON.stringify({ send_to_tg: entry.send_to_tg, tg_sent: entry.tg_sent, keys: Object.keys(entry) })}`);
+          strapi.log.warn(
+            `[DEBUG entry] ${uid}: ${JSON.stringify({ send_to_tg: entry.send_to_tg, tg_sent: entry.tg_sent, keys: Object.keys(entry) })}`,
+          );
           const routeKey = UID_TO_ROUTE_KEY[uid];
           const urls = buildUrls(routeKey, entry);
           if (urls.length > 0) {
@@ -148,7 +235,9 @@ export default {
                   ? media.url
                   : `${MEDIA_BASE_URL}${media.url}`
                 : undefined;
-              strapi.log.warn(`[DEBUG image] media.url=${media?.url} imageUrl=${imageUrl}`);
+              strapi.log.warn(
+                `[DEBUG image] media.url=${media?.url} imageUrl=${imageUrl}`,
+              );
               const articleUrl = buildPrimaryUrl(routeKey, entry);
 
               await sendToTelegramChannel({
@@ -163,7 +252,9 @@ export default {
                 data: { tg_sent: true },
               });
             } catch (tgErr: any) {
-              strapi.log.error(`[TELEGRAM] ${uid}: ошибка отправки — ${tgErr.message}`);
+              strapi.log.error(
+                `[TELEGRAM] ${uid}: ошибка отправки — ${tgErr.message}`,
+              );
             }
           }
         }
