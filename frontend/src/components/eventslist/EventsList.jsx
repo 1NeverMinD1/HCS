@@ -59,7 +59,11 @@ export default function EventsList({ onLoadEvents }) {
     fetchData();
   }, []);
 
-  if (isLoading || events.length === 0) return null;
+  if (isLoading)
+    return (
+      <div className="home__arts-eventlist home__arts-eventlist--skeleton" />
+    );
+  if (events.length === 0) return null;
 
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("ru-RU", {

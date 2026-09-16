@@ -20,6 +20,7 @@
     overflow-y: auto;
     padding-bottom: 20px;
     max-height: calc(100vh - 180px);
+    min-height: calc(100vh - 180px);
   }
   .sidemenu__item {
     text-decoration: none;

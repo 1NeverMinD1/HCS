@@ -55,7 +55,9 @@ export default function Hero({ onLoadFeatured }) {
     fetchFeatured();
   }, []);
 
-  if (!featured) return null;
+  if (!featured) {
+    return <div className="hero hero--skeleton" />;
+  }
 
   const isBlog = featured.__type === "blog";
   const isArticle = featured.__type === "article";
