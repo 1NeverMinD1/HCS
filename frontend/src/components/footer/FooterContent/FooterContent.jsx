@@ -12,7 +12,13 @@ export default function FooterContent() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="logo"
         >
-          <img src={logo} alt="ЖКХ24" className="logo_img" />
+          <img
+            src={logo}
+            alt="ЖКХ24"
+            className="logo_img"
+            width="452"
+            height="103"
+          />
         </button>
 
         <p>

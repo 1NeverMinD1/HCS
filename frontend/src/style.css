@@ -460,6 +460,7 @@
 .footer__content .footer__intro button .logo_img {
   width: auto;
   height: 50px;
+  aspect-ratio: 452/103;
 }
 .footer__content .footer__intro p {
   width: 100%;
