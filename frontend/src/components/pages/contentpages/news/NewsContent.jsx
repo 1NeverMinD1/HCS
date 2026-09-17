@@ -537,7 +537,16 @@ export default function NewsContent() {
   }, [activeItem, locale]);
 
   if (newsList.length === 0)
-    return <h2 className="loading wrapper">Загрузка...</h2>;
+    return (
+      <div className="newscontent__layout">
+        <div className="newscontent__layout-main">
+          <div className="newscontent newscontent--skeleton" />
+        </div>
+        <div className="newscontent__layout-sidemenu">
+          <div className="sidemenu sidemenu--skeleton" />
+        </div>
+      </div>
+    );
 
   const activeItemBreadcrumbs = activeItem
     ? [

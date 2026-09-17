@@ -8,6 +8,11 @@
   margin-inline: 200px;
   .newscontent__layout-main {
     width: 70%;
+    .newscontent--skeleton {
+      min-height: 900px;
+      background: #f0f0f0;
+      border-radius: 20px;
+    }
     .newscontent {
       margin-top: 20px;
       padding: 20px;
@@ -112,6 +117,11 @@
     max-height: calc(100vh - 80px);
     margin-bottom: 60px;
     padding-bottom: 20px;
+    .sidemenu--skeleton {
+      min-height: calc(100vh - 180px);
+      background: #f0f0f0;
+      border-radius: 20px;
+    }
   }
 }
 
@@ -122,6 +132,9 @@
     margin-inline: 10px;
     .newscontent__layout-main {
       width: 100%;
+      .newscontent--skeleton {
+        min-height: 600px;
+      }
       .newscontent {
         margin-top: 20px;
         padding: 10px;
