@@ -26,13 +26,13 @@ export default function Hero({ onLoadFeatured }) {
     async function fetchFeatured() {
       const [newsRes, blogsRes, articlesRes] = await Promise.all([
         fetch(
-          `https://api.zhkh24.kz/api/news?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
+          `https://api.zhkh24.kz/api/news?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
         ).then((res) => res.json()),
         fetch(
-          `https://api.zhkh24.kz/api/blogs?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[back_img][fields][0]=url&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
+          `https://api.zhkh24.kz/api/blogs?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
         ).then((res) => res.json()),
         fetch(
-          `https://api.zhkh24.kz/api/articles?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
+          `https://api.zhkh24.kz/api/articles?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
         ).then((res) => res.json()),
       ]);
 
@@ -62,9 +62,14 @@ export default function Hero({ onLoadFeatured }) {
   const isBlog = featured.__type === "blog";
   const isArticle = featured.__type === "article";
 
+  const descImg = isBlog ? featured?.back_img : featured?.desc_img;
+
   const imageUrl =
-    getImageUrl(isBlog ? featured?.back_img?.url : featured?.desc_img?.url) ||
-    "";
+    getImageUrl(
+      descImg?.formats?.medium?.url ||
+        descImg?.formats?.small?.url ||
+        descImg?.url,
+    ) || "";
 
   const category = isBlog
     ? getLangField(featured?.categories?.[0], "name", locale)
@@ -83,10 +88,9 @@ export default function Hero({ onLoadFeatured }) {
 
   return (
     <Link to={link} className="hero">
-      <div
-        className="hero__bg"
-        style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
-      />
+      <div className="hero__bg">
+        {imageUrl && <img src={imageUrl} alt={title} fetchpriority="high" />}
+      </div>
       <p className="cat">{category}</p>
 
       <h1 className="hero__title">{title}</h1>

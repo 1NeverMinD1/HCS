@@ -6,9 +6,11 @@ import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import "./_BlogsBlock.scss";
 
 export default function BlogsBlock({ blog }) {
-  const imageUrl = getImageUrl(blog?.authors?.[0]?.profile_img?.url || "");
+  const profileImg = blog?.authors?.[0]?.profile_img;
+  const imageUrl = getImageUrl(
+    profileImg?.formats?.thumbnail?.url || profileImg?.url || "",
+  );
   const { locale } = useLocale();
-
   const title = getLangField(blog, "title", locale);
   const desc = getLangField(blog, "desc", locale);
   const author = getLangField(blog?.authors?.[0], "name", locale);
