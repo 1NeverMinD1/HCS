@@ -142,6 +142,8 @@ export const translations = {
     seo_static_title_home: "Home",
     seo_static_desc_home:
       "Actual news, articles, blogs and events on the portal ЖКХ24",
+    seo_static_title_news: "News",
+    seo_static_desc_news: "Actual news on the portal ЖКХ24",
     seo_static_title_arts: "Analytical articles",
     seo_static_desc_arts:
       "Deep research, expert insights, and key topic reviews from our authors",
