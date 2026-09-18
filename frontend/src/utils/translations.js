@@ -131,7 +131,7 @@ export const translations = {
 
     footerDescription:
       "Өзекті жаңалықтары, терең талдамалары және авторлық материалдары бар заманауи жаңалықтар порталы.",
-    footerSectionsTitle: "БӦЛІМДЕР",
+    footerSectionsTitle: "БОЛІМДЕР",
     footerQandA: "Q&A",
     footerPublicationTitle: "БАСЫЛЫМ",
     footerAbout: "Редакция туралы",
