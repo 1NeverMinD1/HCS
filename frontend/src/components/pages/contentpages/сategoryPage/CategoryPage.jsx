@@ -51,11 +51,25 @@ export default function CategoryPage() {
     events.items.length > 0 ||
     qnas.items.length > 0;
 
+  const descriptionTemplates = {
+    ru: (name) =>
+      `Новости, статьи и материалы по теме «${name}» на портале ЖКХ24 — актуальная информация о жилищно-коммунальном хозяйстве Казахстана.`,
+    kk: (name) =>
+      `«${name}» тақырыбы бойынша жаңалықтар мен материалдар ЖКХ24 порталында.`,
+    en: (name) =>
+      `News and articles about "${name}" on the ZHKH24 housing and utilities portal.`,
+  };
+
+  const lang = locale.split("-")[0];
+  const pageDescription = (
+    descriptionTemplates[lang] || descriptionTemplates.ru
+  )(pageCategoryName);
+
   return (
     <div className="categorypage wrapper">
       <SEO
         title={pageCategoryName}
-        description={pageCategoryName}
+        description={pageDescription}
         breadcrumbs={breadcrumbItems}
       />
 

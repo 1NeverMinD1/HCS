@@ -256,6 +256,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
               day: "numeric",
               month: "long",
               year: "numeric",
+              timeZone: "Asia/Almaty",
             })}
           </p>
         </div>

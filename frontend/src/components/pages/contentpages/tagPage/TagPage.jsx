@@ -56,11 +56,25 @@ export default function TagPage() {
     events.items.length > 0 ||
     qnas.items.length > 0;
 
+  const descriptionTemplates = {
+    ru: (name) =>
+      `Новости, статьи и материалы с тегом «${name}» на портале ЖКХ24 — актуальная информация о жилищно-коммунальном хозяйстве Казахстана.`,
+    kk: (name) =>
+      `«${name}» тегі бойынша жаңалықтар мен материалдар ЖКХ24 порталында.`,
+    en: (name) =>
+      `News and articles tagged "${name}" on the ZHKH24 housing and utilities portal.`,
+  };
+
+  const lang = locale.split("-")[0];
+  const pageDescription = (
+    descriptionTemplates[lang] || descriptionTemplates.ru
+  )(pageTagName);
+
   return (
     <div className="tagpage wrapper">
       <SEO
         title={pageTagName}
-        description={pageTagName}
+        description={pageDescription}
         breadcrumbs={breadcrumbItems}
       />
 

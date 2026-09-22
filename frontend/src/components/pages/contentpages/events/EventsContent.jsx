@@ -210,6 +210,7 @@ export default function EventsContent() {
       day: "numeric",
       month: "long",
       year: "numeric",
+      timeZone: "Asia/Almaty",
     });
 
   const isSameDay = (a, b) =>

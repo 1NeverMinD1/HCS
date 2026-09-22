@@ -51,10 +51,18 @@ export const formatLocalizedDate = (dateStr, locale) => {
 
   if (Number.isNaN(date.getTime())) return "";
 
-  const day = date.getDate();
-  const month =
-    monthNames[locale]?.[date.getMonth()] ?? monthNames.ru[date.getMonth()];
-  const year = date.getFullYear();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Almaty",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  }).formatToParts(date);
+
+  const day = Number(parts.find((p) => p.type === "day").value);
+  const monthIndex = Number(parts.find((p) => p.type === "month").value) - 1;
+  const year = Number(parts.find((p) => p.type === "year").value);
+
+  const month = monthNames[locale]?.[monthIndex] ?? monthNames.ru[monthIndex];
 
   return `${day} ${month} ${year}`;
 };
