@@ -55,7 +55,7 @@ async function generateSitemap() {
         const updatedAt =
           item.updatedAt || item.attributes?.updatedAt || new Date().toISOString();
         if (!slug) continue;
-        const lastmod = updatedAt.split("T")[0];
+        const lastmod = toAlmatyDateString(updatedAt);
         urls.push(
           urlEntry(`${SITE_URL}/ru/${collection.path}/${slug}`, lastmod)
         );
