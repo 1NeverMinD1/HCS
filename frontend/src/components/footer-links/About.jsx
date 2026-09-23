@@ -230,13 +230,13 @@ export default function About() {
       <SEO
         seo={page.AboutContent?.SEO}
         og={page.AboutContent?.OG}
-        title="О редакции"
+        title={t("footerAbout")}
         image={getImageUrl(
           page.AboutContent?.OG?.og_image?.url ||
             page.AboutContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>О редакции</h1>
+      <h1>{t("footerAbout")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

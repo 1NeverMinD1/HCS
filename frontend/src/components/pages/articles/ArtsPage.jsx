@@ -89,7 +89,11 @@ export default function ArtsPage() {
   }, [hasMore, loading]);
 
   if (!articles.length) {
-    return <h2 className="empty wrapper">Статей нет</h2>;
+    return (
+      <h2 className="empty wrapper">
+        {loading || hasMore ? t("loading") : t("noContent")}
+      </h2>
+    );
   }
 
   const breadcrumbItems = [

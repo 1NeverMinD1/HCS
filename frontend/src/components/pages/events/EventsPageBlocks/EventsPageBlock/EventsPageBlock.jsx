@@ -40,18 +40,24 @@ export default function EventsPageBlock({ event }) {
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
-      <img src={imgUrl} alt="back_img" />
+      <img src={imgUrl} alt={title || ""} />
       <div className="eventspage__content">
         {isUpcoming && (
-          <div className="event-status event-status--upcoming">Предстоит</div>
+          <div className="event-status event-status--upcoming">
+            {t("statusUpcoming")}
+          </div>
         )}
 
         {isRunning && (
-          <div className="event-status event-status--running">Идет сейчас</div>
+          <div className="event-status event-status--running">
+            {t("statusRunning")}
+          </div>
         )}
 
         {isFinished && (
-          <div className="event-status event-status--finished">Завершено</div>
+          <div className="event-status event-status--finished">
+            {t("statusFinished")}
+          </div>
         )}
         <p className="eventspage__item-cat">{category}</p>
         <h3 className="eventspage__item-title">{title}</h3>
@@ -68,7 +74,7 @@ export default function EventsPageBlock({ event }) {
                 : ""}
               {event.start_time
                 ? `, ${event.start_time.slice(0, 5)}`
-                : ", время не указано"}
+                : `, ${t("timeNotSpecified")}`}
             </p>
           </div>{" "}
           <div className="place">
@@ -100,11 +106,13 @@ export default function EventsPageBlock({ event }) {
           </div>
         </div>
         <div className="eventspage__item-more">
-          <button className="eventspage__item-button">Подробнее</button>
+          <button className="eventspage__item-button">{t("details")}</button>
           {event.price > 0 ? (
-            <p className="price">{event.price} тг.</p>
+            <p className="price">
+              {event.price} {t("currency")}
+            </p>
           ) : (
-            <p className="price">Бесплатно</p>
+            <p className="price">{t("free")}</p>
           )}
         </div>
       </div>

@@ -70,7 +70,7 @@ function extractShortAnswer(contentBlocks, locale) {
   );
 }
 
-function renderComponent(component, index, locale) {
+function renderComponent(component, index, locale, t) {
   if (component.__component === "qand-a.short-answer") {
     const blocks =
       component[`shortanswer_content_${locale}`] ||
@@ -79,7 +79,7 @@ function renderComponent(component, index, locale) {
 
     return (
       <div key={index} className="qnascontent__main-short-block">
-        <p>Краткий ответ</p>
+        <p>{t("shortAnswer")}</p>
         {blocks.map((b, i) => (
           <blockquote key={i} className="short_answer">
             {getPlainText(b.children)}
@@ -97,7 +97,7 @@ function renderComponent(component, index, locale) {
       <div key={index} className="qnascontent__main-zakon-block">
         <div className="qnascontent__main-zakon-block-intro">
           {ZAKON_ICON}
-          <p className="zakon_p">НОРМА</p>
+          <p className="zakon_p">{t("lawNorm")}</p>
         </div>
         {blocks.map((b, i) => (
           <blockquote key={i} className="zakon">
@@ -118,7 +118,7 @@ function renderComponent(component, index, locale) {
       <div key={index} className="qnascontent__main-practice-wrap">
         <div className="qnascontent__main-practice-block">
           {PRACTICE_ICON}
-          <p className="practice_p">Как на практике</p>
+          <p className="practice_p">{t("inPractice")}</p>
         </div>
         <ul className="qnascontent__main-practice">
           {blocks.map((b, i) => (
@@ -194,7 +194,7 @@ export default function QnasContent() {
 
         <div className="qnascontent__main-text">
           {content.map((component, index) =>
-            renderComponent(component, index, locale),
+            renderComponent(component, index, locale, t),
           )}
         </div>
         <div className="qnascontent__tags">

@@ -101,7 +101,11 @@ export default function BlogsPage() {
   }, [hasMore, loading]);
 
   if (!blogs.length) {
-    return <h2 className="empty wrapper">Блогов нет</h2>;
+    return (
+      <h2 className="empty wrapper">
+        {loading || hasMore ? t("loading") : t("noContent")}
+      </h2>
+    );
   }
 
   const breadcrumbItems = [

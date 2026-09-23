@@ -207,13 +207,13 @@ export default function Imprint() {
       <SEO
         seo={page.ImprintContent?.SEO}
         og={page.ImprintContent?.OG}
-        title="Выходные данные"
+        title={t("footerImprint")}
         image={getImageUrl(
           page.ImprintContent?.OG?.og_image?.url ||
             page.ImprintContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Выходные данные</h1>
+      <h1>{t("footerImprint")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

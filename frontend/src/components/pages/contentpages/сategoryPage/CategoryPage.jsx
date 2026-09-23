@@ -57,7 +57,7 @@ export default function CategoryPage() {
     kk: (name) =>
       `«${name}» тақырыбы бойынша жаңалықтар мен материалдар ЖКХ24 порталында.`,
     en: (name) =>
-      `News and articles about "${name}" on the ZHKH24 housing and utilities portal.`,
+      `News and articles about "${name}" on the ZhKH24 housing and utilities portal.`,
   };
 
   const lang = locale.split("-")[0];
@@ -117,7 +117,7 @@ export default function CategoryPage() {
       />
 
       <ScrollBlock
-        title={t("qanda") || "Вопросы и ответы"}
+        title={t("qandasIntro") || "Вопросы и ответы"}
         items={qnas.items}
         hasMore={qnas.hasMore}
         loading={qnas.loading}

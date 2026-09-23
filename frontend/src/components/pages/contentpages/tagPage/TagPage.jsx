@@ -62,7 +62,7 @@ export default function TagPage() {
     kk: (name) =>
       `«${name}» тегі бойынша жаңалықтар мен материалдар ЖКХ24 порталында.`,
     en: (name) =>
-      `News and articles tagged "${name}" on the ZHKH24 housing and utilities portal.`,
+      `News and articles tagged "${name}" on the ZhKH24 housing and utilities portal.`,
   };
 
   const lang = locale.split("-")[0];
@@ -131,7 +131,7 @@ export default function TagPage() {
       />
 
       <ScrollBlock
-        title={t("qanda") || "Вопросы и ответы"}
+        title={t("qandasIntro") || "Вопросы и ответы"}
         items={qnas.items}
         hasMore={qnas.hasMore}
         loading={qnas.loading}

@@ -188,13 +188,13 @@ export default function Privacy() {
       <SEO
         seo={page.PrivacyContent?.SEO}
         og={page.PrivacyContent?.OG}
-        title="Политика конфиденциальности"
+        title={t("footerPrivacy")}
         image={getImageUrl(
           page.PrivacyContent?.OG?.og_image?.url ||
             page.PrivacyContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Политика конфиденциальности</h1>
+      <h1>{t("footerPrivacy")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

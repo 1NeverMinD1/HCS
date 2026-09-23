@@ -213,7 +213,7 @@ export default function Header() {
         <button
           className={`burger ${isMobileMenuOpen ? "burger--active" : ""}`}
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+          aria-label={isMobileMenuOpen ? t("closeMenu") : t("openMenu")}
           aria-expanded={isMobileMenuOpen}
         >
           <span></span>
@@ -240,7 +240,7 @@ export default function Header() {
               <button
                 className={`mobile-menu__caret ${isMobileCatsOpen ? "mobile-menu__caret--open" : ""}`}
                 onClick={() => setIsMobileCatsOpen((prev) => !prev)}
-                aria-label="Показать категории"
+                aria-label={t("showCategories")}
               >
                 <svg
                   width="12"

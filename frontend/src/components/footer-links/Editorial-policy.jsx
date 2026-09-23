@@ -212,13 +212,13 @@ export default function EditorialPolicy() {
       <SEO
         seo={page.EditorialPolicyContent?.SEO}
         og={page.EditorialPolicyContent?.OG}
-        title="Редакционная политика"
+        title={t("footerEditorialPolicy")}
         image={getImageUrl(
           page.EditorialPolicyContent?.OG?.og_image?.url ||
             page.EditorialPolicyContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Редакционная политика</h1>
+      <h1>{t("footerEditorialPolicy")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

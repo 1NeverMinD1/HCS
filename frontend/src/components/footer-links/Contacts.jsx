@@ -266,13 +266,13 @@ export default function Contacts() {
       <SEO
         seo={page.ContactsContent?.SEO}
         og={page.ContactsContent?.OG}
-        title="Контакты"
+        title={t("footerContacts")}
         image={getImageUrl(
           page.ContactsContent?.OG?.og_image?.url ||
             page.ContactsContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Контакты</h1>
+      <h1>{t("footerContacts")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

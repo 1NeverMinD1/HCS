@@ -266,13 +266,13 @@ export default function Advertising() {
       <SEO
         seo={page.AdvertisingContent?.SEO}
         og={page.AdvertisingContent?.OG}
-        title="Реклама"
+        title={t("footerAdvertising")}
         image={getImageUrl(
           page.AdvertisingContent?.OG?.og_image?.url ||
             page.AdvertisingContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Реклама</h1>
+      <h1>{t("footerAdvertising")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

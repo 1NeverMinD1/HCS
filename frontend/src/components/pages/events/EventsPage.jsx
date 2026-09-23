@@ -93,7 +93,11 @@ export default function EventsPage() {
   }, [hasMore, loading]);
 
   if (!events.length) {
-    return <h2 className="empty wrapper">Событий нет</h2>;
+    return (
+      <h2 className="empty wrapper">
+        {loading || hasMore ? t("loading") : t("noContent")}
+      </h2>
+    );
   }
 
   const breadcrumbItems = [

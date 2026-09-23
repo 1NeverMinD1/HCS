@@ -188,13 +188,13 @@ export default function Terms() {
       <SEO
         seo={page.TermsContent?.SEO}
         og={page.TermsContent?.OG}
-        title="Пользовательское соглашение"
+        title={t("footerTerms")}
         image={getImageUrl(
           page.TermsContent?.OG?.og_image?.url ||
             page.TermsContent?.SEO?.seo_image?.url,
         )}
       />
-      <h1>Пользовательское соглашение</h1>
+      <h1>{t("footerTerms")}</h1>
 
       <div className="footer-links__content">
         {content.map((block, i) => renderBlock(block, i, locale, t))}

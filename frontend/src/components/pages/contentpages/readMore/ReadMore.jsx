@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../../../utils/getLangField";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
+import { useTranslation } from "../../../../utils/useTranslation.js";
 // Styles
 import "./_ReadMore.scss";
 
@@ -12,6 +13,8 @@ const RELATED_FIELDS =
 export default function ReadMore({ item, locale, contentType = "news" }) {
   const [related, setRelated] = useState([]);
   const tagId = item.tags?.[0]?.id;
+  const { t } = useTranslation();
+  const [related, setRelated] = useState([]);
 
   useEffect(() => {
     if (!tagId) {
@@ -70,7 +73,7 @@ export default function ReadMore({ item, locale, contentType = "news" }) {
 
   return (
     <div className="read__more">
-      <h2>Читайте также:</h2>
+      <h2>{t("readAlso")}</h2>
       <div className="read__more-blocks">
         {related.map((news) => {
           const title = getLangField(news, "title", locale);

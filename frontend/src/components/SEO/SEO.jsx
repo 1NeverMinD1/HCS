@@ -34,11 +34,17 @@ export default function SEO({
   const OG_LOCALE_MAP = { ru: "ru_RU", kk: "kk_KZ", en: "en_US" };
   const ogLocale = OG_LOCALE_MAP[lang] || "ru_RU";
 
-  const siteName = "ЖКХ24";
+  const SITE_NAMES = { ru: "ЖКХ24", kk: "ЖКХ24", en: "ZhKH24" };
+  const siteName = SITE_NAMES[lang] || SITE_NAMES.ru;
   const baseUrl = "https://zhkh24.kz";
 
+  const DEFAULT_DESCRIPTIONS = {
+    ru: "Современный новостной портал с актуальными новостями, аналитикой и авторскими материалами.",
+    kk: "Өзекті жаңалықтары, терең талдамалары және авторлық материалдары бар заманауи жаңалықтар порталы.",
+    en: "A modern news portal with up-to-date news, in-depth analysis, and original content.",
+  };
   const defaultDescription =
-    "Современный новостной портал с актуальными новостями, аналитикой и авторскими материалами.";
+    DEFAULT_DESCRIPTIONS[lang] || DEFAULT_DESCRIPTIONS.ru;
 
   const defaultImage = `${baseUrl}/og-default.jpg`;
 

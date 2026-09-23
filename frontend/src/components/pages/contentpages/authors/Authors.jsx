@@ -4,6 +4,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale";
+import { useTranslation } from "../../../../utils/useTranslation.js";
 import SEO from "../../../SEO/SEO.jsx";
 import {
   FaInstagram,
@@ -28,11 +29,11 @@ const SOCIAL_ICONS = {
 };
 
 const SECTIONS = [
-  { key: "blogs", label: "Блоги", route: "blogs" },
-  { key: "articles", label: "Статьи", route: "articles" },
-  { key: "news", label: "Новости", route: "news" },
-  { key: "events", label: "Мероприятия", route: "events" },
-  { key: "qnas", label: "Вопросы и ответы", route: "q-and-as" },
+  { key: "blogs", labelKey: "blogs", route: "blogs" },
+  { key: "articles", labelKey: "articles", route: "articles" },
+  { key: "news", labelKey: "news", route: "news" },
+  { key: "events", labelKey: "events", route: "events" },
+  { key: "qnas", labelKey: "qandasIntro", route: "q-and-as" },
 ];
 
 function sortByDateDesc(items) {
@@ -46,6 +47,7 @@ function sortByDateDesc(items) {
 export default function Authors() {
   const { locale } = useLocale();
   const { slug } = useParams();
+  const { t } = useTranslation();
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -140,7 +142,7 @@ export default function Authors() {
 
   if (loading) return <h2 className="loading wrapper">{t("loading")}</h2>;
   if (error || !author)
-    return <h2 className="loading wrapper">Автор не найден</h2>;
+    return <h2 className="loading wrapper">{t("authorNotFound")}</h2>;
 
   const name = getLangField(author, "name", locale);
   const position = getLangField(author, "position", locale);
@@ -168,20 +170,20 @@ export default function Authors() {
       />
       <div className="authors">
         <div className="authors__intro">
-          <img src={profileImg} alt="profile_photo" />
+          <img src={profileImg} alt={name || ""} />
           <div className="authors__intro-info">
-            <p className="authors__intro-info-role">Автор</p>
+            <p className="authors__intro-info-role">{t("author")}</p>
             <h2 className="authors__intro-info-name">{name}</h2>
             <p className="authors__intro-info-position">{position}</p>
           </div>
         </div>
         <div className="authors__main">
           <div className="authors__main-bio">
-            <h3>Биография:</h3>
+            <h3>{t("biography")}</h3>
             <p>{bio}</p>
             {author.links?.length > 0 && (
               <>
-                <h3>Социальные сети:</h3>
+                <h3>{t("socialNetworks")}</h3>
                 <div className="authors__main-socials">
                   {author.links.map((link) => {
                     const Icon = SOCIAL_ICONS[link.platform];
@@ -218,7 +220,7 @@ export default function Authors() {
         </div>
 
         <div className="authors__works">
-          {!hasAnyWorks && <p>Пока нет опубликованных материалов.</p>}
+          {!hasAnyWorks && <p>{t("noPublications")}</p>}
 
           {SECTIONS.map((section) => {
             const items = sortByDateDesc(author[section.key] ?? []);
@@ -226,7 +228,7 @@ export default function Authors() {
 
             return (
               <div key={section.key} className="authors__works-section">
-                <h3>{section.label}</h3>
+                <h3>{t(section.labelKey)}</h3>
                 <div className="authors__works-list">
                   {items.map((item) => {
                     const title = getLangField(item, "title", locale);

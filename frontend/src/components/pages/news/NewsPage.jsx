@@ -127,14 +127,18 @@ export default function NewsPage() {
   }, [hasMore, loading, news]);
 
   if (!news.length) {
-    return <h2 className="empty wrapper">Новостей нет</h2>;
+    return (
+      <h2 className="empty wrapper">
+        {loading || hasMore ? t("loading") : t("noContent")}
+      </h2>
+    );
   }
 
   const heroNews = news[0];
   const topNews = news.slice(1, 4);
   const restNews = news.slice(4);
 
-  const title = isMain ? "Главные новости" : (categoryName ?? t("news"));
+  const title = isMain ? t("mainNewsTitle") : (categoryName ?? t("news"));
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
