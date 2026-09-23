@@ -345,6 +345,9 @@ export default function BlogsContent() {
     `&populate[SEO][fields][8]=seo_keywords_en` +
     `&populate[SEO][populate][seo_image][fields][0]=url` +
     `&populate[SEO][populate][seo_image][fields][1]=formats` +
+    `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
+    `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
+    `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
     `&populate[tags][fields][0]=name_ru` +
     `&populate[tags][fields][1]=name_kk` +
     `&populate[tags][fields][2]=name_en` +

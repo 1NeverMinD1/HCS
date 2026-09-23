@@ -86,6 +86,14 @@ export default function SEO({
 
   const shouldNoIndex = noIndex || isFallbackTranslation;
 
+  const schemaImages = [
+    seo?.seo_image_16x9?.url,
+    seo?.seo_image_4x3?.url,
+    seo?.seo_image_1x1?.url,
+  ]
+    .filter(Boolean)
+    .map((u) => getImageUrl(u));
+
   let structuredData = null;
 
   if (type === "event") {
@@ -95,7 +103,7 @@ export default function SEO({
       name: finalOgTitle,
       description: finalDescription,
       inLanguage: lang,
-      image: [finalImage],
+      image: schemaImages.length === 3 ? schemaImages : [finalImage],
       startDate: startDate,
       endDate: endDate || startDate,
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -133,7 +141,7 @@ export default function SEO({
             : "Article",
       headline: finalOgTitle,
       description: finalDescription,
-      image: [finalImage],
+      image: schemaImages.length === 3 ? schemaImages : [finalImage],
       datePublished: datePublished,
       dateModified: dateModified || datePublished,
       inLanguage: lang,

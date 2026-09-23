@@ -345,6 +345,9 @@ export default function ArticlesContent() {
     `&populate[SEO][fields][8]=seo_keywords_en` +
     `&populate[SEO][populate][seo_image][fields][0]=url` +
     `&populate[SEO][populate][seo_image][fields][1]=formats` +
+    `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
+    `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
+    `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
     `&populate[desc_img][fields][0]=url` +
     `&populate[desc_img][fields][1]=alternativeText` +
     `&populate[desc_img][fields][2]=caption` +
