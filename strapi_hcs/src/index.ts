@@ -1,7 +1,7 @@
 import { execFile } from "child_process";
 import { pingIndexNow } from "./utils/indexnow";
 import { ROUTE_SEGMENT } from "./utils/routeSegments";
-import { optimizeOgImage } from "./utils/og-image-optimizer";
+import { optimizeOgImage, generateSeoImageCrops } from "./utils/og-image-optimizer";
 import { sendToTelegramChannel } from "./utils/telegram";
 import sharp from "sharp";
 import fs from "fs";
@@ -83,17 +83,13 @@ async function convertFileEntryToWebp(strapi: any, file: any) {
   );
 }
 
-const UID_TO_COVER_FIELDS: Record<
-  string,
-  { primary?: string; fallback?: string }
-> = {
+const UID_TO_COVER_FIELDS: Record<string, { primary?: string; fallback?: string }> = {
   "api::new.new": { primary: "desc_img" },
   "api::article.article": { primary: "desc_img" },
   "api::blog.blog": { primary: "back_img" },
   "api::event.event": { primary: "cover_img", fallback: "desc_img" },
   "api::q-and-a.q-and-a": {},
 };
-
 const UID_TO_ROUTE_KEY: Record<string, string> = {
   "api::new.new": "new",
   "api::article.article": "article",
@@ -198,6 +194,13 @@ export default {
         const coverConfig = UID_TO_COVER_FIELDS[uid];
         if (coverConfig && documentId) {
           await optimizeOgImage(
+            strapi,
+            uid,
+            documentId,
+            coverConfig.primary,
+            coverConfig.fallback,
+          );
+          await generateSeoImageCrops(
             strapi,
             uid,
             documentId,
