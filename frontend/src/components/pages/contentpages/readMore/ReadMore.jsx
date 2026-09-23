@@ -14,7 +14,6 @@ export default function ReadMore({ item, locale, contentType = "news" }) {
   const [related, setRelated] = useState([]);
   const tagId = item.tags?.[0]?.id;
   const { t } = useTranslation();
-  const [related, setRelated] = useState([]);
 
   useEffect(() => {
     if (!tagId) {
