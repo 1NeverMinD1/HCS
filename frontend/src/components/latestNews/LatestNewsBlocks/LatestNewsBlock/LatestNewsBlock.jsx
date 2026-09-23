@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
@@ -32,7 +33,7 @@ export default function LatestNewsBlock({ item }) {
         <p className="latest__block-text">{desc}</p>
 
         <p className="latest__block-date">
-          {new Date(item.publishDate).toLocaleDateString()}
+          {formatLocalizedDate(item.publishDate, locale)}
         </p>
       </div>
     </Link>

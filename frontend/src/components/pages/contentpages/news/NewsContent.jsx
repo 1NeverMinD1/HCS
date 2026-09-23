@@ -9,6 +9,7 @@ import {
   getLangField,
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
@@ -225,7 +226,6 @@ const NEWS_POPULATE_QUERY =
 function NewsItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-  const date = new Date(item.publishDate);
   const imgUrl = getImageUrl(item.desc_img?.url);
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
@@ -234,8 +234,8 @@ function NewsItem({ item, isFirst, registerRef }) {
   const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
-    { name: t("home") || "Главная", url: `/${locale}` },
-    { name: t("news") || "Новости", url: `/${locale}/news` },
+    { name: t("home"), url: `/${locale}` },
+    { name: t("news"), url: `/${locale}/news` },
     { name: title },
   ];
 
@@ -248,7 +248,7 @@ function NewsItem({ item, isFirst, registerRef }) {
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
-          Все новости
+          {t("allNews")}
         </Link>
       )}
       {item.authors?.[0] && (
@@ -276,12 +276,7 @@ function NewsItem({ item, isFirst, registerRef }) {
           </Link>
         )}
         <p className="newscontent__header-date">
-          {date.toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-            timeZone: "Asia/Almaty",
-          })}
+          {formatLocalizedDate(item.publishDate, locale)}
         </p>
       </div>
       <Breadcrumbs items={breadcrumbItems} />
@@ -348,6 +343,7 @@ function NewsItem({ item, isFirst, registerRef }) {
 export default function NewsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
+  const { t } = useTranslation();
   const [newsList, setNewsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [activeId, setActiveId] = useState(null);
@@ -554,8 +550,8 @@ export default function NewsContent() {
 
   const activeItemBreadcrumbs = activeItem
     ? [
-        { name: "Главная", url: `/${locale}` },
-        { name: "Новости", url: `/${locale}/news` },
+        { name: t("home"), url: `/${locale}` },
+        { name: t("news"), url: `/${locale}/news` },
         { name: getLangField(activeItem, "title", locale) },
       ]
     : [];

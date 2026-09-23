@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 // Styles
 import "./_BlogsBlock.scss";
 
@@ -28,11 +29,7 @@ export default function BlogsBlock({ blog }) {
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogs__block">
       {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={author || "profile_photo"}
-          className="profile"
-        />
+        <img src={imageUrl} alt={author || ""} className="profile" />
       ) : (
         <div className="profile profile--fallback">{initials}</div>
       )}
@@ -48,7 +45,7 @@ export default function BlogsBlock({ blog }) {
           <p className="blogs__block-text">{desc}</p>
 
           <p className="date">
-            {new Date(blog.publishDate).toLocaleDateString()}
+            {formatLocalizedDate(blog.publishDate, locale)}
           </p>
         </div>
       </div>

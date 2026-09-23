@@ -11,6 +11,7 @@ import {
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
@@ -196,14 +197,13 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
   const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
-    { name: t("home") || "Главная", url: `/${locale}` },
-    { name: t("blogs") || "Блоги", url: `/${locale}/blogs` },
+    { name: t("home"), url: `/${locale}` },
+    { name: t("blogs"), url: `/${locale}/blogs` },
     { name: title },
   ];
 
   const midpointIndex = findMidpointIndex(content);
 
-  const date = new Date(item.publishDate);
   const imgUrl = getImageUrl(item?.back_img?.url);
 
   const profileImg = getImageUrl(
@@ -219,7 +219,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
-          Все блоги
+          {t("allBlogs")}
         </Link>
       )}
       <AuthorsHeader
@@ -238,12 +238,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
           </Link>
         )}
         <p className="blogscontent__header-date">
-          {date.toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-            timeZone: "Asia/Almaty",
-          })}
+          {formatLocalizedDate(item.publishDate, locale)}
         </p>
       </div>
       <Breadcrumbs items={breadcrumbItems} />
@@ -471,8 +466,8 @@ export default function BlogsContent() {
 
   const activeItemBreadcrumbs = activeItem
     ? [
-        { name: "Главная", url: `/${locale}` },
-        { name: "Блоги", url: `/${locale}/blogs` },
+        { name: t("home"), url: `/${locale}` },
+        { name: t("blogs"), url: `/${locale}/blogs` },
         { name: getLangField(activeItem, "title", locale) },
       ]
     : [];

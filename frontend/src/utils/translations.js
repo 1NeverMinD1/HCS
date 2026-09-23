@@ -73,6 +73,12 @@ export const translations = {
       "Свидетельство о постановке на учёт № KZ90VPY00156907 от 17.08.2026, выдано Комитетом информации Министерства культуры и информации РК.",
     footerRightsYear: "© 2026 ЖКХ24.",
     footerRightsReserved: "Все права защищены",
+    people: "чел.",
+    currency: "тг.",
+    free: "Бесплатно",
+    allNews: "Все новости",
+    scrollLeft: "Прокрутить влево",
+    scrollRight: "Прокрутить вправо",
   },
   kk: {
     news: "Жаңалықтар",
@@ -87,15 +93,15 @@ export const translations = {
     qandas: "Кеңестер",
     mainNews: "Барлық негізгі жаңалықтар",
     allArts: "Барлық мақалалар",
-    allEvents: "Барлық қызметтір",
+    allEvents: "Барлық іс-шаралар",
     allBlogs: "Барлық блогтар",
     allQandAs: "Барлық кеңестер",
     futureEvents: "Алдағы іс-шаралар",
     participants: "қолданушылар",
-    subscribeOn: "Рассылкаға жазылыңыз",
+    subscribeOn: "Жаңалықтарға жазылыңыз",
     subscribeOnText:
       "Ең маңызды жаңалықтар мен талдауларды тікелей электрондық поштаңызға алыңыз. Спам жоқ, тек тиісті ақпарат.",
-    enterYourEmail: "Електрондық поштаңызды жазыңыз",
+    enterYourEmail: "Электрондық поштаңызды жазыңыз",
     moreNews: "ҚОСЫМША ЖАҢАЛЫҚТАР",
     artsIntro: "Аналитикалық мақалалар",
     artsIntroText:
@@ -109,7 +115,7 @@ export const translations = {
     qandasIntroText: "Сіздің сұрақтарыңызға жылдам жауаптар",
     seo_static_title_home: "Басты бет",
     seo_static_desc_home:
-      "ZhKKh24 порталындағы соңғы жаңалықтар, мақалалар, блогтар және іс-шаралар.",
+      "ЖКХ24 порталындағы соңғы жаңалықтар, мақалалар, блогтар және іс-шаралар.",
     seo_static_title_news: "Жаңалықтар",
     seo_static_desc_news:
       "Соңғы жаңалықтар, мақалалар, блогтар және іс-шаралар.",
@@ -131,7 +137,7 @@ export const translations = {
 
     footerDescription:
       "Өзекті жаңалықтары, терең талдамалары және авторлық материалдары бар заманауи жаңалықтар порталы.",
-    footerSectionsTitle: "БОЛІМДЕР",
+    footerSectionsTitle: "БӨЛІМДЕР",
     footerQandA: "Q&A",
     footerPublicationTitle: "БАСЫЛЫМ",
     footerAbout: "Редакция туралы",
@@ -151,6 +157,12 @@ export const translations = {
       "KZ90VPY00156907 нөмірлі есепке қою туралы куәлік, 17.08.2026 ж., ҚР Мәдениет және ақпарат министрлігінің Ақпарат комитеті берген.",
     footerRightsYear: "© 2026 ЖКХ24.",
     footerRightsReserved: "Барлық құқықтар қорғалған",
+    people: "адам",
+    currency: "тг.",
+    free: "Тегін",
+    allNews: "Барлық жаңалықтар",
+    scrollLeft: "Солға айналдыру",
+    scrollRight: "Оңға айналдыру",
   },
   en: {
     news: "News",
@@ -162,12 +174,12 @@ export const translations = {
     subscribe: "Subscribe",
     showAll: "Show all",
     latestNews: "Latest news",
-    qandas: "Adviсes",
+    qandas: "Tips",
     mainNews: "All main news",
     allArts: "All articles",
     allEvents: "All events",
     allBlogs: "All blogs",
-    allQandAs: "All advices",
+    allQandAs: "All tips",
     futureEvents: "Future events",
     participants: "participants",
     subscribeOn: "Join our mailing list",
@@ -186,10 +198,9 @@ export const translations = {
     qandasIntro: "Questions and Answers",
     qandasIntroText: "Quick answers to your questions",
     seo_static_title_home: "Home",
-    seo_static_desc_home:
-      "Actual news, articles, blogs and events on the portal ЖКХ24",
+    seo_static_desc_home: "Latest news, articles, blogs and events on ZhKH24",
     seo_static_title_news: "News",
-    seo_static_desc_news: "Actual news on the portal ЖКХ24",
+    seo_static_desc_news: "Latest news on ZhKH24",
     seo_static_title_arts: "Analytical articles",
     seo_static_desc_arts:
       "Deep research, expert insights, and key topic reviews from our authors",
@@ -205,7 +216,6 @@ export const translations = {
     home: "Home",
     category: "Category",
     noContent: "No content",
-
     footerDescription:
       "A modern news portal with up-to-date news, in-depth analysis, and original content.",
     footerSectionsTitle: "SECTIONS",
@@ -228,5 +238,11 @@ export const translations = {
       "Registration certificate No. KZ90VPY00156907 dated 17.08.2026, issued by the Information Committee of the Ministry of Culture and Information of the Republic of Kazakhstan.",
     footerRightsYear: "© 2026 ZhKH24.",
     footerRightsReserved: "All rights reserved",
+    people: "people",
+    currency: "KZT",
+    free: "Free",
+    allNews: "All news",
+    scrollLeft: "Scroll left",
+    scrollRight: "Scroll right",
   },
 };

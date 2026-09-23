@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 // Styles
 import "./_ArticlesBlock.scss";
 
@@ -33,7 +34,7 @@ export default function ArticlesBlock({ article }) {
         <p className="articles__block-text">{desc}</p>
 
         <p className="articles__block-date">
-          {new Date(article.publishDate).toLocaleDateString()}
+          {formatLocalizedDate(article.publishDate, locale)}
         </p>
       </div>
     </Link>

@@ -11,6 +11,7 @@ import {
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
@@ -70,7 +71,6 @@ function renderBlock(block, i, locale, t, scripts = []) {
       const rawCaption = block.image.caption?.trim();
       const caption = parseMultilangField(rawCaption, locale);
       const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
-
       const rawAlt = block.image.alternativeText?.trim();
       const alt = parseMultilangField(rawAlt, locale);
 
@@ -188,7 +188,6 @@ function findMidpointIndex(content) {
 function ArticleItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-  const date = new Date(item.publishDate);
   const imgUrl = getImageUrl(item.desc_img?.url);
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
@@ -198,8 +197,8 @@ function ArticleItem({ item, isFirst, registerRef }) {
   const scripts = item?.scripts || [];
 
   const breadcrumbItems = [
-    { name: t("home") || "Главная", url: `/${locale}` },
-    { name: t("articles") || "Статьи", url: `/${locale}/articles` },
+    { name: t("home"), url: `/${locale}` },
+    { name: t("articles"), url: `/${locale}/articles` },
     { name: title },
   ];
 
@@ -223,7 +222,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
-          Все статьи
+          {t("allArts")}
         </Link>
       )}
       {item.authors?.[0] && (
@@ -251,14 +250,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
           </Link>
         )}
         <div className="artscontent__header-date">
-          <p>
-            {date.toLocaleDateString("ru-RU", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-              timeZone: "Asia/Almaty",
-            })}
-          </p>
+          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
         </div>
       </div>
       <Breadcrumbs items={breadcrumbItems} />
@@ -325,6 +317,7 @@ function ArticleItem({ item, isFirst, registerRef }) {
 export default function ArticlesContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
+  const { t } = useTranslation();
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [activeId, setActiveId] = useState(null);
@@ -484,8 +477,8 @@ export default function ArticlesContent() {
 
   const activeItemBreadcrumbs = activeItem
     ? [
-        { name: "Главная", url: `/${locale}` },
-        { name: "Статьи", url: `/${locale}/articles` },
+        { name: t("home"), url: `/${locale}` },
+        { name: t("articles"), url: `/${locale}/articles` },
         { name: getLangField(activeItem, "title", locale) },
       ]
     : [];

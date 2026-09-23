@@ -10,6 +10,7 @@ import {
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
@@ -208,13 +209,7 @@ export default function EventsContent() {
 
   if (!events) return <h2 className="loading wrapper">Загрузка...</h2>;
 
-  const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "Asia/Almaty",
-    });
+  const formatDate = (dateStr) => formatLocalizedDate(dateStr, locale);
 
   const isSameDay = (a, b) =>
     a && b && new Date(a).toDateString() === new Date(b).toDateString();
@@ -254,7 +249,7 @@ export default function EventsContent() {
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
           </svg>
-          Все события
+          {t("allEvents")}
         </Link>
         {events.authors?.[0] && (
           <div className="authorsHeader">

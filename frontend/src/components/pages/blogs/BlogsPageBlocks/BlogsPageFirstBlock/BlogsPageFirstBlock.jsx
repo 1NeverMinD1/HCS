@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
-import { slugify } from "../../../../../utils/slugify.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 // Styles
 import "./_BlogsPageFirstBlock.scss";
 
 export default function BlogsPageFirstBlock({ blog }) {
-  if (!blog) return null;
   const { locale } = useLocale();
   const title = getLangField(blog, "title", locale);
   const desc = getLangField(blog, "desc", locale);
@@ -22,6 +21,8 @@ export default function BlogsPageFirstBlock({ blog }) {
 
   const firstBlockImg = getImageUrl(blog?.back_img?.url);
 
+  if (!blog) return null;
+
   return (
     <Link
       to={`/${locale}/blogs/${blog.slug}`}
@@ -31,7 +32,7 @@ export default function BlogsPageFirstBlock({ blog }) {
       }}
     >
       <div className="blogspage__hero-header">
-        <img src={profileImg} alt="profile_photo" className="profile" />
+        <img src={profileImg} alt={author || ""} className="profile" />
         <div className="blogspage__hero-about">
           <p className="author">{author}</p>
           <p className="spec">{position}</p>
@@ -42,7 +43,7 @@ export default function BlogsPageFirstBlock({ blog }) {
         <p className="blogspage__hero-text">{desc}</p>
       </div>
 
-      <p className="date">{new Date(blog.publishDate).toLocaleDateString()}</p>
+      <p className="date">{formatLocalizedDate(blog.publishDate, locale)}</p>
     </Link>
   );
 }

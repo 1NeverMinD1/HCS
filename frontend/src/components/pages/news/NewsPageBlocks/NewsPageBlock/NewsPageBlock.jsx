@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 // Styles
 import "./_NewsPageBlock.scss";
 
@@ -30,7 +31,7 @@ export default function NewsPageBlock({ item }) {
         <p className="newspage__hero-item-text">{desc}</p>
 
         <p className="newspage__hero-item-date">
-          {new Date(item.publishDate).toLocaleDateString("ru-RU")}
+          {formatLocalizedDate(item.publishDate, locale)}
         </p>
       </div>
     </Link>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 // Styles
 import "./_BlogsPageBlock.scss";
 
@@ -28,26 +29,24 @@ export default function BlogsPageBlock({ blog }) {
 
   const category = blog.categories?.[0]?.name || blog.tags?.[0]?.name;
 
-  const date = new Date(blog.publishDate);
-
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogspage__item">
       <div className="blogspage__item-header">
-        <img src={profileImg} alt="profile_photo" className="profile" />
+        <img src={profileImg} alt={author || ""} className="profile" />
         <div className="blogspage__item-about">
           <p className="author">{author}</p>
           <p className="spec">{position}</p>
         </div>
       </div>
       <div className="blogspage__item-main">
-        <img src={backImg} alt="back_img" className="back_img" />
+        <img src={backImg} alt={title || ""} className="back_img" />
       </div>
       <div className="blogspage__item-content">
         <h2 className="blogspage__item-title">{title}</h2>
         <p className="blogspage__item-text">{desc}</p>
         <div className="blogs__block-footer">
           <p className="date">
-            {new Date(blog.publishDate).toLocaleDateString()}
+            {formatLocalizedDate(blog.publishDate, locale)}
           </p>
         </div>
       </div>

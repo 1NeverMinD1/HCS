@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../utils/getLangField.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../utils/dateLocale.js";
+import { useTranslation } from "../../utils/useTranslation.js";
 // Styles
 import "./_ScrollBlock.scss";
 
@@ -18,6 +20,7 @@ export default function ScrollBlock({
   imageField,
 }) {
   const scrollRef = useRef(null);
+  const { t } = useTranslation();
 
   const scroll = (direction) => {
     if (!scrollRef.current) return;
@@ -44,7 +47,7 @@ export default function ScrollBlock({
         <button
           className="scroll_block__arrow scroll_block__arrow-left"
           onClick={() => scroll("left")}
-          aria-label="Прокрутить влево"
+          aria-label={t("scrollLeft")}
         >
           ‹
         </button>
@@ -57,11 +60,7 @@ export default function ScrollBlock({
               ? getImageUrl(item[imageField]?.url)
               : null;
             const date = item.publishDate
-              ? new Date(item.publishDate).toLocaleDateString("ru-RU", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })
+              ? formatLocalizedDate(item.publishDate, locale)
               : null;
 
             return (
@@ -72,7 +71,7 @@ export default function ScrollBlock({
               >
                 <div className="scroll_block__card-img">
                   {imgUrl ? (
-                    <img src={imgUrl} alt={itemTitle} />
+                    <img src={imgUrl} alt={itemTitle || ""} />
                   ) : (
                     <div className="scroll_block__card-img-placeholder" />
                   )}
@@ -90,7 +89,7 @@ export default function ScrollBlock({
         <button
           className="scroll_block__arrow scroll_block__arrow-right"
           onClick={() => scroll("right")}
-          aria-label="Прокрутить вправо"
+          aria-label={t("scrollRight")}
         >
           ›
         </button>

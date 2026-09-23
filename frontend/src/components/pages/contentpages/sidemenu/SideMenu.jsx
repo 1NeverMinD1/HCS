@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 // Styles
 import "./_SideMenu.scss";
 
@@ -105,11 +106,7 @@ export default function SideMenu({ currentId }) {
                 <p className="sidemenu__item-label">{labelMap[item.type]}</p>
                 <p className="sidemenu__item-title">{title}</p>
                 <p className="sidemenu__item-date">
-                  {new Date(item.publishDate).toLocaleDateString("ru-RU", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                  {formatLocalizedDate(item.publishDate, locale)}
                 </p>
               </div>
             </Link>
