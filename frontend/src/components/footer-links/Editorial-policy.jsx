@@ -199,7 +199,7 @@ export default function EditorialPolicy() {
   }, []);
 
   if (!page) {
-    return <h2 className="loading wrapper">Загрузка...</h2>;
+    return <h2 className="loading wrapper">{t("loading")}</h2>;
   }
 
   const content =

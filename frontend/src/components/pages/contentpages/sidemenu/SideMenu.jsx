@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 // Styles
 import "./_SideMenu.scss";
@@ -10,6 +11,7 @@ import "./_SideMenu.scss";
 export default function SideMenu({ currentId }) {
   const [items, setItems] = useState([]);
   const { locale } = useLocale();
+  const { t } = useTranslation();
 
   useEffect(() => {
     Promise.all([
@@ -71,17 +73,17 @@ export default function SideMenu({ currentId }) {
   };
 
   const labelMap = {
-    news: "Новость",
-    article: "Статья",
-    blog: "Блог",
-    event: "Событие",
+    news: t("labelNews"),
+    article: t("labelArticle"),
+    blog: t("labelBlog"),
+    event: t("labelEvent"),
   };
 
   const visibleItems = items.filter((item) => item.slug !== currentId);
 
   return (
     <div className="sidemenu">
-      <h2>Последнее</h2>
+      <h2>{t("latest")}</h2>
       <div className="sidemenu__items">
         {visibleItems.map((item) => {
           const title = getLangField(item, "title", locale);

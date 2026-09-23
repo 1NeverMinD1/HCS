@@ -602,7 +602,7 @@ export default function NewsContent() {
 
         {!hasMore && (
           <p style={{ textAlign: "center", padding: "2rem" }}>
-            Больше новостей нет
+            {t("noMoreNews")}
           </p>
         )}
       </div>

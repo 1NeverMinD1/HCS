@@ -207,7 +207,7 @@ export default function EventsContent() {
       .then((data) => setEvents(data.data?.[0]));
   }, [slug]);
 
-  if (!events) return <h2 className="loading wrapper">Загрузка...</h2>;
+  if (!events) return <h2 className="loading wrapper">{t("loading")}</h2>;
 
   const formatDate = (dateStr) => formatLocalizedDate(dateStr, locale);
 
@@ -286,7 +286,7 @@ export default function EventsContent() {
                   <path d="M85.1,18.5H77v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5c-1.9,0-3.5,1.6-3.5,3.5v4.5H35.3v-4.5c0-1.9-1.6-3.5-3.5-3.5h-5  c-1.9,0-3.5,1.6-3.5,3.5v4.5h-8.5c-3.4,0-6.2,2.8-6.2,6.2v55.9c0,3.4,2.8,6.2,6.2,6.2h70.3c3.4,0,6.2-2.8,6.2-6.2V24.7  C91.3,21.3,88.5,18.5,85.1,18.5z M68.7,14.3h4.6v6.1v4.9h-4.6v-4.9V14.3z M27,14.3h4.6v6.1v4.9H27v-4.9V14.3z M14.9,22.2h8.5v3.3  c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3H65v3.3c0,1.9,1.6,3.5,3.5,3.5h5c1.9,0,3.5-1.6,3.5-3.5v-3.3h8.2  c1.4,0,2.5,1.1,2.5,2.5v10H12.4v-10C12.4,23.3,13.5,22.2,14.9,22.2z M85.1,83.1H14.9c-1.4,0-2.5-1.1-2.5-2.5V38.4h75.2v42.2  C87.6,82,86.5,83.1,85.1,83.1z" />
                 </svg>
                 <div className="info">
-                  <p>Дата проведения</p>
+                  <p>{t("eventDate")}</p>
                   <p className="text">
                     {formatDate(events.start)}
                     {events.end && !isSameDay(events.start, events.end)
@@ -300,11 +300,11 @@ export default function EventsContent() {
                   <path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 6 L 11 12.414062 L 15.292969 16.707031 L 16.707031 15.292969 L 13 11.585938 L 13 6 L 11 6 z"></path>
                 </svg>
                 <div className="info">
-                  <p>Время</p>
+                  <p>{t("eventTime")}</p>
                   <p className="text">
                     {events.start_time
                       ? events.start_time.slice(0, 5)
-                      : "Не указано"}
+                      : t("notSpecified")}
                   </p>
                 </div>
               </div>
@@ -320,7 +320,7 @@ export default function EventsContent() {
                   </g>
                 </svg>
                 <div className="info">
-                  <p>Место</p>
+                  <p>{t("eventPlace")}</p>
                   <p className="text">{place}</p>
                 </div>
               </div>
@@ -334,7 +334,7 @@ export default function EventsContent() {
                   <path d="M18.954 20.284a7.051 7.051 0 0 0-3.085-5.114A4.956 4.956 0 0 0 17 12a5 5 0 1 0-8.869 3.17 7.051 7.051 0 0 0-3.085 5.114 14.923 14.923 0 0 0 1.968.849C7.012 21.088 7 21.046 7 21a5.031 5.031 0 0 1 3.233-4.678 1 1 0 0 0 .175-1.785A2.964 2.964 0 0 1 9 12a3 3 0 1 1 6 0 2.964 2.964 0 0 1-1.408 2.537 1 1 0 0 0 .175 1.785A5.031 5.031 0 0 1 17 21c0 .046-.012.088-.013.133a14.919 14.919 0 0 0 1.967-.849z" />
                 </svg>
                 <div className="info">
-                  <p> Количество участников</p>
+                  <p>{t("participantsCount")}</p>
                   <p className="text">{events.amount}</p>
                 </div>
               </div>
@@ -345,7 +345,7 @@ export default function EventsContent() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Зарегистрироваться
+              {t("register")}
             </a>
           </div>
         </div>
@@ -396,7 +396,7 @@ export default function EventsContent() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Зарегистрироваться
+          {t("register")}
         </a>
         <Tags item={events} locale={locale} />
       </div>

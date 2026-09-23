@@ -473,7 +473,7 @@ export default function ArticlesContent() {
   }, [activeItem, locale]);
 
   if (articlesList.length === 0)
-    return <h2 className="loading wrapper">Загрузка...</h2>;
+    return <h2 className="loading wrapper">{t("loading")}</h2>;
 
   const activeItemBreadcrumbs = activeItem
     ? [
@@ -529,7 +529,7 @@ export default function ArticlesContent() {
 
         {!hasMore && (
           <p style={{ textAlign: "center", padding: "2rem" }}>
-            Больше статей нет
+            {t("noMoreArticles")}
           </p>
         )}
       </div>

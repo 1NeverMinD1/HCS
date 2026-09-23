@@ -148,7 +148,7 @@ export default function QnasContent() {
       .then((data) => setQnas(data.data?.[0]));
   }, [slug]);
 
-  if (!qnas) return <h2 className="loading wrapper">Загрузка...</h2>;
+  if (!qnas) return <h2 className="loading wrapper">{t("loading")}</h2>;
 
   const title = getLangField(qnas, "title", locale);
   const content = qnas.Content || [];

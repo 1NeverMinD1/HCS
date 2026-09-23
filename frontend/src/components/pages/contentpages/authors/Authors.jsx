@@ -138,7 +138,7 @@ export default function Authors() {
     };
   }, [slug]);
 
-  if (loading) return <h2 className="loading wrapper">Загрузка...</h2>;
+  if (loading) return <h2 className="loading wrapper">{t("loading")}</h2>;
   if (error || !author)
     return <h2 className="loading wrapper">Автор не найден</h2>;
 
