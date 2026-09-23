@@ -21,7 +21,7 @@ export default function LatestNewsBlock({ item }) {
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="latest__block">
       <div className="img_wrapper">
-        <img src={imgUrl} alt={item.title} className="latest__block-img" />
+        <img src={imgUrl} alt={title || ""} className="latest__block-img" />
       </div>
 
       <div className="latest__block-content">
