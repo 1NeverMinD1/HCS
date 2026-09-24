@@ -3,3 +3,5 @@ dist
 build
 .env
 .env.*
+scripts/sitemap.last-good.xml
+scripts/news-sitemap.last-good.xml
