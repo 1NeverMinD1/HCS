@@ -2,18 +2,13 @@ import { Link } from "react-router-dom";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { getImageUrl } from "../../../../utils/getImageUrl.js";
-// Styles
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import "./_LatestNewsBlock.scss";
 
 export default function LatestNewsBlock({ item }) {
   const { locale } = useLocale();
 
-  const imgUrl = getImageUrl(
-    item.desc_img?.formats?.small?.url ||
-      item.desc_img?.formats?.medium?.url ||
-      item.desc_img?.url,
-  );
+  const { src, srcSet } = getResponsiveImage(item.desc_img);
 
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
@@ -25,8 +20,10 @@ export default function LatestNewsBlock({ item }) {
         <img
           loading="lazy"
           decoding="async"
-          src={imgUrl}
-          alt={title || ""}
+          src={src}
+          srcSet={srcSet}
+          sizes="(max-width: 430px) 70vw, (max-width: 1630px) 280px, 340px"
+          alt=""
           className="latest__block-img"
         />
       </div>

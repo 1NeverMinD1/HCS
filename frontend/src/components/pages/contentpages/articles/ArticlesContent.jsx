@@ -10,14 +10,16 @@ import {
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
-// Styles
 import "./_ArticlesContent.scss";
+
+const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
@@ -73,13 +75,16 @@ function renderBlock(block, i, locale, t, scripts = []) {
       const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
       const rawAlt = block.image.alternativeText?.trim();
       const alt = parseMultilangField(rawAlt, locale);
+      const { src, srcSet } = getResponsiveImage(block.image, "large");
 
       return (
         <figure key={i} className="richtext-image">
           <img
             loading="lazy"
             decoding="async"
-            src={getImageUrl(block.image.url)}
+            src={src}
+            srcSet={srcSet}
+            sizes={CONTENT_IMAGE_SIZES}
             alt={alt || ""}
           />
           {caption && (
@@ -193,7 +198,7 @@ function findMidpointIndex(content) {
 function ArticleItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
-  const imgUrl = getImageUrl(item.desc_img?.url);
+  const cover = getResponsiveImage(item.desc_img, "large");
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
@@ -262,9 +267,13 @@ function ArticleItem({ item, isFirst, registerRef }) {
       <h1 className="artscontent__title">{title}</h1>
       <figure className="artscontent__cover">
         <img
-          src={imgUrl}
+          src={cover.src}
+          srcSet={cover.srcSet}
+          sizes={CONTENT_IMAGE_SIZES}
           alt={coverAlt || title}
           className="artscontent__img"
+          fetchPriority={isFirst ? "high" : "auto"}
+          decoding="async"
         />
         {coverCaption && (
           <figcaption className="img_source">

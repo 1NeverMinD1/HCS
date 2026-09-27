@@ -11,14 +11,16 @@ import {
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
-// Styles
 import "./_BlogsContent.scss";
+
+const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
@@ -72,16 +74,18 @@ function renderBlock(block, i, locale, t, scripts = []) {
       const rawCaption = block.image.caption?.trim();
       const caption = parseMultilangField(rawCaption, locale);
       const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
-
       const rawAlt = block.image.alternativeText?.trim();
       const alt = parseMultilangField(rawAlt, locale);
+      const { src, srcSet } = getResponsiveImage(block.image, "large");
 
       return (
         <figure key={i} className="richtext-image">
           <img
             loading="lazy"
             decoding="async"
-            src={getImageUrl(block.image.url)}
+            src={src}
+            srcSet={srcSet}
+            sizes={CONTENT_IMAGE_SIZES}
             alt={alt || ""}
           />
           {caption && (
@@ -209,7 +213,7 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
 
   const midpointIndex = findMidpointIndex(content);
 
-  const imgUrl = getImageUrl(item?.back_img?.url);
+  const cover = getResponsiveImage(item?.back_img, "large");
 
   const profileImg = getImageUrl(
     item?.authors?.[0]?.profile_img?.formats?.medium?.url ||
@@ -250,7 +254,9 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
       <h1 className="blogscontent__title">{title}</h1>
       <figure className="blogscontent__cover">
         <img
-          src={imgUrl}
+          src={cover.src}
+          srcSet={cover.srcSet}
+          sizes={CONTENT_IMAGE_SIZES}
           alt={
             parseMultilangField(
               item.back_img?.alternativeText?.trim(),
@@ -258,6 +264,8 @@ function BlogItem({ item, locale, t, isFirst, registerRef }) {
             ) || title
           }
           className="blogscontent__img"
+          fetchPriority={isFirst ? "high" : "auto"}
+          decoding="async"
         />
         {parseMultilangField(item.back_img?.caption?.trim(), locale) && (
           <figcaption className="img_source">

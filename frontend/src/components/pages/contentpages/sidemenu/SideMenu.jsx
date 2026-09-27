@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
-// Styles
 import "./_SideMenu.scss";
 
 export default function SideMenu({ currentId }) {
@@ -87,6 +86,10 @@ export default function SideMenu({ currentId }) {
       <div className="sidemenu__items">
         {visibleItems.map((item) => {
           const title = getLangField(item, "title", locale);
+          const { src, srcSet } = getResponsiveImage(
+            item.back_img || item.cover_img || item.desc_img,
+            "thumbnail",
+          );
 
           return (
             <Link
@@ -98,12 +101,10 @@ export default function SideMenu({ currentId }) {
                 <img
                   loading="lazy"
                   decoding="async"
-                  src={getImageUrl(
-                    item.back_img?.url ||
-                      item.desc_img?.formats?.small?.url ||
-                      item.desc_img?.url,
-                  )}
-                  alt={getLangField(item, "title", locale)}
+                  src={src}
+                  srcSet={srcSet}
+                  sizes="200px"
+                  alt=""
                 />
               </div>
               <div className="sidemenu__item-content">
@@ -115,7 +116,7 @@ export default function SideMenu({ currentId }) {
               </div>
             </Link>
           );
-        })}{" "}
+        })}
       </div>
     </div>
   );

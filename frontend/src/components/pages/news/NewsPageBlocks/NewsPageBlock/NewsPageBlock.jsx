@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
-import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
-// Styles
 import "./_NewsPageBlock.scss";
 
 export default function NewsPageBlock({ item }) {
@@ -11,16 +10,21 @@ export default function NewsPageBlock({ item }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
 
-  const imgUrl = getImageUrl(
-    item.desc_img?.formats?.small?.url || item.desc_img?.url,
-  );
+  const { src, srcSet } = getResponsiveImage(item.desc_img);
 
   const category = getLangField(item?.header_cats?.[0], "name", locale);
 
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="newspage__hero-item">
       <div className="img_wrapper">
-        <img loading="lazy" decoding="async" src={imgUrl} alt={title} />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={src}
+          srcSet={srcSet}
+          sizes="(max-width: 430px) 35vw, (max-width: 1630px) 190px, 230px"
+          alt=""
+        />
       </div>
 
       <div className="newspage__hero-item-info">

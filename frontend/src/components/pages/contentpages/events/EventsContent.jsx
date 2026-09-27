@@ -10,13 +10,15 @@ import {
   parseMultilangField,
 } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
-// Styles
 import "./_EventsContent.scss";
+
+const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
@@ -70,16 +72,18 @@ function renderBlock(block, i, locale, t, scripts = []) {
       const rawCaption = block.image.caption?.trim();
       const caption = parseMultilangField(rawCaption, locale);
       const isUrl = caption && /^(https?:\/\/|www\.)/i.test(caption);
-
       const rawAlt = block.image.alternativeText?.trim();
       const alt = parseMultilangField(rawAlt, locale);
+      const { src, srcSet } = getResponsiveImage(block.image, "large");
 
       return (
         <figure key={i} className="richtext-image">
           <img
             loading="lazy"
             decoding="async"
-            src={getImageUrl(block.image.url)}
+            src={src}
+            srcSet={srcSet}
+            sizes={CONTENT_IMAGE_SIZES}
             alt={alt || ""}
           />
           {caption && (
@@ -149,6 +153,7 @@ function renderBlock(block, i, locale, t, scripts = []) {
       return null;
   }
 }
+
 export default function EventsContent() {
   const { locale } = useLocale();
   const { slug } = useParams();
@@ -219,7 +224,7 @@ export default function EventsContent() {
   const isSameDay = (a, b) =>
     a && b && new Date(a).toDateString() === new Date(b).toDateString();
 
-  const imgUrl = getImageUrl(events.desc_img?.url);
+  const cover = getResponsiveImage(events.desc_img, "large");
 
   return (
     <div className="eventscontent__layout">
@@ -356,7 +361,9 @@ export default function EventsContent() {
         </div>
         <figure className="eventscontent__cover">
           <img
-            src={imgUrl}
+            src={cover.src}
+            srcSet={cover.srcSet}
+            sizes={CONTENT_IMAGE_SIZES}
             alt={
               parseMultilangField(
                 events.desc_img?.alternativeText?.trim(),
@@ -364,6 +371,7 @@ export default function EventsContent() {
               ) || title
             }
             className="eventscontent__img"
+            decoding="async"
           />
           {parseMultilangField(events.desc_img?.caption?.trim(), locale) && (
             <figcaption className="img_source">

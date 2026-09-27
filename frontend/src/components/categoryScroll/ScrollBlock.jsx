@@ -1,13 +1,10 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../utils/getLangField.js";
-import { getImageUrl } from "../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
 import { useTranslation } from "../../utils/useTranslation.js";
-// Styles
 import "./_ScrollBlock.scss";
-
-const PAGE_SIZE = 3;
 
 export default function ScrollBlock({
   title,
@@ -56,9 +53,9 @@ export default function ScrollBlock({
           {items.map((item) => {
             const itemTitle = getLangField(item, "title", locale);
             const itemDesc = getLangField(item, "desc", locale);
-            const imgUrl = imageField
-              ? getImageUrl(item[imageField]?.url)
-              : null;
+            const image = imageField
+              ? getResponsiveImage(item[imageField])
+              : { src: "", srcSet: undefined };
             const date = item.publishDate
               ? formatLocalizedDate(item.publishDate, locale)
               : null;
@@ -70,12 +67,14 @@ export default function ScrollBlock({
                 key={item.id}
               >
                 <div className="scroll_block__card-img">
-                  {imgUrl ? (
+                  {image.src ? (
                     <img
                       loading="lazy"
                       decoding="async"
-                      src={imgUrl}
-                      alt={itemTitle || ""}
+                      src={image.src}
+                      srcSet={image.srcSet}
+                      sizes="(max-width: 768px) 240px, 320px"
+                      alt=""
                     />
                   ) : (
                     <div className="scroll_block__card-img-placeholder" />

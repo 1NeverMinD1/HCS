@@ -3,7 +3,7 @@ import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
-import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 // Styles
 import "./_EventsBlock.scss";
 
@@ -11,12 +11,8 @@ export default function EventsBlock({ event }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
 
-  const imageUrl = getImageUrl(
-    event?.cover_img?.formats?.medium?.url ||
-      event?.cover_img?.url ||
-      event?.desc_img?.formats?.medium?.url ||
-      event?.desc_img?.url ||
-      "",
+  const { src, srcSet } = getResponsiveImage(
+    event?.cover_img || event?.desc_img,
   );
 
   const title = getLangField(event, "title", locale);
@@ -27,7 +23,14 @@ export default function EventsBlock({ event }) {
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="events__block">
       <div className="img_wrapper">
-        <img loading="lazy" decoding="async" src={imageUrl} alt={title} />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={src}
+          srcSet={srcSet}
+          sizes="(max-width: 430px) 95vw, 620px"
+          alt=""
+        />
       </div>
       <div className="events__block-content">
         <p className="cat">{category}</p>
@@ -72,7 +75,7 @@ export default function EventsBlock({ event }) {
           </div>
         </div>
       </div>
-      <button className="subscribe">{t("subscribe")}</button>
+      <span className="subscribe">{t("subscribe")}</span>
     </Link>
   );
 }

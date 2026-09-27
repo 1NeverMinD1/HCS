@@ -5,7 +5,7 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { useTranslation } from "../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
-import { getImageUrl } from "../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../utils/getResponsiveImage.js";
 // Styles
 import "./_EventsList.scss";
 
@@ -81,6 +81,9 @@ export default function EventsList({ onLoadEvents }) {
       </div>
 
       {events.map((event) => {
+        const { src, srcSet } = getResponsiveImage(
+          event?.cover_img || event?.desc_img,
+        );
         return (
           <Link
             to={`/${locale}/events/${event.slug}`}
@@ -92,14 +95,10 @@ export default function EventsList({ onLoadEvents }) {
                 <img
                   loading="lazy"
                   decoding="async"
-                  src={getImageUrl(
-                    event?.cover_img?.formats?.medium?.url ||
-                      event?.cover_img?.url ||
-                      event?.desc_img?.formats?.medium?.url ||
-                      event?.desc_img?.url ||
-                      "",
-                  )}
-                  alt={getLangField(event, "title", locale) || ""}
+                  src={src}
+                  srcSet={srcSet}
+                  sizes="(max-width: 1630px) 330px, 420px"
+                  alt=""
                 />
               </div>
               <div className="item__about">

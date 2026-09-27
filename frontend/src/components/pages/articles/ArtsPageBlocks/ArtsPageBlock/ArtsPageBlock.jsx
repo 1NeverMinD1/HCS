@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
-import { getImageUrl } from "../../../../../utils/getImageUrl.js";
-// Styles
+import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
 import "./_ArtsPageBlock.scss";
 
 export default function ArtsPageBlock({ item, index }) {
@@ -12,11 +11,7 @@ export default function ArtsPageBlock({ item, index }) {
   const desc = getLangField(item, "desc", locale);
   if (!item) return null;
 
-  const imgUrl = getImageUrl(
-    item.desc_img?.formats?.small?.url ||
-      item.desc_img?.formats?.medium?.url ||
-      item.desc_img?.url,
-  );
+  const { src, srcSet } = getResponsiveImage(item.desc_img, "medium");
 
   const category = getLangField(item?.categories?.[0], "name", locale);
 
@@ -27,7 +22,16 @@ export default function ArtsPageBlock({ item, index }) {
       to={`/${locale}/articles/${item.slug}`}
       className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
     >
-      {imgUrl && <img loading="lazy" decoding="async" src={imgUrl} alt="" />}
+      {src && (
+        <img
+          loading="lazy"
+          decoding="async"
+          src={src}
+          srcSet={srcSet}
+          sizes="(max-width: 430px) 50vw, (max-width: 1630px) 420px, 530px"
+          alt=""
+        />
+      )}
 
       <div className="artspage__list-block-content">
         <p className="artspage__list-block-cat">{category}</p>

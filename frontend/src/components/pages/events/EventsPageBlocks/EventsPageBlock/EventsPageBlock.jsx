@@ -4,7 +4,7 @@ import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
-import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
 // Styles
 import "./_EventsPageBlock.scss";
 
@@ -18,14 +18,7 @@ export default function EventsPageBlock({ event }) {
   const desc = getLangField(event, "desc", locale);
   const place = getLangField(event, "place", locale);
 
-  const imgUrl = getImageUrl(
-    event.cover_img?.formats?.small?.url ||
-      event.cover_img?.formats?.medium?.url ||
-      event.cover_img?.url ||
-      event.desc_img?.formats?.small?.url ||
-      event.desc_img?.formats?.medium?.url ||
-      event.desc_img?.url,
-  );
+  const { src, srcSet } = getResponsiveImage(event.cover_img || event.desc_img);
 
   const category = getLangField(event?.categories?.[0], "name", locale);
 
@@ -40,7 +33,14 @@ export default function EventsPageBlock({ event }) {
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
-      <img loading="lazy" decoding="async" src={imgUrl} alt="" />
+      <img
+        loading="lazy"
+        decoding="async"
+        src={src}
+        srcSet={srcSet}
+        sizes="(max-width: 430px) 95vw, (max-width: 1630px) 440px, 460px"
+        alt=""
+      />
       <div className="eventspage__content">
         {isUpcoming && (
           <div className="event-status event-status--upcoming">

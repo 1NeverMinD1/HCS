@@ -1,19 +1,14 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
-import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
-// Styles
 import "./_ArticlesBlock.scss";
 
 export default function ArticlesBlock({ article }) {
   const { locale } = useLocale();
 
-  const imgUrl = getImageUrl(
-    article.desc_img?.formats?.small?.url ||
-      article.desc_img?.formats?.medium?.url ||
-      article.desc_img?.url,
-  );
+  const { src, srcSet } = getResponsiveImage(article.desc_img);
 
   const title = getLangField(article, "title", locale);
   const category = getLangField(article?.categories?.[0], "name", locale);
@@ -25,7 +20,14 @@ export default function ArticlesBlock({ article }) {
       className="articles__block"
     >
       <div className="img_wrapper">
-        <img loading="lazy" decoding="async" src={imgUrl} alt={title} />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={src}
+          srcSet={srcSet}
+          sizes="(max-width: 430px) 60vw, 300px"
+          alt=""
+        />
       </div>
 
       <div className="articles__block-content">
