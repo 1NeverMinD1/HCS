@@ -30,7 +30,8 @@
   }
   blockquote {
     margin-block: 20px;
-    background: variables.$hover-color;
+    background: rgba(variables.$primary-color, 0.08);
+    border-left: 4px solid variables.$primary-color;
     padding: 30px;
     padding-left: 50px;
     width: 60%;

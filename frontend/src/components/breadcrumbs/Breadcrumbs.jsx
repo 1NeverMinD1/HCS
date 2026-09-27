@@ -20,7 +20,11 @@ export default function Breadcrumbs({ items }) {
                   {item.name}
                 </Link>
               )}
-              {!isLast && <span className="breadcrumbs__separator">/</span>}
+              {!isLast && (
+                <span className="breadcrumbs__separator" aria-hidden="true">
+                  /
+                </span>
+              )}
             </li>
           );
         })}
