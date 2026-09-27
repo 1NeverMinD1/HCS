@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "frontend/**"
+      - "scripts/**"
   workflow_dispatch:
 
 concurrency:
@@ -27,6 +28,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
 
           script: |
             cd /var/www/project/frontend
