@@ -13,6 +13,8 @@ import EventsList from "../eventslist/EventsList";
 import SEO from "../SEO/SEO.jsx";
 import { useTranslation } from "../../utils/useTranslation.js";
 
+const MAIN_COUNT = 3;
+
 export default function Home() {
   const { locale } = useLocale();
   const [featuredId, setFeaturedId] = useState(null);
@@ -36,9 +38,10 @@ export default function Home() {
     fetchNews();
   }, []);
 
-  const mainNews = allNews
-    .filter((item) => item.id !== featuredId && item.main === true)
-    .slice(0, 3);
+  const pool = allNews.filter((item) => item.id !== featuredId);
+  const pinned = pool.filter((item) => item.main === true);
+  const filler = pool.filter((item) => item.main !== true);
+  const mainNews = [...pinned, ...filler].slice(0, MAIN_COUNT);
 
   const mainIds = new Set(mainNews.map((item) => item.id));
   const trendingNews = allNews.filter((item) => !mainIds.has(item.id));
@@ -58,7 +61,7 @@ export default function Home() {
             >
               <Hero
                 onLoadFeatured={(item) => {
-                  setFeaturedId(item.id);
+                  setFeaturedId(item.__type === "news" ? item.id : null);
                   setFeaturedTag(item.categories?.[0]?.name || null);
                 }}
               />

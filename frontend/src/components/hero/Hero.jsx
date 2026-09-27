@@ -49,7 +49,8 @@ export default function Hero({ onLoadFeatured }) {
       );
 
       setFeatured({ ...winner.item, __type: winner.type });
-      if (onLoadFeatured) onLoadFeatured(winner.item);
+      if (onLoadFeatured)
+        onLoadFeatured({ ...winner.item, __type: winner.type });
     }
 
     fetchFeatured();
