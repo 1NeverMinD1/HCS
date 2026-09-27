@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+
 const API_URL = "https://api.zhkh24.kz/api";
 const SITE_URL = "https://zhkh24.kz";
-const LOCALES = ["ru", "kk", "en"];
 const COLLECTIONS = [
   { endpoint: "news", path: "news" },
   { endpoint: "articles", path: "articles" },
@@ -10,7 +10,21 @@ const COLLECTIONS = [
   { endpoint: "events", path: "events" },
   { endpoint: "q-and-as", path: "q-and-as" },
 ];
-const MIN_URLS_RATIO = 0.5;
+const MIN_TOTAL_URLS = 50;
+const OUTPUT_PATH = path.join(__dirname, "../frontend/dist/sitemap.xml");
+const BACKUP_PATH = path.join(__dirname, "sitemap.last-good.xml");
+
+function toAlmatyDateString(isoString) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Almaty",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date(isoString));
+  const get = (type) => parts.find((p) => p.type === type).value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+
 async function fetchAll(endpoint) {
   let page = 1;
   const pageSize = 100;
@@ -23,51 +37,56 @@ async function fetchAll(endpoint) {
       throw new Error(`HTTP ${res.status} for ${endpoint} page ${page}`);
     }
     const json = await res.json();
-    const items = json.data || [];
-    allItems = allItems.concat(items);
+    allItems = allItems.concat(json.data || []);
     const pageCount = json.meta?.pagination?.pageCount || 1;
     if (page >= pageCount) break;
     page++;
   }
   return allItems;
 }
+
 function urlEntry(loc, lastmod) {
   return `  <url>
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
   </url>`;
 }
-function countExistingUrls(outputPath) {
-  if (!fs.existsSync(outputPath)) return 0;
-  const content = fs.readFileSync(outputPath, "utf-8");
-  const matches = content.match(/<url>/g);
-  return matches ? matches.length : 0;
+
+function writeAtomic(filePath, content) {
+  const tmpPath = filePath + ".tmp";
+  fs.writeFileSync(tmpPath, content, "utf-8");
+  fs.renameSync(tmpPath, filePath);
 }
+
+function restoreBackup() {
+  if (fs.existsSync(BACKUP_PATH)) {
+    fs.copyFileSync(BACKUP_PATH, OUTPUT_PATH);
+    console.error(`Restored last good sitemap from ${BACKUP_PATH}`);
+  } else {
+    console.error("No backup sitemap available, output left untouched");
+  }
+}
+
 async function generateSitemap() {
   const urls = [];
   const failedCollections = [];
-  urls.push(urlEntry(`${SITE_URL}/`, new Date().toISOString()));
+  let latestUpdate = null;
+
   for (const collection of COLLECTIONS) {
     try {
       const items = await fetchAll(collection.endpoint);
       for (const item of items) {
         const slug = item.slug || item.attributes?.slug;
-        const updatedAt =
-          item.updatedAt || item.attributes?.updatedAt || new Date().toISOString();
-        if (!slug) continue;
+        const updatedAt = item.updatedAt || item.attributes?.updatedAt;
+        if (!slug || !updatedAt) continue;
+        if (!latestUpdate || updatedAt > latestUpdate) latestUpdate = updatedAt;
         const lastmod = toAlmatyDateString(updatedAt);
-        urls.push(
-          urlEntry(`${SITE_URL}/ru/${collection.path}/${slug}`, lastmod)
-        );
-        if (item.title_kk) {
-          urls.push(
-            urlEntry(`${SITE_URL}/kk/${collection.path}/${slug}`, lastmod)
-          );
+        urls.push(urlEntry(`${SITE_URL}/ru/${collection.path}/${slug}`, lastmod));
+        if (item.title_kk || item.attributes?.title_kk) {
+          urls.push(urlEntry(`${SITE_URL}/kk/${collection.path}/${slug}`, lastmod));
         }
-        if (item.title_en) {
-          urls.push(
-            urlEntry(`${SITE_URL}/en/${collection.path}/${slug}`, lastmod)
-          );
+        if (item.title_en || item.attributes?.title_en) {
+          urls.push(urlEntry(`${SITE_URL}/en/${collection.path}/${slug}`, lastmod));
         }
       }
       console.log(`✓ ${collection.endpoint}: ${items.length} items`);
@@ -76,38 +95,31 @@ async function generateSitemap() {
       failedCollections.push(collection.endpoint);
     }
   }
-  const outputPath = path.join(__dirname, "../frontend/dist/sitemap.xml");
-  const tmpPath = outputPath + ".tmp";
-  const existingCount = countExistingUrls(outputPath);
-  if (
-    failedCollections.length > 0 &&
-    existingCount > 0 &&
-    urls.length < existingCount * MIN_URLS_RATIO
-  ) {
+
+  if (failedCollections.length > 0 || urls.length < MIN_TOTAL_URLS) {
     console.error(
-      `\n⚠ Aborting: got only ${urls.length} URLs (had ${existingCount} before), ` +
-        `and these collections failed: ${failedCollections.join(", ")}. ` +
-        `Keeping the previous sitemap.xml untouched.`
+      `\n⚠ Aborting: ${urls.length} URLs, failed collections: ${failedCollections.join(", ") || "none"}`
     );
+    restoreBackup();
     process.exit(1);
   }
+
+  urls.unshift(urlEntry(`${SITE_URL}/`, toAlmatyDateString(latestUpdate)));
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join("\n")}
 </urlset>`;
-  fs.writeFileSync(tmpPath, xml, "utf-8");
-  fs.renameSync(tmpPath, outputPath);
-  console.log(`\nSitemap generated: ${outputPath}`);
+
+  writeAtomic(OUTPUT_PATH, xml);
+  writeAtomic(BACKUP_PATH, xml);
+
+  console.log(`\nSitemap generated: ${OUTPUT_PATH}`);
   console.log(`Total URLs: ${urls.length}`);
-  if (failedCollections.length > 0) {
-    console.error(
-      `\n⚠ Warning: some collections failed but sitemap was still written ` +
-        `(${urls.length} URLs is above the ${MIN_URLS_RATIO * 100}% safety threshold): ` +
-        failedCollections.join(", ")
-    );
-  }
 }
+
 generateSitemap().catch((err) => {
   console.error("Sitemap generation failed:", err);
+  restoreBackup();
   process.exit(1);
 });
