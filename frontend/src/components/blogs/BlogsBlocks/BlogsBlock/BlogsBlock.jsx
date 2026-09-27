@@ -40,7 +40,7 @@ export default function BlogsBlock({ blog }) {
           <p className="spec">{position}</p>
         </div>
         <div className="blogs__block-info">
-          <h2 className="blogs__block-title">{title}</h2>
+          <h3 className="blogs__block-title">{title}</h3>
 
           <p className="blogs__block-text">{desc}</p>
 

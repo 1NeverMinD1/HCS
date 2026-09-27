@@ -36,7 +36,8 @@
       flex-direction: column;
       gap: 20px;
 
-      h3 {
+      h2 {
+        font-size: 1.17em;
         line-height: 1.5;
       }
 
@@ -123,7 +124,7 @@
       gap: 10px;
       .footer__contacts-block {
         gap: 10px;
-        h3 {
+        h2 {
           font-size: variables.$mobile-subtitle-font-size;
         }
         .footer__contacts-list {

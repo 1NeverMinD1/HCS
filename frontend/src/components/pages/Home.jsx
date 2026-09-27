@@ -52,7 +52,7 @@ export default function Home() {
         title={t("seo_static_title_home")}
         description={t("seo_static_desc_home")}
       />
-
+      <h1 className="visually-hidden">{t("homeH1")}</h1>
       <div className="wrapper">
         <div className="home__news-block">
           <div className="home__news-item">

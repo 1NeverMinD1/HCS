@@ -90,11 +90,11 @@ export default function Hero({ onLoadFeatured }) {
   return (
     <Link to={link} className="hero">
       <div className="hero__bg">
-        {imageUrl && <img src={imageUrl} alt={title} fetchpriority="high" />}
+        {imageUrl && <img src={imageUrl} alt="" fetchPriority="high" />}
       </div>
       <p className="cat">{category}</p>
 
-      <h1 className="hero__title">{title}</h1>
+      <h2 className="hero__title">{title}</h2>
       <p className="hero__text">{desc}</p>
 
       <p className="hero__date">

@@ -477,7 +477,8 @@
   flex-direction: column;
   gap: 20px;
 }
-.footer__content .footer__contacts .footer__contacts-block h3 {
+.footer__content .footer__contacts .footer__contacts-block h2 {
+  font-size: 1.17em;
   line-height: 1.5;
 }
 .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list {
@@ -552,7 +553,7 @@
   .footer__content .footer__contacts .footer__contacts-block {
     gap: 10px;
   }
-  .footer__content .footer__contacts .footer__contacts-block h3 {
+  .footer__content .footer__contacts .footer__contacts-block h2 {
     font-size: 18px;
   }
   .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list .footer__contacts-item {
@@ -624,4 +625,16 @@ ul {
 .img_source {
   color: #707070;
   margin-top: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }/*# sourceMappingURL=style.css.map */

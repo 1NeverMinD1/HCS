@@ -27,66 +27,97 @@ export default function FooterContent() {
       </div>
       <div className="footer__contacts">
         <div className="footer__contacts-block">
-          <h3>{t.footerSectionsTitle}</h3>
+          <h2>{t.footerSectionsTitle}</h2>
           <ul className="footer__contacts-list">
-            <Link to={`/${locale}/news`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.news}</li>
-            </Link>
-            <Link to={`/${locale}/articles`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.articles}</li>
-            </Link>
-            <Link to={`/${locale}/blogs`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.blogs}</li>
-            </Link>
-            <Link to={`/${locale}/events`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.events}</li>
-            </Link>
-            <Link to={`/${locale}/q-and-as`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.footerQandA}</li>
-            </Link>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/news`} className="footer__contacts-item">
+                {t.news}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link
+                to={`/${locale}/articles`}
+                className="footer__contacts-item"
+              >
+                {t.articles}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/blogs`} className="footer__contacts-item">
+                {t.blogs}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/events`} className="footer__contacts-item">
+                {t.events}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link
+                to={`/${locale}/q-and-as`}
+                className="footer__contacts-item"
+              >
+                {t.footerQandA}
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h3>{t.footerPublicationTitle}</h3>
+          <h2>{t.footerPublicationTitle}</h2>
           <ul className="footer__contacts-list">
-            <Link to={`/${locale}/about`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.footerAbout}</li>
-            </Link>
-            <Link
-              to={`/${locale}/editorial-policy`}
-              className="footer__contacts-item"
-            >
-              <li className="footer__contacts-item">
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/about`} className="footer__contacts-item">
+                {t.footerAbout}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link
+                to={`/${locale}/editorial-policy`}
+                className="footer__contacts-item"
+              >
                 {t.footerEditorialPolicy}
-              </li>
-            </Link>
-            <Link to={`/${locale}/contacts`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.footerContacts}</li>
-            </Link>
-            <Link
-              to={`/${locale}/advertising`}
-              className="footer__contacts-item"
-            >
-              <li className="footer__contacts-item">{t.footerAdvertising}</li>
-            </Link>
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link
+                to={`/${locale}/contacts`}
+                className="footer__contacts-item"
+              >
+                {t.footerContacts}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link
+                to={`/${locale}/advertising`}
+                className="footer__contacts-item"
+              >
+                {t.footerAdvertising}
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h3>{t.footerLegalTitle}</h3>
+          <h2>{t.footerLegalTitle}</h2>
           <ul className="footer__contacts-list">
-            <Link to={`/${locale}/imprint`} className="footer__contacts-item">
-              <li className="footer__contacts-item">{t.footerImprint}</li>
-            </Link>
-            <Link to={`/${locale}/privacy`} className="footer__contacts-item">
-              {t.footerPrivacy}
-            </Link>
-            <Link to={`/${locale}/terms`} className="footer__contacts-item">
-              {t.footerTerms}
-            </Link>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/imprint`} className="footer__contacts-item">
+                {t.footerImprint}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/privacy`} className="footer__contacts-item">
+                {t.footerPrivacy}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/terms`} className="footer__contacts-item">
+                {t.footerTerms}
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h3>{t.footerOfficeTitle}</h3>
+          <h2>{t.footerOfficeTitle}</h2>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item adress">
               <a
@@ -99,7 +130,7 @@ export default function FooterContent() {
               </a>
             </li>
           </ul>
-          <h3>{t.footerEditorialTitle}</h3>
+          <h2>{t.footerEditorialTitle}</h2>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <a href="mailto:info@zhkh24.kz">info@zhkh24.kz</a>

@@ -112,6 +112,7 @@ export const translations = {
     biography: "Биография:",
     socialNetworks: "Социальные сети:",
     noPublications: "Пока нет опубликованных материалов.",
+    homeH1: "ЖКХ24 — новости и аналитика ЖКХ Казахстана",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -231,6 +232,7 @@ export const translations = {
     biography: "Өмірбаяны:",
     socialNetworks: "Әлеуметтік желілер:",
     noPublications: "Әзірге жарияланған материалдар жоқ.",
+    homeH1: "ЖКХ24 — Қазақстандағы ТКШ жаңалықтары мен талдауы",
   },
   /////////////////////////////////// EN
   en: {
@@ -347,5 +349,6 @@ export const translations = {
     biography: "Biography:",
     socialNetworks: "Social media:",
     noPublications: "No published materials yet.",
+    homeH1: "ZhKH24 — Kazakhstan housing and utilities news and analysis",
   },
 };

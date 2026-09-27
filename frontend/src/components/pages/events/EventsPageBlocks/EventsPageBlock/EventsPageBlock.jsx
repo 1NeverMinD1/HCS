@@ -40,7 +40,7 @@ export default function EventsPageBlock({ event }) {
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
-      <img src={imgUrl} alt={title || ""} />
+      <img src={imgUrl} alt="" />
       <div className="eventspage__content">
         {isUpcoming && (
           <div className="event-status event-status--upcoming">
@@ -60,7 +60,7 @@ export default function EventsPageBlock({ event }) {
           </div>
         )}
         <p className="eventspage__item-cat">{category}</p>
-        <h3 className="eventspage__item-title">{title}</h3>
+        <h2 className="eventspage__item-title">{title}</h2>
         <p className="eventspage__item-text">{desc}</p>
         <div className="eventspage__item-footer">
           <div className="date">
@@ -106,7 +106,7 @@ export default function EventsPageBlock({ event }) {
           </div>
         </div>
         <div className="eventspage__item-more">
-          <button className="eventspage__item-button">{t("details")}</button>
+          <span className="eventspage__item-button">{t("details")}</span>
           {event.price > 0 ? (
             <p className="price">
               {event.price} {t("currency")}

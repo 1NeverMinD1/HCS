@@ -27,7 +27,7 @@ export default function QNA() {
         title={t("seo_static_title_qandas")}
         description={t("seo_static_desc_qandas")}
       />
-      <h2 className="qnaspage__title">{t("qandasIntro")}</h2>
+      <h1 className="qnaspage__title">{t("qandasIntro")}</h1>
       <p className="qnaspage__intro">{t("qandasIntroText")}</p>
       <QnasPageBlocks qnas={qnas} />
     </div>

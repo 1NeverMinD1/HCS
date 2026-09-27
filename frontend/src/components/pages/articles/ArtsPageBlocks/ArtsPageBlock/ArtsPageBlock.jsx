@@ -27,11 +27,11 @@ export default function ArtsPageBlock({ item, index }) {
       to={`/${locale}/articles/${item.slug}`}
       className={`artspage__list-block ${isReversed ? "reverse" : ""}`}
     >
-      {imgUrl && <img src={imgUrl} alt={title} />}
+      {imgUrl && <img src={imgUrl} alt="" />}
 
       <div className="artspage__list-block-content">
         <p className="artspage__list-block-cat">{category}</p>
-        <h3 className="artspage__list-block-title">{title}</h3>
+        <h2 className="artspage__list-block-title">{title}</h2>
         <p className="artspage__list-block-text">{desc}</p>
 
         <p className="artspage__list-block-date">
