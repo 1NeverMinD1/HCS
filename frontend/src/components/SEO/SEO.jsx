@@ -92,6 +92,25 @@ export default function SEO({
 
   const shouldNoIndex = noIndex || isFallbackTranslation;
 
+  const HREFLANG_LOCALES = ["ru", "kk", "en"];
+  const pathWithoutLocale = canonicalUrl
+    .replace(baseUrl, "")
+    .replace(/^\/(ru|kk|en)(?=\/|$)/, "");
+
+  const availableLocales = translationSourceItem
+    ? HREFLANG_LOCALES.filter((l) =>
+        hasLangField(translationSourceItem, translationField, l),
+      )
+    : HREFLANG_LOCALES;
+
+  const hreflangLinks =
+    !shouldNoIndex && availableLocales.length > 1
+      ? availableLocales.map((l) => ({
+          lang: l,
+          href: `${baseUrl}/${l}${pathWithoutLocale}`,
+        }))
+      : [];
+
   const schemaImages = [
     seo?.seo_image_16x9?.url,
     seo?.seo_image_4x3?.url,
@@ -267,6 +286,17 @@ export default function SEO({
       />
 
       <link rel="canonical" href={canonicalUrl} />
+
+      {hreflangLinks.map((h) => (
+        <link key={h.lang} rel="alternate" hrefLang={h.lang} href={h.href} />
+      ))}
+      {hreflangLinks.length > 0 && (
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href={`${baseUrl}/ru${pathWithoutLocale}`}
+        />
+      )}
 
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
