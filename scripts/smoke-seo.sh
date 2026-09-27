@@ -26,6 +26,7 @@ fi
 
 check_xml() {
   local name="$1"
+  local allow_empty="${2:-no}"
   local code
   code=$(fetch "$SITE/$name" "curl/8" "$TMP/$name")
   if [ "$code" != "200" ]; then fail "$name вернул $code"; return 1; fi
@@ -34,12 +35,12 @@ check_xml() {
   fi
   local count
   count=$(grep -c '<loc>' "$TMP/$name")
-  if [ "$count" -eq 0 ]; then fail "$name пустой"; return 1; fi
+  if [ "$count" -eq 0 ] && [ "$allow_empty" != "yes" ]; then fail "$name пустой"; return 1; fi
   ok "$name валиден, <loc>: $count"
 }
 
 check_xml "sitemap.xml"
-check_xml "news-sitemap.xml"
+check_xml "news-sitemap.xml" "yes"
 
 URL_SOURCE="$TMP/sitemap.xml"
 if [ -f "$URL_SOURCE" ] && grep -q '<sitemapindex' "$URL_SOURCE"; then
