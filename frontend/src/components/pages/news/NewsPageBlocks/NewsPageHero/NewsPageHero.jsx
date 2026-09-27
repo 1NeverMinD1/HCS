@@ -34,7 +34,7 @@ export default function NewsPageHero({ news }) {
 
       <p className="cat">{latestNewsCategory}</p>
 
-      <h1 className="newspage__hero-main-title">{title}</h1>
+      <h2 className="newspage__hero-main-title">{title}</h2>
 
       <p className="newspage__hero-main-text">{desc}</p>
 

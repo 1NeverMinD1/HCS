@@ -11,7 +11,7 @@ export default function QnasPageBlock({ qna }) {
 
   return (
     <Link to={`/${locale}/q-and-as/${qna.slug}`} className="qnas__main-item">
-      <h3 className="qnas__main-item-title">{title}</h3>
+      <h2 className="qnas__main-item-title">{title}</h2>
       <p className="qnas__main-item-date">
         {formatLocalizedDate(qna.publishDate, locale)}
       </p>
