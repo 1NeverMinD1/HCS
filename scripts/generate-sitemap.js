@@ -39,7 +39,7 @@ async function fetchAll(endpoint) {
   let allItems = [];
   while (true) {
     const res = await fetch(
-      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=title_kk&fields[3]=title_en`
+      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=title_kk&fields[3]=title_en`,
     );
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} for ${endpoint} page ${page}`);
@@ -73,7 +73,7 @@ function buildIndex(items) {
       ({ loc, lastmod }) => `  <sitemap>
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
-  </sitemap>`
+  </sitemap>`,
     )
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -117,7 +117,8 @@ async function generateSitemaps() {
   let latestOverall = null;
 
   const addUrl = (fileName, loc, updatedAt) => {
-    if (!groups.has(fileName)) groups.set(fileName, { entries: [], latest: null });
+    if (!groups.has(fileName))
+      groups.set(fileName, { entries: [], latest: null });
     const group = groups.get(fileName);
     group.entries.push(urlEntry(loc, toAlmatyDateString(updatedAt)));
     if (!group.latest || updatedAt > group.latest) group.latest = updatedAt;
@@ -130,13 +131,18 @@ async function generateSitemaps() {
         const slug = item.slug || item.attributes?.slug;
         const updatedAt = item.updatedAt || item.attributes?.updatedAt;
         if (!slug || !updatedAt) continue;
-        if (!latestOverall || updatedAt > latestOverall) latestOverall = updatedAt;
+        if (!latestOverall || updatedAt > latestOverall)
+          latestOverall = updatedAt;
         for (const locale of LOCALES) {
-          if (locale.field && !(item[locale.field] || item.attributes?.[locale.field])) continue;
+          if (
+            locale.field &&
+            !(item[locale.field] || item.attributes?.[locale.field])
+          )
+            continue;
           addUrl(
             `sitemap-${collection.name}-${locale.code}.xml`,
             `${SITE_URL}/${locale.code}/${collection.path}/${slug}`,
-            updatedAt
+            updatedAt,
           );
           totalUrls++;
         }
@@ -150,19 +156,24 @@ async function generateSitemaps() {
 
   if (failedCollections.length > 0 || totalUrls < MIN_TOTAL_URLS) {
     console.error(
-      `\n⚠ Aborting: ${totalUrls} URLs, failed collections: ${failedCollections.join(", ") || "none"}`
+      `\n⚠ Aborting: ${totalUrls} URLs, failed collections: ${failedCollections.join(", ") || "none"}`,
     );
     restoreBackup();
     process.exit(1);
   }
 
-  addUrl(STATIC_NAME, `${SITE_URL}/`, latestOverall);
+  for (const locale of LOCALES) {
+    addUrl(STATIC_NAME, `${SITE_URL}/${locale.code}`, latestOverall);
+  }
 
   const names = [...groups.keys()].sort((a, b) =>
-    a === STATIC_NAME ? -1 : b === STATIC_NAME ? 1 : a.localeCompare(b)
+    a === STATIC_NAME ? -1 : b === STATIC_NAME ? 1 : a.localeCompare(b),
   );
 
-  const files = names.map((name) => [name, buildUrlset(groups.get(name).entries)]);
+  const files = names.map((name) => [
+    name,
+    buildUrlset(groups.get(name).entries),
+  ]);
 
   const indexItems = names.map((name) => ({
     loc: `${SITE_URL}/${name}`,
@@ -173,7 +184,9 @@ async function generateSitemaps() {
   if (fs.existsSync(newsSitemapPath)) {
     indexItems.push({
       loc: `${SITE_URL}/${NEWS_SITEMAP_NAME}`,
-      lastmod: toAlmatyDateString(fs.statSync(newsSitemapPath).mtime.toISOString()),
+      lastmod: toAlmatyDateString(
+        fs.statSync(newsSitemapPath).mtime.toISOString(),
+      ),
     });
   }
 
@@ -190,7 +203,9 @@ async function generateSitemaps() {
   for (const name of names) {
     console.log(`  ${name}: ${groups.get(name).entries.length} URLs`);
   }
-  console.log(`\nSitemap index generated: ${path.join(OUTPUT_DIR, INDEX_NAME)}`);
+  console.log(
+    `\nSitemap index generated: ${path.join(OUTPUT_DIR, INDEX_NAME)}`,
+  );
   console.log(`Files: ${names.length}, total URLs: ${totalUrls + 1}`);
 }
 
