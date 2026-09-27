@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "frontend/**"
+  workflow_dispatch:
 
 concurrency:
   group: production-deploy
@@ -17,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Deploy frontend via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -32,3 +36,13 @@ jobs:
             npm install
 
             npm run build
+
+      - name: Wait for services
+        run: sleep 30
+
+      - name: SEO smoke test
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxml2-utils
+          chmod +x scripts/smoke-seo.sh
+          SITE=https://zhkh24.kz ./scripts/smoke-seo.sh
