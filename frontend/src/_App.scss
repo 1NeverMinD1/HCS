@@ -1,5 +1,8 @@
 .main {
   background-color: white;
+  .main__content {
+    min-height: 100vh;
+  }
   .wrapper {
     padding-inline: 300px;
     .home__news-block {

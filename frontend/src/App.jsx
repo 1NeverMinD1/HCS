@@ -71,66 +71,66 @@ export default function App() {
     <LocaleProvider>
       <div className="main">
         <Header />
-
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/ru" replace />} />
-            {/* Домашняя страница */}
-            <Route path="/:locale" element={<Home />} />
-            {/* Все новости */}
-            <Route path="/:locale/news" element={<NewsPage />} />
-            {/* Главные новости */}
-            <Route path="/:locale/news/main" element={<NewsPage />} />
-            {/* Категории новостей */}
-            <Route path="/:locale/news/category/:id" element={<NewsPage />} />
-            {/* Полная новость */}
-            <Route path="/:locale/news/:slug" element={<NewsContent />} />
-            {/* Все статьи */}
-            <Route path="/:locale/articles" element={<ArtsPage />} />
-            {/* Полная статья */}
-            <Route
-              path="/:locale/articles/:slug"
-              element={<ArticlesContent />}
-            />
-            {/* Все блоги */}
-            <Route path="/:locale/blogs" element={<BlogsPage />} />
-            {/* Полный блог */}
-            <Route path="/:locale/blogs/:slug" element={<BlogsContent />} />
-            {/* Все мероприятия */}
-            <Route path="/:locale/events" element={<EventsPage />} />
-            {/* Полное мероприятие */}
-            <Route path="/:locale/events/:slug" element={<EventsContent />} />
-            {/* Вопросы и ответы */}
-            <Route path="/:locale/q-and-as" element={<QNA />} />
-            {/* Полный вопрос */}
-            <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
-            {/* Автор */}
-            <Route path="/:locale/author/:slug" element={<Authors />} />
-            {/* FooterLinks */}
-            {/* Imprint */}
-            <Route path="/:locale/imprint" element={<Imprint />} />
-            {/* About */}
-            <Route path="/:locale/about" element={<About />} />
-            {/* Advertising */}
-            <Route path="/:locale/advertising" element={<Advertising />} />
-            {/* Contacts */}
-            <Route path="/:locale/contacts" element={<Contacts />} />
-            {/* Editorial-policy */}
-            <Route
-              path="/:locale/editorial-policy"
-              element={<EditorialPolicy />}
-            />
-            {/* Privacy */}
-            <Route path="/:locale/privacy" element={<Privacy />} />
-            {/* Terms */}
-            <Route path="/:locale/terms" element={<Terms />} />
-            {/* Категория (для статей/блогов/событий/qna) */}
-            <Route path="/:locale/category/:id" element={<CategoryPage />} />
-            {/* Тег */}
-            <Route path="/:locale/tag/:id" element={<TagPage />} />
-          </Routes>
-        </Suspense>
-
+        <main className="main__content">
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/ru" replace />} />
+              {/* Домашняя страница */}
+              <Route path="/:locale" element={<Home />} />
+              {/* Все новости */}
+              <Route path="/:locale/news" element={<NewsPage />} />
+              {/* Главные новости */}
+              <Route path="/:locale/news/main" element={<NewsPage />} />
+              {/* Категории новостей */}
+              <Route path="/:locale/news/category/:id" element={<NewsPage />} />
+              {/* Полная новость */}
+              <Route path="/:locale/news/:slug" element={<NewsContent />} />
+              {/* Все статьи */}
+              <Route path="/:locale/articles" element={<ArtsPage />} />
+              {/* Полная статья */}
+              <Route
+                path="/:locale/articles/:slug"
+                element={<ArticlesContent />}
+              />
+              {/* Все блоги */}
+              <Route path="/:locale/blogs" element={<BlogsPage />} />
+              {/* Полный блог */}
+              <Route path="/:locale/blogs/:slug" element={<BlogsContent />} />
+              {/* Все мероприятия */}
+              <Route path="/:locale/events" element={<EventsPage />} />
+              {/* Полное мероприятие */}
+              <Route path="/:locale/events/:slug" element={<EventsContent />} />
+              {/* Вопросы и ответы */}
+              <Route path="/:locale/q-and-as" element={<QNA />} />
+              {/* Полный вопрос */}
+              <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
+              {/* Автор */}
+              <Route path="/:locale/author/:slug" element={<Authors />} />
+              {/* FooterLinks */}
+              {/* Imprint */}
+              <Route path="/:locale/imprint" element={<Imprint />} />
+              {/* About */}
+              <Route path="/:locale/about" element={<About />} />
+              {/* Advertising */}
+              <Route path="/:locale/advertising" element={<Advertising />} />
+              {/* Contacts */}
+              <Route path="/:locale/contacts" element={<Contacts />} />
+              {/* Editorial-policy */}
+              <Route
+                path="/:locale/editorial-policy"
+                element={<EditorialPolicy />}
+              />
+              {/* Privacy */}
+              <Route path="/:locale/privacy" element={<Privacy />} />
+              {/* Terms */}
+              <Route path="/:locale/terms" element={<Terms />} />
+              {/* Категория (для статей/блогов/событий/qna) */}
+              <Route path="/:locale/category/:id" element={<CategoryPage />} />
+              {/* Тег */}
+              <Route path="/:locale/tag/:id" element={<TagPage />} />
+            </Routes>
+          </Suspense>
+        </main>
         <hr className="main_divide" />
         <div className="wrapper">
           <Footer />
