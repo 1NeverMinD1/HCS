@@ -4,8 +4,18 @@ import { useLocale } from "../../context/LocaleContext.jsx";
 import { getLangField } from "../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../utils/dateLocale.js";
 import { getImageUrl } from "../../utils/getImageUrl.js";
-// Styles
 import "./_Hero.scss";
+
+const API = "https://api.zhkh24.kz/api";
+const COMMON =
+  "filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&sort=publishDate:desc&pagination[pageSize]=1";
+const CATS =
+  "populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en";
+const HERO_URLS = [
+  `${API}/news?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en`,
+  `${API}/blogs?${COMMON}&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&${CATS}`,
+  `${API}/articles?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&${CATS}`,
+];
 
 function isNewer(a, b) {
   const aPublish = new Date(a.publishDate).getTime();
@@ -18,23 +28,22 @@ function isNewer(a, b) {
   return aCreated >= bCreated;
 }
 
+function fetchHeroData() {
+  const early = window.__heroPromise;
+  window.__heroPromise = null;
+  const own = () =>
+    Promise.all(HERO_URLS.map((url) => fetch(url).then((res) => res.json())));
+  if (!early) return own();
+  return early.then((data) => data || own());
+}
+
 export default function Hero({ onLoadFeatured }) {
   const [featured, setFeatured] = useState(null);
   const { locale } = useLocale();
 
   useEffect(() => {
     async function fetchFeatured() {
-      const [newsRes, blogsRes, articlesRes] = await Promise.all([
-        fetch(
-          `https://api.zhkh24.kz/api/news?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
-        ).then((res) => res.json()),
-        fetch(
-          `https://api.zhkh24.kz/api/blogs?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
-        ).then((res) => res.json()),
-        fetch(
-          `https://api.zhkh24.kz/api/articles?filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en&sort=publishDate:desc&pagination[pageSize]=1`,
-        ).then((res) => res.json()),
-      ]);
+      const [newsRes, blogsRes, articlesRes] = await fetchHeroData();
 
       const candidates = [
         { item: newsRes.data?.[0] || null, type: "news" },
@@ -90,7 +99,9 @@ export default function Hero({ onLoadFeatured }) {
   return (
     <Link to={link} className="hero">
       <div className="hero__bg">
-        {imageUrl && <img src={imageUrl} alt="" fetchPriority="high" />}
+        {imageUrl && (
+          <img src={imageUrl} alt="" fetchPriority="high" decoding="async" />
+        )}
       </div>
       <p className="cat">{category}</p>
 
