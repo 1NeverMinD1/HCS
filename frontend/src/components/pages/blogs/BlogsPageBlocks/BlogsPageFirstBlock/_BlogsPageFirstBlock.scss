@@ -3,12 +3,12 @@
 .blogspage__hero {
   text-decoration: none;
   position: relative;
-  color: black;
   isolation: isolate;
   overflow: hidden;
   padding: 30px;
   height: 450px;
   border-radius: 10px;
+  background-color: #1f2a30;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,7 +20,7 @@
   gap: 20px;
   text-shadow:
     0 1px 1px rgba(0, 0, 0, 0.9),
-    0 1px 1px rgba(0, 0, 0, 0.8);
+    0 1px 3px rgba(0, 0, 0, 0.6);
 
   &:hover {
     background-size: 110%;
@@ -28,18 +28,17 @@
 
   &::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.65) 30%,
-      rgba(0, 0, 0, 0.3) 55%,
-      rgba(0, 0, 0, 0) 100%
-    );
-
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 50%),
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 40%,
+        rgba(0, 0, 0, 0.45) 65%,
+        rgba(0, 0, 0, 0) 100%
+      );
     z-index: -1;
   }
 
@@ -57,6 +56,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+
     .profile {
       width: 90px;
       height: 90px;
@@ -76,14 +76,12 @@
 
       .spec {
         font-size: 14px;
-        opacity: 0.9;
       }
     }
   }
 
   .blogspage__hero-content {
     width: 60%;
-
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -100,12 +98,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       line-height: 1.5;
-      opacity: 0.95;
     }
-  }
-
-  .date {
-    opacity: 0.85;
   }
 }
 
@@ -113,6 +106,7 @@
   .blogspage__hero {
     height: 350px;
     padding: 10px;
+
     .blogspage__hero-header {
       padding-top: 10%;
 
@@ -120,6 +114,7 @@
         width: 50px;
         height: 50px;
       }
+
       .blogspage__hero-about {
         .author {
           font-size: variables.$mobile-subtitle-font-size - 2px;
@@ -129,8 +124,10 @@
         }
       }
     }
+
     .blogspage__hero-content {
       width: 100%;
+
       .blogspage__hero-title {
         font-size: variables.$mobile-subtitle-font-size;
       }
@@ -138,6 +135,7 @@
         font-size: variables.$mobile-text-font-size;
       }
     }
+
     .date {
       font-size: variables.$mobile-text-font-size - 2px;
     }

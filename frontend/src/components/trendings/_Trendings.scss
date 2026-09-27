@@ -6,7 +6,6 @@
   align-self: flex-start;
   padding: 16px;
   border-left: 3px solid variables.$primary-color;
-
   .trendings__title {
     font-size: 18px;
     font-weight: 700;
@@ -15,13 +14,11 @@
     margin-bottom: 16px;
     color: black;
   }
-
   .trendings__list {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
-
   .trendings__block {
     display: flex;
     gap: 10px;
@@ -60,7 +57,7 @@
 
       .trendings__block-date {
         font-size: 14px;
-        color: #999;
+        color: #707070;
       }
     }
   }
@@ -90,11 +87,11 @@
     width: 100%;
     .trendings__title {
       font-size: variables.$mobile-subtitle-font-size;
-      .trendings__block {
-        .trendings__block-info {
-          h3 {
-            font-size: variables.$mobile-text-font-size;
-          }
+    }
+    .trendings__block {
+      .trendings__block-info {
+        h3 {
+          font-size: variables.$mobile-text-font-size;
         }
       }
     }

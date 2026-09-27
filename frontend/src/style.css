@@ -126,7 +126,7 @@
 }
 .header .interaction .locale-switcher .locale-btn:hover {
   transition: 0.3s ease all;
-  background: rgba(0, 60, 255, 0.658);
+  background: #0030cc;
   color: white;
 }
 .header .interaction .locale-switcher .locale-btn--active {
@@ -154,7 +154,7 @@
   cursor: pointer;
 }
 .subscribe:hover {
-  background: rgba(0, 60, 255, 0.658);
+  background: #0030cc;
 }
 
 @keyframes fadeIn {
@@ -325,7 +325,7 @@
   }
   .header .mobile-menu .mobile-menu__footer .locale-switcher .locale-btn:hover {
     transition: 0.3s ease all;
-    background: rgba(0, 60, 255, 0.658);
+    background: #0030cc;
     color: white;
   }
   .header .mobile-menu .mobile-menu__footer .locale-switcher .locale-btn--active {
@@ -622,7 +622,6 @@ ul {
 }
 
 .img_source {
-  color: rgb(58, 58, 58);
-  opacity: 0.6;
+  color: #707070;
   margin-top: 0;
 }/*# sourceMappingURL=style.css.map */
