@@ -24,7 +24,7 @@ export default function NewsPageListBlock({ item }) {
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="newspage__main-item">
       <div className="check">
-        <img src={imgUrl} alt={title} />
+        <img loading="lazy" decoding="async" src={imgUrl} alt={title} />
       </div>
 
       <div className="newspage__main-item-content">

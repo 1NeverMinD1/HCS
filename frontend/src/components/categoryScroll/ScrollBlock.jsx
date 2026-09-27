@@ -71,7 +71,12 @@ export default function ScrollBlock({
               >
                 <div className="scroll_block__card-img">
                   {imgUrl ? (
-                    <img src={imgUrl} alt={itemTitle || ""} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={imgUrl}
+                      alt={itemTitle || ""}
+                    />
                   ) : (
                     <div className="scroll_block__card-img-placeholder" />
                   )}

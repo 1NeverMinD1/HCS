@@ -15,6 +15,8 @@ export default function FooterContent() {
           className="logo"
         >
           <img
+            loading="lazy"
+            decoding="async"
             src={logo}
             alt="ЖКХ24"
             className="logo_img"

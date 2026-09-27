@@ -27,7 +27,7 @@ export default function EventsBlock({ event }) {
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="events__block">
       <div className="img_wrapper">
-        <img src={imageUrl} alt={title} />
+        <img loading="lazy" decoding="async" src={imageUrl} alt={title} />
       </div>
       <div className="events__block-content">
         <p className="cat">{category}</p>

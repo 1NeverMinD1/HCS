@@ -27,7 +27,6 @@
       crossorigin
     />
 
-    <!-- Иконкииииииии -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -36,34 +35,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-
-    <script type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        m[i].l = 1 * new Date();
-        for (var j = 0; j < document.scripts.length; j++) {
-          if (document.scripts[j].src === r) {
-            return;
-          }
-        }
-        ((k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a));
-      })(
-        window,
-        document,
-        "script",
-        "https://mc.yandex.ru/metrika/tag.js?id=110367191",
-        "ym",
-      );
-
+    <script>
+      window.ym =
+        window.ym ||
+        function () {
+          (window.ym.a = window.ym.a || []).push(arguments);
+        };
+      window.ym.l = 1 * new Date();
       ym(110367191, "init", {
         ssr: true,
         webvisor: true,
@@ -74,21 +52,49 @@
         accurateTrackBounce: true,
         trackLinks: true,
       });
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=AW-11519161480"
-    ></script>
-    <script>
+
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-6L84ZVGCWX");
       gtag("config", "AW-11519161480");
+
+      (function () {
+        var loaded = false;
+        var sources = [
+          "https://mc.yandex.ru/metrika/tag.js?id=110367191",
+          "https://www.googletagmanager.com/gtag/js?id=AW-11519161480",
+        ];
+        function load() {
+          if (loaded) return;
+          loaded = true;
+          sources.forEach(function (src) {
+            var s = document.createElement("script");
+            s.async = true;
+            s.src = src;
+            document.head.appendChild(s);
+          });
+        }
+        function schedule() {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(load, { timeout: 4000 });
+          } else {
+            setTimeout(load, 2000);
+          }
+        }
+        if (document.readyState === "complete") {
+          schedule();
+        } else {
+          window.addEventListener("load", schedule, { once: true });
+        }
+        ["scroll", "pointerdown", "keydown", "touchstart"].forEach(
+          function (evt) {
+            window.addEventListener(evt, load, { once: true, passive: true });
+          },
+        );
+      })();
     </script>
   </head>
 

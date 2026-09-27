@@ -32,14 +32,26 @@ export default function BlogsPageBlock({ blog }) {
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogspage__item">
       <div className="blogspage__item-header">
-        <img src={profileImg} alt={author || ""} className="profile" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={profileImg}
+          alt={author || ""}
+          className="profile"
+        />
         <div className="blogspage__item-about">
           <p className="author">{author}</p>
           <p className="spec">{position}</p>
         </div>
       </div>
       <div className="blogspage__item-main">
-        <img src={backImg} alt={title || ""} className="back_img" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={backImg}
+          alt={title || ""}
+          className="back_img"
+        />
       </div>
       <div className="blogspage__item-content">
         <h2 className="blogspage__item-title">{title}</h2>

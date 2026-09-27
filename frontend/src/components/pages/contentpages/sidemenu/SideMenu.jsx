@@ -96,6 +96,8 @@ export default function SideMenu({ currentId }) {
             >
               <div className="sidemenu__item-img">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={getImageUrl(
                     item.back_img?.url ||
                       item.desc_img?.formats?.small?.url ||

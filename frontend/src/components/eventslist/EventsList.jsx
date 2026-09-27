@@ -90,6 +90,8 @@ export default function EventsList({ onLoadEvents }) {
             <div className="item__intro">
               <div className="img-wrapper">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={getImageUrl(
                     event?.cover_img?.formats?.medium?.url ||
                       event?.cover_img?.url ||

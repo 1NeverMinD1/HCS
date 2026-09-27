@@ -20,7 +20,7 @@ export default function NewsPageBlock({ item }) {
   return (
     <Link to={`/${locale}/news/${item.slug}`} className="newspage__hero-item">
       <div className="img_wrapper">
-        <img src={imgUrl} alt={title} />
+        <img loading="lazy" decoding="async" src={imgUrl} alt={title} />
       </div>
 
       <div className="newspage__hero-item-info">

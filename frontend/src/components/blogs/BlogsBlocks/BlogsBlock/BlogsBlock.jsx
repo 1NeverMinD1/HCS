@@ -29,7 +29,13 @@ export default function BlogsBlock({ blog }) {
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogs__block">
       {imageUrl ? (
-        <img src={imageUrl} alt={author || ""} className="profile" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src={imageUrl}
+          alt={author || ""}
+          className="profile"
+        />
       ) : (
         <div className="profile profile--fallback">{initials}</div>
       )}

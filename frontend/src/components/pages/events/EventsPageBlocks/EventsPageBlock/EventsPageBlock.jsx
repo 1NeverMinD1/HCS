@@ -40,7 +40,7 @@ export default function EventsPageBlock({ event }) {
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
-      <img src={imgUrl} alt="" />
+      <img loading="lazy" decoding="async" src={imgUrl} alt="" />
       <div className="eventspage__content">
         {isUpcoming && (
           <div className="event-status event-status--upcoming">

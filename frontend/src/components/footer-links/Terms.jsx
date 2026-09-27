@@ -120,7 +120,12 @@ function renderBlock(block, i, locale, t) {
 
       return (
         <figure key={i} className="richtext-image">
-          <img src={getImageUrl(block.image.url)} alt={alt || ""} />
+          <img
+            loading="lazy"
+            decoding="async"
+            src={getImageUrl(block.image.url)}
+            alt={alt || ""}
+          />
 
           {caption && (
             <figcaption className="img_source">

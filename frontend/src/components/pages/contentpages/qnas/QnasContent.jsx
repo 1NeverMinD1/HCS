@@ -132,6 +132,31 @@ function renderComponent(component, index, locale, t) {
   return null;
 }
 
+const QNA_POPULATE_QUERY =
+  `populate[Content]=true` +
+  `&populate[OG][populate][og_image][fields][0]=url` +
+  `&populate[OG][populate][og_image][fields][1]=formats` +
+  `&populate[SEO][fields][0]=seo_title_ru` +
+  `&populate[SEO][fields][1]=seo_desc_ru` +
+  `&populate[SEO][fields][2]=seo_title_kk` +
+  `&populate[SEO][fields][3]=seo_desc_kk` +
+  `&populate[SEO][fields][4]=seo_title_en` +
+  `&populate[SEO][fields][5]=seo_desc_en` +
+  `&populate[SEO][fields][6]=seo_keywords_ru` +
+  `&populate[SEO][fields][7]=seo_keywords_kk` +
+  `&populate[SEO][fields][8]=seo_keywords_en` +
+  `&populate[SEO][populate][seo_image][fields][0]=url` +
+  `&populate[SEO][populate][seo_image][fields][1]=formats` +
+  `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
+  `&populate[tags][fields][0]=name_ru` +
+  `&populate[tags][fields][1]=name_kk` +
+  `&populate[tags][fields][2]=name_en` +
+  `&populate[authors][fields][0]=name_ru` +
+  `&populate[authors][fields][1]=name_kk` +
+  `&populate[authors][fields][2]=name_en`;
+
 export default function QnasContent() {
   const { slug } = useParams();
   const [qnas, setQnas] = useState(null);
@@ -142,7 +167,7 @@ export default function QnasContent() {
     setQnas(null);
 
     fetch(
-      `https://api.zhkh24.kz/api/q-and-as?filters[slug][$eq]=${slug}&populate=*`,
+      `https://api.zhkh24.kz/api/q-and-as?filters[slug][$eq]=${slug}&${QNA_POPULATE_QUERY}`,
     )
       .then((res) => res.json())
       .then((data) => setQnas(data.data?.[0]));

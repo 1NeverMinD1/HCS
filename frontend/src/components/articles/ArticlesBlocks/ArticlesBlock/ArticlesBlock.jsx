@@ -25,7 +25,7 @@ export default function ArticlesBlock({ article }) {
       className="articles__block"
     >
       <div className="img_wrapper">
-        <img src={imgUrl} alt={title} />
+        <img loading="lazy" decoding="async" src={imgUrl} alt={title} />
       </div>
 
       <div className="articles__block-content">
