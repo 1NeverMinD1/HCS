@@ -5,8 +5,15 @@ import { getLangField } from "../../../../../utils/getLangField.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
+import { getEventStatus } from "../../../../../utils/eventStatus.js";
 // Styles
 import "./_EventsPageBlock.scss";
+
+const STATUS_LABELS = {
+  upcoming: "statusUpcoming",
+  running: "statusRunning",
+  finished: "statusFinished",
+};
 
 const isSameDay = (a, b) =>
   a && b && new Date(a).toDateString() === new Date(b).toDateString();
@@ -22,14 +29,7 @@ export default function EventsPageBlock({ event }) {
 
   const category = getLangField(event?.categories?.[0], "name", locale);
 
-  const now = new Date();
-
-  const start = event.start ? new Date(event.start) : null;
-  const end = event.end ? new Date(event.end) : start;
-
-  const isUpcoming = start && start > now;
-  const isRunning = start && start <= now && end >= now;
-  const isFinished = end && end < now;
+  const status = getEventStatus(event);
 
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
@@ -42,21 +42,9 @@ export default function EventsPageBlock({ event }) {
         alt=""
       />
       <div className="eventspage__content">
-        {isUpcoming && (
-          <div className="event-status event-status--upcoming">
-            {t("statusUpcoming")}
-          </div>
-        )}
-
-        {isRunning && (
-          <div className="event-status event-status--running">
-            {t("statusRunning")}
-          </div>
-        )}
-
-        {isFinished && (
-          <div className="event-status event-status--finished">
-            {t("statusFinished")}
+        {status && (
+          <div className={`event-status event-status--${status}`}>
+            {t(STATUS_LABELS[status])}
           </div>
         )}
         <p className="eventspage__item-cat">{category}</p>

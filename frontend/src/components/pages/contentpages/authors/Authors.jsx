@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
@@ -15,7 +15,6 @@ import {
   FaGlobe,
   FaEnvelope,
 } from "react-icons/fa";
-// Styles
 import "./_Authors.scss";
 
 const SOCIAL_ICONS = {
@@ -36,6 +35,8 @@ const SECTIONS = [
   { key: "qnas", labelKey: "qandasIntro", route: "q-and-as" },
 ];
 
+const PAGE_SIZE = 10;
+
 function sortByDateDesc(items) {
   return [...items].sort((a, b) => {
     const dateA = new Date(a.publishDate || a.start || a.createdAt);
@@ -48,9 +49,11 @@ export default function Authors() {
   const { locale } = useLocale();
   const { slug } = useParams();
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   useEffect(() => {
     let cancelled = false;
@@ -140,6 +143,35 @@ export default function Authors() {
     };
   }, [slug]);
 
+  const availableSections = useMemo(() => {
+    if (!author) return [];
+    return SECTIONS.map((section) => ({
+      ...section,
+      items: sortByDateDesc(author[section.key] ?? []),
+    })).filter((section) => section.items.length > 0);
+  }, [author]);
+
+  const tabParam = searchParams.get("tab");
+  const activeSection =
+    availableSections.find((section) => section.key === tabParam) ||
+    availableSections[0];
+  const activeKey = activeSection?.key;
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [activeKey, slug]);
+
+  const handleTabChange = (key) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("tab", key);
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
   if (loading) return <h2 className="loading wrapper">{t("loading")}</h2>;
   if (error || !author)
     return <h2 className="loading wrapper">{t("authorNotFound")}</h2>;
@@ -152,10 +184,6 @@ export default function Authors() {
     author.profile_img?.formats?.medium?.url ||
       author.profile_img?.formats?.small?.url ||
       author.profile_img?.url,
-  );
-
-  const hasAnyWorks = SECTIONS.some(
-    (section) => (author[section.key] ?? []).length > 0,
   );
 
   return (
@@ -220,52 +248,82 @@ export default function Authors() {
         </div>
 
         <div className="authors__works">
-          {!hasAnyWorks && <p>{t("noPublications")}</p>}
+          {availableSections.length === 0 && (
+            <p className="authors__works-empty">{t("noPublications")}</p>
+          )}
 
-          {SECTIONS.map((section) => {
-            const items = sortByDateDesc(author[section.key] ?? []);
-            if (items.length === 0) return null;
-
-            return (
-              <div key={section.key} className="authors__works-section">
-                <h3>{t(section.labelKey)}</h3>
-                <div className="authors__works-list">
-                  {items.map((item) => {
-                    const title = getLangField(item, "title", locale);
-                    const desc = getLangField(item, "desc", locale);
-                    const cover = getImageUrl(
-                      item.desc_img?.formats?.medium?.url ||
-                        item.back_img?.formats?.medium?.url ||
-                        item.cover_img?.formats?.medium?.url ||
-                        item.desc_img?.url ||
-                        item.back_img?.url ||
-                        item.cover_img?.url,
-                    );
-
-                    return (
-                      <Link
-                        key={item.id}
-                        to={`/${locale}/${section.route}/${item.slug}`}
-                        className="authors__work-card"
-                      >
-                        {cover && <img src={cover} alt={title} />}
-                        <div className="authors__work-text">
-                          <p className="authors__work-title">{title}</p>
-                          <p className="authors__work-desc">{desc}</p>
-                          <p className="authors__work-date">
-                            {formatLocalizedDate(
-                              item.publishDate || item.start || item.createdAt,
-                              locale,
-                            )}
-                          </p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+          {activeSection && (
+            <>
+              <div className="authors__tabs" role="tablist">
+                {availableSections.map((section) => {
+                  const isActive = section.key === activeKey;
+                  return (
+                    <button
+                      key={section.key}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      className={
+                        "authors__tab" +
+                        (isActive ? " authors__tab--active" : "")
+                      }
+                      onClick={() => handleTabChange(section.key)}
+                    >
+                      {t(section.labelKey)}
+                      <span className="authors__tab-count">
+                        {section.items.length}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
-            );
-          })}
+
+              <div className="authors__works-list" role="tabpanel">
+                {activeSection.items.slice(0, visibleCount).map((item) => {
+                  const title = getLangField(item, "title", locale);
+                  const desc = getLangField(item, "desc", locale);
+                  const cover = getImageUrl(
+                    item.desc_img?.formats?.medium?.url ||
+                      item.back_img?.formats?.medium?.url ||
+                      item.cover_img?.formats?.medium?.url ||
+                      item.desc_img?.url ||
+                      item.back_img?.url ||
+                      item.cover_img?.url,
+                  );
+
+                  return (
+                    <Link
+                      key={item.id}
+                      to={`/${locale}/${activeSection.route}/${item.slug}`}
+                      className="authors__work-card"
+                    >
+                      {cover && <img src={cover} alt={title} />}
+                      <div className="authors__work-text">
+                        <p className="authors__work-title">{title}</p>
+                        <p className="authors__work-desc">{desc}</p>
+                        <p className="authors__work-date">
+                          {formatLocalizedDate(
+                            item.publishDate || item.start || item.createdAt,
+                            locale,
+                          )}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {visibleCount < activeSection.items.length && (
+                <button
+                  type="button"
+                  className="authors__more"
+                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                >
+                  {t("showMore")}
+                </button>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

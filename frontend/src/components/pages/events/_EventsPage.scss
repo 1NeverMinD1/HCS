@@ -8,6 +8,98 @@
   .eventspage__intro {
     margin-bottom: 20px;
   }
+  .eventspage__filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-block: 20px 30px;
+    padding: 16px 20px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 14px;
+    .eventspage__statuses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      .eventspage__status {
+        padding: 8px 16px;
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 999px;
+        background: none;
+        font: inherit;
+        font-size: variables.$text-font-size - 2px;
+        color: variables.$text-color;
+        white-space: nowrap;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          border-color 0.2s;
+        &:hover {
+          border-color: variables.$primary-color;
+          color: variables.$primary-color;
+        }
+        &--active {
+          background: variables.$primary-color;
+          border-color: variables.$primary-color;
+          color: white;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+    .eventspage__dates {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+      .eventspage__date {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        span {
+          font-size: variables.$text-font-size - 4px;
+          color: rgb(110, 110, 110);
+        }
+        input {
+          padding: 7px 10px;
+          border: 1px solid rgb(220, 220, 220);
+          border-radius: 8px;
+          font: inherit;
+          font-size: variables.$text-font-size - 2px;
+          color: variables.$text-color;
+          background: white;
+          cursor: pointer;
+          &:focus {
+            outline: none;
+            border-color: variables.$primary-color;
+          }
+        }
+      }
+      .eventspage__reset {
+        padding: 8px 12px;
+        border: none;
+        background: none;
+        font: inherit;
+        font-size: variables.$text-font-size - 2px;
+        color: variables.$primary-color;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          color: variables.$hover-color;
+        }
+      }
+    }
+  }
+  .eventspage__empty,
+  .eventspage__loading {
+    text-align: center;
+    padding: 20px;
+    font-size: variables.$text-font-size;
+    color: rgb(110, 110, 110);
+  }
 }
 
 @media (max-width: 430px) {
@@ -17,6 +109,52 @@
     }
     .eventspage__intro {
       font-size: variables.$mobile-subtitle-font-size;
+    }
+    .eventspage__filters {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      margin-block: 14px 20px;
+      padding: 12px;
+      .eventspage__statuses {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-inline: -12px;
+        padding-inline: 12px;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .eventspage__status {
+          flex-shrink: 0;
+          padding: 6px 12px;
+          font-size: variables.$mobile-text-font-size;
+        }
+      }
+      .eventspage__dates {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        .eventspage__date {
+          min-width: 0;
+          span {
+            font-size: variables.$mobile-text-font-size - 2px;
+          }
+          input {
+            width: 100%;
+            font-size: variables.$mobile-text-font-size;
+          }
+        }
+        .eventspage__reset {
+          grid-column: 1 / -1;
+          justify-self: center;
+          font-size: variables.$mobile-text-font-size;
+        }
+      }
+    }
+    .eventspage__empty,
+    .eventspage__loading {
+      font-size: variables.$mobile-text-font-size;
     }
   }
 }

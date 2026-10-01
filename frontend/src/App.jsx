@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { LocaleProvider } from "./context/LocaleContext.jsx";
 import { useYandexMetrika } from "./utils/useYandexMetrika.js";
@@ -59,13 +59,17 @@ const Terms = lazy(() => import("./components/footer-links/Terms.jsx"));
 
 export default function App() {
   useYandexMetrika();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-    window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
 
   return (
     <LocaleProvider>

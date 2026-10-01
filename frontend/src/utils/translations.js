@@ -113,6 +113,11 @@ export const translations = {
     socialNetworks: "Социальные сети:",
     noPublications: "Пока нет опубликованных материалов.",
     homeH1: "ЖКХ24 — новости и аналитика ЖКХ Казахстана",
+    showMore: "Показать больше",
+    filterAll: "Все",
+    dateFrom: "С даты",
+    dateTo: "По дату",
+    resetFilters: "Сбросить",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -233,6 +238,11 @@ export const translations = {
     socialNetworks: "Әлеуметтік желілер:",
     noPublications: "Әзірге жарияланған материалдар жоқ.",
     homeH1: "ЖКХ24 — Қазақстандағы ТКШ жаңалықтары мен талдауы",
+    showMore: "Толығырақ көрсету",
+    filterAll: "Барлығы",
+    dateFrom: "Күнден",
+    dateTo: "Күнге",
+    resetFilters: "Фильтрлерді сәттің",
   },
   /////////////////////////////////// EN
   en: {
@@ -350,5 +360,10 @@ export const translations = {
     socialNetworks: "Social media:",
     noPublications: "No published materials yet.",
     homeH1: "ZhKH24 — Kazakhstan housing and utilities news and analysis",
+    showMore: "Show more",
+    filterAll: "All",
+    dateFrom: "From",
+    dateTo: "To",
+    resetFilters: "Reset filters",
   },
 };
