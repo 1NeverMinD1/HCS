@@ -119,26 +119,30 @@ export default function FooterContent() {
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h2>{t.footerOfficeTitle}</h2>
-          <ul className="footer__contacts-list">
-            <li className="footer__contacts-item adress">
-              <a
-                href="https://2gis.kz/astana/geo/9570784863371165/71.43852,51.120018"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>{t.footerAddressCity}</span>{" "}
-                <span>{t.footerAddressStreet}</span>
-              </a>
-            </li>
-          </ul>
-          <h2>{t.footerEditorialTitle}</h2>
+          <h2>{t.footerLegalTitle}</h2>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
-              <a href="mailto:info@zhkh24.kz">info@zhkh24.kz</a>
+              <Link to={`/${locale}/imprint`} className="footer__contacts-item">
+                {t.footerImprint}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/privacy`} className="footer__contacts-item">
+                {t.footerPrivacy}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/terms`} className="footer__contacts-item">
+                {t.footerTerms}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/sitemap`} className="footer__contacts-item">
+                {t.sitemap}
+              </Link>
             </li>
           </ul>
-        </div>
+        </div>{" "}
       </div>
     </div>
   );

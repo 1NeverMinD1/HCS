@@ -43,6 +43,8 @@ const TagPage = lazy(
   () => import("./components/pages/contentpages/tagPage/TagPage.jsx"),
 );
 
+const Sitemap = lazy(() => import("./components/sitemap/Sitemap.jsx"));
+
 // FooterLinks
 
 const Imprint = lazy(() => import("./components/footer-links/Imprint.jsx"));
@@ -128,6 +130,8 @@ export default function App() {
               <Route path="/:locale/privacy" element={<Privacy />} />
               {/* Terms */}
               <Route path="/:locale/terms" element={<Terms />} />
+              {/* Sitemap */}
+              <Route path="/:locale/sitemap" element={<Sitemap />} />
               {/* Категория (для статей/блогов/событий/qna) */}
               <Route path="/:locale/category/:id" element={<CategoryPage />} />
               {/* Тег */}

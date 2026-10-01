@@ -118,6 +118,12 @@ export const translations = {
     dateFrom: "С даты",
     dateTo: "По дату",
     resetFilters: "Сбросить",
+    sitemap: "Карта сайта",
+    sitemapDesc:
+      "Структура портала ЖКХ24: разделы, рубрики, авторы и правовая информация",
+    rubrics: "Рубрики",
+    authorsList: "Авторы",
+    aboutPortal: "О портале",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -242,7 +248,13 @@ export const translations = {
     filterAll: "Барлығы",
     dateFrom: "Күнден",
     dateTo: "Күнге",
-    resetFilters: "Фильтрлерді сәттің",
+    resetFilters: "Тазалау",
+    sitemap: "Сайт картасы",
+    sitemapDesc:
+      "ЖКХ24 порталының құрылымы: бөлімдер, айдарлар, авторлар және құқықтық ақпарат",
+    rubrics: "Айдарлар",
+    authorsList: "Авторлар",
+    aboutPortal: "Портал туралы",
   },
   /////////////////////////////////// EN
   en: {
@@ -365,5 +377,11 @@ export const translations = {
     dateFrom: "From",
     dateTo: "To",
     resetFilters: "Reset filters",
+    sitemap: "Sitemap",
+    sitemapDesc:
+      "ZhKH24 portal structure: sections, topics, authors and legal information",
+    rubrics: "Topics",
+    authorsList: "Authors",
+    aboutPortal: "About the portal",
   },
 };

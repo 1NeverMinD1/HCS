@@ -1,0 +1,118 @@
+@use "../../variables";
+
+.sitemap {
+  margin-bottom: 40px;
+  .sitemap__title {
+    margin-block: 20px;
+    font-size: 40px;
+  }
+  .sitemap__tree {
+    margin-top: 30px;
+    .sitemap__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sitemap__list--level-0 {
+      > .sitemap__item {
+        > .sitemap__link {
+          display: inline-block;
+          font-size: variables.$subtitle-font-size;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .sitemap__list--level-1 {
+      columns: 260px;
+      column-gap: 20px;
+      > .sitemap__item {
+        display: block;
+        break-inside: avoid;
+        margin-bottom: 20px;
+        padding: 18px 20px;
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 14px;
+        > .sitemap__link,
+        > .sitemap__group {
+          font-size: variables.$text-font-size + 2px;
+          font-weight: bold;
+        }
+      }
+    }
+    .sitemap__list--level-2 {
+      margin-top: 12px;
+      padding-left: 14px;
+      border-left: 2px solid rgb(230, 230, 230);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .sitemap__item {
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          left: -14px;
+          top: 0.7em;
+          width: 10px;
+          border-top: 2px solid rgb(230, 230, 230);
+        }
+      }
+      .sitemap__link {
+        font-size: variables.$text-font-size;
+      }
+    }
+    .sitemap__link {
+      color: variables.$text-color;
+      text-decoration: none;
+      transition: color 0.2s;
+      &:hover {
+        color: variables.$primary-color;
+      }
+      &:focus-visible {
+        outline: 2px solid variables.$primary-color;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    }
+    .sitemap__group {
+      color: variables.$text-color;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .sitemap {
+    margin-bottom: 24px;
+    .sitemap__title {
+      font-size: variables.$mobile-title-font-size;
+    }
+    .sitemap__tree {
+      margin-top: 20px;
+      .sitemap__list--level-0 {
+        > .sitemap__item {
+          > .sitemap__link {
+            font-size: variables.$mobile-subtitle-font-size;
+            margin-bottom: 14px;
+          }
+        }
+      }
+      .sitemap__list--level-1 {
+        columns: 1;
+        > .sitemap__item {
+          margin-bottom: 12px;
+          padding: 14px;
+          > .sitemap__link,
+          > .sitemap__group {
+            font-size: variables.$mobile-subtitle-font-size;
+          }
+        }
+      }
+      .sitemap__list--level-2 {
+        .sitemap__link {
+          font-size: variables.$mobile-text-font-size;
+        }
+      }
+    }
+  }
+}
