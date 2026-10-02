@@ -111,7 +111,13 @@ const UID_TO_TG_TEXT_FIELDS: Record<string, { title: string; desc: string }> = {
   "api::event.event": { title: "title_ru", desc: "desc_ru" },
 };
 
-const SITEMAP_TRIGGER_ACTIONS = ["publish", "update", "unpublish", "delete"];
+const SITEMAP_TRIGGER_ACTIONS = [
+  "create",
+  "publish",
+  "update",
+  "unpublish",
+  "delete",
+];
 
 function buildUrls(routeKey: string, entry: any) {
   const segment = ROUTE_SEGMENT[routeKey];
@@ -191,7 +197,7 @@ export default {
         }
       }
 
-      if (!["publish", "update"].includes(action)) return result;
+      if (!["create", "publish", "update"].includes(action)) return result;
 
       try {
         const entry = extractEntry(action, result);
