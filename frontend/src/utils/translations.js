@@ -124,6 +124,7 @@ export const translations = {
     rubrics: "Рубрики",
     authorsList: "Авторы",
     aboutPortal: "О портале",
+    notFound: "Страница не найдена",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -255,6 +256,7 @@ export const translations = {
     rubrics: "Айдарлар",
     authorsList: "Авторлар",
     aboutPortal: "Портал туралы",
+    notFound: "Бет табылмады",
   },
   /////////////////////////////////// EN
   en: {
@@ -383,5 +385,6 @@ export const translations = {
     rubrics: "Topics",
     authorsList: "Authors",
     aboutPortal: "About the portal",
+    notFound: "Page not found",
   },
 };

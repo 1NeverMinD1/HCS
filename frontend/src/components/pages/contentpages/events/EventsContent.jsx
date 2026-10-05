@@ -16,6 +16,7 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 import "./_EventsContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
@@ -159,6 +160,7 @@ export default function EventsContent() {
   const { slug } = useParams();
   const { t } = useTranslation();
   const [events, setEvents] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const title = getLangField(events, "title", locale);
   const desc = getLangField(events, "desc", locale);
   const content = getLangField(events, "content", locale);
@@ -173,6 +175,9 @@ export default function EventsContent() {
   ];
 
   useEffect(() => {
+    setEvents(null);
+    setNotFound(false);
+
     fetch(
       `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}` +
         `&populate[OG][populate][og_image][fields][0]=url` +
@@ -213,10 +218,19 @@ export default function EventsContent() {
         `&populate[scripts][fields][0]=name` +
         `&populate[scripts][fields][1]=script`,
     )
-      .then((res) => res.json())
-      .then((data) => setEvents(data.data?.[0]));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const first = data.data?.[0];
+        if (first) setEvents(first);
+        else setNotFound(true);
+      })
+      .catch((err) => console.error("Failed to fetch event:", err));
   }, [slug]);
 
+  if (notFound) return <NotFoundContent />;
   if (!events) return <h2 className="loading wrapper">{t("loading")}</h2>;
 
   const formatDate = (dateStr) => formatLocalizedDate(dateStr, locale);
