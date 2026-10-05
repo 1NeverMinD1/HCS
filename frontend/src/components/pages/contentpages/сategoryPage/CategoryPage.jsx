@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import { useTranslation } from "../../../../utils/useTranslation.js";
@@ -6,6 +5,9 @@ import SEO from "../../../SEO/SEO.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 import ScrollBlock from "../../../categoryScroll/ScrollBlock.jsx";
 import useCategoryContent from "../../../../hooks/useCategoryContent.js";
+import { getLangField } from "../../../../utils/getLangField.js";
+import useTaxonomyItem from "../../../../hooks/useTaxonomyItem.js";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 // Styles
 import "./_CategoryPage.scss";
 
@@ -32,13 +34,13 @@ export default function CategoryPage() {
     hasDesc: false,
   });
 
+  const { item: category, notFound } = useTaxonomyItem("categories", id);
+
+  if (notFound) return <NotFoundContent />;
+  if (!category) return <h2 className="loading wrapper">{t("loading")}</h2>;
+
   const pageCategoryName =
-    articles.categoryName ||
-    blogs.categoryName ||
-    events.categoryName ||
-    qnas.categoryName ||
-    t("category") ||
-    "Категория";
+    getLangField(category, "name", locale) || t("category") || "Категория";
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },

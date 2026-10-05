@@ -5,6 +5,9 @@ import SEO from "../../../SEO/SEO.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 import ScrollBlock from "../../../categoryScroll/ScrollBlock.jsx";
 import useCategoryContent from "../../../../hooks/useCategoryContent.js";
+import { getLangField } from "../../../../utils/getLangField.js";
+import useTaxonomyItem from "../../../../hooks/useTaxonomyItem.js";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 // Styles
 import "./_TagPage.scss";
 
@@ -35,14 +38,12 @@ export default function TagPage() {
     hasDesc: false,
   });
 
-  const pageTagName =
-    news.categoryName ||
-    articles.categoryName ||
-    blogs.categoryName ||
-    events.categoryName ||
-    qnas.categoryName ||
-    t("tag") ||
-    "Тег";
+  const { item: tag, notFound } = useTaxonomyItem("tags", id);
+
+  if (notFound) return <NotFoundContent />;
+  if (!tag) return <h2 className="loading wrapper">{t("loading")}</h2>;
+
+  const pageTagName = getLangField(tag, "name", locale) || t("tag") || "Тег";
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
