@@ -7,14 +7,25 @@ import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
+import NotFoundContent from "../../notFound/NotFoundContent.jsx";
 // Styles
 import "./_NewsPage.scss";
 
 const PAGE_SIZE = 20;
 
+const CATEGORY_DESCRIPTIONS = {
+  ru: (name) =>
+    `${name} — новости жилищно-коммунального хозяйства Казахстана на портале ЖКХ24.`,
+  kk: (name) =>
+    `${name} — Қазақстанның тұрғын үй-коммуналдық шаруашылығы жаңалықтары ЖКХ24 порталында.`,
+  en: (name) =>
+    `${name} — housing and utilities news from Kazakhstan on the ZhKH24 portal.`,
+};
+
 export default function NewsPage() {
   const [news, setNews] = useState([]);
-  const [categoryName, setCategoryName] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -26,14 +37,42 @@ export default function NewsPage() {
   const { id } = useParams();
   const location = useLocation();
   const isMain = location.pathname.endsWith("/news/main");
+  const isCategory = Boolean(id) && !isMain;
   const { locale } = useLocale();
 
   useEffect(() => {
     setNews([]);
     setPage(1);
     setHasMore(true);
-    setCategoryName(null);
+    setCategory(null);
+    setNotFound(false);
   }, [id, isMain]);
+
+  useEffect(() => {
+    if (!isCategory) return;
+
+    let cancelled = false;
+
+    fetch(
+      `https://api.zhkh24.kz/api/header-cats?filters[id][$eq]=${id}` +
+        `&fields[0]=name_ru&fields[1]=name_kk&fields[2]=name_en`,
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        const cat = data.data?.[0];
+        if (cat) setCategory(cat);
+        else setNotFound(true);
+      })
+      .catch((err) => console.error("Failed to fetch category:", err));
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isCategory]);
 
   useEffect(() => {
     async function fetchNews() {
@@ -70,38 +109,32 @@ export default function NewsPage() {
           POPULATE_PARAMS;
       }
 
-      const res = await fetch(url);
-      const data = await res.json();
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-      const newItems = data.data || [];
+        const newItems = data.data || [];
 
-      setNews((prev) => {
-        if (page === 1) return newItems;
+        setNews((prev) => {
+          if (page === 1) return newItems;
 
-        const ids = new Set(prev.map((item) => item.id));
-        return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
-      });
+          const ids = new Set(prev.map((item) => item.id));
+          return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
+        });
 
-      if (page === 1 && id && newItems.length > 0) {
-        const cat = newItems[0].header_cats?.find(
-          (c) => String(c.id) === String(id),
-        );
-        setCategoryName(getLangField(cat, "name", locale) || null);
-      }
+        const pagination = data.meta?.pagination;
 
-      if (page === 1 && !id) {
-        setCategoryName(null);
-      }
-
-      const pagination = data.meta?.pagination;
-
-      if (pagination) {
-        setHasMore(pagination.page < pagination.pageCount);
-      } else {
+        if (pagination) {
+          setHasMore(pagination.page < pagination.pageCount);
+        } else {
+          setHasMore(false);
+        }
+      } catch (err) {
+        console.error("Failed to fetch news:", err);
         setHasMore(false);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     }
 
     fetchNews();
@@ -126,19 +159,26 @@ export default function NewsPage() {
     return () => observer.disconnect();
   }, [hasMore, loading, news]);
 
-  if (!news.length) {
-    return (
-      <h2 className="empty wrapper">
-        {loading || hasMore ? t("loading") : t("noContent")}
-      </h2>
-    );
+  if (notFound) return <NotFoundContent />;
+
+  if ((isCategory && !category) || (!news.length && (loading || hasMore))) {
+    return <h2 className="empty wrapper">{t("loading")}</h2>;
   }
+
+  const categoryName = category ? getLangField(category, "name", locale) : null;
 
   const heroNews = news[0];
   const topNews = news.slice(1, 4);
   const restNews = news.slice(4);
 
   const title = isMain ? t("mainNewsTitle") : (categoryName ?? t("news"));
+
+  const lang = locale.split("-")[0];
+  const seoTitle = isMain || isCategory ? title : t("seo_static_title_news");
+  const seoDescription =
+    isCategory && categoryName
+      ? (CATEGORY_DESCRIPTIONS[lang] || CATEGORY_DESCRIPTIONS.ru)(categoryName)
+      : t("seo_static_desc_news");
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -153,21 +193,31 @@ export default function NewsPage() {
   return (
     <div className="newspage wrapper">
       <SEO
-        title={t("seo_static_title_news")}
-        description={t("seo_static_desc_news")}
+        title={seoTitle}
+        description={seoDescription}
         breadcrumbs={breadcrumbItems}
       />
       <h1 className="newspage__title">{title}</h1>
       <Breadcrumbs items={breadcrumbItems} />
-      <NewsPageBlocks hero={heroNews} list={topNews} />
 
-      <div className="more_news">
-        <hr />
-        <p>{t("moreNews")}</p>
-        <hr />
-      </div>
+      {news.length === 0 ? (
+        <p className="newspage__empty">{t("noContent")}</p>
+      ) : (
+        <>
+          <NewsPageBlocks hero={heroNews} list={topNews} />
 
-      <NewsPageList news={restNews} loaderRef={hasMore ? loaderRef : null} />
+          <div className="more_news">
+            <hr />
+            <p>{t("moreNews")}</p>
+            <hr />
+          </div>
+
+          <NewsPageList
+            news={restNews}
+            loaderRef={hasMore ? loaderRef : null}
+          />
+        </>
+      )}
 
       {loading && (
         <p style={{ textAlign: "center", padding: "20px" }}>{t("loading")}</p>

@@ -6,7 +6,7 @@ import { useYandexMetrika } from "./utils/useYandexMetrika.js";
 
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
-
+import NotFoundContent from "./components/notFound/NotFoundContent.jsx";
 import Home from "./components/pages/Home.jsx";
 
 const NewsPage = lazy(() => import("./components/pages/news/NewsPage.jsx"));
@@ -136,6 +136,8 @@ export default function App() {
               <Route path="/:locale/category/:id" element={<CategoryPage />} />
               {/* Тег */}
               <Route path="/:locale/tag/:id" element={<TagPage />} />
+              {/* 404 */}
+              <Route path="*" element={<NotFoundContent />} />
             </Routes>
           </Suspense>
         </main>
