@@ -126,6 +126,7 @@ export const translations = {
     aboutPortal: "О портале",
     notFound: "Страница не найдена",
     backToHome: "Вернуться на главную",
+    participantsNotSpecified: "Количество участников не указано",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -259,6 +260,7 @@ export const translations = {
     aboutPortal: "Портал туралы",
     notFound: "Бет табылмады",
     backToHome: "Басты бетке оралу",
+    participantsNotSpecified: "Қатысушылар саны көрсетілмеген",
   },
   /////////////////////////////////// EN
   en: {
@@ -389,5 +391,6 @@ export const translations = {
     aboutPortal: "About the portal",
     notFound: "Page not found",
     backToHome: "Back to home",
+    participantsNotSpecified: "Number of participants is not specified",
   },
 };

@@ -311,7 +311,11 @@ export function EventView({ item: events, children }) {
                 </svg>
                 <div className="info">
                   <p>{t("participantsCount")}</p>
-                  <p className="text">{events.amount}</p>
+                  <p className="text">
+                    {events.amount != null
+                      ? events.amount.toLocaleString()
+                      : t("notSpecified")}
+                  </p>
                 </div>
               </div>
             </div>
