@@ -9,6 +9,9 @@ import Footer from "./components/footer/Footer.jsx";
 import NotFoundContent from "./components/notFound/NotFoundContent.jsx";
 import Home from "./components/pages/Home.jsx";
 
+const PreviewPage = lazy(
+  () => import("./components/pages/preview/PreviewPage.jsx"),
+);
 const NewsPage = lazy(() => import("./components/pages/news/NewsPage.jsx"));
 const ArtsPage = lazy(() => import("./components/pages/articles/ArtsPage.jsx"));
 const BlogsPage = lazy(() => import("./components/pages/blogs/BlogsPage.jsx"));
@@ -138,6 +141,11 @@ export default function App() {
               <Route path="/:locale/tag/:id" element={<TagPage />} />
               {/* 404 */}
               <Route path="*" element={<NotFoundContent />} />
+              {/* Preview */}
+              <Route
+                path="/:locale/preview/:type/:documentId"
+                element={<PreviewPage />}
+              />
             </Routes>
           </Suspense>
         </main>
