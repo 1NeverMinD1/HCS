@@ -197,7 +197,7 @@ function findMidpointIndex(content) {
   return idx;
 }
 
-function NewsItem({ item, isFirst, registerRef }) {
+export function NewsItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
   const cover = getResponsiveImage(item.desc_img, "large");
@@ -320,7 +320,7 @@ function NewsItem({ item, isFirst, registerRef }) {
   );
 }
 
-const NEWS_POPULATE_QUERY =
+export const NEWS_POPULATE_QUERY =
   `populate[OG][populate][og_image][fields][0]=url` +
   `&populate[OG][populate][og_image][fields][1]=formats` +
   `&populate[SEO][fields][0]=seo_title_ru` +

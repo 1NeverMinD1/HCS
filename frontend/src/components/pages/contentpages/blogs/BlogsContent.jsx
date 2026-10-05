@@ -23,6 +23,45 @@ import "./_BlogsContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
+export const BLOGS_POPULATE_QUERY =
+  `populate[authors][fields][0]=name_ru` +
+  `&populate[authors][fields][1]=name_kk` +
+  `&populate[authors][fields][2]=name_en` +
+  `&populate[authors][fields][3]=position_ru` +
+  `&populate[authors][fields][4]=position_kk` +
+  `&populate[authors][fields][5]=position_en` +
+  `&populate[authors][fields][6]=slug` +
+  `&populate[authors][populate][profile_img][fields][0]=url` +
+  `&populate[authors][populate][profile_img][fields][1]=formats` +
+  `&populate[back_img][fields][0]=url` +
+  `&populate[back_img][fields][1]=alternativeText` +
+  `&populate[back_img][fields][2]=caption` +
+  `&populate[back_img][fields][3]=formats` +
+  `&populate[OG][populate][og_image][fields][0]=url` +
+  `&populate[OG][populate][og_image][fields][1]=formats` +
+  `&populate[SEO][fields][0]=seo_title_ru` +
+  `&populate[SEO][fields][1]=seo_desc_ru` +
+  `&populate[SEO][fields][2]=seo_title_kk` +
+  `&populate[SEO][fields][3]=seo_desc_kk` +
+  `&populate[SEO][fields][4]=seo_title_en` +
+  `&populate[SEO][fields][5]=seo_desc_en` +
+  `&populate[SEO][fields][6]=seo_keywords_ru` +
+  `&populate[SEO][fields][7]=seo_keywords_kk` +
+  `&populate[SEO][fields][8]=seo_keywords_en` +
+  `&populate[SEO][populate][seo_image][fields][0]=url` +
+  `&populate[SEO][populate][seo_image][fields][1]=formats` +
+  `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
+  `&populate[tags][fields][0]=name_ru` +
+  `&populate[tags][fields][1]=name_kk` +
+  `&populate[tags][fields][2]=name_en` +
+  `&populate[categories][fields][0]=name_ru` +
+  `&populate[categories][fields][1]=name_kk` +
+  `&populate[categories][fields][2]=name_en` +
+  `&populate[scripts][fields][0]=name` +
+  `&populate[scripts][fields][1]=script`;
+
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
@@ -197,7 +236,7 @@ function findMidpointIndex(content) {
   return idx;
 }
 
-function BlogItem({ item, locale, t, isFirst, registerRef }) {
+export function BlogItem({ item, locale, t, isFirst, registerRef }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
@@ -327,45 +366,6 @@ export default function BlogsContent() {
   const [notFound, setNotFound] = useState(false);
   const loaderRef = useRef(null);
   const itemRefs = useRef(new Map());
-
-  const BLOGS_POPULATE_QUERY =
-    `populate[authors][fields][0]=name_ru` +
-    `&populate[authors][fields][1]=name_kk` +
-    `&populate[authors][fields][2]=name_en` +
-    `&populate[authors][fields][3]=position_ru` +
-    `&populate[authors][fields][4]=position_kk` +
-    `&populate[authors][fields][5]=position_en` +
-    `&populate[authors][fields][6]=slug` +
-    `&populate[authors][populate][profile_img][fields][0]=url` +
-    `&populate[authors][populate][profile_img][fields][1]=formats` +
-    `&populate[back_img][fields][0]=url` +
-    `&populate[back_img][fields][1]=alternativeText` +
-    `&populate[back_img][fields][2]=caption` +
-    `&populate[back_img][fields][3]=formats` +
-    `&populate[OG][populate][og_image][fields][0]=url` +
-    `&populate[OG][populate][og_image][fields][1]=formats` +
-    `&populate[SEO][fields][0]=seo_title_ru` +
-    `&populate[SEO][fields][1]=seo_desc_ru` +
-    `&populate[SEO][fields][2]=seo_title_kk` +
-    `&populate[SEO][fields][3]=seo_desc_kk` +
-    `&populate[SEO][fields][4]=seo_title_en` +
-    `&populate[SEO][fields][5]=seo_desc_en` +
-    `&populate[SEO][fields][6]=seo_keywords_ru` +
-    `&populate[SEO][fields][7]=seo_keywords_kk` +
-    `&populate[SEO][fields][8]=seo_keywords_en` +
-    `&populate[SEO][populate][seo_image][fields][0]=url` +
-    `&populate[SEO][populate][seo_image][fields][1]=formats` +
-    `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
-    `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
-    `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
-    `&populate[tags][fields][0]=name_ru` +
-    `&populate[tags][fields][1]=name_kk` +
-    `&populate[tags][fields][2]=name_en` +
-    `&populate[categories][fields][0]=name_ru` +
-    `&populate[categories][fields][1]=name_kk` +
-    `&populate[categories][fields][2]=name_en` +
-    `&populate[scripts][fields][0]=name` +
-    `&populate[scripts][fields][1]=script`;
 
   useEffect(() => {
     setBlogsList([]);

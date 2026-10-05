@@ -21,6 +21,45 @@ import "./_EventsContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
+export const EVENTS_POPULATE_QUERY =
+  `populate[OG][populate][og_image][fields][0]=url` +
+  `&populate[OG][populate][og_image][fields][1]=formats` +
+  `&populate[SEO][fields][0]=seo_title_ru` +
+  `&populate[SEO][fields][1]=seo_desc_ru` +
+  `&populate[SEO][fields][2]=seo_title_kk` +
+  `&populate[SEO][fields][3]=seo_desc_kk` +
+  `&populate[SEO][fields][4]=seo_title_en` +
+  `&populate[SEO][fields][5]=seo_desc_en` +
+  `&populate[SEO][fields][6]=seo_keywords_ru` +
+  `&populate[SEO][fields][7]=seo_keywords_kk` +
+  `&populate[SEO][fields][8]=seo_keywords_en` +
+  `&populate[SEO][populate][seo_image][fields][0]=url` +
+  `&populate[SEO][populate][seo_image][fields][1]=formats` +
+  `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
+  `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
+  `&populate[desc_img][fields][0]=url` +
+  `&populate[desc_img][fields][1]=alternativeText` +
+  `&populate[desc_img][fields][2]=caption` +
+  `&populate[desc_img][fields][3]=formats` +
+  `&populate[authors][fields][0]=name_ru` +
+  `&populate[authors][fields][1]=name_kk` +
+  `&populate[authors][fields][2]=name_en` +
+  `&populate[authors][fields][3]=position_ru` +
+  `&populate[authors][fields][4]=position_kk` +
+  `&populate[authors][fields][5]=position_en` +
+  `&populate[authors][fields][6]=slug` +
+  `&populate[authors][populate][profile_img][fields][0]=url` +
+  `&populate[authors][populate][profile_img][fields][1]=formats` +
+  `&populate[categories][fields][0]=name_ru` +
+  `&populate[categories][fields][1]=name_kk` +
+  `&populate[categories][fields][2]=name_en` +
+  `&populate[tags][fields][0]=name_ru` +
+  `&populate[tags][fields][1]=name_kk` +
+  `&populate[tags][fields][2]=name_en` +
+  `&populate[scripts][fields][0]=name` +
+  `&populate[scripts][fields][1]=script`;
+
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
@@ -155,12 +194,9 @@ function renderBlock(block, i, locale, t, scripts = []) {
   }
 }
 
-export default function EventsContent() {
+export function EventView({ item: events, children }) {
   const { locale } = useLocale();
-  const { slug } = useParams();
   const { t } = useTranslation();
-  const [events, setEvents] = useState(null);
-  const [notFound, setNotFound] = useState(false);
   const title = getLangField(events, "title", locale);
   const desc = getLangField(events, "desc", locale);
   const content = getLangField(events, "content", locale);
@@ -174,65 +210,6 @@ export default function EventsContent() {
     { name: title },
   ];
 
-  useEffect(() => {
-    setEvents(null);
-    setNotFound(false);
-
-    fetch(
-      `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}` +
-        `&populate[OG][populate][og_image][fields][0]=url` +
-        `&populate[OG][populate][og_image][fields][1]=formats` +
-        `&populate[SEO][fields][0]=seo_title_ru` +
-        `&populate[SEO][fields][1]=seo_desc_ru` +
-        `&populate[SEO][fields][2]=seo_title_kk` +
-        `&populate[SEO][fields][3]=seo_desc_kk` +
-        `&populate[SEO][fields][4]=seo_title_en` +
-        `&populate[SEO][fields][5]=seo_desc_en` +
-        `&populate[SEO][fields][6]=seo_keywords_ru` +
-        `&populate[SEO][fields][7]=seo_keywords_kk` +
-        `&populate[SEO][fields][8]=seo_keywords_en` +
-        `&populate[SEO][populate][seo_image][fields][0]=url` +
-        `&populate[SEO][populate][seo_image][fields][1]=formats` +
-        `&populate[SEO][populate][seo_image_16x9][fields][0]=url` +
-        `&populate[SEO][populate][seo_image_4x3][fields][0]=url` +
-        `&populate[SEO][populate][seo_image_1x1][fields][0]=url` +
-        `&populate[desc_img][fields][0]=url` +
-        `&populate[desc_img][fields][1]=alternativeText` +
-        `&populate[desc_img][fields][2]=caption` +
-        `&populate[desc_img][fields][3]=formats` +
-        `&populate[authors][fields][0]=name_ru` +
-        `&populate[authors][fields][1]=name_kk` +
-        `&populate[authors][fields][2]=name_en` +
-        `&populate[authors][fields][3]=position_ru` +
-        `&populate[authors][fields][4]=position_kk` +
-        `&populate[authors][fields][5]=position_en` +
-        `&populate[authors][fields][6]=slug` +
-        `&populate[authors][populate][profile_img][fields][0]=url` +
-        `&populate[authors][populate][profile_img][fields][1]=formats` +
-        `&populate[categories][fields][0]=name_ru` +
-        `&populate[categories][fields][1]=name_kk` +
-        `&populate[categories][fields][2]=name_en` +
-        `&populate[tags][fields][0]=name_ru` +
-        `&populate[tags][fields][1]=name_kk` +
-        `&populate[tags][fields][2]=name_en` +
-        `&populate[scripts][fields][0]=name` +
-        `&populate[scripts][fields][1]=script`,
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        const first = data.data?.[0];
-        if (first) setEvents(first);
-        else setNotFound(true);
-      })
-      .catch((err) => console.error("Failed to fetch event:", err));
-  }, [slug]);
-
-  if (notFound) return <NotFoundContent />;
-  if (!events) return <h2 className="loading wrapper">{t("loading")}</h2>;
-
   const formatDate = (dateStr) => formatLocalizedDate(dateStr, locale);
 
   const isSameDay = (a, b) =>
@@ -242,32 +219,7 @@ export default function EventsContent() {
 
   return (
     <div className="eventscontent__layout">
-      <SEO
-        seo={events.SEO}
-        og={events.OG}
-        title={getLangField(events, "title", locale)}
-        description={getLangField(events, "desc", locale)}
-        image={getImageUrl(
-          events.OG?.og_image?.formats?.large?.url ||
-            events.OG?.og_image?.url ||
-            events.desc_img?.formats?.large?.url ||
-            events.desc_img?.formats?.medium?.url ||
-            events.desc_img?.url,
-        )}
-        type="event"
-        startDate={events.start}
-        endDate={events.end}
-        authorName={
-          events.authors?.[0]
-            ? getLangField(events.authors[0], "name", locale)
-            : undefined
-        }
-        authorSlug={events.authors?.[0]?.slug}
-        location={place}
-        translationSourceItem={events}
-        translationField="title"
-        breadcrumbs={breadcrumbItems}
-      />
+      {children}
       <div className="eventscontent wrapper">
         <Link to={`/${locale}/events`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
@@ -428,8 +380,78 @@ export default function EventsContent() {
         <Tags item={events} locale={locale} />
       </div>
       <div className="eventscontent__layout-sidemenu">
-        <SideMenu currentId={slug} />
+        <SideMenu currentId={events.slug} />
       </div>
     </div>
+  );
+}
+
+export default function EventsContent() {
+  const { locale } = useLocale();
+  const { slug } = useParams();
+  const { t } = useTranslation();
+  const [events, setEvents] = useState(null);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    setEvents(null);
+    setNotFound(false);
+
+    fetch(
+      `https://api.zhkh24.kz/api/events?filters[slug][$eq]=${slug}&${EVENTS_POPULATE_QUERY}`,
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const first = data.data?.[0];
+        if (first) setEvents(first);
+        else setNotFound(true);
+      })
+      .catch((err) => console.error("Failed to fetch event:", err));
+  }, [slug]);
+
+  if (notFound) return <NotFoundContent />;
+  if (!events) return <h2 className="loading wrapper">{t("loading")}</h2>;
+
+  const title = getLangField(events, "title", locale);
+  const place = getLangField(events, "place", locale);
+
+  const breadcrumbItems = [
+    { name: t("home") || "Главная", url: `/${locale}` },
+    { name: t("events") || "События", url: `/${locale}/events` },
+    { name: title },
+  ];
+
+  return (
+    <EventView item={events}>
+      <SEO
+        seo={events.SEO}
+        og={events.OG}
+        title={title}
+        description={getLangField(events, "desc", locale)}
+        image={getImageUrl(
+          events.OG?.og_image?.formats?.large?.url ||
+            events.OG?.og_image?.url ||
+            events.desc_img?.formats?.large?.url ||
+            events.desc_img?.formats?.medium?.url ||
+            events.desc_img?.url,
+        )}
+        type="event"
+        startDate={events.start}
+        endDate={events.end}
+        authorName={
+          events.authors?.[0]
+            ? getLangField(events.authors[0], "name", locale)
+            : undefined
+        }
+        authorSlug={events.authors?.[0]?.slug}
+        location={place}
+        translationSourceItem={events}
+        translationField="title"
+        breadcrumbs={breadcrumbItems}
+      />
+    </EventView>
   );
 }

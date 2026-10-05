@@ -133,7 +133,7 @@ function renderComponent(component, index, locale, t) {
   return null;
 }
 
-const QNA_POPULATE_QUERY =
+export const QNA_POPULATE_QUERY =
   `populate[Content]=true` +
   `&populate[OG][populate][og_image][fields][0]=url` +
   `&populate[OG][populate][og_image][fields][1]=formats` +
@@ -157,6 +157,42 @@ const QNA_POPULATE_QUERY =
   `&populate[authors][fields][0]=name_ru` +
   `&populate[authors][fields][1]=name_kk` +
   `&populate[authors][fields][2]=name_en`;
+
+export function QnaView({ item: qnas, children }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation(locale);
+  const title = getLangField(qnas, "title", locale);
+  const content = qnas.Content || [];
+
+  return (
+    <div className="qnascontent wrapper">
+      {children}
+      <Link to={`/${locale}/q-and-as`} className="back">
+        <svg className="arrow_reverse" viewBox="0 0 5 9">
+          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
+        </svg>
+        {t("allQandAs")}
+      </Link>
+      <div className="qnascontent__main">
+        <div className="qnascontent__main-header">
+          <span className="question_ico">?</span>
+          <h1>{title}</h1>
+        </div>
+
+        <div className="qnascontent__main-text">
+          {content.map((component, index) =>
+            renderComponent(component, index, locale, t),
+          )}
+        </div>
+        <div className="qnascontent__tags">
+          {qnas.tags?.map((tag) => (
+            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function QnasContent() {
   const { slug } = useParams();
@@ -187,12 +223,10 @@ export default function QnasContent() {
   if (notFound) return <NotFoundContent />;
   if (!qnas) return <h2 className="loading wrapper">{t("loading")}</h2>;
 
-  const title = getLangField(qnas, "title", locale);
-  const content = qnas.Content || [];
-  const shortAnswer = extractShortAnswer(content, locale);
+  const shortAnswer = extractShortAnswer(qnas.Content || [], locale);
 
   return (
-    <div className="qnascontent wrapper">
+    <QnaView item={qnas}>
       <SEO
         seo={qnas.SEO}
         og={qnas.OG}
@@ -217,29 +251,6 @@ export default function QnasContent() {
         translationSourceItem={qnas}
         translationField="title"
       />
-      <Link to={`/${locale}/q-and-as`} className="back">
-        <svg className="arrow_reverse" viewBox="0 0 5 9">
-          <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
-        </svg>
-        {t("allQandAs")}
-      </Link>
-      <div className="qnascontent__main">
-        <div className="qnascontent__main-header">
-          <span className="question_ico">?</span>
-          <h1>{title}</h1>
-        </div>
-
-        <div className="qnascontent__main-text">
-          {content.map((component, index) =>
-            renderComponent(component, index, locale, t),
-          )}
-        </div>
-        <div className="qnascontent__tags">
-          {qnas.tags?.map((tag) => (
-            <p key={tag.id}>{getLangField(tag, "name", locale)}</p>
-          ))}
-        </div>
-      </div>
-    </div>
+    </QnaView>
   );
 }
