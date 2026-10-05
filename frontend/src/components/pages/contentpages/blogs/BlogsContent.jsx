@@ -18,6 +18,7 @@ import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 import "./_BlogsContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
@@ -323,6 +324,7 @@ export default function BlogsContent() {
   const [blogsList, setBlogsList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [activeId, setActiveId] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const loaderRef = useRef(null);
   const itemRefs = useRef(new Map());
 
@@ -370,16 +372,25 @@ export default function BlogsContent() {
     setHasMore(true);
     setActiveId(null);
     itemRefs.current.clear();
+    setNotFound(false);
 
     fetch(
       `https://api.zhkh24.kz/api/blogs?filters[slug][$eq]=${slug}&${BLOGS_POPULATE_QUERY}`,
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         const first = data.data?.[0];
+        if (!first) {
+          setNotFound(true);
+          return;
+        }
         setBlogsList([first]);
-        if (first) setActiveId(first.id);
-      });
+        setActiveId(first.id);
+      })
+      .catch((err) => console.error("Failed to fetch blog:", err));
   }, [slug]);
 
   const loadNext = useCallback(async () => {
@@ -473,6 +484,8 @@ export default function BlogsContent() {
       }
     }
   }, [activeItem, locale]);
+
+  if (notFound) return <NotFoundContent />;
 
   if (blogsList.length === 0)
     return <h2 className="loading wrapper">{t("loading")}</h2>;

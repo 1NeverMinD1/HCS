@@ -5,6 +5,7 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale";
 import { useTranslation } from "../../../../utils/useTranslation.js";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 import SEO from "../../../SEO/SEO.jsx";
 import {
   FaInstagram,
@@ -173,8 +174,8 @@ export default function Authors() {
   };
 
   if (loading) return <h2 className="loading wrapper">{t("loading")}</h2>;
-  if (error || !author)
-    return <h2 className="loading wrapper">{t("authorNotFound")}</h2>;
+  if (error) return <h2 className="loading wrapper">{t("authorNotFound")}</h2>;
+  if (!author) return <NotFoundContent text={t("authorNotFound")} />;
 
   const name = getLangField(author, "name", locale);
   const position = getLangField(author, "position", locale);

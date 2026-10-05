@@ -17,6 +17,7 @@ import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 import "./_ArticlesContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
@@ -335,6 +336,7 @@ export default function ArticlesContent() {
   const [articlesList, setArticlesList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [activeId, setActiveId] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const loaderRef = useRef(null);
   const itemRefs = useRef(new Map());
 
@@ -382,16 +384,25 @@ export default function ArticlesContent() {
     setHasMore(true);
     setActiveId(null);
     itemRefs.current.clear();
+    setNotFound(false);
 
     fetch(
       `https://api.zhkh24.kz/api/articles?filters[slug][$eq]=${slug}&${ARTICLES_POPULATE_QUERY}`,
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         const first = data.data?.[0];
+        if (!first) {
+          setNotFound(true);
+          return;
+        }
         setArticlesList([first]);
-        if (first) setActiveId(first.id);
-      });
+        setActiveId(first.id);
+      })
+      .catch((err) => console.error("Failed to fetch article:", err));
   }, [slug]);
 
   const loadNext = useCallback(async () => {
@@ -485,6 +496,8 @@ export default function ArticlesContent() {
       }
     }
   }, [activeItem, locale]);
+
+  if (notFound) return <NotFoundContent />;
 
   if (articlesList.length === 0)
     return <h2 className="loading wrapper">{t("loading")}</h2>;

@@ -6,6 +6,7 @@ import { getLangField } from "../../../../utils/getLangField.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../../../../utils/getImageUrl.js";
+import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 // Styles
 import "./_QnasContent.scss";
 
@@ -160,19 +161,30 @@ const QNA_POPULATE_QUERY =
 export default function QnasContent() {
   const { slug } = useParams();
   const [qnas, setQnas] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const { locale } = useLocale();
   const { t } = useTranslation(locale);
 
   useEffect(() => {
     setQnas(null);
+    setNotFound(false);
 
     fetch(
       `https://api.zhkh24.kz/api/q-and-as?filters[slug][$eq]=${slug}&${QNA_POPULATE_QUERY}`,
     )
-      .then((res) => res.json())
-      .then((data) => setQnas(data.data?.[0]));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const first = data.data?.[0];
+        if (first) setQnas(first);
+        else setNotFound(true);
+      })
+      .catch((err) => console.error("Failed to fetch Q&A:", err));
   }, [slug]);
 
+  if (notFound) return <NotFoundContent />;
   if (!qnas) return <h2 className="loading wrapper">{t("loading")}</h2>;
 
   const title = getLangField(qnas, "title", locale);

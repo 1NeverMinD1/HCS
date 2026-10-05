@@ -125,6 +125,7 @@ export const translations = {
     authorsList: "Авторы",
     aboutPortal: "О портале",
     notFound: "Страница не найдена",
+    backToHome: "Вернуться на главную",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -257,6 +258,7 @@ export const translations = {
     authorsList: "Авторлар",
     aboutPortal: "Портал туралы",
     notFound: "Бет табылмады",
+    backToHome: "Басты бетке оралу",
   },
   /////////////////////////////////// EN
   en: {
@@ -386,5 +388,6 @@ export const translations = {
     authorsList: "Authors",
     aboutPortal: "About the portal",
     notFound: "Page not found",
+    backToHome: "Back to home",
   },
 };
