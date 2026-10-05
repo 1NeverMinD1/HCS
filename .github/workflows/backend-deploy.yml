@@ -26,12 +26,12 @@ jobs:
           command_timeout: 20m
 
           script: |
+            set -e
             cd /var/www/project/strapi_hcs
-
+            OLD_HEAD=$(git rev-parse HEAD)
             git pull origin master
-
-            npm ci
-
+            if ! git diff --quiet "$OLD_HEAD" HEAD -- package.json package-lock.json; then
+              npm ci
+            fi
             npm run build
-
             pm2 restart strapi
