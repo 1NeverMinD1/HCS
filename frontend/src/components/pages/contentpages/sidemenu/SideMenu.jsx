@@ -7,6 +7,24 @@ import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import "./_SideMenu.scss";
 
+const NEWS_COUNT = 3;
+const MAX_ITEMS = 8;
+const FETCH_SIZE = 4;
+
+const byDateDesc = (a, b) => new Date(b.publishDate) - new Date(a.publishDate);
+
+const baseFields =
+  "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
+  "&fields[3]=slug&fields[4]=publishDate";
+
+const imagePopulate = (field) =>
+  `&populate[${field}][fields][0]=url&populate[${field}][fields][1]=formats`;
+
+const buildUrl = (endpoint, images) =>
+  `https://api.zhkh24.kz/api/${endpoint}?sort=publishDate:desc&pagination[pageSize]=${FETCH_SIZE}` +
+  baseFields +
+  images.map(imagePopulate).join("");
+
 export default function SideMenu({ currentId }) {
   const [items, setItems] = useState([]);
   const { locale } = useLocale();
@@ -14,61 +32,50 @@ export default function SideMenu({ currentId }) {
 
   useEffect(() => {
     Promise.all([
-      fetch(
-        "https://api.zhkh24.kz/api/news?sort=publishDate:desc&pagination[pageSize]=3" +
-          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
-          "&fields[3]=slug&fields[4]=publishDate" +
-          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
-      ).then((res) => res.json()),
-      fetch(
-        "https://api.zhkh24.kz/api/articles?sort=publishDate:desc&pagination[pageSize]=3" +
-          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
-          "&fields[3]=slug&fields[4]=publishDate" +
-          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
-      ).then((res) => res.json()),
-      fetch(
-        "https://api.zhkh24.kz/api/blogs?sort=publishDate:desc&pagination[pageSize]=3" +
-          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
-          "&fields[3]=slug&fields[4]=publishDate" +
-          "&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats",
-      ).then((res) => res.json()),
-      fetch(
-        "https://api.zhkh24.kz/api/events?sort=start:desc&pagination[pageSize]=3" +
-          "&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en" +
-          "&fields[3]=slug&fields[4]=start" +
-          "&populate[cover_img][fields][0]=url&populate[cover_img][fields][1]=formats" +
-          "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats",
-      ).then((res) => res.json()),
+      fetch(buildUrl("news", ["desc_img"])).then((res) => res.json()),
+      fetch(buildUrl("articles", ["desc_img"])).then((res) => res.json()),
+      fetch(buildUrl("blogs", ["back_img"])).then((res) => res.json()),
+      fetch(buildUrl("events", ["cover_img", "desc_img"])).then((res) =>
+        res.json(),
+      ),
     ]).then(([news, articles, blogs, events]) => {
+      const prepare = (res, type) =>
+        (res.data || [])
+          .map((i) => ({ ...i, type }))
+          .filter((i) => i.slug !== currentId);
+
+      const newsList = prepare(news, "news").slice(0, NEWS_COUNT);
+
+      const otherLists = [
+        prepare(articles, "article"),
+        prepare(blogs, "blog"),
+        prepare(events, "event"),
+      ];
+
+      const guaranteed = otherLists.flatMap((list) => list.slice(0, 1));
+
+      const rest = otherLists.flatMap((list) => list.slice(1)).sort(byDateDesc);
+
+      const freeSlots = Math.max(
+        0,
+        MAX_ITEMS - newsList.length - guaranteed.length,
+      );
+
       const all = [
-        ...(news.data || []).map((i) => ({
-          ...i,
-          type: "news",
-        })),
-        ...(articles.data || []).map((i) => ({
-          ...i,
-          type: "article",
-        })),
-        ...(blogs.data || []).map((i) => ({
-          ...i,
-          type: "blog",
-        })),
-        ...(events.data || []).map((i) => ({
-          ...i,
-          type: "event",
-          publishDate: i.start,
-        })),
-      ].sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+        ...newsList,
+        ...guaranteed,
+        ...rest.slice(0, freeSlots),
+      ].sort(byDateDesc);
 
       setItems(all);
     });
-  }, []);
+  }, [currentId]);
 
   const linkMap = {
-    news: "/news",
-    article: "/articles",
-    blog: "/blogs",
-    event: "/events",
+    news: "news",
+    article: "articles",
+    blog: "blogs",
+    event: "events",
   };
 
   const labelMap = {
@@ -78,13 +85,11 @@ export default function SideMenu({ currentId }) {
     event: t("labelEvent"),
   };
 
-  const visibleItems = items.filter((item) => item.slug !== currentId);
-
   return (
     <div className="sidemenu">
       <h2>{t("latest")}</h2>
       <div className="sidemenu__items">
-        {visibleItems.map((item) => {
+        {items.map((item) => {
           const title = getLangField(item, "title", locale);
           const { src, srcSet } = getResponsiveImage(
             item.back_img || item.cover_img || item.desc_img,
