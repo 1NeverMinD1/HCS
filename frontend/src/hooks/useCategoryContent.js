@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 12;
 
 export default function useCategoryContent(
   endpoint,
@@ -12,11 +12,13 @@ export default function useCategoryContent(
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(null);
 
   useEffect(() => {
     setItems([]);
     setPage(1);
     setHasMore(true);
+    setTotal(null);
   }, [endpoint, filterId, relationField]);
 
   useEffect(() => {
@@ -54,6 +56,9 @@ export default function useCategoryContent(
 
         const pagination = data.meta?.pagination;
         setHasMore(pagination ? pagination.page < pagination.pageCount : false);
+        if (pagination && typeof pagination.total === "number") {
+          setTotal(pagination.total);
+        }
       } catch (err) {
         console.error(`Failed to fetch ${endpoint}:`, err);
         setHasMore(false);
@@ -69,5 +74,5 @@ export default function useCategoryContent(
     if (!loading && hasMore) setPage((prev) => prev + 1);
   }, [loading, hasMore]);
 
-  return { items, hasMore, loading, loadMore };
+  return { items, hasMore, loading, loadMore, total };
 }

@@ -1,3 +1,5 @@
+@use "../../variables";
+
 .footer {
   margin-bottom: 20px;
   .imprint {
@@ -30,11 +32,34 @@
   }
 }
 
-@media (min-width: 429px) {
+@media (max-width: 600px) {
   .footer {
+    .imprint {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-block: 16px;
+
+      p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.5;
+        color: variables.$text-color;
+      }
+    }
+
     .footer__end {
+      margin-top: 0;
+
       .rights {
-        align-items: center;
+        display: block;
+
+        p {
+          margin: 0;
+          text-align: left;
+          font-size: 12px;
+          color: variables.$text-color;
+        }
       }
     }
   }

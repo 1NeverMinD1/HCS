@@ -13,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    align-items: center;
     .articles__header-title {
       font-size: 40px;
     }
@@ -47,6 +48,6 @@
     }
   }
   .articles__blocks-skeleton {
-    min-height: 300px;
+    min-height: 330px;
   }
 }

@@ -225,6 +225,20 @@ export function NewsItem({ item, isFirst, registerRef }) {
           {t("allNews")}
         </Link>
       )}
+      <Breadcrumbs items={breadcrumbItems} />
+      <div className="newscontent__header">
+        {item?.header_cats?.[0] && (
+          <Link
+            to={`/${locale}/news/category/${item.header_cats[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
+        <p className="newscontent__header-date">
+          {formatLocalizedDate(item.publishDate, locale)}
+        </p>
+      </div>
       {item.authors?.[0] && (
         <div className="authorsHeader">
           <AuthorsHeader
@@ -240,20 +254,6 @@ export function NewsItem({ item, isFirst, registerRef }) {
         </div>
       )}
 
-      <div className="newscontent__header">
-        {item?.header_cats?.[0] && (
-          <Link
-            to={`/${locale}/news/category/${item.header_cats[0].id}`}
-            className="cat"
-          >
-            {category}
-          </Link>
-        )}
-        <p className="newscontent__header-date">
-          {formatLocalizedDate(item.publishDate, locale)}
-        </p>
-      </div>
-      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="newscontent__title">{title}</h1>
       <p className="newscontent__intro">{desc}</p>
       <figure className="newscontent__cover">

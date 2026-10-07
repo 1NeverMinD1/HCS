@@ -12,6 +12,23 @@
     border-radius: 20px;
     border: 1px solid rgb(220, 220, 220);
     width: 70%;
+    .cat {
+      margin-block: 10px;
+      display: inline-block;
+      color: black;
+      background: variables.$primary-color;
+      color: white;
+      padding: 5px;
+      width: fit-content;
+      border-radius: 5px;
+      margin-block: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      &:hover {
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+    }
     .back {
       display: flex;
       align-items: center;
@@ -41,22 +58,6 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       .eventscontent__header {
-        .cat {
-          display: inline-block;
-          color: black;
-          background: variables.$primary-color;
-          color: white;
-          padding: 5px;
-          width: fit-content;
-          border-radius: 5px;
-          margin-block: 10px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          &:hover {
-            transform: scale(1.05);
-            transition: all 0.3s ease;
-          }
-        }
         .eventscontent__title {
           font-size: 40px;
         }

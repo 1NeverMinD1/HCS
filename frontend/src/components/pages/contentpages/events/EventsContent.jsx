@@ -227,6 +227,16 @@ export function EventView({ item: events, children }) {
           </svg>
           {t("allEvents")}
         </Link>
+        <Breadcrumbs items={breadcrumbItems} />
+        {events?.categories?.[0] && (
+          <Link
+            to={`/${locale}/category/${events.categories[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
+
         {events.authors?.[0] && (
           <div className="authorsHeader">
             <AuthorsHeader
@@ -243,15 +253,6 @@ export function EventView({ item: events, children }) {
         )}
         <div className="eventscontent__intro">
           <div className="eventscontent__header">
-            {events?.categories?.[0] && (
-              <Link
-                to={`/${locale}/category/${events.categories[0].id}`}
-                className="cat"
-              >
-                {category}
-              </Link>
-            )}
-            <Breadcrumbs items={breadcrumbItems} />
             <h1 className="eventscontent__title">{title}</h1>
             <p className="eventscontent__desc">{desc}</p>
           </div>

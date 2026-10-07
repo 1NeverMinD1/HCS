@@ -124,7 +124,7 @@ export default function FooterContent() {
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h2>{t.footerOfficeTitle}</h2>
+          <h2>{t.footerContacts}</h2>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item adress">
               <a
@@ -136,14 +136,11 @@ export default function FooterContent() {
                 <span>{t.footerAddressStreet}</span>
               </a>
             </li>
-          </ul>
-          <h2>{t.footerEditorialTitle}</h2>
-          <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <a href="mailto:info@zhkh24.kz">info@zhkh24.kz</a>
             </li>
           </ul>
-        </div>
+        </div>{" "}
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { getLangField } from "../../utils/getLangField.js";
 import { getResponsiveImage } from "../../utils/getResponsiveImage.js";
@@ -9,6 +8,7 @@ import "./_ScrollBlock.scss";
 export default function ScrollBlock({
   title,
   items,
+  total,
   hasMore,
   loading,
   onLoadMore,
@@ -16,56 +16,36 @@ export default function ScrollBlock({
   locale,
   imageField,
 }) {
-  const scrollRef = useRef(null);
   const { t } = useTranslation();
-
-  const scroll = (direction) => {
-    if (!scrollRef.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    const atEnd = scrollLeft + clientWidth >= scrollWidth - 50;
-
-    if (direction === "right" && atEnd && hasMore && !loading) {
-      onLoadMore();
-    }
-
-    scrollRef.current.scrollBy({
-      left: direction === "right" ? 320 : -320,
-      behavior: "smooth",
-    });
-  };
 
   if (!items || items.length === 0) return null;
 
+  const count = total ?? items.length;
+
   return (
-    <div className="scroll_block">
-      <h2 className="scroll_block__title">{title}</h2>
-      <div className="scroll_block__wrapper">
-        <button
-          className="scroll_block__arrow scroll_block__arrow-left"
-          onClick={() => scroll("left")}
-          aria-label={t("scrollLeft")}
-        >
-          ‹
-        </button>
+    <section className="scroll_block">
+      <div className="scroll_block__header">
+        <h2 className="scroll_block__title">{title}</h2>
+        <span className="scroll_block__count">{count}</span>
+      </div>
 
-        <div className="scroll_block__list" ref={scrollRef}>
-          {items.map((item) => {
-            const itemTitle = getLangField(item, "title", locale);
-            const itemDesc = getLangField(item, "desc", locale);
-            const image = imageField
-              ? getResponsiveImage(item[imageField])
-              : { src: "", srcSet: undefined };
-            const date = item.publishDate
-              ? formatLocalizedDate(item.publishDate, locale)
-              : null;
+      <div className="scroll_block__grid">
+        {items.map((item) => {
+          const itemTitle = getLangField(item, "title", locale);
+          const itemDesc = getLangField(item, "desc", locale);
+          const image = imageField
+            ? getResponsiveImage(item[imageField])
+            : { src: "", srcSet: undefined };
+          const rawDate = item.publishDate || item.start;
+          const date = rawDate ? formatLocalizedDate(rawDate, locale) : null;
 
-            return (
-              <Link
-                to={`/${locale}/${basePath}/${item.slug}`}
-                className="scroll_block__card"
-                key={item.id}
-              >
+          return (
+            <Link
+              to={`/${locale}/${basePath}/${item.slug}`}
+              className={`scroll_block__card${imageField ? "" : " scroll_block__card--text"}`}
+              key={item.id}
+            >
+              {imageField && (
                 <div className="scroll_block__card-img">
                   {image.src ? (
                     <img
@@ -73,31 +53,38 @@ export default function ScrollBlock({
                       decoding="async"
                       src={image.src}
                       srcSet={image.srcSet}
-                      sizes="(max-width: 768px) 240px, 320px"
+                      sizes="(max-width: 600px) 112px, (max-width: 768px) 50vw, 300px"
                       alt=""
                     />
                   ) : (
                     <div className="scroll_block__card-img-placeholder" />
                   )}
-                  <h3 className="scroll_block__card-overlay">{itemTitle}</h3>
                 </div>
+              )}
+
+              <div className="scroll_block__card-body">
+                <h3 className="scroll_block__card-title">{itemTitle}</h3>
                 {itemDesc && (
                   <p className="scroll_block__card-desc">{itemDesc}</p>
                 )}
                 {date && <p className="scroll_block__card-date">{date}</p>}
-              </Link>
-            );
-          })}
-        </div>
-
-        <button
-          className="scroll_block__arrow scroll_block__arrow-right"
-          onClick={() => scroll("right")}
-          aria-label={t("scrollRight")}
-        >
-          ›
-        </button>
+              </div>
+            </Link>
+          );
+        })}
       </div>
-    </div>
+
+      {hasMore && (
+        <button
+          className="scroll_block__more"
+          onClick={onLoadMore}
+          disabled={loading}
+        >
+          {loading
+            ? t("loading") || "Загрузка..."
+            : t("showMore") || "Показать ещё"}
+        </button>
+      )}
+    </section>
   );
 }

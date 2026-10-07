@@ -271,12 +271,7 @@ export function BlogItem({ item, locale, t, isFirst, registerRef }) {
           {t("allBlogs")}
         </Link>
       )}
-      <AuthorsHeader
-        profileImg={profileImg}
-        author={author}
-        position={position}
-        authorSlug={item?.authors?.[0]?.slug}
-      />
+      <Breadcrumbs items={breadcrumbItems} />
       <div className="blogscontent__header">
         {item?.categories?.[0] && (
           <Link
@@ -290,7 +285,17 @@ export function BlogItem({ item, locale, t, isFirst, registerRef }) {
           {formatLocalizedDate(item.publishDate, locale)}
         </p>
       </div>
-      <Breadcrumbs items={breadcrumbItems} />
+      {item.authors?.[0] && (
+        <div className="authorsHeader">
+          <AuthorsHeader
+            profileImg={profileImg}
+            author={author}
+            position={position}
+            authorSlug={item?.authors?.[0]?.slug}
+          />
+        </div>
+      )}
+
       <h1 className="blogscontent__title">{title}</h1>
       <figure className="blogscontent__cover">
         <img

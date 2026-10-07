@@ -437,9 +437,30 @@
     font-size: 16px;
   }
 }
-@media (min-width: 429px) {
+@media (max-width: 600px) {
+  .footer .imprint {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-block: 16px;
+  }
+  .footer .imprint p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgb(58, 58, 58);
+  }
+  .footer .footer__end {
+    margin-top: 0;
+  }
   .footer .footer__end .rights {
-    align-items: center;
+    display: block;
+  }
+  .footer .footer__end .rights p {
+    margin: 0;
+    text-align: left;
+    font-size: 12px;
+    color: rgb(58, 58, 58);
   }
 }
 .footer__content {
@@ -528,42 +549,57 @@
   fill: rgb(0, 60, 255);
 }
 
-@media (max-width: 430px) {
+@media (max-width: 600px) {
   .footer__content {
-    align-items: center;
     flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    align-items: stretch;
+    gap: 28px;
+    text-align: left;
   }
   .footer__content .footer__intro {
     width: 100%;
-    margin-bottom: 10px;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer__content .footer__intro button {
+    margin-bottom: 0;
+    padding: 0;
   }
   .footer__content .footer__intro .logo .logo_img {
-    width: auto;
-    height: 40px;
+    height: 36px;
   }
   .footer__content .footer__intro p {
-    width: 100%;
-    font-size: 16px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
   }
   .footer__content .footer__contacts {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    -moz-column-gap: 16px;
+         column-gap: 16px;
+    row-gap: 28px;
   }
   .footer__content .footer__contacts .footer__contacts-block {
-    gap: 10px;
+    gap: 12px;
+    min-width: 0;
   }
   .footer__content .footer__contacts .footer__contacts-block h2 {
-    font-size: 18px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list {
+    gap: 10px;
+    margin: 0;
+    padding: 0;
   }
   .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list .footer__contacts-item {
-    font-size: 16px;
-  }
-  .footer__content .footer__contacts .footer__contacts-block .footer__contacts-list--social .footer__contacts-item a {
-    justify-content: center;
+    font-size: 15px;
+    line-height: 1.35;
   }
 }
 p,

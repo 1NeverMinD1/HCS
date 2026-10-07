@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useLocale } from "../../context/LocaleContext.jsx";
 import { translations } from "../../utils/translations.js";
 
@@ -18,8 +17,9 @@ export default function Footer() {
       </div>
       <div className="footer__end">
         <div className="rights">
-          <p>{t.footerRightsYear} </p>
-          <p>{t.footerRightsReserved}</p>
+          <p>
+            {t.footerRightsYear} {t.footerRightsReserved}
+          </p>
         </div>
       </div>
     </footer>

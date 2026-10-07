@@ -8,7 +8,6 @@ import useCategoryContent from "../../../../hooks/useCategoryContent.js";
 import { getLangField } from "../../../../utils/getLangField.js";
 import useTaxonomyItem from "../../../../hooks/useTaxonomyItem.js";
 import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
-// Styles
 import "./_TagPage.scss";
 
 export default function TagPage() {
@@ -57,6 +56,13 @@ export default function TagPage() {
     events.items.length > 0 ||
     qnas.items.length > 0;
 
+  const totalCount =
+    (news.total ?? news.items.length) +
+    (articles.total ?? articles.items.length) +
+    (blogs.total ?? blogs.items.length) +
+    (events.total ?? events.items.length) +
+    (qnas.total ?? qnas.items.length);
+
   const descriptionTemplates = {
     ru: (name) =>
       `Новости, статьи и материалы с тегом «${name}» на портале ЖКХ24 — актуальная информация о жилищно-коммунальном хозяйстве Казахстана.`,
@@ -79,9 +85,16 @@ export default function TagPage() {
         breadcrumbs={breadcrumbItems}
       />
 
-      <h1 className="tagpage__title">#{pageTagName}</h1>
-
       <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="tagpage__header">
+        <h1 className="tagpage__title">#{pageTagName}</h1>
+        {hasAnyContent && (
+          <p className="tagpage__count">
+            {t("materialsCount") || "Материалов"}: {totalCount}
+          </p>
+        )}
+      </div>
 
       {!hasAnyContent && (
         <p className="tagpage__empty">{t("noContent") || "Материалов нет"}</p>
@@ -90,6 +103,7 @@ export default function TagPage() {
       <ScrollBlock
         title={t("news") || "Новости"}
         items={news.items}
+        total={news.total}
         hasMore={news.hasMore}
         loading={news.loading}
         onLoadMore={news.loadMore}
@@ -101,6 +115,7 @@ export default function TagPage() {
       <ScrollBlock
         title={t("articles") || "Статьи"}
         items={articles.items}
+        total={articles.total}
         hasMore={articles.hasMore}
         loading={articles.loading}
         onLoadMore={articles.loadMore}
@@ -112,6 +127,7 @@ export default function TagPage() {
       <ScrollBlock
         title={t("blogs") || "Блоги"}
         items={blogs.items}
+        total={blogs.total}
         hasMore={blogs.hasMore}
         loading={blogs.loading}
         onLoadMore={blogs.loadMore}
@@ -123,6 +139,7 @@ export default function TagPage() {
       <ScrollBlock
         title={t("events") || "События"}
         items={events.items}
+        total={events.total}
         hasMore={events.hasMore}
         loading={events.loading}
         onLoadMore={events.loadMore}
@@ -134,6 +151,7 @@ export default function TagPage() {
       <ScrollBlock
         title={t("qandasIntro") || "Вопросы и ответы"}
         items={qnas.items}
+        total={qnas.total}
         hasMore={qnas.hasMore}
         loading={qnas.loading}
         onLoadMore={qnas.loadMore}

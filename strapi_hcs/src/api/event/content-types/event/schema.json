@@ -156,6 +156,10 @@
       "relation": "manyToMany",
       "target": "api::script.script",
       "inversedBy": "events"
+    },
+    "publishDate": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

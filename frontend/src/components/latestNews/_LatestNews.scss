@@ -35,6 +35,9 @@
 
 @media (max-width: 430px) {
   .latest {
+    margin-block: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #000000;
     .latest__link {
       justify-content: center;
       .view_all {

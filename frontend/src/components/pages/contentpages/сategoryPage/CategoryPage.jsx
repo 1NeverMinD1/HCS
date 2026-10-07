@@ -53,6 +53,12 @@ export default function CategoryPage() {
     events.items.length > 0 ||
     qnas.items.length > 0;
 
+  const totalCount =
+    (articles.total ?? articles.items.length) +
+    (blogs.total ?? blogs.items.length) +
+    (events.total ?? events.items.length) +
+    (qnas.total ?? qnas.items.length);
+
   const descriptionTemplates = {
     ru: (name) =>
       `Новости, статьи и материалы по теме «${name}» на портале ЖКХ24 — актуальная информация о жилищно-коммунальном хозяйстве Казахстана.`,
@@ -75,9 +81,16 @@ export default function CategoryPage() {
         breadcrumbs={breadcrumbItems}
       />
 
-      <h1 className="categorypage__title">{pageCategoryName}</h1>
-
       <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="categorypage__header">
+        <h1 className="categorypage__title">{pageCategoryName}</h1>
+        {hasAnyContent && (
+          <p className="categorypage__count">
+            {t("materialsCount") || "Материалов"}: {totalCount}
+          </p>
+        )}
+      </div>
 
       {!hasAnyContent && (
         <p className="categorypage__empty">
@@ -88,6 +101,7 @@ export default function CategoryPage() {
       <ScrollBlock
         title={t("articles") || "Статьи"}
         items={articles.items}
+        total={articles.total}
         hasMore={articles.hasMore}
         loading={articles.loading}
         onLoadMore={articles.loadMore}
@@ -99,6 +113,7 @@ export default function CategoryPage() {
       <ScrollBlock
         title={t("blogs") || "Блоги"}
         items={blogs.items}
+        total={blogs.total}
         hasMore={blogs.hasMore}
         loading={blogs.loading}
         onLoadMore={blogs.loadMore}
@@ -110,6 +125,7 @@ export default function CategoryPage() {
       <ScrollBlock
         title={t("events") || "События"}
         items={events.items}
+        total={events.total}
         hasMore={events.hasMore}
         loading={events.loading}
         onLoadMore={events.loadMore}
@@ -121,6 +137,7 @@ export default function CategoryPage() {
       <ScrollBlock
         title={t("qandasIntro") || "Вопросы и ответы"}
         items={qnas.items}
+        total={qnas.total}
         hasMore={qnas.hasMore}
         loading={qnas.loading}
         onLoadMore={qnas.loadMore}

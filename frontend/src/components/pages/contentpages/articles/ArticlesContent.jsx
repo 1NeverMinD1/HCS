@@ -275,6 +275,20 @@ export function ArticleItem({ item, isFirst, registerRef }) {
           {t("allArts")}
         </Link>
       )}
+      <Breadcrumbs items={breadcrumbItems} />
+      <div className="artscontent__header">
+        {item?.categories?.[0] && (
+          <Link
+            to={`/${locale}/category/${item.categories[0].id}`}
+            className="cat"
+          >
+            {category}
+          </Link>
+        )}
+        <div className="artscontent__header-date">
+          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
+        </div>
+      </div>
       {item.authors?.[0] && (
         <div className="authorsHeader">
           <AuthorsHeader
@@ -290,20 +304,6 @@ export function ArticleItem({ item, isFirst, registerRef }) {
         </div>
       )}
 
-      <div className="artscontent__header">
-        {item?.categories?.[0] && (
-          <Link
-            to={`/${locale}/category/${item.categories[0].id}`}
-            className="cat"
-          >
-            {category}
-          </Link>
-        )}
-        <div className="artscontent__header-date">
-          <p>{formatLocalizedDate(item.publishDate, locale)}</p>
-        </div>
-      </div>
-      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="artscontent__title">{title}</h1>
       <figure className="artscontent__cover">
         <img

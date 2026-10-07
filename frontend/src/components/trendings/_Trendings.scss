@@ -89,6 +89,7 @@
       font-size: variables.$mobile-subtitle-font-size;
     }
     .trendings__block {
+      min-height: 50px;
       .trendings__block-info {
         h3 {
           font-size: variables.$mobile-text-font-size;

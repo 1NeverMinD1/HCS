@@ -831,6 +831,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_kk: Schema.Attribute.String;
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Integer;
+    publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     register_link: Schema.Attribute.Text;
     scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;

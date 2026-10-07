@@ -22,7 +22,7 @@ export default function LatestNewsBlock({ item }) {
           decoding="async"
           src={src}
           srcSet={srcSet}
-          sizes="(max-width: 430px) 70vw, (max-width: 1630px) 280px, 340px"
+          sizes="(max-width: 600px) 100vw, (max-width: 1630px) 280px, 340px"
           alt=""
           className="latest__block-img"
         />

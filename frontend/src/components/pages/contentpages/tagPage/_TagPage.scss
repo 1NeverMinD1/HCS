@@ -1,11 +1,24 @@
 @use "../../../../variables";
 
 .tagpage {
+  &__header {
+    margin: 12px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
   &__title {
-    font-size: 32px;
+    margin: 0 0 6px;
+    font-size: 36px;
     font-weight: 700;
-    margin: 20px 0 10px;
+    line-height: 1.2;
     color: #1a1a1a;
+  }
+
+  &__count {
+    margin: 0;
+    font-size: 15px;
+    color: #707070;
   }
 
   &__empty {
@@ -17,8 +30,17 @@
 
 @media (max-width: 768px) {
   .tagpage {
+    &__header {
+      margin: 8px 0 20px;
+      padding-bottom: 14px;
+    }
+
     &__title {
       font-size: 24px;
+    }
+
+    &__count {
+      font-size: 13px;
     }
   }
 }

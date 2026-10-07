@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    align-items: center;
     .blogs__header-title {
       font-size: variables.$title-font-size;
     }

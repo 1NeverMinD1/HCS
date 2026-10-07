@@ -25,7 +25,7 @@ export default function ArticlesBlock({ article }) {
           decoding="async"
           src={src}
           srcSet={srcSet}
-          sizes="(max-width: 430px) 60vw, 300px"
+          sizes="(max-width: 600px) 112px, 300px"
           alt=""
         />
       </div>

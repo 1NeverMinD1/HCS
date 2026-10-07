@@ -4,8 +4,10 @@
   gap: 20px;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 600px) {
   .articles__blocks {
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 }

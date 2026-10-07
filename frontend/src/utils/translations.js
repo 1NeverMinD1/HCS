@@ -65,7 +65,7 @@ export const translations = {
     footerTerms: "Пользовательское соглашение",
     footerOfficeTitle: "Главный офис",
     footerAddressCity: "010000, г. Астана",
-    footerAddressStreet: "ул. Алихана Бокейхана, 2, Н. П. 5Б",
+    footerAddressStreet: "ул. Алихана Бокейхана, 2,\u00A0Н.\u00A0П.\u00A05Б",
     footerEditorialTitle: "Редакция",
     footerNetworkPublication: "Сетевое издание «ЖКХ 24» · 16+",
     footerCertificate:
@@ -127,6 +127,7 @@ export const translations = {
     notFound: "Страница не найдена",
     backToHome: "Вернуться на главную",
     participantsNotSpecified: "Количество участников не указано",
+    materialsCount: "Материалов",
   },
   /////////////////////////////////// KZ
   kk: {
@@ -199,7 +200,7 @@ export const translations = {
     footerTerms: "Пайдаланушы келісімі",
     footerOfficeTitle: "Бас офис",
     footerAddressCity: "010000, Астана қ.",
-    footerAddressStreet: "Әлихан Бөкейхан к-сі, 2, 5Б Н.П.",
+    footerAddressStreet: "Әлихан Бөкейхан к-сі, 2,\u00A05Б\u00A0Н.П.",
     footerEditorialTitle: "Редакция",
     footerNetworkPublication: "«ЖКХ 24» желілік басылымы · 16+",
     footerCertificate:
@@ -247,7 +248,7 @@ export const translations = {
     socialNetworks: "Әлеуметтік желілер:",
     noPublications: "Әзірге жарияланған материалдар жоқ.",
     homeH1: "ЖКХ24 — Қазақстандағы ТКШ жаңалықтары мен талдауы",
-    showMore: "Толығырақ көрсету",
+    showMore: "Тағы көрсету",
     filterAll: "Барлығы",
     dateFrom: "Күнден",
     dateTo: "Күнге",
@@ -261,6 +262,7 @@ export const translations = {
     notFound: "Бет табылмады",
     backToHome: "Басты бетке оралу",
     participantsNotSpecified: "Қатысушылар саны көрсетілмеген",
+    materialsCount: "Материалдар",
   },
   /////////////////////////////////// EN
   en: {
@@ -330,7 +332,7 @@ export const translations = {
     footerTerms: "Terms of use",
     footerOfficeTitle: "Head office",
     footerAddressCity: "010000, Astana",
-    footerAddressStreet: "2 Alikhan Bokeikhan St., N.P. 5B",
+    footerAddressStreet: "2 Alikhan Bokeikhan St., N.P.\u00A05B",
     footerEditorialTitle: "Editorial",
     footerNetworkPublication: 'Online media outlet "ZhKH 24" · 16+',
     footerCertificate:
@@ -392,5 +394,6 @@ export const translations = {
     notFound: "Page not found",
     backToHome: "Back to home",
     participantsNotSpecified: "Number of participants is not specified",
+    materialsCount: "Materials",
   },
 };
