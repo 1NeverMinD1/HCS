@@ -68,6 +68,7 @@ const FIELDS = [
 ];
 
 const FORMAT_ORDER = ["small", "medium", "large"];
+const HERO_SIZES = "(max-width: 430px) 70vw, 60vw";
 
 function isNewer(a: any, b: any) {
   const ap = new Date(a.publishDate).getTime();
@@ -127,7 +128,7 @@ async function buildHeroHtml(strapi: any) {
       sort: [{ publishDate: "desc" }],
       fields: FIELDS,
       populate: {
-        [src.img]: { fields: ["url", "formats"] },
+        [src.img]: { fields: ["url", "formats", "width"] },
         [src.cats]: { fields: ["name_ru", "name_kk", "name_en"] },
       },
     });
@@ -141,13 +142,16 @@ async function buildHeroHtml(strapi: any) {
   );
 
   const img = winner.__type === "blog" ? winner.back_img : winner.desc_img;
-  const imgUrl = absUrl(
-    img?.formats?.medium?.url || img?.formats?.small?.url || img?.url,
-  );
+  const href = pickSrc(img);
 
-  const preload = imgUrl
-    ? `<link rel="preload" as="image" href="${escAttr(imgUrl)}" fetchpriority="high">`
-    : "";
+  let preload = "";
+  if (href) {
+    const srcset = buildSrcSet(img);
+    const srcsetAttrs = srcset
+      ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(HERO_SIZES)}"`
+      : "";
+    preload = `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
+  }
 
   return `${preload}<script type="application/json" id="hero-data">${escJson(winner)}</script>`;
 }

@@ -24,16 +24,16 @@
           base +
             "news?" +
             common +
-            "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en",
+            "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[desc_img][fields][2]=width&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en",
           base +
             "blogs?" +
             common +
-            "&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&" +
+            "&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&populate[back_img][fields][2]=width&" +
             cats,
           base +
             "articles?" +
             common +
-            "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&" +
+            "&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[desc_img][fields][2]=width&" +
             cats,
         ];
         window.__heroPromise = Promise.all(

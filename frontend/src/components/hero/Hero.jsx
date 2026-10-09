@@ -12,10 +12,13 @@ const COMMON =
 const CATS =
   "populate[categories][fields][0]=name_ru&populate[categories][fields][1]=name_kk&populate[categories][fields][2]=name_en";
 const HERO_URLS = [
-  `${API}/news?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en`,
-  `${API}/blogs?${COMMON}&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&${CATS}`,
-  `${API}/articles?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&${CATS}`,
+  `${API}/news?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[desc_img][fields][2]=width&populate[header_cats][fields][0]=name_ru&populate[header_cats][fields][1]=name_kk&populate[header_cats][fields][2]=name_en`,
+  `${API}/blogs?${COMMON}&populate[back_img][fields][0]=url&populate[back_img][fields][1]=formats&populate[back_img][fields][2]=width&${CATS}`,
+  `${API}/articles?${COMMON}&populate[desc_img][fields][0]=url&populate[desc_img][fields][1]=formats&populate[desc_img][fields][2]=width&${CATS}`,
 ];
+
+const HERO_SIZES = "(max-width: 430px) 70vw, 60vw";
+const FORMAT_ORDER = ["small", "medium", "large"];
 
 function isNewer(a, b) {
   const aPublish = new Date(a.publishDate).getTime();
@@ -26,6 +29,26 @@ function isNewer(a, b) {
   const aCreated = new Date(a.createdAt).getTime();
   const bCreated = new Date(b.createdAt).getTime();
   return aCreated >= bCreated;
+}
+
+function buildSrcSet(img) {
+  if (!img) return undefined;
+  const parts = [];
+  const formats = img.formats || {};
+  for (const key of FORMAT_ORDER) {
+    const f = formats[key];
+    if (f?.url && f?.width) parts.push(`${getImageUrl(f.url)} ${f.width}w`);
+  }
+  if (img.url && img.width) parts.push(`${getImageUrl(img.url)} ${img.width}w`);
+  return parts.length > 1 ? parts.join(", ") : undefined;
+}
+
+function pickSrc(img) {
+  if (!img) return "";
+  const f = img.formats || {};
+  return (
+    getImageUrl(f.medium?.url || f.large?.url || f.small?.url || img.url) || ""
+  );
 }
 
 function readSnapshot() {
@@ -88,13 +111,8 @@ export default function Hero({ onLoadFeatured }) {
   const isArticle = featured.__type === "article";
 
   const descImg = isBlog ? featured?.back_img : featured?.desc_img;
-
-  const imageUrl =
-    getImageUrl(
-      descImg?.formats?.medium?.url ||
-        descImg?.formats?.small?.url ||
-        descImg?.url,
-    ) || "";
+  const imageUrl = pickSrc(descImg);
+  const srcSet = buildSrcSet(descImg);
 
   const category = isBlog
     ? getLangField(featured?.categories?.[0], "name", locale)
@@ -115,7 +133,13 @@ export default function Hero({ onLoadFeatured }) {
     <Link to={link} className="hero">
       <div className="hero__bg">
         {imageUrl && (
-          <img src={imageUrl} alt="" fetchPriority="high" decoding="async" />
+          <img
+            src={imageUrl}
+            srcSet={srcSet}
+            sizes={HERO_SIZES}
+            alt=""
+            fetchPriority="high"
+          />
         )}
       </div>
       <p className="cat">{category}</p>
