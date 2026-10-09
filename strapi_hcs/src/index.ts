@@ -6,6 +6,7 @@ import {
   generateSeoImageCrops,
 } from "./utils/og-image-optimizer";
 import { sendToTelegramChannel } from "./utils/telegram";
+import { registerHeroSnapshot, writeHeroSnapshot } from "./utils/hero-snapshot";
 import sharp from "sharp";
 import fs from "fs";
 
@@ -184,6 +185,8 @@ export default {
       },
     });
 
+    registerHeroSnapshot(strapi);
+
     strapi.documents.use(async (context: any, next: any) => {
       const result = await next();
       const uid = context.uid;
@@ -279,5 +282,7 @@ export default {
       return result;
     });
   },
-  bootstrap() {},
+  async bootstrap({ strapi }: { strapi: any }) {
+    await writeHeroSnapshot(strapi);
+  },
 };
