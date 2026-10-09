@@ -2,13 +2,16 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-
+    <!--# if expr="$is_home" -->
+    <!--# include virtual="/__hero" -->
+    <!--# endif -->
     <link rel="preconnect" href="https://api.zhkh24.kz" crossorigin />
     <link rel="preconnect" href="https://api.zhkh24.kz" />
 
     <script>
       (function () {
         if (!/^\/((ru|kk|en)\/?)?$/.test(location.pathname)) return;
+        if (document.getElementById("hero-data")) return;
         var base = "https://api.zhkh24.kz/api/";
         var common =
           "filters[isFeatured][$eq]=true&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en&fields[3]=desc_ru&fields[4]=desc_kk&fields[5]=desc_en&fields[6]=slug&fields[7]=publishDate&fields[8]=createdAt&sort=publishDate:desc&pagination[pageSize]=1";

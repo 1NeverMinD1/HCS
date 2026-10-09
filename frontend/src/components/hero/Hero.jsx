@@ -28,6 +28,16 @@ function isNewer(a, b) {
   return aCreated >= bCreated;
 }
 
+function readSnapshot() {
+  const el = document.getElementById("hero-data");
+  if (!el) return null;
+  try {
+    return JSON.parse(el.textContent);
+  } catch {
+    return null;
+  }
+}
+
 function fetchHeroData() {
   const early = window.__heroPromise;
   window.__heroPromise = null;
@@ -38,10 +48,15 @@ function fetchHeroData() {
 }
 
 export default function Hero({ onLoadFeatured }) {
-  const [featured, setFeatured] = useState(null);
+  const [featured, setFeatured] = useState(readSnapshot);
   const { locale } = useLocale();
 
   useEffect(() => {
+    if (featured) {
+      if (onLoadFeatured) onLoadFeatured(featured);
+      return;
+    }
+
     async function fetchFeatured() {
       const [newsRes, blogsRes, articlesRes] = await fetchHeroData();
 
