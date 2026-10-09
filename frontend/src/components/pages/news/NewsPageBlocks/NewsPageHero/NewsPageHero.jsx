@@ -51,7 +51,7 @@ export default function NewsPageHero({ news }) {
           className="newspage__hero-img"
           src={src}
           srcSet={srcSet}
-          sizes="(max-width: 430px) 100vw, 50vw"
+          sizes="(max-width: 430px) 70vw, 50vw"
           alt=""
           fetchPriority="high"
         />

@@ -22,7 +22,7 @@ const LIST_SOURCES = [
     key: "news",
     uid: "api::new.new",
     img: "desc_img",
-    sizes: "(max-width: 430px) 100vw, 50vw",
+    sizes: "(max-width: 430px) 70vw, 50vw",
     pageSize: 20,
     fields: [
       "title_ru",
