@@ -6,7 +6,6 @@ import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
 import { useTranslation } from "../../../../../utils/useTranslation.js";
 import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
 import { getEventStatus } from "../../../../../utils/eventStatus.js";
-// Styles
 import "./_EventsPageBlock.scss";
 
 const STATUS_LABELS = {
@@ -18,7 +17,7 @@ const STATUS_LABELS = {
 const isSameDay = (a, b) =>
   a && b && new Date(a).toDateString() === new Date(b).toDateString();
 
-export default function EventsPageBlock({ event }) {
+export default function EventsPageBlock({ event, index }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
   const title = getLangField(event, "title", locale);
@@ -31,11 +30,14 @@ export default function EventsPageBlock({ event }) {
 
   const status = getEventStatus(event);
 
+  const isFirst = index === 0;
+
   return (
     <Link to={`/${locale}/events/${event.slug}`} className="eventspage__item">
       <img
-        loading="lazy"
-        decoding="async"
+        loading={isFirst ? "eager" : "lazy"}
+        decoding={isFirst ? undefined : "async"}
+        fetchPriority={isFirst ? "high" : undefined}
         src={src}
         srcSet={srcSet}
         sizes="(max-width: 430px) 95vw, (max-width: 1630px) 440px, 460px"

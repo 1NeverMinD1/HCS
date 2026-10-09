@@ -9,10 +9,6 @@
   height: 450px;
   border-radius: 10px;
   background-color: #1f2a30;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-size 0.4s ease;
   color: white;
   display: flex;
   flex-direction: column;
@@ -21,10 +17,6 @@
   text-shadow:
     0 1px 1px rgba(0, 0, 0, 0.9),
     0 1px 3px rgba(0, 0, 0, 0.6);
-
-  &:hover {
-    background-size: 110%;
-  }
 
   &::before {
     content: "";
@@ -45,6 +37,21 @@
   > * {
     position: relative;
     z-index: 2;
+  }
+
+  > .blogspage__hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover > .blogspage__hero-bg {
+    transform: scale(1.1);
   }
 
   p {

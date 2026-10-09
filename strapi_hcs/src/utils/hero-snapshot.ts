@@ -5,6 +5,7 @@ const OUT_DIR = "/var/www/project/hero";
 const HERO_FILE = path.join(OUT_DIR, "hero.html");
 const MEDIA_BASE = "https://api.zhkh24.kz";
 const DEBOUNCE_MS = 1000;
+const HERO_SIZES = "(max-width: 430px) 70vw, 60vw";
 
 const SOURCES = [
   { uid: "api::new.new", type: "news", img: "desc_img", cats: "header_cats" },
@@ -17,13 +18,89 @@ const SOURCES = [
   },
 ] as const;
 
-const LIST_SOURCES = [
+const TEXT_FIELDS = [
+  "title_ru",
+  "title_kk",
+  "title_en",
+  "desc_ru",
+  "desc_kk",
+  "desc_en",
+  "slug",
+  "publishDate",
+];
+
+const NAME_FIELDS = { fields: ["name_ru", "name_kk", "name_en"] };
+const IMG_FIELDS = { fields: ["url", "formats", "width"] };
+
+const LIST_SOURCES: any[] = [
   {
     key: "news",
     uid: "api::new.new",
-    img: "desc_img",
+    img: ["desc_img"],
+    imageMode: "hero",
     sizes: "(max-width: 430px) 70vw, 50vw",
     pageSize: 20,
+    sort: [{ publishDate: "desc" }],
+    fields: TEXT_FIELDS,
+    populate: {
+      desc_img: IMG_FIELDS,
+      header_cats: NAME_FIELDS,
+    },
+  },
+  {
+    key: "articles",
+    uid: "api::article.article",
+    img: ["desc_img"],
+    imageMode: "responsive",
+    fallbackFormat: "medium",
+    sizes: "(max-width: 430px) 50vw, (max-width: 1630px) 420px, 530px",
+    pageSize: 20,
+    sort: [{ publishDate: "desc" }],
+    fields: TEXT_FIELDS,
+    populate: {
+      desc_img: IMG_FIELDS,
+      categories: NAME_FIELDS,
+    },
+  },
+  {
+    key: "blogs",
+    uid: "api::blog.blog",
+    img: ["back_img"],
+    imageMode: "responsive",
+    fallbackFormat: "large",
+    sizes: "(max-width: 430px) 70vw, (max-width: 1630px) 90vw, 1300px",
+    pageSize: 20,
+    sort: [{ publishDate: "desc" }],
+    fields: TEXT_FIELDS,
+    populate: {
+      back_img: IMG_FIELDS,
+      authors: {
+        fields: [
+          "name_ru",
+          "name_kk",
+          "name_en",
+          "position_ru",
+          "position_kk",
+          "position_en",
+          "slug",
+        ],
+        populate: {
+          profile_img: { fields: ["url", "formats"] },
+        },
+      },
+      categories: NAME_FIELDS,
+      tags: NAME_FIELDS,
+    },
+  },
+  {
+    key: "events",
+    uid: "api::event.event",
+    img: ["cover_img", "desc_img"],
+    imageMode: "responsive",
+    fallbackFormat: "small",
+    sizes: "(max-width: 430px) 95vw, (max-width: 1630px) 440px, 460px",
+    pageSize: 20,
+    sort: [{ start: "desc" }],
     fields: [
       "title_ru",
       "title_kk",
@@ -31,12 +108,20 @@ const LIST_SOURCES = [
       "desc_ru",
       "desc_kk",
       "desc_en",
+      "place_ru",
+      "place_kk",
+      "place_en",
       "slug",
-      "publishDate",
+      "start",
+      "end",
+      "start_time",
+      "amount",
+      "price",
     ],
     populate: {
-      desc_img: { fields: ["url", "formats", "width"] },
-      header_cats: { fields: ["name_ru", "name_kk", "name_en"] },
+      cover_img: IMG_FIELDS,
+      desc_img: IMG_FIELDS,
+      categories: NAME_FIELDS,
     },
   },
 ];
@@ -55,20 +140,9 @@ const ACTIONS = new Set([
   "discardDraft",
 ]);
 
-const FIELDS = [
-  "title_ru",
-  "title_kk",
-  "title_en",
-  "desc_ru",
-  "desc_kk",
-  "desc_en",
-  "slug",
-  "publishDate",
-  "createdAt",
-];
-
-const FORMAT_ORDER = ["small", "medium", "large"];
-const HERO_SIZES = "(max-width: 430px) 70vw, 60vw";
+const HERO_FIELDS = [...TEXT_FIELDS, "createdAt"];
+const HERO_FORMAT_ORDER = ["small", "medium", "large"];
+const RESPONSIVE_FORMAT_ORDER = ["thumbnail", "small", "medium", "large"];
 
 function isNewer(a: any, b: any) {
   const ap = new Date(a.publishDate).getTime();
@@ -93,22 +167,63 @@ function escJson(obj: unknown) {
     .replace(/\u2029/g, "\\u2029");
 }
 
-function buildSrcSet(img: any) {
-  if (!img) return "";
-  const parts: string[] = [];
+function heroImage(img: any) {
+  if (!img) return { href: "", srcset: "" };
   const formats = img.formats || {};
-  for (const key of FORMAT_ORDER) {
+  const parts: string[] = [];
+  for (const key of HERO_FORMAT_ORDER) {
     const f = formats[key];
     if (f?.url && f?.width) parts.push(`${absUrl(f.url)} ${f.width}w`);
   }
   if (img.url && img.width) parts.push(`${absUrl(img.url)} ${img.width}w`);
-  return parts.length > 1 ? parts.join(", ") : "";
+  const href = absUrl(
+    formats.medium?.url || formats.large?.url || formats.small?.url || img.url,
+  );
+  return { href, srcset: parts.length > 1 ? parts.join(", ") : "" };
 }
 
-function pickSrc(img: any) {
-  if (!img) return "";
-  const f = img.formats || {};
-  return absUrl(f.medium?.url || f.large?.url || f.small?.url || img.url);
+function responsiveImage(img: any, fallbackFormat: string) {
+  if (!img) return { href: "", srcset: "" };
+  const formats = img.formats || {};
+  const candidates: any[] = RESPONSIVE_FORMAT_ORDER.map(
+    (k) => formats[k],
+  ).filter((f) => f && f.url && f.width);
+  if (img.url && img.width) candidates.push({ url: img.url, width: img.width });
+
+  const seen = new Set<number>();
+  const unique = candidates
+    .sort((a, b) => a.width - b.width)
+    .filter((f) => {
+      if (seen.has(f.width)) return false;
+      seen.add(f.width);
+      return true;
+    });
+
+  const fallback =
+    formats[fallbackFormat] || formats.small || formats.medium || img;
+
+  return {
+    href: absUrl(fallback.url),
+    srcset:
+      unique.length > 1
+        ? unique.map((f) => `${absUrl(f.url)} ${f.width}w`).join(", ")
+        : "",
+  };
+}
+
+function pickImg(item: any, fields: string[]) {
+  for (const f of fields) {
+    if (item?.[f]) return item[f];
+  }
+  return null;
+}
+
+function preloadTag(href: string, srcset: string, sizes: string) {
+  if (!href) return "";
+  const srcsetAttrs = srcset
+    ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(sizes)}"`
+    : "";
+  return `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
 }
 
 async function writeAtomic(file: string, content: string) {
@@ -126,10 +241,10 @@ async function buildHeroHtml(strapi: any) {
       status: "published",
       filters: { isFeatured: true },
       sort: [{ publishDate: "desc" }],
-      fields: FIELDS,
+      fields: HERO_FIELDS,
       populate: {
-        [src.img]: { fields: ["url", "formats", "width"] },
-        [src.cats]: { fields: ["name_ru", "name_kk", "name_en"] },
+        [src.img]: IMG_FIELDS,
+        [src.cats]: NAME_FIELDS,
       },
     });
     if (doc) candidates.push({ ...doc, __type: src.type });
@@ -142,24 +257,15 @@ async function buildHeroHtml(strapi: any) {
   );
 
   const img = winner.__type === "blog" ? winner.back_img : winner.desc_img;
-  const href = pickSrc(img);
+  const { href, srcset } = heroImage(img);
 
-  let preload = "";
-  if (href) {
-    const srcset = buildSrcSet(img);
-    const srcsetAttrs = srcset
-      ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(HERO_SIZES)}"`
-      : "";
-    preload = `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
-  }
-
-  return `${preload}<script type="application/json" id="hero-data">${escJson(winner)}</script>`;
+  return `${preloadTag(href, srcset, HERO_SIZES)}<script type="application/json" id="hero-data">${escJson(winner)}</script>`;
 }
 
-async function buildListHtml(strapi: any, src: (typeof LIST_SOURCES)[number]) {
+async function buildListHtml(strapi: any, src: any) {
   const items = await strapi.documents(src.uid).findMany({
     status: "published",
-    sort: [{ publishDate: "desc" }],
+    sort: src.sort,
     fields: src.fields,
     populate: src.populate,
     start: 0,
@@ -176,20 +282,15 @@ async function buildListHtml(strapi: any, src: (typeof LIST_SOURCES)[number]) {
     total,
   };
 
-  const img = items[0]?.[src.img];
-  const href = pickSrc(img);
-  let preload = "";
-  if (href) {
-    const srcset = buildSrcSet(img);
-    const srcsetAttrs = srcset
-      ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(src.sizes)}"`
-      : "";
-    preload = `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
-  }
+  const img = pickImg(items[0], src.img);
+  const { href, srcset } =
+    src.imageMode === "responsive"
+      ? responsiveImage(img, src.fallbackFormat || "small")
+      : heroImage(img);
 
   const json = escJson({ key: src.key, data: items, pagination });
 
-  return `${preload}<script type="application/json" id="list-data">${json}</script>`;
+  return `${preloadTag(href, srcset, src.sizes)}<script type="application/json" id="list-data">${json}</script>`;
 }
 
 export async function writeHeroSnapshot(strapi: any) {

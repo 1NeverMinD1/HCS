@@ -16,6 +16,7 @@ export default function ArtsPageBlock({ item, index }) {
   const category = getLangField(item?.categories?.[0], "name", locale);
 
   const isReversed = index % 2 === 1;
+  const isFirst = index === 0;
 
   return (
     <Link
@@ -24,8 +25,9 @@ export default function ArtsPageBlock({ item, index }) {
     >
       {src && (
         <img
-          loading="lazy"
-          decoding="async"
+          loading={isFirst ? "eager" : "lazy"}
+          decoding={isFirst ? undefined : "async"}
+          fetchPriority={isFirst ? "high" : undefined}
           src={src}
           srcSet={srcSet}
           sizes="(max-width: 430px) 50vw, (max-width: 1630px) 420px, 530px"

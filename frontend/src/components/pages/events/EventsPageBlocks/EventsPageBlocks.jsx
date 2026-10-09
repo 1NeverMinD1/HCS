@@ -1,5 +1,4 @@
 import EventsPageBlock from "./EventsPageBlock/EventsPageBlock";
-// Styles
 import "./_EventsPageBlocks.scss";
 
 export default function EventsPageBlocks({ events }) {
@@ -16,15 +15,19 @@ export default function EventsPageBlocks({ events }) {
   return (
     <>
       <div className="eventspage__list">
-        {normalEvents.map((item) => (
-          <EventsPageBlock key={item.id} event={item} />
+        {normalEvents.map((item, index) => (
+          <EventsPageBlock key={item.id} event={item} index={index} />
         ))}
       </div>
 
       {lastRow.length > 0 && (
         <div className="eventspage__list">
-          {lastRow.map((item) => (
-            <EventsPageBlock key={item.id} event={item} />
+          {lastRow.map((item, index) => (
+            <EventsPageBlock
+              key={item.id}
+              event={item}
+              index={normalEvents.length + index}
+            />
           ))}
         </div>
       )}

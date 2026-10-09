@@ -8,6 +8,10 @@ import {
   buildEventFilters,
   toQuery,
 } from "../../../utils/eventStatus.js";
+import {
+  readListSnapshot,
+  markListSnapshotUsed,
+} from "../../../utils/listSnapshot.js";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 import "./_EventsPage.scss";
@@ -24,8 +28,10 @@ const FIELDS =
   `&fields[12]=start_time&fields[13]=amount&fields[14]=price` +
   `&populate[cover_img][fields][0]=url` +
   `&populate[cover_img][fields][1]=formats` +
+  `&populate[cover_img][fields][2]=width` +
   `&populate[desc_img][fields][0]=url` +
   `&populate[desc_img][fields][1]=formats` +
+  `&populate[desc_img][fields][2]=width` +
   `&populate[categories][fields][0]=name_ru` +
   `&populate[categories][fields][1]=name_kk` +
   `&populate[categories][fields][2]=name_en`;
@@ -62,16 +68,32 @@ export default function EventsPage() {
   const filterKey = `${status}|${from}|${to}`;
   const hasFilters = status !== "all" || Boolean(from) || Boolean(to);
 
-  const [events, setEvents] = useState([]);
+  const [snapshot] = useState(() =>
+    hasFilters ? null : readListSnapshot("events"),
+  );
+
+  const [events, setEvents] = useState(() => snapshot?.data || []);
   const [pageState, setPageState] = useState({ key: filterKey, page: 1 });
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(() =>
+    snapshot ? snapshot.pagination.page < snapshot.pagination.pageCount : true,
+  );
+  const [loading, setLoading] = useState(() => !snapshot);
 
   const page = pageState.key === filterKey ? pageState.page : 1;
 
   const loaderRef = useRef(null);
+  const skipFirstFetch = useRef(Boolean(snapshot));
 
   useEffect(() => {
+    markListSnapshotUsed("events");
+  }, []);
+
+  useEffect(() => {
+    if (skipFirstFetch.current) {
+      skipFirstFetch.current = false;
+      return;
+    }
+
     const controller = new AbortController();
 
     setLoading(true);
