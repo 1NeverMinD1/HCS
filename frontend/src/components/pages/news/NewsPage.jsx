@@ -88,6 +88,7 @@ export default function NewsPage() {
         `&fields[6]=slug&fields[7]=publishDate` +
         `&populate[desc_img][fields][0]=url` +
         `&populate[desc_img][fields][1]=formats` +
+        `&populate[desc_img][fields][2]=width` +
         `&populate[header_cats][fields][0]=name_ru` +
         `&populate[header_cats][fields][1]=name_kk` +
         `&populate[header_cats][fields][2]=name_en`;

@@ -5,10 +5,7 @@
   width: 50%;
   height: 500px;
   position: relative;
-  background-size: cover;
   background-color: #1f2a30;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
@@ -16,6 +13,21 @@
   justify-content: space-between;
   padding: 20px;
   color: white;
+
+  .newspage__hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+    z-index: 0;
+  }
+
+  &:hover .newspage__hero-img {
+    transform: scale(1.08);
+  }
 
   .newspage__hero-overlay {
     position: absolute;
@@ -73,21 +85,6 @@
       color: white;
     }
   }
-}
-
-.newspage__hero-main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--bg);
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.5s ease;
-  z-index: 0;
-}
-
-.newspage__hero-main:hover::before {
-  transform: scale(1.08);
 }
 
 @media (max-width: 430px) {
