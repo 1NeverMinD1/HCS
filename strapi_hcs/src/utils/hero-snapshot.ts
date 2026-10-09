@@ -1,7 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 
-const OUT_FILE = "/var/www/project/hero/hero.html";
+const OUT_DIR = "/var/www/project/hero";
+const HERO_FILE = path.join(OUT_DIR, "hero.html");
 const MEDIA_BASE = "https://api.zhkh24.kz";
 const DEBOUNCE_MS = 1000;
 
@@ -16,7 +17,20 @@ const SOURCES = [
   },
 ] as const;
 
-const UIDS = new Set<string>(SOURCES.map((s) => s.uid));
+const LIST_SOURCES = [
+  {
+    key: "news",
+    uid: "api::new.new",
+    img: "desc_img",
+    sizes: "(max-width: 430px) 100vw, 50vw",
+  },
+] as const;
+
+const UIDS = new Set<string>([
+  ...SOURCES.map((s) => s.uid),
+  ...LIST_SOURCES.map((s) => s.uid),
+]);
+
 const ACTIONS = new Set([
   "create",
   "update",
@@ -37,6 +51,8 @@ const FIELDS = [
   "publishDate",
   "createdAt",
 ];
+
+const FORMAT_ORDER = ["small", "medium", "large"];
 
 function isNewer(a: any, b: any) {
   const ap = new Date(a.publishDate).getTime();
@@ -61,7 +77,32 @@ function escJson(obj: unknown) {
     .replace(/\u2029/g, "\\u2029");
 }
 
-async function buildHtml(strapi: any) {
+function buildSrcSet(img: any) {
+  if (!img) return "";
+  const parts: string[] = [];
+  const formats = img.formats || {};
+  for (const key of FORMAT_ORDER) {
+    const f = formats[key];
+    if (f?.url && f?.width) parts.push(`${absUrl(f.url)} ${f.width}w`);
+  }
+  if (img.url && img.width) parts.push(`${absUrl(img.url)} ${img.width}w`);
+  return parts.length > 1 ? parts.join(", ") : "";
+}
+
+function pickSrc(img: any) {
+  if (!img) return "";
+  const f = img.formats || {};
+  return absUrl(f.medium?.url || f.large?.url || f.small?.url || img.url);
+}
+
+async function writeAtomic(file: string, content: string) {
+  await fs.mkdir(path.dirname(file), { recursive: true });
+  const tmp = `${file}.tmp`;
+  await fs.writeFile(tmp, content, "utf8");
+  await fs.rename(tmp, file);
+}
+
+async function buildHeroHtml(strapi: any) {
   const candidates: any[] = [];
 
   for (const src of SOURCES) {
@@ -96,16 +137,45 @@ async function buildHtml(strapi: any) {
   return `${preload}<script type="application/json" id="hero-data">${escJson(winner)}</script>`;
 }
 
+async function buildListHtml(strapi: any, src: (typeof LIST_SOURCES)[number]) {
+  const doc = await strapi.documents(src.uid).findFirst({
+    status: "published",
+    sort: [{ publishDate: "desc" }],
+    fields: ["publishDate"],
+    populate: {
+      [src.img]: { fields: ["url", "formats", "width"] },
+    },
+  });
+
+  const img = doc?.[src.img];
+  const href = pickSrc(img);
+  if (!href) return "";
+
+  const srcset = buildSrcSet(img);
+  const srcsetAttrs = srcset
+    ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(src.sizes)}"`
+    : "";
+
+  return `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
+}
+
 export async function writeHeroSnapshot(strapi: any) {
   try {
-    const html = await buildHtml(strapi);
-    await fs.mkdir(path.dirname(OUT_FILE), { recursive: true });
-    const tmp = `${OUT_FILE}.tmp`;
-    await fs.writeFile(tmp, html, "utf8");
-    await fs.rename(tmp, OUT_FILE);
+    const html = await buildHeroHtml(strapi);
+    await writeAtomic(HERO_FILE, html);
     strapi.log.info(`[HERO] снимок обновлён (${html.length} байт)`);
   } catch (e: any) {
     strapi.log.error(`[HERO] hero snapshot failed: ${e.message}`);
+  }
+
+  for (const src of LIST_SOURCES) {
+    try {
+      const html = await buildListHtml(strapi, src);
+      await writeAtomic(path.join(OUT_DIR, `list-${src.key}.html`), html);
+      strapi.log.info(`[HERO] list-${src.key} обновлён (${html.length} байт)`);
+    } catch (e: any) {
+      strapi.log.error(`[HERO] list-${src.key} failed: ${e.message}`);
+    }
   }
 }
 
