@@ -106,23 +106,7 @@
           "https://mc.yandex.ru/metrika/tag.js?id=110367191",
           "https://www.googletagmanager.com/gtag/js?id=AW-11519161480",
         ];
-        var events = [
-          "scroll",
-          "pointerdown",
-          "touchstart",
-          "keydown",
-          "mousemove",
-        ];
-        var loaded = false;
-        var timer = null;
-
         function load() {
-          if (loaded) return;
-          loaded = true;
-          if (timer) clearTimeout(timer);
-          events.forEach(function (e) {
-            window.removeEventListener(e, load, { passive: true });
-          });
           sources.forEach(function (src) {
             var s = document.createElement("script");
             s.async = true;
@@ -130,19 +114,17 @@
             document.head.appendChild(s);
           });
         }
-
-        events.forEach(function (e) {
-          window.addEventListener(e, load, { once: true, passive: true });
-        });
-
-        function startFallback() {
-          timer = setTimeout(load, 20000);
+        function schedule() {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(load, { timeout: 5000 });
+          } else {
+            setTimeout(load, 3000);
+          }
         }
-
         if (document.readyState === "complete") {
-          startFallback();
+          schedule();
         } else {
-          window.addEventListener("load", startFallback, { once: true });
+          window.addEventListener("load", schedule, { once: true });
         }
       })();
     </script>
