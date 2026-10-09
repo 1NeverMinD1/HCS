@@ -8,7 +8,6 @@ import { useLocale } from "../../../context/LocaleContext";
 import SEO from "../../SEO/SEO.jsx";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs.jsx";
 import NotFoundContent from "../../notFound/NotFoundContent.jsx";
-// Styles
 import "./_NewsPage.scss";
 
 const PAGE_SIZE = 20;
@@ -22,25 +21,57 @@ const CATEGORY_DESCRIPTIONS = {
     `${name} — housing and utilities news from Kazakhstan on the ZhKH24 portal.`,
 };
 
+let listSnapshotUsed = false;
+
+function readListSnapshot(key) {
+  if (listSnapshotUsed) return null;
+  const el = document.getElementById("list-data");
+  if (!el) return null;
+  try {
+    const parsed = JSON.parse(el.textContent);
+    if (parsed?.key !== key || !Array.isArray(parsed.data)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 export default function NewsPage() {
-  const [news, setNews] = useState([]);
-  const [category, setCategory] = useState(null);
-  const [notFound, setNotFound] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
-
-  const loaderRef = useRef(null);
-
-  const { t } = useTranslation();
-
   const { id } = useParams();
   const location = useLocation();
   const isMain = location.pathname.endsWith("/news/main");
   const isCategory = Boolean(id) && !isMain;
   const { locale } = useLocale();
 
+  const [snapshot] = useState(() =>
+    !id && !isMain ? readListSnapshot("news") : null,
+  );
+
+  const [news, setNews] = useState(() => snapshot?.data || []);
+  const [category, setCategory] = useState(null);
+  const [notFound, setNotFound] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(() =>
+    snapshot ? snapshot.pagination.page < snapshot.pagination.pageCount : true,
+  );
+  const [loading, setLoading] = useState(false);
+
+  const loaderRef = useRef(null);
+  const isFirstRender = useRef(true);
+  const skipFirstFetch = useRef(Boolean(snapshot));
+
+  const { t } = useTranslation();
+
   useEffect(() => {
+    listSnapshotUsed = true;
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    skipFirstFetch.current = false;
     setNews([]);
     setPage(1);
     setHasMore(true);
@@ -75,6 +106,11 @@ export default function NewsPage() {
   }, [id, isCategory]);
 
   useEffect(() => {
+    if (page === 1 && skipFirstFetch.current) {
+      skipFirstFetch.current = false;
+      return;
+    }
+
     async function fetchNews() {
       if (loading || !hasMore) return;
 

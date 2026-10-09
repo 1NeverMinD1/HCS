@@ -23,8 +23,23 @@ const LIST_SOURCES = [
     uid: "api::new.new",
     img: "desc_img",
     sizes: "(max-width: 430px) 100vw, 50vw",
+    pageSize: 20,
+    fields: [
+      "title_ru",
+      "title_kk",
+      "title_en",
+      "desc_ru",
+      "desc_kk",
+      "desc_en",
+      "slug",
+      "publishDate",
+    ],
+    populate: {
+      desc_img: { fields: ["url", "formats", "width"] },
+      header_cats: { fields: ["name_ru", "name_kk", "name_en"] },
+    },
   },
-] as const;
+];
 
 const UIDS = new Set<string>([
   ...SOURCES.map((s) => s.uid),
@@ -138,25 +153,39 @@ async function buildHeroHtml(strapi: any) {
 }
 
 async function buildListHtml(strapi: any, src: (typeof LIST_SOURCES)[number]) {
-  const doc = await strapi.documents(src.uid).findFirst({
+  const items = await strapi.documents(src.uid).findMany({
     status: "published",
     sort: [{ publishDate: "desc" }],
-    fields: ["publishDate"],
-    populate: {
-      [src.img]: { fields: ["url", "formats", "width"] },
-    },
+    fields: src.fields,
+    populate: src.populate,
+    start: 0,
+    limit: src.pageSize,
   });
 
-  const img = doc?.[src.img];
+  if (!items || items.length === 0) return "";
+
+  const total = await strapi.documents(src.uid).count({ status: "published" });
+  const pagination = {
+    page: 1,
+    pageSize: src.pageSize,
+    pageCount: Math.max(1, Math.ceil(total / src.pageSize)),
+    total,
+  };
+
+  const img = items[0]?.[src.img];
   const href = pickSrc(img);
-  if (!href) return "";
+  let preload = "";
+  if (href) {
+    const srcset = buildSrcSet(img);
+    const srcsetAttrs = srcset
+      ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(src.sizes)}"`
+      : "";
+    preload = `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
+  }
 
-  const srcset = buildSrcSet(img);
-  const srcsetAttrs = srcset
-    ? ` imagesrcset="${escAttr(srcset)}" imagesizes="${escAttr(src.sizes)}"`
-    : "";
+  const json = escJson({ key: src.key, data: items, pagination });
 
-  return `<link rel="preload" as="image" href="${escAttr(href)}"${srcsetAttrs} fetchpriority="high">`;
+  return `${preload}<script type="application/json" id="list-data">${json}</script>`;
 }
 
 export async function writeHeroSnapshot(strapi: any) {
