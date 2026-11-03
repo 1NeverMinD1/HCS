@@ -360,7 +360,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
       </div>
       {faq.length > 0 && (
         <div className="artscontent__faq">
-          <h2>FAQ</h2>
+          <h2>Вопросы и Ответы</h2>
           {faq.map((block, i) => renderBlock(block, i, locale, t, scripts))}
         </div>
       )}
