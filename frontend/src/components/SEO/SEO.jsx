@@ -26,6 +26,7 @@ export default function SEO({
   translationSourceItem,
   translationField = "title",
   breadcrumbs,
+  faq,
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -260,6 +261,24 @@ export default function SEO({
         }
       : null;
 
+  const faqData =
+    faq && faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          inLanguage: lang,
+          mainEntity: faq.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: a.join(" "),
+            },
+          })),
+        }
+      : null;
+
   return (
     <Helmet>
       {structuredData && (
@@ -271,6 +290,9 @@ export default function SEO({
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbData)}
         </script>
+      )}
+      {faqData && (
+        <script type="application/ld+json">{JSON.stringify(faqData)}</script>
       )}
       <html lang={lang} />
 

@@ -14,6 +14,7 @@ import { getResponsiveImage } from "../../../../utils/getResponsiveImage.js";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import { formatLocalizedDate } from "../../../../utils/dateLocale.js";
 import AuthorsHeader from "../../../authorsHeader/AuthorsHeader.jsx";
+import { getQandaBlocks, parseQanda } from "../../../../utils/qanda.js";
 import Tags from "../tags/Tags.jsx";
 import ReadMore from "../readMore/ReadMore.jsx";
 import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
@@ -242,7 +243,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
   const title = getLangField(item, "title", locale);
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
-  const faq = item?.[`qanda_${locale}`] || item?.qanda_ru || [];
+  const faq = getQandaBlocks(item, locale);
   const category = getLangField(item?.categories?.[0], "name", locale);
   const scripts = item?.scripts || [];
 
@@ -510,11 +511,14 @@ export default function ArticlesContent() {
       ]
     : [];
 
+  const activeFaq = parseQanda(getQandaBlocks(activeItem, locale));
+
   return (
     <div className="artscontent__layout">
       <SEO
         seo={activeItem.SEO}
         og={activeItem.OG}
+        faq={activeFaq}
         title={getLangField(activeItem, "title", locale)}
         description={getLangField(activeItem, "desc", locale)}
         image={getImageUrl(
