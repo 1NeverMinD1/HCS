@@ -71,12 +71,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "tags": {
       "type": "relation",
@@ -117,13 +112,25 @@
       "inversedBy": "articles"
     },
     "qanda_ru": {
-      "type": "blocks"
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      }
     },
     "qanda_kz": {
-      "type": "blocks"
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      }
     },
     "qanda_en": {
-      "type": "blocks"
+      "type": "customField",
+      "customField": "plugin::better-blocks.better-blocks",
+      "options": {
+        "detailsStyle": "github"
+      }
     },
     "send_to_tg": {
       "type": "boolean"
