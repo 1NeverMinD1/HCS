@@ -22,6 +22,11 @@ export default function SEO({
   startDate,
   endDate,
   location,
+  address,
+  price,
+  performer,
+  registerLink,
+  city,
   answerText,
   translationSourceItem,
   translationField = "title",
@@ -35,8 +40,16 @@ export default function SEO({
   const OG_LOCALE_MAP = { ru: "ru_RU", kk: "kk_KZ", en: "en_US" };
   const ogLocale = OG_LOCALE_MAP[lang] || "ru_RU";
 
-  const SITE_NAMES = { ru: "ЖКХ24", kk: "ЖКХ24", en: "ZhKH24" };
+  const SITE_NAMES = { ru: "ЖКХ 24", kk: "ЖКХ 24", en: "ZhKH 24" };
   const siteName = SITE_NAMES[lang] || SITE_NAMES.ru;
+
+  const HOME_TITLES = {
+    ru: "ЖКХ 24 — новости ЖКХ Казахстана: тарифы, ОСИ, коммуналка",
+    kk: "ЖКХ 24 — Қазақстандағы ТКШ жаңалықтары: тарифтер, ПИБ",
+    en: "ZhKH 24 — Kazakhstan housing and utilities news",
+  };
+  const isHome = /^\/((ru|kk|en)\/?)?$/.test(pathname);
+  const homeTitle = HOME_TITLES[lang] || HOME_TITLES.ru;
   const baseUrl = "https://zhkh24.kz";
 
   const DEFAULT_DESCRIPTIONS = {
@@ -74,9 +87,11 @@ export default function SEO({
   const ogImageWidth = ogImageData?.width;
   const ogImageHeight = ogImageData?.height;
 
-  const finalTitle = seoTitle || title || siteName;
+  const finalTitle = isHome ? homeTitle : seoTitle || title || siteName;
   const fullTitle =
-    finalTitle === siteName ? siteName : `${finalTitle} | ${siteName}`;
+    isHome || finalTitle === siteName
+      ? finalTitle
+      : `${finalTitle} | ${siteName}`;
 
   const finalDescription = seoDescription || description || defaultDescription;
 
@@ -138,6 +153,28 @@ export default function SEO({
         ? {
             "@type": "Place",
             name: location,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: address || location,
+              addressLocality: city,
+              addressCountry: "KZ",
+            },
+          }
+        : undefined,
+      offers:
+        price != null
+          ? {
+              "@type": "Offer",
+              price: price,
+              priceCurrency: "KZT",
+              availability: "https://schema.org/InStock",
+              url: registerLink || canonicalUrl,
+            }
+          : undefined,
+      performer: performer
+        ? {
+            "@type": "Person",
+            name: performer,
           }
         : undefined,
       organizer: {
@@ -224,6 +261,7 @@ export default function SEO({
         {
           "@type": "WebSite",
           name: siteName,
+          alternateName: ["ЖКХ24", "ZhKH24", "zhkh24.kz"],
           url: baseUrl,
           inLanguage: lang,
         },

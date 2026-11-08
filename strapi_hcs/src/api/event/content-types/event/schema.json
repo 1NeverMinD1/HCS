@@ -59,28 +59,19 @@
     },
     "price": {
       "type": "integer",
-      "required": false
+      "required": false,
+      "default": 0
     },
     "desc_img": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "cover_img": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "content_ru": {
       "type": "customField",

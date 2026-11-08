@@ -58,7 +58,10 @@ export const EVENTS_POPULATE_QUERY =
   `&populate[tags][fields][1]=name_kk` +
   `&populate[tags][fields][2]=name_en` +
   `&populate[scripts][fields][0]=name` +
-  `&populate[scripts][fields][1]=script`;
+  `&populate[scripts][fields][1]=script` +
+  `&populate[cities][fields][0]=name_ru` +
+  `&populate[cities][fields][1]=name_kk` +
+  `&populate[cities][fields][2]=name_en`;
 
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
@@ -422,6 +425,7 @@ export default function EventsContent() {
 
   const title = getLangField(events, "title", locale);
   const place = getLangField(events, "place", locale);
+  const city = getLangField(events?.cities?.[0], "name", locale);
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
@@ -453,6 +457,9 @@ export default function EventsContent() {
         }
         authorSlug={events.authors?.[0]?.slug}
         location={place}
+        city={city || undefined}
+        price={events.price ?? 0}
+        registerLink={events.register_link || undefined}
         translationSourceItem={events}
         translationField="title"
         breadcrumbs={breadcrumbItems}

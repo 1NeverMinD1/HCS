@@ -3,7 +3,7 @@
 .latest__block {
   display: flex;
   flex-direction: column;
-  min-height: 450px; // увеличил с 400px — компенсирует более высокую картинку
+  min-height: 450px;
   overflow: hidden;
   text-decoration: none;
   color: black;
@@ -49,7 +49,7 @@
 
     .latest__block-cat {
       margin-left: 10px;
-      white-space: nowrap; // всегда 1 строка
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -57,7 +57,7 @@
     .latest__block-title {
       display: -webkit-box;
       overflow: hidden;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
 

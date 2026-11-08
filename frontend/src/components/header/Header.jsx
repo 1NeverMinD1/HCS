@@ -77,9 +77,9 @@ export default function Header() {
       <Link to={`/${locale}`} className="logo" onClick={closeMobileMenu}>
         <img
           src={logo}
-          alt="ЖКХ24"
+          alt="ЖКХ 24"
           className="logo_img"
-          width="452"
+          width="482"
           height="103"
         />
       </Link>
