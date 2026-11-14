@@ -236,6 +236,23 @@ function findMidpointIndex(content) {
   return idx;
 }
 
+function getBlockText(node) {
+  if (typeof node?.text === "string") return node.text;
+  return (node?.children || []).map(getBlockText).join("");
+}
+
+function groupFaqItems(blocks = []) {
+  const items = [];
+  blocks.forEach((block) => {
+    if (block.type === "heading") {
+      items.push({ question: getBlockText(block).trim(), answer: [] });
+    } else if (items.length > 0) {
+      items[items.length - 1].answer.push(block);
+    }
+  });
+  return items.filter((faqItem) => faqItem.question);
+}
+
 export function ArticleItem({ item, isFirst, registerRef }) {
   const { locale } = useLocale();
   const { t } = useTranslation();
@@ -244,6 +261,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
   const desc = getLangField(item, "desc", locale);
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const faq = getQandaBlocks(item, locale);
+  const faqItems = groupFaqItems(faq);
   const category = getLangField(item?.categories?.[0], "name", locale);
   const scripts = item?.scripts || [];
 
@@ -358,11 +376,24 @@ export function ArticleItem({ item, isFirst, registerRef }) {
           <ReadMore item={item} locale={locale} contentType="article" />
         )}
       </div>
-      {faq.length > 0 && (
-        <div className="artscontent__faq">
-          <h2>Коротко: вопросы и ответы</h2>
-          {faq.map((block, i) => renderBlock(block, i, locale, t, scripts))}
-        </div>
+      {faqItems.length > 0 && (
+        <section className="artscontent__faq">
+          <h2 className="artscontent__faq-title">Коротко: вопросы и ответы</h2>
+          <div className="artscontent__faq-list">
+            {faqItems.map((faqItem, i) => (
+              <details key={i} className="artscontent__faq-item" open={i === 0}>
+                <summary className="artscontent__faq-question">
+                  <h3>{faqItem.question}</h3>
+                </summary>
+                <div className="artscontent__faq-answer">
+                  {faqItem.answer.map((block, j) =>
+                    renderBlock(block, j, locale, t, scripts),
+                  )}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
       )}
       <Tags item={item} locale={locale} />
     </div>
@@ -556,13 +587,9 @@ export default function ArticlesContent() {
             />
           ))}
 
-        {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+        {hasMore && <div ref={loaderRef} className="artscontent__loader" />}
 
-        {!hasMore && (
-          <p style={{ textAlign: "center", padding: "2rem" }}>
-            {t("noMoreArticles")}
-          </p>
-        )}
+        {!hasMore && <p className="artscontent__end">{t("noMoreArticles")}</p>}
       </div>
       <div className="artscontent__layout-sidemenu">
         <SideMenu currentId={activeItem.slug} />

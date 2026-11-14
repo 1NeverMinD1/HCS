@@ -555,13 +555,9 @@ export default function NewsContent() {
             />
           ))}
 
-        {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+        {hasMore && <div ref={loaderRef} className="newscontent__loader" />}
 
-        {!hasMore && (
-          <p style={{ textAlign: "center", padding: "2rem" }}>
-            {t("noMoreNews")}
-          </p>
-        )}
+        {!hasMore && <p className="newscontent__end">{t("noMoreNews")}</p>}
       </div>
       <div className="newscontent__layout-sidemenu">
         <SideMenu currentId={activeItem.slug} />

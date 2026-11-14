@@ -547,13 +547,9 @@ export default function BlogsContent() {
             />
           ))}
 
-        {hasMore && <div ref={loaderRef} style={{ height: "60px" }} />}
+        {hasMore && <div ref={loaderRef} className="blogscontent__loader" />}
 
-        {!hasMore && (
-          <p style={{ textAlign: "center", padding: "2rem" }}>
-            {t("noMoreBlogs")}
-          </p>
-        )}
+        {!hasMore && <p className="blogscontent__end">{t("noMoreBlogs")}</p>}
       </div>
       <div className="blogscontent__layout-sidemenu">
         <SideMenu currentId={activeItem.slug} />

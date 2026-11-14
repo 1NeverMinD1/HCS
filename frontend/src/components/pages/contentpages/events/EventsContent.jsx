@@ -59,9 +59,9 @@ export const EVENTS_POPULATE_QUERY =
   `&populate[tags][fields][2]=name_en` +
   `&populate[scripts][fields][0]=name` +
   `&populate[scripts][fields][1]=script` +
-  `&populate[cities][fields][0]=name_ru` +
-  `&populate[cities][fields][1]=name_kk` +
-  `&populate[cities][fields][2]=name_en`;
+  `&populate[cities][fields][0]=city_ru` +
+  `&populate[cities][fields][1]=city_kk` +
+  `&populate[cities][fields][2]=city_en`;
 
 function renderBlock(block, i, locale, t, scripts = []) {
   const renderChildren = (children = []) =>
@@ -223,7 +223,7 @@ export function EventView({ item: events, children }) {
   return (
     <div className="eventscontent__layout">
       {children}
-      <div className="eventscontent wrapper">
+      <div className="eventscontent">
         <Link to={`/${locale}/events`} className="back">
           <svg className="arrow_reverse" viewBox="0 0 5 9">
             <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z"></path>
@@ -425,7 +425,7 @@ export default function EventsContent() {
 
   const title = getLangField(events, "title", locale);
   const place = getLangField(events, "place", locale);
-  const city = getLangField(events?.cities?.[0], "name", locale);
+  const city = getLangField(events?.cities?.[0], "city", locale);
 
   const breadcrumbItems = [
     { name: t("home") || "Главная", url: `/${locale}` },
