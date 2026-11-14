@@ -19,7 +19,7 @@ export default function BlogsPage() {
   const [snapshot] = useState(() => readListSnapshot("blogs"));
 
   const [blogs, setBlogs] = useState(() => snapshot?.data || []);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => snapshot?.pagination?.page || 1);
   const [hasMore, setHasMore] = useState(() =>
     snapshot ? snapshot.pagination.page < snapshot.pagination.pageCount : true,
   );
@@ -33,7 +33,7 @@ export default function BlogsPage() {
   }, []);
 
   useEffect(() => {
-    if (page === 1 && skipFirstFetch.current) {
+    if (skipFirstFetch.current) {
       skipFirstFetch.current = false;
       return;
     }
@@ -69,6 +69,7 @@ export default function BlogsPage() {
             `&populate[tags][fields][2]=name_en`,
         );
 
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
         const newItems = data.data || [];
@@ -138,17 +139,15 @@ export default function BlogsPage() {
         breadcrumbs={breadcrumbItems}
       />
 
+      <Breadcrumbs items={breadcrumbItems} />
       <h1 className="blogspage__title">{t("blogsIntro")}</h1>
       <p className="blogspage__intro">{t("blogsIntroText")}</p>
-      <Breadcrumbs items={breadcrumbItems} />
 
       <BlogsPageBlocks blogs={blogs} />
 
-      {loading && (
-        <p style={{ textAlign: "center", padding: "20px" }}>{t("loading")}</p>
-      )}
+      {loading && <p className="blogspage__status">{t("loading")}</p>}
 
-      {hasMore && <div ref={loaderRef} style={{ height: 1 }} />}
+      {hasMore && <div ref={loaderRef} className="blogspage__loader" />}
     </div>
   );
 }

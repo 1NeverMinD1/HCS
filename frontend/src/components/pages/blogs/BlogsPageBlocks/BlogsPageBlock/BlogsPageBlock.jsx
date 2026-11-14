@@ -1,66 +1,66 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../../../../context/LocaleContext.jsx";
 import { getLangField } from "../../../../../utils/getLangField.js";
 import { getImageUrl } from "../../../../../utils/getImageUrl.js";
+import { getResponsiveImage } from "../../../../../utils/getResponsiveImage.js";
 import { formatLocalizedDate } from "../../../../../utils/dateLocale.js";
-// Styles
 import "./_BlogsPageBlock.scss";
 
 export default function BlogsPageBlock({ blog }) {
   const { locale } = useLocale();
-  const title = getLangField(blog, "title", locale);
-  const desc = getLangField(blog, "desc", locale);
-  const author = getLangField(blog?.authors?.[0], "name", locale);
-  const position = getLangField(blog?.authors?.[0], "position", locale);
+
   if (!blog) return null;
 
-  const profileImg = getImageUrl(
-    blog?.authors?.[0]?.profile_img?.formats?.medium?.url ||
-      blog?.authors?.[0]?.profile_img?.formats?.small?.url ||
-      blog?.authors?.[0]?.profile_img?.url,
-  );
-
-  const backImg = getImageUrl(
-    blog?.back_img?.formats?.medium?.url ||
-      blog?.back_img?.formats?.small?.url ||
-      blog?.back_img?.url,
-  );
-
-  const category = blog.categories?.[0]?.name || blog.tags?.[0]?.name;
+  const authorData = blog.authors?.[0];
+  const title = getLangField(blog, "title", locale);
+  const desc = getLangField(blog, "desc", locale);
+  const author = getLangField(authorData, "name", locale);
+  const position = getLangField(authorData, "position", locale);
+  const profileImg = authorData
+    ? getImageUrl(
+        authorData.profile_img?.formats?.small?.url ||
+          authorData.profile_img?.formats?.thumbnail?.url ||
+          authorData.profile_img?.url,
+      )
+    : null;
+  const cover = getResponsiveImage(blog.back_img, "medium");
 
   return (
     <Link to={`/${locale}/blogs/${blog.slug}`} className="blogspage__item">
-      <div className="blogspage__item-header">
-        <img
-          loading="lazy"
-          decoding="async"
-          src={profileImg}
-          alt={author || ""}
-          className="profile"
-        />
-        <div className="blogspage__item-about">
-          <p className="author">{author}</p>
-          <p className="spec">{position}</p>
+      {authorData && (
+        <div className="blogspage__item-header">
+          {profileImg && (
+            <img
+              loading="lazy"
+              decoding="async"
+              src={profileImg}
+              alt=""
+              className="profile"
+            />
+          )}
+          <div className="blogspage__item-about">
+            <p className="author">{author}</p>
+            {position && <p className="spec">{position}</p>}
+          </div>
         </div>
-      </div>
+      )}
       <div className="blogspage__item-main">
-        <img
-          loading="lazy"
-          decoding="async"
-          src={backImg}
-          alt={title || ""}
-          className="back_img"
-        />
+        {cover.src && (
+          <img
+            loading="lazy"
+            decoding="async"
+            src={cover.src}
+            srcSet={cover.srcSet}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt=""
+            className="back_img"
+          />
+        )}
       </div>
       <div className="blogspage__item-content">
         <h2 className="blogspage__item-title">{title}</h2>
-        <p className="blogspage__item-text">{desc}</p>
-        <div className="blogs__block-footer">
-          <p className="date">
-            {formatLocalizedDate(blog.publishDate, locale)}
-          </p>
-        </div>
+        {desc && <p className="blogspage__item-text">{desc}</p>}
+        <p className="date">{formatLocalizedDate(blog.publishDate, locale)}</p>
       </div>
     </Link>
   );

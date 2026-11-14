@@ -1,7 +1,22 @@
 .blogspage__blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.blogspage__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 20px;
+}
+
+@media (max-width: 768px) {
+  .blogspage__blocks {
+    gap: 20px;
+  }
+
   .blogspage__list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
   }
 }

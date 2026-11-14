@@ -1,36 +1,17 @@
 import BlogsPageBlock from "./BlogsPageBlock/BlogsPageBlock";
 import BlogsPageFirstBlock from "./BlogsPageFirstBlock/BlogsPageFirstBlock";
-// Styles
 import "./_BlogsPageBlocks.scss";
 
 export default function BlogsPageBlocks({ blogs }) {
-  const blog = blogs[0];
-
-  const list = blogs.slice(1);
-
-  const remainder = list.length % 3;
-
-  let normalBlogs = list;
-  let lastRow = [];
-
-  if (list.length > 3 && remainder !== 0) {
-    normalBlogs = list.slice(0, list.length - (3 + remainder));
-    lastRow = list.slice(-(3 + remainder));
-  }
+  const [first, ...rest] = blogs;
 
   return (
     <div className="blogspage__blocks">
-      <BlogsPageFirstBlock blog={blog} />
+      <BlogsPageFirstBlock blog={first} />
 
-      <div className="blogspage__list">
-        {normalBlogs.map((item) => (
-          <BlogsPageBlock key={item.id} blog={item} />
-        ))}
-      </div>
-
-      {lastRow.length > 0 && (
+      {rest.length > 0 && (
         <div className="blogspage__list">
-          {lastRow.map((item) => (
+          {rest.map((item) => (
             <BlogsPageBlock key={item.id} blog={item} />
           ))}
         </div>
