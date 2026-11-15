@@ -29,7 +29,7 @@ export default function FooterContent() {
       </div>
       <div className="footer__contacts">
         <div className="footer__contacts-block">
-          <h2>{t.footerSectionsTitle}</h2>
+          <p className="footer__contacts-title">{t.footerSectionsTitle}</p>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <Link to={`/${locale}/news`} className="footer__contacts-item">
@@ -65,7 +65,7 @@ export default function FooterContent() {
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h2>{t.footerPublicationTitle}</h2>
+          <p className="footer__contacts-title">{t.footerPublicationTitle}</p>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <Link to={`/${locale}/about`} className="footer__contacts-item">
@@ -99,7 +99,7 @@ export default function FooterContent() {
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h2>{t.footerLegalTitle}</h2>
+          <p className="footer__contacts-title">{t.footerLegalTitle}</p>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item">
               <Link to={`/${locale}/imprint`} className="footer__contacts-item">
@@ -124,7 +124,7 @@ export default function FooterContent() {
           </ul>
         </div>
         <div className="footer__contacts-block">
-          <h2>{t.footerContacts}</h2>
+          <p className="footer__contacts-title">{t.footerContacts}</p>
           <ul className="footer__contacts-list">
             <li className="footer__contacts-item adress">
               <a

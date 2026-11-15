@@ -10,8 +10,11 @@
   gap: 10px;
   overflow: hidden;
   transition: all 0.3s ease;
-  h2 {
+  .sidemenu__title {
     flex-shrink: 0;
+    color: black;
+    font-size: 1.5em;
+    font-weight: 700;
   }
   .sidemenu__items {
     display: flex;

@@ -36,8 +36,10 @@
       flex-direction: column;
       gap: 20px;
 
-      h2 {
+      .footer__contacts-title {
+        color: black;
         font-size: 1.17em;
+        font-weight: 700;
         line-height: 1.5;
       }
 
@@ -136,7 +138,7 @@
         gap: 12px;
         min-width: 0;
 
-        h2 {
+        .footer__contacts-title {
           margin: 0;
           font-size: variables.$mobile-text-font-size - 3px;
           line-height: 1.3;

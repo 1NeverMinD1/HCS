@@ -87,7 +87,7 @@ export default function SideMenu({ currentId }) {
 
   return (
     <div className="sidemenu">
-      <h2>{t("latest")}</h2>
+      <p className="sidemenu__title">{t("latest")}</p>
       <div className="sidemenu__items">
         {items.map((item) => {
           const title = getLangField(item, "title", locale);
