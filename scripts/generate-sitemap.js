@@ -53,16 +53,30 @@ async function fetchAll(endpoint) {
   return allItems;
 }
 
-function urlEntry(loc, lastmod) {
+function buildAlternates(codes, makeUrl) {
+  if (codes.length < 2) return [];
+  return [
+    ...codes.map((code) => ({ lang: code, href: makeUrl(code) })),
+    { lang: "x-default", href: makeUrl("ru") },
+  ];
+}
+
+function urlEntry(loc, lastmod, alternates = []) {
+  const links = alternates
+    .map(
+      ({ lang, href }) =>
+        `\n    <xhtml:link rel="alternate" hreflang="${lang}" href="${href}"/>`,
+    )
+    .join("");
   return `  <url>
     <loc>${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <lastmod>${lastmod}</lastmod>${links}
   </url>`;
 }
 
 function buildUrlset(entries) {
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.join("\n")}
 </urlset>`;
 }
@@ -116,11 +130,13 @@ async function generateSitemaps() {
   let totalUrls = 0;
   let latestOverall = null;
 
-  const addUrl = (fileName, loc, updatedAt) => {
+  const addUrl = (fileName, loc, updatedAt, alternates = []) => {
     if (!groups.has(fileName))
       groups.set(fileName, { entries: [], latest: null });
     const group = groups.get(fileName);
-    group.entries.push(urlEntry(loc, toAlmatyDateString(updatedAt)));
+    group.entries.push(
+      urlEntry(loc, toAlmatyDateString(updatedAt), alternates),
+    );
     if (!group.latest || updatedAt > group.latest) group.latest = updatedAt;
   };
 
@@ -133,16 +149,24 @@ async function generateSitemaps() {
         if (!slug || !updatedAt) continue;
         if (!latestOverall || updatedAt > latestOverall)
           latestOverall = updatedAt;
-        for (const locale of LOCALES) {
-          if (
-            locale.field &&
-            !(item[locale.field] || item.attributes?.[locale.field])
-          )
-            continue;
+        const available = LOCALES.filter(
+          (locale) =>
+            !locale.field ||
+            item[locale.field] ||
+            item.attributes?.[locale.field],
+        );
+        const makeItemUrl = (code) =>
+          `${SITE_URL}/${code}/${collection.path}/${slug}`;
+        const alternates = buildAlternates(
+          available.map((locale) => locale.code),
+          makeItemUrl,
+        );
+        for (const locale of available) {
           addUrl(
             `sitemap-${collection.name}-${locale.code}.xml`,
-            `${SITE_URL}/${locale.code}/${collection.path}/${slug}`,
+            makeItemUrl(locale.code),
             updatedAt,
+            alternates,
           );
           totalUrls++;
         }
@@ -162,8 +186,17 @@ async function generateSitemaps() {
     process.exit(1);
   }
 
+  const homeAlternates = buildAlternates(
+    LOCALES.map((locale) => locale.code),
+    (code) => `${SITE_URL}/${code}`,
+  );
   for (const locale of LOCALES) {
-    addUrl(STATIC_NAME, `${SITE_URL}/${locale.code}`, latestOverall);
+    addUrl(
+      STATIC_NAME,
+      `${SITE_URL}/${locale.code}`,
+      latestOverall,
+      homeAlternates,
+    );
   }
 
   const names = [...groups.keys()].sort((a, b) =>

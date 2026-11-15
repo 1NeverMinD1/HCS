@@ -104,7 +104,7 @@ function renderBlock(block, i, locale, t, scripts = []) {
       return <p key={i}>{renderChildren(block.children)}</p>;
 
     case "heading": {
-      const Tag = `h${block.level || 2}`;
+      const Tag = `h${Math.min(Math.max(block.level || 2, 2), 6)}`;
       return <Tag key={i}>{renderChildren(block.children)}</Tag>;
     }
 
