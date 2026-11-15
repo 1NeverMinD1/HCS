@@ -100,7 +100,13 @@ export default function SEO({
   const finalOgTitle = ogTitle || finalTitle;
   const finalOgDescription = ogDescription || finalDescription;
 
-  const ogType = type === "event" ? "website" : type;
+  const isArticleType =
+    type === "article" || type === "news" || type === "blog";
+  const ogType = isArticleType
+    ? "article"
+    : type === "profile"
+      ? "profile"
+      : "website";
 
   const isFallbackTranslation =
     translationSourceItem &&
@@ -371,6 +377,18 @@ export default function SEO({
       <meta property="og:type" content={ogType} />
       <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content={siteName} />
+      {isArticleType && datePublished && (
+        <meta property="article:published_time" content={datePublished} />
+      )}
+      {isArticleType && (dateModified || datePublished) && (
+        <meta
+          property="article:modified_time"
+          content={dateModified || datePublished}
+        />
+      )}
+      {isArticleType && authorUrl && (
+        <meta property="article:author" content={authorUrl} />
+      )}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalOgTitle} />
