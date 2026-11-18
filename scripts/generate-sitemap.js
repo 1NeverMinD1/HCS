@@ -9,7 +9,6 @@ const COLLECTIONS = [
   { endpoint: "blogs", path: "blogs", name: "blogs" },
   { endpoint: "events", path: "events", name: "events" },
   { endpoint: "q-and-as", path: "q-and-as", name: "qna" },
-  { endpoint: "authors", path: "author", name: "authors", field: "name" },
 ];
 const LOCALES = [
   { code: "ru", field: null },
@@ -197,19 +196,6 @@ async function generateSitemaps() {
       `${SITE_URL}/${locale.code}`,
       latestOverall,
       homeAlternates,
-    );
-  }
-
-  const authorsAlternates = buildAlternates(
-    LOCALES.map((locale) => locale.code),
-    (code) => `${SITE_URL}/${code}/authors`,
-  );
-  for (const locale of LOCALES) {
-    addUrl(
-      STATIC_NAME,
-      `${SITE_URL}/${locale.code}/authors`,
-      latestOverall,
-      authorsAlternates,
     );
   }
 
