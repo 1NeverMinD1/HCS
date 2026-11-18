@@ -10,22 +10,16 @@ import "./_AuthorsList.scss";
 
 const TEXTS = {
   ru: {
-    title: "Авторы и эксперты",
-    intro: "Журналисты и эксперты, которые пишут для ЖКХ 24.",
-    journalists: "Редакция",
-    experts: "Эксперты",
+    title: "Авторы",
+    intro: "Авторы, которые пишут для ЖКХ 24.",
   },
   kk: {
-    title: "Авторлар мен сарапшылар",
-    intro: "ЖКХ 24 үшін жазатын журналистер мен сарапшылар.",
-    journalists: "Редакция",
-    experts: "Сарапшылар",
+    title: "Авторлар",
+    intro: "ЖКХ 24 үшін жазатын авторлар.",
   },
   en: {
-    title: "Authors and experts",
-    intro: "Journalists and experts who write for ZhKH 24.",
-    journalists: "Newsroom",
-    experts: "Experts",
+    title: "Authors",
+    intro: "Authors who write for ZhKH 24.",
   },
 };
 
@@ -103,10 +97,6 @@ export default function AuthorsList() {
     { name: texts.title },
   ];
 
-  const journalists = authors.filter((author) => author.isJournalist);
-  const experts = authors.filter((author) => !author.isJournalist);
-  const isGrouped = journalists.length > 0 && experts.length > 0;
-
   const renderGrid = (list) => (
     <div className="authorslist__grid">
       {list.map((author) => (
@@ -130,20 +120,7 @@ export default function AuthorsList() {
         <p className="authorslist__empty">{t("noContent")}</p>
       )}
 
-      {isGrouped ? (
-        <>
-          <section className="authorslist__group">
-            <h2 className="authorslist__group-title">{texts.journalists}</h2>
-            {renderGrid(journalists)}
-          </section>
-          <section className="authorslist__group">
-            <h2 className="authorslist__group-title">{texts.experts}</h2>
-            {renderGrid(experts)}
-          </section>
-        </>
-      ) : (
-        authors.length > 0 && renderGrid(authors)
-      )}
+      {authors.length > 0 && renderGrid(authors)}
     </div>
   );
 }

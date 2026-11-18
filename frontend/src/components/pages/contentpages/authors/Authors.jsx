@@ -39,11 +39,7 @@ const SECTIONS = [
 
 const PAGE_SIZE = 10;
 
-const AUTHORS_LABEL = {
-  ru: "Авторы и эксперты",
-  kk: "Авторлар мен сарапшылар",
-  en: "Authors and experts",
-};
+const AUTHORS_LABEL = { ru: "Авторы", kk: "Авторлар", en: "Authors" };
 
 function sortByDateDesc(items) {
   return [...items].sort((a, b) => {
