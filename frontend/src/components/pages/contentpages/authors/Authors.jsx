@@ -7,6 +7,7 @@ import { formatLocalizedDate } from "../../../../utils/dateLocale";
 import { useTranslation } from "../../../../utils/useTranslation.js";
 import NotFoundContent from "../../../notFound/NotFoundContent.jsx";
 import SEO from "../../../SEO/SEO.jsx";
+import Breadcrumbs from "../../../breadcrumbs/Breadcrumbs.jsx";
 import {
   FaInstagram,
   FaTelegram,
@@ -37,6 +38,12 @@ const SECTIONS = [
 ];
 
 const PAGE_SIZE = 10;
+
+const AUTHORS_LABEL = {
+  ru: "Авторы и эксперты",
+  kk: "Авторлар мен сарапшылар",
+  en: "Authors and experts",
+};
 
 function sortByDateDesc(items) {
   return [...items].sort((a, b) => {
@@ -73,6 +80,7 @@ export default function Authors() {
         `&fields[7]=bio_kk` +
         `&fields[8]=bio_en` +
         `&fields[9]=slug` +
+        `&fields[10]=updatedAt` +
         `&populate[profile_img][fields][0]=url` +
         `&populate[profile_img][fields][1]=formats` +
         `&populate[blogs][fields][0]=title_ru` +
@@ -187,22 +195,40 @@ export default function Authors() {
       author.profile_img?.url,
   );
 
+  const breadcrumbItems = [
+    { name: t("home"), url: `/${locale}` },
+    {
+      name: AUTHORS_LABEL[locale] || AUTHORS_LABEL.ru,
+      url: `/${locale}/authors`,
+    },
+    { name },
+  ];
+
+  const socialUrls = (author.links || [])
+    .filter((link) => link.url && link.platform !== "email")
+    .map((link) => link.url);
+
   return (
     <div className="authors__layout">
       <SEO
         title={name}
         description={bio || position}
         image={profileImg}
-        type="website"
+        type="profile"
+        jobTitle={position}
+        sameAs={socialUrls}
+        dateModified={author.updatedAt}
         translationSourceItem={author}
         translationField="name"
+        breadcrumbs={breadcrumbItems}
       />
       <div className="authors">
+        <Breadcrumbs items={breadcrumbItems} />
         <div className="authors__intro">
           <img src={profileImg} alt={name || ""} />
           <div className="authors__intro-info">
             <p className="authors__intro-info-role">{t("author")}</p>
-            <h2 className="authors__intro-info-name">{name}</h2>
+            <h1 className="authors__intro-info-name">{name}</h1>
             <p className="authors__intro-info-position">{position}</p>
           </div>
         </div>

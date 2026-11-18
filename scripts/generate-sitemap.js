@@ -9,6 +9,7 @@ const COLLECTIONS = [
   { endpoint: "blogs", path: "blogs", name: "blogs" },
   { endpoint: "events", path: "events", name: "events" },
   { endpoint: "q-and-as", path: "q-and-as", name: "qna" },
+  { endpoint: "authors", path: "author", name: "authors", field: "name" },
 ];
 const LOCALES = [
   { code: "ru", field: null },
@@ -33,13 +34,13 @@ function toAlmatyDateString(isoString) {
   return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
-async function fetchAll(endpoint) {
+async function fetchAll(endpoint, field = "title") {
   let page = 1;
   const pageSize = 100;
   let allItems = [];
   while (true) {
     const res = await fetch(
-      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=title_kk&fields[3]=title_en`,
+      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=${field}_kk&fields[3]=${field}_en`,
     );
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} for ${endpoint} page ${page}`);
@@ -142,19 +143,19 @@ async function generateSitemaps() {
 
   for (const collection of COLLECTIONS) {
     try {
-      const items = await fetchAll(collection.endpoint);
+      const items = await fetchAll(collection.endpoint, collection.field);
       for (const item of items) {
         const slug = item.slug || item.attributes?.slug;
         const updatedAt = item.updatedAt || item.attributes?.updatedAt;
         if (!slug || !updatedAt) continue;
         if (!latestOverall || updatedAt > latestOverall)
           latestOverall = updatedAt;
-        const available = LOCALES.filter(
-          (locale) =>
-            !locale.field ||
-            item[locale.field] ||
-            item.attributes?.[locale.field],
-        );
+        const baseField = collection.field || "title";
+        const available = LOCALES.filter((locale) => {
+          if (!locale.field) return true;
+          const key = `${baseField}_${locale.code}`;
+          return item[key] || item.attributes?.[key];
+        });
         const makeItemUrl = (code) =>
           `${SITE_URL}/${code}/${collection.path}/${slug}`;
         const alternates = buildAlternates(

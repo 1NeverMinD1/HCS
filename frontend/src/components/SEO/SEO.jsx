@@ -32,6 +32,8 @@ export default function SEO({
   translationField = "title",
   breadcrumbs,
   faq,
+  jobTitle,
+  sameAs,
 }) {
   const { locale } = useLocale();
   const { pathname } = useLocation();
@@ -208,7 +210,9 @@ export default function SEO({
             {
               "@type": "Person",
               name: authorName,
-              ...(authorUrl ? { url: authorUrl } : {}),
+              ...(authorUrl
+                ? { url: authorUrl, "@id": `${authorUrl}#person` }
+                : {}),
             },
           ]
         : undefined,
@@ -233,7 +237,9 @@ export default function SEO({
             {
               "@type": "Person",
               name: authorName,
-              ...(authorUrl ? { url: authorUrl } : {}),
+              ...(authorUrl
+                ? { url: authorUrl, "@id": `${authorUrl}#person` }
+                : {}),
             },
           ]
         : [
@@ -256,6 +262,30 @@ export default function SEO({
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": canonicalUrl,
+      },
+    };
+  } else if (type === "profile") {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      inLanguage: lang,
+      url: canonicalUrl,
+      ...(dateModified ? { dateModified } : {}),
+      mainEntity: {
+        "@type": "Person",
+        "@id": `${canonicalUrl}#person`,
+        name: title,
+        description: finalDescription,
+        image: finalImage,
+        url: canonicalUrl,
+        ...(jobTitle ? { jobTitle } : {}),
+        ...(sameAs && sameAs.length > 0 ? { sameAs } : {}),
+        worksFor: {
+          "@type": "Organization",
+          "@id": orgId,
+          name: siteName,
+          url: baseUrl,
+        },
       },
     };
   } else if (type === "qna") {
