@@ -199,6 +199,19 @@ async function generateSitemaps() {
     );
   }
 
+  const authorsAlternates = buildAlternates(
+    LOCALES.map((locale) => locale.code),
+    (code) => `${SITE_URL}/${code}/authors`,
+  );
+  for (const locale of LOCALES) {
+    addUrl(
+      STATIC_NAME,
+      `${SITE_URL}/${locale.code}/authors`,
+      latestOverall,
+      authorsAlternates,
+    );
+  }
+
   const names = [...groups.keys()].sort((a, b) =>
     a === STATIC_NAME ? -1 : b === STATIC_NAME ? 1 : a.localeCompare(b),
   );
