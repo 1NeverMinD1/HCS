@@ -448,8 +448,13 @@ export default function EventsContent() {
             events.desc_img?.url,
         )}
         type="event"
-        startDate={events.start}
+        startDate={
+          events.start_time
+            ? `${events.start}T${events.start_time.slice(0, 8)}+05:00`
+            : events.start
+        }
         endDate={events.end}
+        datePublished={events.publishDate}
         authorName={
           events.authors?.[0]
             ? getLangField(events.authors[0], "name", locale)

@@ -141,6 +141,12 @@ export default function SEO({
     .filter(Boolean)
     .map((u) => getImageUrl(u));
 
+  const isOnlineEvent =
+    type === "event" &&
+    /онлайн|online|zoom|вебинар|webinar/i.test(
+      `${location || ""} ${finalOgTitle || ""}`,
+    );
+
   let structuredData = null;
 
   if (type === "event") {
@@ -153,20 +159,27 @@ export default function SEO({
       image: schemaImages.length === 3 ? schemaImages : [finalImage],
       startDate: startDate,
       endDate: endDate || startDate,
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      eventAttendanceMode: isOnlineEvent
+        ? "https://schema.org/OnlineEventAttendanceMode"
+        : "https://schema.org/OfflineEventAttendanceMode",
       eventStatus: "https://schema.org/EventScheduled",
-      location: location
+      location: isOnlineEvent
         ? {
-            "@type": "Place",
-            name: location,
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: address || location,
-              addressLocality: city,
-              addressCountry: "KZ",
-            },
+            "@type": "VirtualLocation",
+            url: registerLink || canonicalUrl,
           }
-        : undefined,
+        : location
+          ? {
+              "@type": "Place",
+              name: location,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: address || location,
+                addressLocality: city,
+                addressCountry: "KZ",
+              },
+            }
+          : undefined,
       offers:
         price != null
           ? {
@@ -175,6 +188,7 @@ export default function SEO({
               priceCurrency: "KZT",
               availability: "https://schema.org/InStock",
               url: registerLink || canonicalUrl,
+              ...(datePublished ? { validFrom: datePublished } : {}),
             }
           : undefined,
       performer: performer

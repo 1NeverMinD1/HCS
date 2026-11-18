@@ -39,6 +39,9 @@ const QnasContent = lazy(
 const Authors = lazy(
   () => import("./components/pages/contentpages/authors/Authors.jsx"),
 );
+const AuthorsList = lazy(
+  () => import("./components/pages/authorsList/AuthorsList.jsx"),
+);
 const CategoryPage = lazy(
   () => import("./components/pages/contentpages/сategoryPage/CategoryPage.jsx"),
 );
@@ -113,6 +116,8 @@ export default function App() {
               <Route path="/:locale/q-and-as" element={<QNA />} />
               {/* Полный вопрос */}
               <Route path="/:locale/q-and-as/:slug" element={<QnasContent />} />
+              {/* Все авторы */}
+              <Route path="/:locale/authors" element={<AuthorsList />} />
               {/* Автор */}
               <Route path="/:locale/author/:slug" element={<Authors />} />
               {/* FooterLinks */}

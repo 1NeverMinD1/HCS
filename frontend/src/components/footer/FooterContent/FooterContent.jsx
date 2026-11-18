@@ -3,6 +3,8 @@ import { useLocale } from "../../../context/LocaleContext.jsx";
 import { translations } from "../../../utils/translations.js";
 import logo from "../../../assets/logo.svg";
 
+const AUTHORS_LABEL = { ru: "Авторы", kk: "Авторлар", en: "Authors" };
+
 export default function FooterContent() {
   const { locale } = useLocale();
   const t = translations[locale];
@@ -70,6 +72,11 @@ export default function FooterContent() {
             <li className="footer__contacts-item">
               <Link to={`/${locale}/about`} className="footer__contacts-item">
                 {t.footerAbout}
+              </Link>
+            </li>
+            <li className="footer__contacts-item">
+              <Link to={`/${locale}/authors`} className="footer__contacts-item">
+                {AUTHORS_LABEL[locale] || AUTHORS_LABEL.ru}
               </Link>
             </li>
             <li className="footer__contacts-item">
