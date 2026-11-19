@@ -559,9 +559,27 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     OG: Schema.Attribute.Component<'content.og', false>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    qanda_en: Schema.Attribute.Blocks;
-    qanda_kz: Schema.Attribute.Blocks;
-    qanda_ru: Schema.Attribute.Blocks;
+    qanda_en: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    qanda_kz: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
+    qanda_ru: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::better-blocks.better-blocks',
+        {
+          detailsStyle: 'github';
+        }
+      >;
     scripts: Schema.Attribute.Relation<'manyToMany', 'api::script.script'>;
     send_to_tg: Schema.Attribute.Boolean;
     SEO: Schema.Attribute.Component<'content.seo', false>;
@@ -589,6 +607,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    authorType: Schema.Attribute.Enumeration<['editorial', 'expert']>;
     bio_en: Schema.Attribute.Text;
     bio_kk: Schema.Attribute.Text;
     bio_ru: Schema.Attribute.Text & Schema.Attribute.Required;
@@ -599,6 +618,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     isJournalist: Schema.Attribute.Boolean;
+    isReal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     links: Schema.Attribute.Component<'content.social-link', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -830,7 +850,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     place_en: Schema.Attribute.String;
     place_kk: Schema.Attribute.String;
     place_ru: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.Integer;
+    price: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     register_link: Schema.Attribute.Text;

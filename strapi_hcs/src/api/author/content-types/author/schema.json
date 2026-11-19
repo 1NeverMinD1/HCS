@@ -99,6 +99,17 @@
       "relation": "manyToMany",
       "target": "api::city.city",
       "inversedBy": "authors"
+    },
+    "isReal": {
+      "type": "boolean",
+      "default": true
+    },
+    "authorType": {
+      "type": "enumeration",
+      "enum": [
+        "editorial",
+        "expert"
+      ]
     }
   }
 }
