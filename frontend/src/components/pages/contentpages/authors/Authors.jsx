@@ -77,6 +77,7 @@ export default function Authors() {
         `&fields[8]=bio_en` +
         `&fields[9]=slug` +
         `&fields[10]=updatedAt` +
+        `&fields[11]=isReal` +
         `&populate[profile_img][fields][0]=url` +
         `&populate[profile_img][fields][1]=formats` +
         `&populate[blogs][fields][0]=title_ru` +
@@ -200,6 +201,8 @@ export default function Authors() {
     { name },
   ];
 
+  const isRealAuthor = author.isReal !== false;
+
   const socialUrls = (author.links || [])
     .filter((link) => link.url && link.platform !== "email")
     .map((link) => link.url);
@@ -210,9 +213,10 @@ export default function Authors() {
         title={name}
         description={bio || position}
         image={profileImg}
-        type="profile"
-        jobTitle={position}
-        sameAs={socialUrls}
+        type={isRealAuthor ? "profile" : "website"}
+        jobTitle={isRealAuthor ? position : undefined}
+        sameAs={isRealAuthor ? socialUrls : undefined}
+        noIndex={!isRealAuthor}
         dateModified={author.updatedAt}
         translationSourceItem={author}
         translationField="name"

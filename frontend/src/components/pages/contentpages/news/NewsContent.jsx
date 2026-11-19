@@ -352,6 +352,7 @@ export const NEWS_POPULATE_QUERY =
   `&populate[authors][fields][4]=position_kk` +
   `&populate[authors][fields][5]=position_en` +
   `&populate[authors][fields][6]=slug` +
+  `&populate[authors][fields][7]=isReal` +
   `&populate[authors][populate][profile_img][fields][0]=url` +
   `&populate[authors][populate][profile_img][fields][1]=formats` +
   `&populate[header_cats][fields][0]=name_ru` +
@@ -535,11 +536,15 @@ export default function NewsContent() {
         datePublished={activeItem.publishDate}
         dateModified={activeItem.updatedAt}
         authorName={
-          activeItem.authors?.[0]
+          activeItem.authors?.[0] && activeItem.authors[0].isReal !== false
             ? getLangField(activeItem.authors[0], "name", locale)
             : undefined
         }
-        authorSlug={activeItem.authors?.[0]?.slug}
+        authorSlug={
+          activeItem.authors?.[0]?.isReal !== false
+            ? activeItem.authors?.[0]?.slug
+            : undefined
+        }
         translationSourceItem={activeItem}
         translationField="title"
         breadcrumbs={activeItemBreadcrumbs}

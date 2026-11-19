@@ -12,22 +12,42 @@ const TEXTS = {
   ru: {
     title: "Авторы",
     intro: "Авторы, которые пишут для ЖКХ 24.",
+    groups: {
+      editorial: "Редакция",
+      expert: "Эксперты",
+    },
   },
   kk: {
     title: "Авторлар",
     intro: "ЖКХ 24 үшін жазатын авторлар.",
+    groups: {
+      editorial: "Редакция",
+      expert: "Сарапшылар",
+    },
   },
   en: {
     title: "Authors",
     intro: "Authors who write for ZhKH 24.",
+    groups: {
+      editorial: "Newsroom",
+      expert: "Experts",
+    },
   },
 };
+
+const AUTHOR_TYPES = ["editorial", "expert"];
+
+function getAuthorType(author) {
+  return AUTHOR_TYPES.includes(author.authorType)
+    ? author.authorType
+    : "editorial";
+}
 
 const AUTHORS_URL =
   `https://api.zhkh24.kz/api/authors?pagination[pageSize]=100&sort=name_ru:asc` +
   `&fields[0]=name_ru&fields[1]=name_kk&fields[2]=name_en` +
   `&fields[3]=position_ru&fields[4]=position_kk&fields[5]=position_en` +
-  `&fields[6]=slug&fields[7]=isJournalist` +
+  `&fields[6]=slug&fields[7]=isReal&fields[8]=authorType` +
   `&populate[profile_img][fields][0]=url` +
   `&populate[profile_img][fields][1]=formats`;
 
@@ -77,7 +97,11 @@ export default function AuthorsList() {
       })
       .then((data) => {
         if (!cancelled) {
-          setAuthors((data.data || []).filter((author) => author.slug));
+          setAuthors(
+            (data.data || []).filter(
+              (author) => author.slug && author.isReal !== false,
+            ),
+          );
         }
       })
       .catch((err) => console.error("Failed to fetch authors:", err))
@@ -96,6 +120,11 @@ export default function AuthorsList() {
     { name: t("home"), url: `/${locale}` },
     { name: texts.title },
   ];
+
+  const groups = AUTHOR_TYPES.map((type) => ({
+    type,
+    items: authors.filter((author) => getAuthorType(author) === type),
+  })).filter((group) => group.items.length > 0);
 
   const renderGrid = (list) => (
     <div className="authorslist__grid">
@@ -120,7 +149,16 @@ export default function AuthorsList() {
         <p className="authorslist__empty">{t("noContent")}</p>
       )}
 
-      {authors.length > 0 && renderGrid(authors)}
+      {groups.length > 1
+        ? groups.map((group) => (
+            <section key={group.type} className="authorslist__group">
+              <h2 className="authorslist__group-title">
+                {texts.groups[group.type]}
+              </h2>
+              {renderGrid(group.items)}
+            </section>
+          ))
+        : authors.length > 0 && renderGrid(authors)}
     </div>
   );
 }

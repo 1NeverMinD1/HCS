@@ -49,6 +49,7 @@ export const EVENTS_POPULATE_QUERY =
   `&populate[authors][fields][4]=position_kk` +
   `&populate[authors][fields][5]=position_en` +
   `&populate[authors][fields][6]=slug` +
+  `&populate[authors][fields][7]=isReal` +
   `&populate[authors][populate][profile_img][fields][0]=url` +
   `&populate[authors][populate][profile_img][fields][1]=formats` +
   `&populate[categories][fields][0]=name_ru` +
@@ -456,11 +457,15 @@ export default function EventsContent() {
         endDate={events.end}
         datePublished={events.publishDate}
         authorName={
-          events.authors?.[0]
+          events.authors?.[0] && events.authors[0].isReal !== false
             ? getLangField(events.authors[0], "name", locale)
             : undefined
         }
-        authorSlug={events.authors?.[0]?.slug}
+        authorSlug={
+          events.authors?.[0]?.isReal !== false
+            ? events.authors?.[0]?.slug
+            : undefined
+        }
         location={place}
         city={city || undefined}
         price={events.price ?? 0}

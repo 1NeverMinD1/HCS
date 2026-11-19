@@ -9,6 +9,14 @@ const COLLECTIONS = [
   { endpoint: "blogs", path: "blogs", name: "blogs" },
   { endpoint: "events", path: "events", name: "events" },
   { endpoint: "q-and-as", path: "q-and-as", name: "qna" },
+  {
+    endpoint: "authors",
+    path: "author",
+    name: "authors",
+    field: "name",
+    extraFields: ["isReal"],
+    include: (item) => item.isReal !== false,
+  },
 ];
 const LOCALES = [
   { code: "ru", field: null },
@@ -33,13 +41,13 @@ function toAlmatyDateString(isoString) {
   return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
-async function fetchAll(endpoint, field = "title") {
+async function fetchAll(endpoint, field = "title", extraFields = []) {
   let page = 1;
   const pageSize = 100;
   let allItems = [];
   while (true) {
     const res = await fetch(
-      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=${field}_kk&fields[3]=${field}_en`,
+      `${API_URL}/${endpoint}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&fields[0]=slug&fields[1]=updatedAt&fields[2]=${field}_kk&fields[3]=${field}_en${extraFields.map((name, i) => `&fields[${4 + i}]=${name}`).join("")}`,
     );
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} for ${endpoint} page ${page}`);
@@ -142,11 +150,16 @@ async function generateSitemaps() {
 
   for (const collection of COLLECTIONS) {
     try {
-      const items = await fetchAll(collection.endpoint, collection.field);
+      const items = await fetchAll(
+        collection.endpoint,
+        collection.field,
+        collection.extraFields,
+      );
       for (const item of items) {
         const slug = item.slug || item.attributes?.slug;
         const updatedAt = item.updatedAt || item.attributes?.updatedAt;
         if (!slug || !updatedAt) continue;
+        if (collection.include && !collection.include(item)) continue;
         if (!latestOverall || updatedAt > latestOverall)
           latestOverall = updatedAt;
         const baseField = collection.field || "title";
@@ -196,6 +209,19 @@ async function generateSitemaps() {
       `${SITE_URL}/${locale.code}`,
       latestOverall,
       homeAlternates,
+    );
+  }
+
+  const authorsAlternates = buildAlternates(
+    LOCALES.map((locale) => locale.code),
+    (code) => `${SITE_URL}/${code}/authors`,
+  );
+  for (const locale of LOCALES) {
+    addUrl(
+      STATIC_NAME,
+      `${SITE_URL}/${locale.code}/authors`,
+      latestOverall,
+      authorsAlternates,
     );
   }
 
