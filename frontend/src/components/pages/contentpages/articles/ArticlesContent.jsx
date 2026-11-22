@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
+import VideoEmbed from "../../../videoEmbed/VideoEmbed.jsx";
 import { useLocale } from "../../../../context/LocaleContext.jsx";
 import {
   getLangField,
@@ -61,9 +62,20 @@ export const ARTICLES_POPULATE_QUERY =
   `&populate[tags][fields][1]=name_kk` +
   `&populate[tags][fields][2]=name_en` +
   `&populate[scripts][fields][0]=name` +
-  `&populate[scripts][fields][1]=script`;
+  `&populate[scripts][fields][1]=script` +
+  `&populate[videos][fields][0]=title_ru` +
+  `&populate[videos][fields][1]=title_kk` +
+  `&populate[videos][fields][2]=title_en` +
+  `&populate[videos][fields][3]=desc_ru` +
+  `&populate[videos][fields][4]=desc_kk` +
+  `&populate[videos][fields][5]=desc_en` +
+  `&populate[videos][fields][6]=youtube_id` +
+  `&populate[videos][fields][7]=upload_date` +
+  `&populate[videos][fields][8]=is_short` +
+  `&populate[videos][fields][9]=ai_generated` +
+  `&populate[videos][fields][10]=slug`;
 
-function renderBlock(block, i, locale, t, scripts = []) {
+function renderBlock(block, i, locale, t, scripts = [], videos = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -165,6 +177,13 @@ function renderBlock(block, i, locale, t, scripts = []) {
 
     case "code": {
       const codeword = block.children?.[0]?.text?.trim() || "";
+      if (codeword.startsWith("video:")) {
+        const videoSlug = codeword.slice(6).trim();
+        const video = videos.find((v) => v.slug === videoSlug);
+        return video ? (
+          <VideoEmbed key={i} video={video} locale={locale} />
+        ) : null;
+      }
       const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
       const scriptHtml = matchedScript ? matchedScript.script : codeword;
       return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
@@ -265,6 +284,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
   const faqItems = groupFaqItems(faq);
   const category = getLangField(item?.categories?.[0], "name", locale);
   const scripts = item?.scripts || [];
+  const videos = item?.videos || [];
 
   const breadcrumbItems = [
     { name: t("home"), url: `/${locale}` },
@@ -364,7 +384,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
       <hr />
       <div className="artscontent__main">
         {content?.map((block, i) => {
-          const rendered = renderBlock(block, i, locale, t, scripts);
+          const rendered = renderBlock(block, i, locale, t, scripts, videos);
 
           if (i === midpointIndex) {
             return (
@@ -392,7 +412,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
                 </summary>
                 <div className="artscontent__faq-answer">
                   {faqItem.answer.map((block, j) =>
-                    renderBlock(block, j, locale, t, scripts),
+                    renderBlock(block, j, locale, t, scripts, videos),
                   )}
                 </div>
               </details>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SideMenu from "../sidemenu/SideMenu";
 import SEO from "../../../SEO/SEO.jsx";
 import RenderHtml from "../../../renderHtml/RenderHtml.jsx";
+import VideoEmbed from "../../../videoEmbed/VideoEmbed.jsx";
 import { useLocale } from "../../../../context/LocaleContext";
 import {
   getLangField,
@@ -22,7 +23,7 @@ import "./_NewsContent.scss";
 
 const CONTENT_IMAGE_SIZES = "(max-width: 430px) 100vw, 900px";
 
-function renderBlock(block, i, locale, t, scripts = []) {
+function renderBlock(block, i, locale, t, scripts = [], videos = []) {
   const renderChildren = (children = []) =>
     children.map((child, j) => {
       let content = child.text || "";
@@ -124,6 +125,13 @@ function renderBlock(block, i, locale, t, scripts = []) {
 
     case "code": {
       const codeword = block.children?.[0]?.text?.trim() || "";
+      if (codeword.startsWith("video:")) {
+        const videoSlug = codeword.slice(6).trim();
+        const video = videos.find((v) => v.slug === videoSlug);
+        return video ? (
+          <VideoEmbed key={i} video={video} locale={locale} />
+        ) : null;
+      }
       const matchedScript = scripts.find((s) => s.name?.trim() === codeword);
       const scriptHtml = matchedScript ? matchedScript.script : codeword;
       return <RenderHtml key={i} html={scriptHtml} locale={locale} />;
@@ -206,6 +214,7 @@ export function NewsItem({ item, isFirst, registerRef }) {
   const content = item?.[`content_${locale}`] || item?.content_ru || [];
   const category = getLangField(item?.header_cats?.[0], "name", locale);
   const scripts = item?.scripts || [];
+  const videos = item?.videos || [];
 
   const breadcrumbItems = [
     { name: t("home"), url: `/${locale}` },
@@ -302,7 +311,7 @@ export function NewsItem({ item, isFirst, registerRef }) {
       <hr />
       <div className="newscontent__main">
         {content?.map((block, i) => {
-          const rendered = renderBlock(block, i, locale, t, scripts);
+          const rendered = renderBlock(block, i, locale, t, scripts, videos);
 
           if (i === midpointIndex) {
             return (
@@ -365,7 +374,18 @@ export const NEWS_POPULATE_QUERY =
   `&populate[cities][fields][1]=city_kk` +
   `&populate[cities][fields][2]=city_en` +
   `&populate[scripts][fields][0]=name` +
-  `&populate[scripts][fields][1]=script`;
+  `&populate[scripts][fields][1]=script` +
+  `&populate[videos][fields][0]=title_ru` +
+  `&populate[videos][fields][1]=title_kk` +
+  `&populate[videos][fields][2]=title_en` +
+  `&populate[videos][fields][3]=desc_ru` +
+  `&populate[videos][fields][4]=desc_kk` +
+  `&populate[videos][fields][5]=desc_en` +
+  `&populate[videos][fields][6]=youtube_id` +
+  `&populate[videos][fields][7]=upload_date` +
+  `&populate[videos][fields][8]=is_short` +
+  `&populate[videos][fields][9]=ai_generated` +
+  `&populate[videos][fields][10]=slug`;
 
 export default function NewsContent() {
   const { locale } = useLocale();
