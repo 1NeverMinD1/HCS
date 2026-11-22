@@ -12,7 +12,11 @@ export default function Tags({ item, locale }) {
         </p>
       )}
       {item.tags?.map((tag) => (
-        <Link to={`/${locale}/tag/${tag.id}`} className="tag" key={tag.id}>
+        <Link
+          to={`/${locale}/tag/${tag.documentId}`}
+          className="tag"
+          key={tag.id}
+        >
           {getLangField(tag, "name", locale)}
         </Link>
       ))}

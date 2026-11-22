@@ -254,7 +254,7 @@ export function EventView({ item: events, children }) {
         <Breadcrumbs items={breadcrumbItems} />
         {events?.categories?.[0] && (
           <Link
-            to={`/${locale}/category/${events.categories[0].id}`}
+            to={`/${locale}/category/${events.categories[0].documentId}`}
             className="cat"
           >
             {category}

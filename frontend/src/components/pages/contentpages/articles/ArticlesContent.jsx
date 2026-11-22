@@ -319,7 +319,7 @@ export function ArticleItem({ item, isFirst, registerRef }) {
       <div className="artscontent__header">
         {item?.categories?.[0] && (
           <Link
-            to={`/${locale}/category/${item.categories[0].id}`}
+            to={`/${locale}/category/${item.categories[0].documentId}`}
             className="cat"
           >
             {category}

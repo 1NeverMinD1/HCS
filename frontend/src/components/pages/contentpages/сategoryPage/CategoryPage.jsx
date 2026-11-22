@@ -79,6 +79,7 @@ export default function CategoryPage() {
         title={pageCategoryName}
         description={pageDescription}
         breadcrumbs={breadcrumbItems}
+        url={`https://zhkh24.kz/${locale}/category/${category.documentId}`}
       />
 
       <Breadcrumbs items={breadcrumbItems} />

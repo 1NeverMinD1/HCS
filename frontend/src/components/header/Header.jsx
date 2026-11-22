@@ -125,7 +125,7 @@ export default function Header() {
                   {categories.map((cat) => (
                     <li key={cat.id} className="dropdown__item">
                       <NavLink
-                        to={`/${locale}/news/category/${cat.id}`}
+                        to={`/${locale}/news/category/${cat.documentId}`}
                         className="dropdown__link"
                       >
                         {getLangField(cat, "name", locale)}

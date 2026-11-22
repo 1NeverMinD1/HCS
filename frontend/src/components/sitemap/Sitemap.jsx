@@ -91,7 +91,7 @@ export default function Sitemap() {
           children: sortByName(newsCats, locale).map(({ item, name }) => ({
             key: `news-cat-${item.id}`,
             label: name,
-            to: `${base}/news/category/${item.id}`,
+            to: `${base}/news/category/${item.documentId}`,
           })),
         },
         { key: "articles", label: t("articles"), to: `${base}/articles` },
@@ -104,7 +104,7 @@ export default function Sitemap() {
           children: sortByName(rubrics, locale).map(({ item, name }) => ({
             key: `rubric-${item.id}`,
             label: name,
-            to: `${base}/category/${item.id}`,
+            to: `${base}/category/${item.documentId}`,
           })),
         },
         {

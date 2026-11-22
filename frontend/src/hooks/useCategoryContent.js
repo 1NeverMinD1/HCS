@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { idFilter } from "../utils/idFilter.js";
 
 const PAGE_SIZE = 12;
 
@@ -37,7 +38,7 @@ export default function useCategoryContent(
 
       try {
         const res = await fetch(
-          `https://api.zhkh24.kz/api/${endpoint}?filters[${relationField}][id][$eq]=${filterId}` +
+          `https://api.zhkh24.kz/api/${endpoint}?${idFilter(filterId, `[${relationField}]`)}` +
             `&sort=${sortField}:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
             `&fields[0]=title_ru&fields[1]=title_kk&fields[2]=title_en` +
             descFields +

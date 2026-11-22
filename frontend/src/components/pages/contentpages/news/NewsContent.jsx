@@ -238,7 +238,7 @@ export function NewsItem({ item, isFirst, registerRef }) {
       <div className="newscontent__header">
         {item?.header_cats?.[0] && (
           <Link
-            to={`/${locale}/news/category/${item.header_cats[0].id}`}
+            to={`/${locale}/news/category/${item.header_cats[0].documentId}`}
             className="cat"
           >
             {category}

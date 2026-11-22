@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "../../../utils/useTranslation.js";
 import { getLangField } from "../../../utils/getLangField.js";
+import { idFilter } from "../../../utils/idFilter.js";
 import NewsPageBlocks from "./NewsPageBlocks/NewsPageBlocks";
 import NewsPageList from "./NewsPageList/NewsPageList";
 import { useLocale } from "../../../context/LocaleContext";
@@ -85,7 +86,7 @@ export default function NewsPage() {
     let cancelled = false;
 
     fetch(
-      `https://api.zhkh24.kz/api/header-cats?filters[id][$eq]=${id}` +
+      `https://api.zhkh24.kz/api/header-cats?${idFilter(id)}` +
         `&fields[0]=name_ru&fields[1]=name_kk&fields[2]=name_en`,
     )
       .then((res) => {
@@ -136,7 +137,7 @@ export default function NewsPage() {
           POPULATE_PARAMS;
       } else if (id) {
         url =
-          `https://api.zhkh24.kz/api/news?filters[header_cats][id][$eq]=${id}` +
+          `https://api.zhkh24.kz/api/news?${idFilter(id, "[header_cats]")}` +
           `&sort=publishDate:desc&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
           POPULATE_PARAMS;
       } else {
@@ -233,6 +234,11 @@ export default function NewsPage() {
         title={seoTitle}
         description={seoDescription}
         breadcrumbs={breadcrumbItems}
+        url={
+          isCategory && category?.documentId
+            ? `https://zhkh24.kz/${locale}/news/category/${category.documentId}`
+            : undefined
+        }
       />
       <h1 className="newspage__title">{title}</h1>
       <Breadcrumbs items={breadcrumbItems} />

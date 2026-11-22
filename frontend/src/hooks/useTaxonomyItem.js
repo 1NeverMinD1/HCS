@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { idFilter } from "../utils/idFilter.js";
 
 export default function useTaxonomyItem(endpoint, id) {
   const [item, setItem] = useState(null);
@@ -8,7 +9,7 @@ export default function useTaxonomyItem(endpoint, id) {
     setItem(null);
     setNotFound(false);
 
-    if (!id || !/^\d+$/.test(id)) {
+    if (!id || !/^[a-z0-9]+$/i.test(id)) {
       setNotFound(true);
       return;
     }
@@ -16,7 +17,7 @@ export default function useTaxonomyItem(endpoint, id) {
     let cancelled = false;
 
     fetch(
-      `https://api.zhkh24.kz/api/${endpoint}?filters[id][$eq]=${id}` +
+      `https://api.zhkh24.kz/api/${endpoint}?${idFilter(id)}` +
         `&fields[0]=name_ru&fields[1]=name_kk&fields[2]=name_en`,
     )
       .then((res) => {

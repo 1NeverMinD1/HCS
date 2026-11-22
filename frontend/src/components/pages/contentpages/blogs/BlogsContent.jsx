@@ -296,7 +296,7 @@ export function BlogItem({ item, locale, t, isFirst, registerRef }) {
       <div className="blogscontent__header">
         {item?.categories?.[0] && (
           <Link
-            to={`/${locale}/category/${item.categories[0].id}`}
+            to={`/${locale}/category/${item.categories[0].documentId}`}
             className="cat"
           >
             {category}

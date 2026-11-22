@@ -83,6 +83,7 @@ export default function TagPage() {
         title={pageTagName}
         description={pageDescription}
         breadcrumbs={breadcrumbItems}
+        url={`https://zhkh24.kz/${locale}/tag/${tag.documentId}`}
       />
 
       <Breadcrumbs items={breadcrumbItems} />
