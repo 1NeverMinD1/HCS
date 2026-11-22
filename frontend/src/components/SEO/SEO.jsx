@@ -67,7 +67,8 @@ export default function SEO({
   const orgLogo = `${baseUrl}/logo.png`;
   const orgId = `${baseUrl}/#organization`;
 
-  const canonicalUrl = url || `${baseUrl}${pathname}`;
+  const canonicalUrl =
+    url || `${baseUrl}${pathname.replace(/\/+$/, "") || "/"}`;
 
   const authorUrl = authorSlug
     ? `${baseUrl}/${lang}/author/${authorSlug}`
