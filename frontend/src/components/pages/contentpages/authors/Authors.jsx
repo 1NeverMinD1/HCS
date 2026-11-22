@@ -216,7 +216,6 @@ export default function Authors() {
         type={isRealAuthor ? "profile" : "website"}
         jobTitle={isRealAuthor ? position : undefined}
         sameAs={isRealAuthor ? socialUrls : undefined}
-        noIndex={!isRealAuthor}
         dateModified={author.updatedAt}
         translationSourceItem={author}
         translationField="name"

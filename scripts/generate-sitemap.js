@@ -14,8 +14,6 @@ const COLLECTIONS = [
     path: "author",
     name: "authors",
     field: "name",
-    extraFields: ["isReal"],
-    include: (item) => item.isReal !== false,
   },
 ];
 const LOCALES = [

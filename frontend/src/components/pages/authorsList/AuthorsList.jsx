@@ -97,11 +97,7 @@ export default function AuthorsList() {
       })
       .then((data) => {
         if (!cancelled) {
-          setAuthors(
-            (data.data || []).filter(
-              (author) => author.slug && author.isReal !== false,
-            ),
-          );
+          setAuthors((data.data || []).filter((author) => author.slug));
         }
       })
       .catch((err) => console.error("Failed to fetch authors:", err))
