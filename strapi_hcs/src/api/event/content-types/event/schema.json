@@ -161,6 +161,12 @@
     "publishDate": {
       "type": "datetime",
       "required": true
+    },
+    "videos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::video.video",
+      "inversedBy": "events"
     }
   }
 }

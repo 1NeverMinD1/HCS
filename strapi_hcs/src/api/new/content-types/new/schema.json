@@ -124,6 +124,12 @@
       "relation": "manyToMany",
       "target": "api::script.script",
       "inversedBy": "news"
+    },
+    "videos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::video.video",
+      "inversedBy": "news"
     }
   }
 }

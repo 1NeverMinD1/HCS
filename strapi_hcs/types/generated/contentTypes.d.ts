@@ -592,6 +592,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    videos: Schema.Attribute.Relation<'manyToMany', 'api::video.video'>;
   };
 }
 
@@ -716,6 +717,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    videos: Schema.Attribute.Relation<'manyToMany', 'api::video.video'>;
   };
 }
 
@@ -868,6 +870,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    videos: Schema.Attribute.Relation<'manyToMany', 'api::video.video'>;
   };
 }
 
@@ -1154,6 +1157,7 @@ export interface ApiNewNew extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    videos: Schema.Attribute.Relation<'manyToMany', 'api::video.video'>;
   };
 }
 
@@ -1266,6 +1270,45 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
+  collectionName: 'videos';
+  info: {
+    displayName: 'Video';
+    pluralName: 'videos';
+    singularName: 'video';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ai_generated: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc_en: Schema.Attribute.String;
+    desc_kk: Schema.Attribute.String;
+    desc_ru: Schema.Attribute.Text;
+    events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
+    is_short: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::video.video'> &
+      Schema.Attribute.Private;
+    news: Schema.Attribute.Relation<'manyToMany', 'api::new.new'>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title_ru'> & Schema.Attribute.Required;
+    title_en: Schema.Attribute.String;
+    title_kk: Schema.Attribute.String;
+    title_ru: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    upload_date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    youtube_id: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1799,6 +1842,7 @@ declare module '@strapi/strapi' {
       'api::q-and-a.q-and-a': ApiQAndAQAndA;
       'api::script.script': ApiScriptScript;
       'api::tag.tag': ApiTagTag;
+      'api::video.video': ApiVideoVideo;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

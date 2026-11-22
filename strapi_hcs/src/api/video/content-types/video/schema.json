@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "Video"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title_ru": {
+      "type": "string",
+      "required": true
+    },
+    "title_kk": {
+      "type": "string"
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "desc_ru": {
+      "type": "text"
+    },
+    "desc_kk": {
+      "type": "string"
+    },
+    "desc_en": {
+      "type": "string"
+    },
+    "youtube_id": {
+      "type": "string",
+      "required": true
+    },
+    "upload_date": {
+      "type": "datetime",
+      "required": true
+    },
+    "is_short": {
+      "type": "boolean",
+      "default": false
+    },
+    "ai_generated": {
+      "type": "boolean",
+      "default": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title_ru",
+      "required": true
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "videos"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "videos"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "mappedBy": "videos"
+    },
+    "news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::new.new",
+      "mappedBy": "videos"
+    }
+  }
+}
